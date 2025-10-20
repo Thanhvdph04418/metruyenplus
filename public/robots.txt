@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://tcomicclub.com
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://tcomicclub.com/sitemap.xml

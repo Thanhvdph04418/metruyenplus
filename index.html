@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preconnect to ad servers for faster ad loading -->
+  <link rel="preconnect" href="https://www.highperformanceformat.com">
+  <link rel="dns-prefetch" href="//www.highperformanceformat.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Comic+Neue:wght@400;700&family=Bangers&display=swap"
+    rel="stylesheet">
+
+  <!-- Preload critical logo -->
+  <link rel="preload" as="image" href="/logo.png" fetchPriority="high" />
+
+  <!-- Font fallback styles to prevent layout shift -->
+  <style>
+    @font-face {
+      font-family: 'Nunito Fallback';
+      src: local('Arial'), local('Helvetica');
+      size-adjust: 95%;
+      ascent-override: 105%;
+      descent-override: 35%;
+      line-gap-override: 10%;
+    }
+
+    @font-face {
+      font-family: 'Comic Neue Fallback';
+      src: local('Comic Sans MS'), local('cursive');
+      size-adjust: 98%;
+      ascent-override: 100%;
+      descent-override: 30%;
+    }
+
+    @font-face {
+      font-family: 'Bangers Fallback';
+      src: local('Impact'), local('Arial Black');
+      size-adjust: 85%;
+      ascent-override: 110%;
+      descent-override: 25%;
+    }
+  </style>
+
+  <!-- Favicon Configuration -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png">
+  <link rel="apple-touch-icon-precomposed" href="/icon-192x192.png">
+  <link rel="apple-touch-icon" href="/icon-192x192.png" sizes="192x192" />
+
+  <title>Đọc Truyện Chữ Online - MeTruyen+</title>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icon-192x192.png" sizes="192x192" />
+  <link rel="shortcut icon" href="/icon-192x192.png" type="image/x-icon" sizes="192x192" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#8B5CF6" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="twitter:creator" content="@MeTruyen+Fan" />
+  <meta name="revisit-after" content="1 days" />
+  <meta name="rating" content="general" />
+  <meta name="geo.region" content="VN" />
+  <meta name="geo.placename" content="Việt Nam" />
+  <meta name="title" content="Đọc Truyện Chữ Online - MeTruyen+" />
+  <meta data-rh="true" name="description"
+    content="MeTruyen+ - Nền tảng đọc truyện chữ online miễn phí với hơn 50,000+ bộ truyện tiểu thuyết, truyện ngắn, truyện dài. Cập nhật nhanh nhất các truyện mới, truyện hot. Cộng đồng hơn 10 triệu thành viên thảo luận sôi nổi 🎉 ❤️" />
+  <meta name="keywords"
+    content="Truyện chữ, Truyen chu online, Tiểu thuyết, Truyện ngắn, Truyện dài, Truyện ngôn tình, Truyện kiếm hiệp, Truyện huyền huyễn, Truyện đô thị, Truyện xuyên không, Truyện trọng sinh, Truyện hệ thống, Truyện tu tiên, Truyện dị giới, Truyện hiện đại, Truyện cổ đại, Truyện tương lai, Truyện khoa học viễn tưởng, Truyện kinh dị, Truyện trinh thám, MeTruyen+, VNovels" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://metruyenplus.com/" />
+  <meta property="og:title" content="Đọc Truyện Chữ Online - MeTruyen+" />
+  <meta property="og:description"
+    content="MeTruyen+ - Nền tảng đọc truyện chữ online miễn phí với hơn 50,000+ bộ truyện tiểu thuyết, truyện ngắn, truyện dài" />
+  <meta property="og:image" content="/share.png" />
+  <meta property="og:image:width" content="500" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:site_name" content="MeTruyen+" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://metruyenplus.com/" />
+  <meta property="twitter:title" content="Đọc Truyện Chữ Online - MeTruyen+" />
+  <meta property="twitter:description"
+    content="MeTruyen+ - Nền tảng đọc truyện chữ online miễn phí với hơn 50,000+ bộ truyện tiểu thuyết, truyện ngắn, truyện dài" />
+  <meta property="twitter:image" content="/share.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="MeTruyen+" />
+  <meta name="apple-mobile-web-app-title" content="MeTruyen+" />
+  <meta name="msapplication-starturl" content="/" />
+  <meta itemprop="name" content="Đọc Truyện Tranh Online - MeTruyen+" />
+  <meta itemprop="description"
+    content="MeTruyen+ - Nền tảng đọc truyện chữ online miễn phí với hơn 50,000+ bộ truyện tiểu thuyết, truyện ngắn, truyện dài" />
+  <link rel="next" href="https://metruyenplus.com/truyen-moi-cap-nhat?page=1" />
+  <link rel="icon" type="image/png" href="/icon-192x192.png" sizes="192x192" />
+  <link rel="icon" href="/icon-192x192.png" sizes="192x192" />
+  <meta name="copyright" content="Copyright © 2025 Truyện chữ MeTruyen+" />
+  <meta name="Author" content="Truyện chữ MeTruyen+" />
+  <meta name="google" content="notranslate" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "MeTruyen+",
+      "url": "https://metruyenplus.com",
+      "description": "Nền tảng đọc truyện chữ online miễn phí với hơn 50,000+ bộ truyện tiểu thuyết, truyện ngắn, truyện dài",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://metruyenplus.com/tim-kiem?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "sameAs": [
+        "https://facebook.com/MeTruyen+Fan",
+        "https://twitter.com/MeTruyen+Fan"
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MeTruyen+",
+      "url": "https://metruyenplus.com",
+      "logo": "https://metruyenplus.com/icon-192x192.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@metruyenplus.com"
+      }
+    }
+  </script>
+  <link rel="preload" as="image" href="/img-error.webp" type="image/webp" />
+  <link rel="preconnect" href="https://p21-ad-sg.ibyteimg.com" crossorigin />
+  <link rel="preconnect" href="https://imgcdn.metruyenplus.com" crossorigin />
+  <meta name="fetchpriority" content="high" />
+  <!-- Adsense Verification -->
+  <meta name="clckd" content="beccfa9cea1d2aca3062ac16237119c9" />
+  <meta name="monetag" content="3181453ac8f3daea520626d8053e2963">
+</head>
+
+<!-- <script type='text/javascript'
+  src='//pl27748866.revenuecpmgate.com/59/86/15/5986156d66d28c7b6f1f8736bc657910.js'></script> -->
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

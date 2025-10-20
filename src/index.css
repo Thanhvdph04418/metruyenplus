@@ -1,0 +1,636 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Vertical text writing mode */
+.writing-mode-vertical-rl {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+/* Hide horizontal scrollbar on mobile */
+@media (max-width: 640px) {
+  .hide-horizontal-scrollbar {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-horizontal-scrollbar::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+  
+  /* Hide horizontal scrollbars for all overflow-x-auto elements on mobile */
+  .overflow-x-auto {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .overflow-x-auto::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+}
+
+:root,
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family:
+    SF Pro Display,
+    SF Pro Icons,
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
+  user-select: none;
+  /* Intentionally disabled: CSS smooth scrolling conflicts with JS/router scroll restoration
+     and can cause janky back/forward navigation. We restore scroll positions manually
+     (e.g., returning from chapter to list/detail) */
+  /* scroll-behavior: smooth; */
+  scrollbar-gutter: stable;
+}
+
+/* Custom CSS variables for colors */
+:root {
+  --color-text-light: #2d3748; /* Darker text for better contrast */
+  --color-text-dark: #edf2f7;
+  --color-link-hover: #8B5CF6;
+
+  /* Evening mode variables - activated with JS */
+  --evening-bg-light: #f0f4f8;
+  --evening-text-light: #2d3748;
+}
+
+/* Apply better default text colors */
+body {
+  @apply bg-light-bg text-gray-900; /* High contrast text for better readability */
+  line-height: 1.6;
+  letter-spacing: 0.015em; /* Slightly increased letter spacing for readability */
+  font-weight: 400; /* Ensures font isn't too thin */
+}
+
+body.dark {
+  @apply bg-dark-bg text-white; /* High contrast white text for better readability */
+  line-height: 1.65; /* Improved line height for dark mode */
+}
+
+/* Apply eye-relief filters to all images */
+:not(.dark) img {
+  filter: brightness(98%) contrast(95%) saturate(95%); /* Reduced brightness, contrast, saturation */
+}
+
+/* Evening mode specific styles - can be toggled with JS */
+.evening-mode img {
+  filter: brightness(90%) contrast(90%) saturate(85%) sepia(5%);
+}
+
+/* Add evening mode class to body or html element via JS when needed */
+.evening-mode {
+  background-color: var(--evening-bg-light);
+  color: var(--evening-text-light);
+}
+
+html ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html ::-webkit-scrollbar-track {
+  background: rgba(243, 244, 246, 0.6); /* Neutral light gray track */
+}
+
+html ::-webkit-scrollbar-thumb {
+  background: rgba(209, 213, 219, 0.5); /* Neutral gray thumb */
+  border-radius: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: rgba(26, 30, 46, 0.4);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+strong {
+  font-size: unset;
+  font-weight: unset;
+}
+
+/* Add improved focus styles for better accessibility */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring-2 ring-primary ring-opacity-50;
+}
+
+/* Reduce eye strain with improved transitions */
+a,
+button,
+input,
+select,
+textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+/* remove common styles pagination swiper */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: unset !important;
+  top: unset !important;
+  left: unset !important;
+  width: unset !important;
+}
+
+#swiper-banner-pagination {
+  bottom: 2px !important;
+}
+
+.swiper-pagination .swiper-pagination-bullet,
+.swiper-pagination-recommend .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+  background: #d1d5db; /* Neutral gray bullet background */
+  opacity: 90;
+  cursor: pointer;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active,
+.swiper-pagination-recommend .swiper-pagination-bullet-active {
+  width: 23px;
+  height: 10px;
+  border-radius: 5px;
+  background: #8B5CF6;
+}
+
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+/* Embla Carousel Styles - Hot Comics Slider */
+.embla {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: visible; /* Allow slides to extend outside */
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: -1rem;
+  margin-right: -1rem; /* Add right margin to prevent clipping */
+  backface-visibility: hidden;
+  /* Ensure slides are not clipped */
+  overflow: visible;
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 45.45%; /* ~2.2 slides per view */
+  min-width: 0;
+  padding-left: 1rem;
+  backface-visibility: hidden;
+}
+
+/* Responsive breakpoints for Embla */
+@media (min-width: 480px) {
+  .embla__slide {
+    flex: 0 0 40%; /* 2.5 slides */
+  }
+}
+
+@media (min-width: 640px) {
+  .embla__slide {
+    flex: 0 0 31.25%; /* 3.2 slides */
+  }
+}
+
+@media (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 28.57%; /* 3.5 slides */
+  }
+}
+
+@media (min-width: 1024px) {
+  .embla__slide {
+    flex: 0 0 23.81%; /* 4.2 slides */
+  }
+}
+
+@media (min-width: 1280px) {
+  .embla__slide {
+    flex: 0 0 19.23%; /* 5.2 slides */
+  }
+}
+
+/* Embla navigation buttons */
+.embla__button {
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  /* Ensure buttons are always on top */
+  z-index: 20;
+  position: relative;
+}
+
+.embla__button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Ensure navigation buttons are not covered */
+.embla__button--prev,
+.embla__button--next {
+  z-index: 20 !important;
+  position: absolute !important;
+}
+
+/* Better mobile touch handling */
+@media (max-width: 768px) {
+  .embla {
+    overflow: visible;
+  }
+
+  .embla__container {
+    margin-left: -0.5rem;
+  }
+
+  .embla__slide {
+    padding-left: 0.5rem;
+  }
+}
+
+/* Ensure proper card height */
+.embla__slide > div {
+  height: 100%;
+}
+
+/* No transitions - instant sliding */
+.embla__container {
+  transition: none;
+}
+
+.embla__container.embla--is-dragging {
+  transition: none;
+}
+
+/* Basic 3D transforms for layout */
+.embla,
+.embla__container,
+.embla__slide {
+  transform-style: preserve-3d;
+}
+
+/* Prevent layout shift during loading */
+.embla__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Embla Carousel Styles - Recommend Comics */
+.embla-recommend {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.embla-recommend__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  backface-visibility: hidden;
+  transition: none;
+}
+
+.embla-recommend__slide {
+  flex: 0 0 100%; /* Each slide takes full width */
+  min-width: 0;
+  backface-visibility: hidden;
+  padding: 0 1rem; /* Add padding to prevent edge cutting */
+}
+
+/* Create 2x2 grid within each slide group */
+.embla-recommend__slide-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  height: 100%;
+  min-height: 400px; /* Ensure consistent height */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .embla-recommend__slide {
+    padding: 0 0.5rem;
+  }
+
+  .embla-recommend__slide-group {
+    gap: 0.75rem;
+    min-height: 350px;
+  }
+}
+
+/* Ensure proper card sizing within grid */
+.embla-recommend__slide-group > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0; /* Prevent overflow issues */
+}
+
+/* Prevent layout shift and overflow */
+.embla-recommend__slide-group .LazyLoadImageComponent {
+  width: 100%;
+  height: auto;
+}
+
+/* Ensure navigation buttons don't interfere with content */
+.embla-recommend .embla__button {
+  z-index: 20;
+}
+
+/* Add proper spacing for mobile */
+@media (max-width: 640px) {
+  .embla-recommend {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Optimize content visibility */
+.comic-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 360px;
+}
+
+/* Add image loading optimizations */
+img {
+  /* Add default dimensions to prevent layout shifts */
+  aspect-ratio: attr(width) / attr(height);
+  image-rendering: optimizeQuality;
+}
+
+/* Add loading skeleton */
+.image-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 247, 232, 0) 0%,
+    rgba(250, 247, 232, 0.2) 20%,
+    rgba(250, 247, 232, 0.5) 60%,
+    rgba(250, 247, 232, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .image-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(37, 42, 61, 0) 0%,
+    rgba(37, 42, 61, 0.2) 20%,
+    rgba(37, 42, 61, 0.5) 60%,
+    rgba(37, 42, 61, 0) 100%
+  );
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Additional eye-friendly styles */
+
+/* Improved readability for long text */
+.long-text {
+  @apply text-[#2d3748] dark:text-[#edf2f7];
+  line-height: 1.8;
+  font-size: 1.05em;
+}
+
+/* Improved text rendering for better legibility */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reading mode specific styles */
+.reading-container {
+  max-width: 800px;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.reading-container p {
+  margin-bottom: 1.5em;
+}
+
+/* Increased contrast for important UI text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+  @apply text-[#1a202c] dark:text-white;
+  font-weight: 600;
+}
+
+/* Improved focus styles for better accessibility */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  @apply outline-none ring-2 ring-primary ring-opacity-50;
+}
+
+/* Reduce eye strain with improved transitions */
+a,
+button,
+input,
+select,
+textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Improved card backgrounds */
+.card,
+.bg-white {
+  @apply bg-light-card dark:bg-dark-surface;
+}
+
+/* Softer dark backgrounds */
+.dark .bg-gray-800 {
+  @apply bg-dark-surface;
+}
+
+.dark .bg-gray-900 {
+  @apply bg-dark-bg;
+}
+
+/* Light mode gray backgrounds should use the warmer tones */
+.bg-gray-50 {
+  @apply bg-light-highlight;
+}
+
+.bg-gray-100 {
+  @apply bg-light-highlight;
+}
+
+/* Clean surfaces for light mode */
+.paper-surface {
+  @apply bg-light-card;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Improved link colors */
+a:hover {
+  @apply text-primary;
+}
+
+/* Reduce eye strain with subtle transitions on theme change */
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
+}
+
+/* Evening Reading Mode Component */
+.evening-reading-mode {
+  position: fixed;
+  bottom: 20px; /* Default position, can be overridden */
+  right: 20px; /* Default position, can be overridden */
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.evening-reading-mode:hover {
+  transform: scale(1.1);
+}
+
+.dark .evening-reading-mode {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.evening-mode-active .evening-reading-mode {
+  background: rgba(225, 175, 105, 0.2);
+}
+
+/* Add custom evening mode status indicator */
+.evening-mode-status {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.evening-mode-status.show {
+  opacity: 1;
+}
+
+.is-hide-header {
+  transition: all 0.5s ease;
+  opacity: 0;
+  z-index: -1;
+}
+
+/* Remove borders on focus/active for navigation and interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove borders on active states for navigation links */
+a:active,
+button:active {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Remove borders on hover for navigation elements */
+nav a:hover,
+nav button:hover {
+  border: none !important;
+  outline: none !important;
+}
+
+@media (max-width: 639px) {
+  .is-input-mobile-search-bar {
+    border-radius: 12px 0 0 12px;
+  }
+  .is-btn-mobile-search-bar {
+    border-radius: 0 12px 12px 0;
+  }
+}
