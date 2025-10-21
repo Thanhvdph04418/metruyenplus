@@ -27,7 +27,7 @@ const GenreList = ({
   const [showSearchResults, setShowSearchResults] = useState(false)
 
   // Get current selected genre name
-  const currentGenre = dataGenreComics?.find((item) => item.id === type) || dataGenreComics?.at(0)
+  // const currentGenre = dataGenreComics?.find((item) => item.id === type) || dataGenreComics?.at(0)
   
   // Show all genres with selected genre at the top
   const getAllGenres = () => {
@@ -269,13 +269,13 @@ const ComicsList = () => {
   const dataComics = data?.data
   const dataGenreComics = dataGenres?.data
 
-  // Derived state
-  const descGenre = useMemo(
-    () =>
-      dataGenreComics?.find((item) => item.id === type)?.description ??
-      dataGenreComics?.at(0)?.description,
-    [type, dataGenreComics]
-  )
+  // // Derived state
+  // const descGenre = useMemo(
+  //   () =>
+  //     dataGenreComics?.find((item) => item.id === type)?.description ??
+  //     dataGenreComics?.at(0)?.description,
+  //   [type, dataGenreComics]
+  // )
 
   const currentGenre = useMemo(
     () => dataGenreComics?.find((item) => item.id === type) ?? dataGenreComics?.at(0),

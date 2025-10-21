@@ -5,45 +5,45 @@ import PATH from '@/utils/path'
 import { formatNumber } from '@/utils/formatNumber'
 
 // Utility function to format time ago
-const formatTimeAgo = (dateString?: string) => {
-  if (!dateString) {
-    return 'Không xác định'
-  }
+// const formatTimeAgo = (dateString?: string) => {
+//   if (!dateString) {
+//     return 'Không xác định'
+//   }
 
-  const now = new Date()
-  const date = new Date(dateString)
+//   const now = new Date()
+//   const date = new Date(dateString)
   
-  // Check if date is valid
-  if (isNaN(date.getTime())) {
-    return 'Không xác định'
-  }
+//   // Check if date is valid
+//   if (isNaN(date.getTime())) {
+//     return 'Không xác định'
+//   }
 
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+//   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
 
-  // Handle future dates
-  if (diffInSeconds < 0) {
-    return 'Vừa xong'
-  }
+//   // Handle future dates
+//   if (diffInSeconds < 0) {
+//     return 'Vừa xong'
+//   }
 
-  if (diffInSeconds < 60) {
-    return 'Vừa xong'
-  } else if (diffInSeconds < 3600) {
-    const minutes = Math.floor(diffInSeconds / 60)
-    return `${minutes} phút trước`
-  } else if (diffInSeconds < 86400) {
-    const hours = Math.floor(diffInSeconds / 3600)
-    return `${hours} giờ trước`
-  } else if (diffInSeconds < 2592000) {
-    const days = Math.floor(diffInSeconds / 86400)
-    return `${days} ngày trước`
-  } else if (diffInSeconds < 31536000) {
-    const months = Math.floor(diffInSeconds / 2592000)
-    return `${months} tháng trước`
-  } else {
-    const years = Math.floor(diffInSeconds / 31536000)
-    return `${years} năm trước`
-  }
-}
+//   if (diffInSeconds < 60) {
+//     return 'Vừa xong'
+//   } else if (diffInSeconds < 3600) {
+//     const minutes = Math.floor(diffInSeconds / 60)
+//     return `${minutes} phút trước`
+//   } else if (diffInSeconds < 86400) {
+//     const hours = Math.floor(diffInSeconds / 3600)
+//     return `${hours} giờ trước`
+//   } else if (diffInSeconds < 2592000) {
+//     const days = Math.floor(diffInSeconds / 86400)
+//     return `${days} ngày trước`
+//   } else if (diffInSeconds < 31536000) {
+//     const months = Math.floor(diffInSeconds / 2592000)
+//     return `${months} tháng trước`
+//   } else {
+//     const years = Math.floor(diffInSeconds / 31536000)
+//     return `${years} năm trước`
+//   }
+// }
 
 interface Props {
   data?: comics[]
