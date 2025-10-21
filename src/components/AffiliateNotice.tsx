@@ -33,12 +33,12 @@ const AffiliateNotice = () => {
       <div className='px-3 sm:px-4 py-2.5 sm:py-3'>
         <div className='flex items-center justify-center gap-2 flex-wrap'>
           <span className='text-xs sm:text-sm text-gray-700 dark:text-gray-200'>
-            💙 <span className='font-medium'>MeTruyen+ không có quảng cáo!</span> Hãy
+            💙 <span className='font-medium'>Tcomic không có quảng cáo!</span> Hãy
           </span>
           <button
             onClick={handleLinkClick}
             className='group inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 text-xs sm:text-sm'
-            title='Click để hỗ trợ MeTruyen+'
+            title='Click để hỗ trợ Tcomic'
           >
             <svg
               className='w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse'

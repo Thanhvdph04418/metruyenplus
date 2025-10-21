@@ -67,10 +67,10 @@ const ComicsSearch = () => {
   return (
     <>
       <Helmet>
-        <title>Tìm truyện chữ online - MeTruyen+</title>
+        <title>Tìm truyện tranh online - Tcomic</title>
         <meta
           name='description'
-          content='Tìm truyện chữ - Tất cả truyện đều có thể tìm thấy tại MeTruyen+'
+          content='Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại Tcomic'
         />
         {/* Canonical URL - always points to page 1 with search query */}
         <link rel='canonical' href={canonicalUrl} />

@@ -70,7 +70,7 @@ const Home = () => {
         <link rel='canonical' href='https://metruyenplus.com' />
         <meta
           name='description'
-          content='Web đọc truyện chữ online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại MeTruyen+ ❤️💛💚'
+          content='Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại MeTruyen+ ❤️💛💚'
         />
       </Helmet>
       <div className='min-h-screen bg-light-bg dark:bg-dark-bg'>
@@ -86,12 +86,12 @@ const Home = () => {
             <div className='text-center mb-8'>
               <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
                 Chào mừng đến với{' '}
-                <span className='bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent'>
-                  MeTruyen+
+                <span className='logo-text-bold gradient-logo-text'>
+                  Tcomic
                 </span>
               </h1>
               <p className='text-lg md:text-xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed'>
-                Khám phá thế giới truyện chữ phong phú với hàng ngàn tác phẩm hay, 
+                Khám phá thế giới truyện tranh phong phú với hàng ngàn tác phẩm hay, 
                 cập nhật liên tục và trải nghiệm đọc tuyệt vời
               </p>
             </div>

@@ -20,12 +20,12 @@ const SiteMap = () => {
   return (
     <>
       <Helmet>
-        <title>Sơ đồ trang web - MeTruyen+</title>
+        <title>Sơ đồ trang web - Tcomic</title>
         <meta
           name='description'
-          content='Sơ đồ trang web của MeTruyen+ - Tất cả các đường dẫn trên website'
+          content='Sơ đồ trang web của Tcomic - Tất cả các đường dẫn trên website'
         />
-        <link rel='canonical' href='https://tcomicclub.com/so-do-trang-web' />
+        <link rel='canonical' href='https://tcomic.com/so-do-trang-web' />
       </Helmet>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         <div className='bg-white dark:bg-gray-900 rounded-xl shadow-lg dark:shadow-gray-900/30 overflow-hidden'>

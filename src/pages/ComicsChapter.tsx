@@ -187,18 +187,18 @@ const ComicsChapter = () => {
       {/* Position the evening mode toggle at the middle of the right side */}
       <EveningModeToggle />
       <Helmet>
-        <title>{`${dataComics?.title} ${dataComics?.chapters.at(0)?.name} - MeTruyen+`}</title>
+        <title>{`${dataComics?.title} ${dataComics?.chapters.at(0)?.name} - Tcomic`}</title>
         <meta
           name='description'
-          content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} miễn phí, không quảng cáo tại MeTruyen+. Cập nhật nhanh nhất, chất lượng cao, không quảng cáo, luôn luôn lắng nghe người dùng.`}
+          content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} miễn phí, không quảng cáo tại Tcomic. Cập nhật nhanh nhất, chất lượng cao, không quảng cáo, luôn luôn lắng nghe người dùng.`}
         />
         <meta
           name='keywords'
-          content={`${dataComics?.title}, ${chapterInfo?.name}, truyện chữ, manga, manhua, manhwa, comic, webtoon , ${dataComics?.genres
+          content={`${dataComics?.title}, ${chapterInfo?.name}, truyện tranh, manga, manhua, manhwa, comic, webtoon , ${dataComics?.genres
             ?.map((g) => g.name)
             .join(', ')}`}
         />
-        <meta name='author' content='MeTruyen+' />
+        <meta name='author' content='Tcomic' />
         <meta name='robots' content='index, follow' />
         <link
           rel='canonical'
@@ -207,11 +207,11 @@ const ComicsChapter = () => {
 
         {/* Open Graph Tags - Enhanced */}
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='MeTruyen+' />
+        <meta property='og:site_name' content='Tcomic' />
         <meta property='og:title' content={`${dataComics?.title} - ${chapterInfo?.name}`} />
         <meta
           property='og:description'
-          content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} và hàng ngàn chương truyện khác tại MeTruyen+ - Cộng đồng đọc truyện chữ online lớn nhất Việt Nam`}
+          content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} và hàng ngàn chương truyện khác tại Tcomic - Cộng đồng đọc truyện tranh online lớn nhất Việt Nam`}
         />
         <meta property='og:image' content={dataChapter?.images[0]?.src} />
         <meta property='og:image:width' content='1200' />
@@ -225,11 +225,11 @@ const ComicsChapter = () => {
 
         {/* Twitter Card Tags - Enhanced */}
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content='@MeTruyen+' />
+        <meta name='twitter:site' content='@Tcomic' />
         <meta name='twitter:title' content={`${dataComics?.title} - ${chapterInfo?.name}`} />
         <meta
           name='twitter:description'
-          content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} và hàng ngàn chương truyện khác tại MeTruyen+ - Cộng đồng đọc truyện chữ online lớn nhất Việt Nam`}
+          content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} và hàng ngàn chương truyện khác tại Tcomic - Cộng đồng đọc truyện tranh online lớn nhất Việt Nam`}
         />
         <meta name='twitter:image' content={dataChapter?.images[0]?.src} />
         <meta name='twitter:image:alt' content={`${dataComics?.title} chapter cover`} />
@@ -245,11 +245,11 @@ const ComicsChapter = () => {
             dateModified: dataChapter?.updated_at || new Date().toISOString(),
             author: {
               '@type': 'Organization',
-              name: 'MeTruyen+'
+              name: 'Tcomic'
             },
             publisher: {
               '@type': 'Organization',
-              name: 'MeTruyen+',
+              name: 'Tcomic',
               logo: {
                 '@type': 'ImageObject',
                 url: 'https://metruyenplus.com/icon-192x192.png'
@@ -267,7 +267,7 @@ const ComicsChapter = () => {
               '@type': 'WebPage',
               '@id': `https://metruyenplus.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`
             },
-            description: `Đọc truyện ${dataComics?.title} ${chapterInfo?.name} miễn phí tại MeTruyen+`
+            description: `Đọc truyện ${dataComics?.title} ${chapterInfo?.name} miễn phí tại Tcomic`
           })}
         </script>
 

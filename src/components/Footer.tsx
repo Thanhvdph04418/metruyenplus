@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='container py-6 px-4'>
         {/* Keywords Section */}
         <div className='mb-6'>
-          <h2 className='text-orange-600 dark:text-orange-500 text-sm font-semibold mb-3'>
+          <h2 className='text-primary dark:text-primary-2 text-sm font-semibold mb-3'>
             Từ khóa nổi bật:
           </h2>
           <div className='flex flex-wrap gap-2 text-xs'>
@@ -29,7 +29,7 @@ const Footer = () => {
               <a
                 key={keyword}
                 href={`${PATH.search}?q=${keyword}`}
-                className='hover:text-orange-600 dark:hover:text-orange-500 transition-colors duration-200'
+                className='hover:text-primary dark:hover:text-primary-2 transition-colors duration-200'
                 title={`Tìm kiếm ${keyword}`}
               >
                 {keyword}
@@ -40,7 +40,7 @@ const Footer = () => {
 
         {/* Categories Section */}
         <div className='mb-8'>
-          <h2 className='text-yellow-600 dark:text-yellow-500 text-sm font-semibold mb-3'>
+          <h2 className='text-primary-2 dark:text-secondary text-sm font-semibold mb-3'>
             Thể loại
           </h2>
           <div className='flex flex-wrap gap-2'>
@@ -75,7 +75,7 @@ const Footer = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/* Introduction */}
           <div>
-            <h2 className='text-gray-900 dark:text-white text-xs font-semibold border-b border-red-500 pb-1.5 mb-3'>
+            <h2 className='text-gray-900 dark:text-white text-xs font-semibold border-b border-primary pb-1.5 mb-3'>
               GIỚI THIỆU
             </h2>
             <p className='text-xs leading-relaxed'>
@@ -89,7 +89,7 @@ const Footer = () => {
 
           {/* Support */}
           <div>
-            <h2 className='text-gray-900 dark:text-white text-xs font-semibold border-b border-red-500 pb-1.5 mb-3'>
+            <h2 className='text-gray-900 dark:text-white text-xs font-semibold border-b border-primary pb-1.5 mb-3'>
               HỖ TRỢ
             </h2>
             <p className='text-xs leading-relaxed'>
@@ -101,12 +101,12 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h2 className='text-gray-900 dark:text-white text-xs font-semibold border-b border-red-500 pb-1.5 mb-3'>
+            <h2 className='text-gray-900 dark:text-white text-xs font-semibold border-b border-primary pb-1.5 mb-3'>
               LIÊN HỆ
             </h2>
             <div className='space-y-2'>
               <p className='text-xs leading-relaxed flex items-center gap-2'>
-                <span className='text-red-500'>
+                <span className='text-primary'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-4 w-4'
@@ -122,7 +122,7 @@ const Footer = () => {
               <div className='space-y-3'>
                 <Link
                   to={PATH.privatePolicy}
-                  className='text-orange-600 dark:text-orange-500 hover:underline text-xs inline-flex items-center gap-1'
+                  className='text-primary dark:text-primary-2 hover:underline text-xs inline-flex items-center gap-1'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -142,8 +142,8 @@ const Footer = () => {
                 {/* Enhanced App Link */}
                 <Link
                   to={PATH.app}
-                  className='group flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-orange-500 to-red-500 
-                             hover:from-orange-600 hover:to-red-600 text-white rounded-lg transition-all duration-300
+                  className='group flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-primary to-primary-2 
+                             hover:from-primary-2 hover:to-secondary text-white rounded-lg transition-all duration-300
                              shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
                 >
                   <svg
@@ -176,15 +176,15 @@ const Footer = () => {
         {/* Logo and Slogan */}
         <div className='text-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-800'>
           <div className='mb-2'>
-            <span className='text-3xl font-bold bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent'>
-              MeTruyen+
+            <span className='text-3xl logo-text-bold gradient-logo-text'>
+              Tcomic
             </span>
           </div>
-          <p className='text-sm font-medium bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent'>
+          <p className='text-sm font-medium gradient-logo-text'>
             Quality - Quickly - Quantity
           </p>
           <p className='text-xs mt-2 text-gray-500 dark:text-gray-400'>
-            Copyright © {new Date().getFullYear()} MeTruyen+. All Right Reserved
+            Copyright © {new Date().getFullYear()} Tcomic. All Right Reserved
           </p>
         </div>
       </div>

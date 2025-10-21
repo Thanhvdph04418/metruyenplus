@@ -238,35 +238,35 @@ const ComicsDetail = () => {
         <link rel='canonical' href={`https://metruyenplus.com${PATH.comics}/${slug}-${id}`} />
 
         {/* Primary Meta Tags */}
-        <title>{`${dataComics?.title} [${dataComics?.chapters.at(0)?.name}] | MeTruyen+`}</title>
-        <meta name='title' content={`${dataComics?.title} | Đọc Truyện Tranh Online - MeTruyen+`} />
+        <title>{`${dataComics?.title} [${dataComics?.chapters.at(0)?.name}] | Tcomic`}</title>
+        <meta name='title' content={`${dataComics?.title} | Đọc Truyện Tranh Online - Tcomic`} />
         <meta
           name='description'
-          content={`✅ Đọc truyện chữ ${dataComics?.title} ${
+          content={`✅ Đọc truyện tranh ${dataComics?.title} ${
             dataComics?.other_names && dataComics?.other_names.length > 0
               ? `(${dataComics.other_names.join(', ')})`
               : ''
-          } Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại MeTruyen+. Thể loại: ${dataComics?.genres
+          } Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại Tcomic. Thể loại: ${dataComics?.genres
             ?.map((g) => g.name)
             .join(', ')}`}
         />
         <meta
           name='keywords'
-          content={`đọc truyện chữ, ${dataComics?.title}, ${
+          content={`đọc truyện tranh, ${dataComics?.title}, ${
             dataComics?.other_names?.join(', ') || ''
-          }, truyện chữ online, manga, ${dataComics?.genres?.map((g) => g.name).join(', ')}`}
+          }, truyện tranh online, manga, ${dataComics?.genres?.map((g) => g.name).join(', ')}`}
         />
 
         {/* Open Graph / Facebook */}
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='MeTruyen+' />
+        <meta property='og:site_name' content='Tcomic' />
         <meta
           property='og:title'
-          content={`${dataComics?.title} | Đọc Truyện Tranh Online - MeTruyen+`}
+          content={`${dataComics?.title} | Đọc Truyện Tranh Online - Tcomic`}
         />
         <meta
           property='og:description'
-          content={`Đọc truyện chữ ${dataComics?.title} Tiếng Việt bản dịch Full mới nhất. ${dataComics?.description?.substring(
+          content={`Đọc truyện tranh ${dataComics?.title} Tiếng Việt bản dịch Full mới nhất. ${dataComics?.description?.substring(
             0,
             150
           )}...`}
@@ -277,14 +277,14 @@ const ComicsDetail = () => {
 
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content='@MeTruyen+' />
+        <meta name='twitter:site' content='@Tcomic' />
         <meta
           name='twitter:title'
-          content={`${dataComics?.title} | Đọc Truyện Tranh Online - MeTruyen+`}
+          content={`${dataComics?.title} | Đọc Truyện Tranh Online - Tcomic`}
         />
         <meta
           name='twitter:description'
-          content={`Đọc truyện chữ ${dataComics?.title} Tiếng Việt bản dịch Full mới nhất. ${dataComics?.description?.substring(
+          content={`Đọc truyện tranh ${dataComics?.title} Tiếng Việt bản dịch Full mới nhất. ${dataComics?.description?.substring(
             0,
             150
           )}...`}
@@ -293,7 +293,7 @@ const ComicsDetail = () => {
         <meta name='twitter:image:alt' content={`Ảnh bìa truyện ${dataComics?.title}`} />
 
         {/* Additional Meta Tags */}
-        <meta name='author' content={dataComics?.authors || 'MeTruyen+'} />
+        <meta name='author' content={dataComics?.authors || 'Tcomic'} />
         <meta name='robots' content='index, follow' />
 
         {/* Comic-specific structured data with more details */}
@@ -318,10 +318,10 @@ const ComicsDetail = () => {
               name: dataComics?.authors
             },
             genre: dataComics?.genres?.map((g) => g.name).join(', '),
-            keywords: `truyện chữ, ${dataComics?.title}, manga`,
+            keywords: `truyện tranh, ${dataComics?.title}, manga`,
             publisher: {
               '@type': 'Organization',
-              name: 'MeTruyen+',
+              name: 'Tcomic',
               logo: {
                 '@type': 'ImageObject',
                 url: 'https://metruyenplus.com/icon-192x192.png'

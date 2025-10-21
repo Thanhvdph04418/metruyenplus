@@ -1,11 +1,10 @@
-import { Link, useLocation, useMatch } from 'react-router-dom'
+import { Link, useMatch } from 'react-router-dom'
 import PATH from '@/utils/path'
 import { useAuth } from '@/context/AuthContext'
 import { FaHome, FaHistory, FaUser, FaThList, FaTrophy } from 'react-icons/fa'
 
 const MobileBottomTab = () => {
-  const { pathname } = useLocation()
-  const { token } = useAuth()
+  const { isAuthenticated } = useAuth()
   const isHome = useMatch(PATH.home)
   const isHistory = useMatch(PATH.history)
   const isAccount = useMatch(PATH.customerInfo)
@@ -38,7 +37,7 @@ const MobileBottomTab = () => {
       isActive: isHistory
     },
     {
-      to: token ? PATH.customerInfo : PATH.login,
+      to: isAuthenticated ? PATH.customerInfo : PATH.login,
       title: 'Tài khoản',
       icon: FaUser,
       isActive: isAccount
@@ -54,15 +53,23 @@ const MobileBottomTab = () => {
             <Link
               key={tab.to}
               to={tab.to}
-              className={`flex flex-col items-center py-2 px-4 rounded-lg transition-colors ${
+              className={`flex flex-col items-center py-2 px-4 rounded-lg transition-all duration-300 ${
                 tab.isActive
-                  ? 'text-primary bg-primary/10'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-primary'
+                  ? 'bg-gradient-to-r from-primary/10 to-primary-2/10 border border-primary/20'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800'
               }`}
               title={tab.title}
             >
-              <Icon className='w-5 h-5 mb-1' />
-              <span className='text-xs font-medium'>{tab.title}</span>
+              <Icon className={`w-5 h-5 mb-1 transition-all duration-300 text-current ${
+                tab.isActive 
+                  ? 'text-primary drop-shadow-sm scale-110' 
+                  : 'hover:scale-105'
+              }`} />
+              <span className={`text-xs font-medium ${
+                tab.isActive 
+                  ? 'text-transparent bg-gradient-to-r from-primary to-primary-2 bg-clip-text' 
+                  : ''
+              }`}>{tab.title}</span>
             </Link>
           )
         })}

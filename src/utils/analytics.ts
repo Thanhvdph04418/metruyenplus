@@ -122,7 +122,7 @@ const getPageTitle = (path: string): string => {
     return 'Đọc chương'
   }
 
-  return 'MeTruyen+ - Đọc truyện chữ online'
+  return 'Tcomic - Đọc truyện tranh online'
 }
 
 // Comic-related event tracking

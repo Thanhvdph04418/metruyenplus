@@ -18,12 +18,17 @@ export default {
       fontFamily: {
         sans: ['Nunito', 'Nunito Fallback', 'system-ui', 'sans-serif'],
         comic: ['Comic Neue', 'Comic Neue Fallback', 'cursive'],
-        title: ['Bangers', 'Bangers Fallback', 'cursive']
+        title: ['Bangers', 'Bangers Fallback', 'cursive'],
+        manga: ['Fredoka One', 'Fredoka One Fallback', 'Bangers', 'cursive'],
+        comicBold: ['Fredoka One', 'Fredoka One Fallback', 'Bangers', 'cursive'],
+        logo: ['Inter', 'Inter Fallback', 'Arial', 'sans-serif'],
+        logoAlt: ['Poppins', 'Poppins Fallback', 'Arial', 'sans-serif'],
+        logoBold: ['Poppins', 'Poppins Fallback', 'Arial Black', 'sans-serif']
       },
       colors: {
-        primary: '#8B5CF6',          /* Purple primary */
-        'primary-2': '#06B6D4',      /* Cyan secondary */
-        secondary: '#10B981',        /* Emerald accent */
+        primary: '#2196F3',          /* Medium blue from logo */
+        'primary-2': '#06B6D4',      /* Teal from logo */
+        secondary: '#4DC0B5',        /* Light teal accent */
         'comment-bg': '#F8FAFC',     /* Slate background */
         'dark-bg': '#0F172A',        /* Slate dark for dark mode */
         'dark-surface': '#1E293B',   /* Slate surface */
@@ -35,7 +40,10 @@ export default {
         'light-border': '#E2E8F0',
       },
       backgroundImage: {
-        gradient: 'linear-gradient(133deg, #8B5CF6 0%, #06B6D4 100%)'
+        gradient: 'linear-gradient(135deg, #2196F3 0%, #06B6D4 100%)',
+        'gradient-logo': 'linear-gradient(180deg, #2196F3 0%, #06B6D4 100%)',
+        'gradient-radial': 'radial-gradient(ellipse at center, #2196F3 0%, #06B6D4 100%)',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, #2196F3 0deg, #06B6D4 120deg, #4DC0B5 240deg, #2196F3 360deg)'
       },
       transitionDuration: {
         DEFAULT: '200ms',
@@ -167,6 +175,47 @@ export default {
         '.stable-transform': {
           willChange: 'transform',
           transformStyle: 'preserve-3d'
+        },
+        // Logo-inspired gradient utilities
+        '.gradient-logo-text': {
+          background: 'linear-gradient(180deg, #2196F3 0%, #06B6D4 100%)',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        },
+        '.gradient-logo-border': {
+          background: 'linear-gradient(180deg, #2196F3 0%, #06B6D4 100%)',
+          padding: '2px',
+          borderRadius: '0.5rem'
+        },
+        '.gradient-logo-shadow': {
+          boxShadow: '0 10px 25px -5px rgba(33, 150, 243, 0.3), 0 10px 10px -5px rgba(6, 182, 212, 0.2)'
+        },
+        // Logo-appropriate text effects
+        '.logo-text': {
+          fontFamily: 'Bangers, Bangers Fallback, Arial Black, sans-serif',
+          fontWeight: '400',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase'
+        },
+        '.logo-text-alt': {
+          fontFamily: 'Fredoka One, Fredoka One Fallback, Arial Black, sans-serif',
+          fontWeight: '400',
+          letterSpacing: '0.05em'
+        },
+        '.logo-text-bold': {
+          fontFamily: 'Bangers, Bangers Fallback, Arial Black, sans-serif',
+          fontWeight: '400',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase'
+        },
+        '.comic-text': {
+          fontFamily: 'Fredoka One, Fredoka One Fallback, Bangers, cursive',
+          textShadow: '2px 2px 0px rgba(0,0,0,0.1), 4px 4px 0px rgba(0,0,0,0.05)',
+          letterSpacing: '0.05em'
+        },
+        '.comic-outline': {
+          textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
         }
       })
     }

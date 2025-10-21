@@ -6,7 +6,7 @@ import AndroidApkModal from './AndroidApkModal'
 
 /**
  * Mobile App Notification Component
- * Shows a simple notification encouraging users to download the MeTruyen+ mobile app
+ * Shows a simple notification encouraging users to download the Tcomic mobile app
  * Only visible on mobile devices with automatic iOS/Android detection
  * For Android: Shows modal explaining APK installation
  * For iOS: Direct link to App Store

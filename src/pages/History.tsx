@@ -105,7 +105,7 @@ const History = () => {
   return (
     <>
       <Helmet>
-        <title>Lịch sử đọc truyện - MeTruyen+</title>
+        <title>Lịch sử đọc truyện - Tcomic</title>
         <meta name='description' content='Lịch sử các bộ truyện bạn đã đọc' />
       </Helmet>
       <div className='container px-2 lg:px-0'>
@@ -163,7 +163,7 @@ const History = () => {
                   </svg>
                 )}
                 <span className='sm:hidden'>Đồng bộ</span>
-                <span className='hidden sm:inline'>Đồng bộ với app MeTruyen+</span>
+                <span className='hidden sm:inline'>Đồng bộ với app Tcomic</span>
               </button>
             )}
             <button

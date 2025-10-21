@@ -9,9 +9,9 @@ const AppLanding = () => {
     <div className='min-h-screen bg-gray-100 dark:bg-gray-900'>
       <div className='container mx-auto px-4 py-8'>
         {/* Header */}
-        <div className='bg-primary rounded-b-[50px] text-white text-center py-10 px-4 mb-8'>
+        <div className='bg-gradient-logo rounded-b-[50px] text-white text-center py-10 px-4 mb-8'>
           <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold'>
-            Hành trình mới cùng ứng dụng truyện tranh MeTruyen+!
+            Hành trình mới cùng ứng dụng truyện tranh Tcomic!
           </h1>
         </div>
 

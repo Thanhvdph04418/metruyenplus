@@ -15,26 +15,29 @@ import { useQueryConfig } from '@/hooks'
 import { useAuth } from '@/context/AuthContext'
 import { SvgMoon, SvgSun } from './Icons'
 import {
-  FaAngleDown,
-  FaBookOpen,
   FaFacebookF,
-  FaHistory,
   FaMars,
-  FaSignOutAlt,
-  FaUser,
-  FaVenus
+  FaVenus,
+  FaHome,
+  FaMobileAlt,
+  FaThList,
+  FaStar,
+  FaTrophy,
+  FaClock,
+  FaFire,
+  FaCheckCircle
 } from 'react-icons/fa'
 
 // Internal Components
 const Logo = () => (
   <Link
     to={PATH.home}
-    title='MeTruyen+'
+    title='Tcomic'
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     className='flex items-center'
   >
-    <span className='text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent hover:from-primary-2 hover:to-primary transition-all duration-300'>
-      MeTruyen+
+    <span className='text-2xl lg:text-3xl logo-text-bold gradient-logo-text hover:from-primary-2 hover:to-primary transition-all duration-300'>
+      Tcomic
     </span>
   </Link>
 )
@@ -49,55 +52,71 @@ const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
   <ul className='hidden sm:flex items-center gap-5 ml-6 mt-1'>
     <li className='hidden lg:block'>
       <Link
-        title='Trang chủ MeTruyen+'
+        title='Trang chủ Tcomic'
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         to={PATH.home}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors ${
+        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
           useMatch(PATH.home) ? 'text-primary' : ''
         }`}
       >
+        <FaHome className='w-4 h-4 text-current' />
         Trang chủ
       </Link>
     </li>
     <li>
       <Link
-        title='Tất cả thể loại truyện chữ'
+        title='Ứng dụng'
+        to={{
+          pathname: PATH.app
+        }}
+        className={`hover:text-primary text-lg capitalize flex items-center gap-2 ${useMatch(PATH.app) && 'text-primary'}`}
+      >
+        <FaMobileAlt className='w-4 h-4 text-current' />
+        Ứng dụng
+      </Link>
+    </li>
+    <li>
+      <Link
+        title='Tất cả thể loại truyện tranh'
         to={{
           pathname: PATH.genres,
           search: createSearchParams({ type: 'all', page: '1' }).toString()
         }}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors ${
+        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
           useMatch(PATH.genres) ? 'text-primary' : ''
         }`}
       >
+        <FaThList className='w-4 h-4 text-current' />
         Thể loại
       </Link>
     </li>
     <li>
       <Link
-        title='Truyện chữ mới nhất'
+        title='Truyện tranh mới nhất'
         to={{
           pathname: PATH.new,
           search: createSearchParams({ status: 'all', page: '1' }).toString()
         }}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors ${
+        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
           useMatch(PATH.new) ? 'text-primary' : ''
         }`}
       >
+        <FaStar className='w-4 h-4 text-current' />
         Mới
       </Link>
     </li>
     <li>
       <Link
-        title='Bảng xếp hạng truyện chữ'
+        title='Bảng xếp hạng truyện tranh'
         to={{
           pathname: PATH.top,
           search: createSearchParams({ status: 'all', page: '1' }).toString()
         }}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors ${
+        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
           isMatchTop ? 'text-primary' : ''
         }`}
       >
+        <FaTrophy className='w-4 h-4 text-current' />
         BXH
       </Link>
     </li>
@@ -210,22 +229,13 @@ const MobileNavigation = ({
   handleChangeTheme: (type: 'light' | 'dark') => void
 }) => {
   const { logout } = useAuth()
-  const user = JSON.parse(localStorage.getItem('customerInfo') || '{}')
   const token = localStorage.getItem('auth_token')
-  const navigate = useNavigate()
-
-  const [isShowMenuUser, setIsShowMenuUser] = useState<boolean>(false)
 
   const handleLogout = async () => {
     await logout()
     window.location.reload()
   }
 
-  useEffect(() => {
-    if (!OpenNav) {
-      setIsShowMenuUser(false)
-    }
-  }, [OpenNav])
 
   return (
     <div
@@ -236,56 +246,114 @@ const MobileNavigation = ({
       {/* Existing content */}
       <div className='flex-1 overflow-y-auto px-4 pt-0'>
         <SearchBar />
-        <ul className='flex flex-col gap-2 text-[15px] pb-5'>
-          {/* Mobile Navigation Links */}
-          {[
-            { to: PATH.new, title: 'mới', params: { status: 'all', page: '1' } as SearchParams },
-            { to: PATH.recent, title: 'Mới cập nhật', params: { page: '1' } as SearchParams },
-            { to: PATH.popular, title: 'nổi bật', params: { page: '1' } as SearchParams },
-            { to: PATH.completed, title: 'đã hoàn thành', params: { page: '1' } as SearchParams },
-            {
-              to: PATH.boy,
-              title: 'con trai',
-              params: { page: '1' } as SearchParams,
-              icon: <FaMars />
-            },
-            {
-              to: PATH.girl,
-              title: 'con gái',
-              params: { page: '1' } as SearchParams,
-              icon: <FaVenus />
-            }
-          ].map((link) => (
-            <li key={link.to}>
-              {link.params ? (
+        <ul className='flex flex-col gap-1 text-[15px] pb-5'>
+          {/* Group 1: Main Navigation */}
+          <div className='mb-3'>
+            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+              Điều hướng
+            </h3>
+            {[
+              { to: PATH.app, title: 'Ứng dụng', icon: <FaMobileAlt className='w-4 h-4' />},
+            ].map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className={`hover:text-primary text-left inline-flex items-center uppercase leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors ${
+                    useMatch(link.to) && 'text-primary bg-primary/10'
+                  }`}
+                  title={link.title}
+                >
+                  {link?.icon}
+                  {link.title}
+                </Link>
+              </li>
+            ))}
+          </div>
+
+          {/* Group 2: Comic Categories */}
+          <div className='mb-3'>
+            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+              Thể loại truyện
+            </h3>
+            {[
+              { to: PATH.new, title: 'Mới', params: { status: 'all', page: '1' } as SearchParams, icon: <FaStar className='w-4 h-4' /> },
+              { to: PATH.recent, title: 'Mới cập nhật', params: { page: '1' } as SearchParams, icon: <FaClock className='w-4 h-4' /> },
+              { to: PATH.popular, title: 'Nổi bật', params: { page: '1' } as SearchParams, icon: <FaFire className='w-4 h-4' /> },
+              { to: PATH.completed, title: 'Đã hoàn thành', params: { page: '1' } as SearchParams, icon: <FaCheckCircle className='w-4 h-4' /> },
+            ].map((link) => (
+              <li key={link.to}>
                 <NavLink
                   to={{
                     pathname: link.to,
                     search: createSearchParams(link.params).toString()
                   }}
                   className={({ isActive }) =>
-                    `uppercase inline-flex items-center hover:text-primary text-left leading-[19px] gap-0.5 py-3 px-4 rounded-xl transition-colors ${
+                    `uppercase inline-flex items-center hover:text-primary text-left leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors ${
                       isActive && 'text-primary bg-primary/10'
                     }`
                   }
                 >
-                  {link.title}
                   {link?.icon}
+                  {link.title}
                 </NavLink>
-              ) : (
-                <Link
-                  to={link.to}
-                  className={`hover:text-primary text-left inline-flex items-center uppercase leading-[19px] gap-0.5 py-3 px-4 rounded-xl transition-colors ${
-                    useMatch(link.to) && 'text-primary bg-primary/10'
-                  }`}
-                  title={link.title}
+              </li>
+            ))}
+          </div>
+
+          {/* Group 3: Gender Categories */}
+          <div className='mb-3'>
+            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+              Phân loại
+            </h3>
+            {[
+              {
+                to: PATH.boy,
+                title: 'Con trai',
+                params: { page: '1' } as SearchParams,
+                icon: <FaMars className='w-4 h-4' />
+              },
+              {
+                to: PATH.girl,
+                title: 'Con gái',
+                params: { page: '1' } as SearchParams,
+                icon: <FaVenus className='w-4 h-4' />
+              }
+            ].map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={{
+                    pathname: link.to,
+                    search: createSearchParams(link.params).toString()
+                  }}
+                  className={({ isActive }) =>
+                    `uppercase inline-flex items-center hover:text-primary text-left leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors ${
+                      isActive && 'text-primary bg-primary/10'
+                    }`
+                  }
                 >
-                  {link.title}
                   {link?.icon}
-                </Link>
-              )}
+                  {link.title}
+                </NavLink>
+              </li>
+            ))}
+          </div>
+
+          {/* Group 4: Social */}
+          <div className='mb-3'>
+            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+              Cộng đồng
+            </h3>
+            <li>
+              <Link
+                to='https://www.facebook.com/groups/523416513198612'
+                className='hover:text-primary text-left inline-flex items-center uppercase leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors'
+                title='Facebook'
+              >
+                <FaFacebookF className='w-4 h-4' />
+                Group
+              </Link>
             </li>
-          ))}
+          </div>
         </ul>
       </div>
 
@@ -682,7 +750,7 @@ const Header = () => {
             {token ? <UserInfoDesktop /> : <LoginButtonDesktop />}
           </div>
           <Link
-            title='Lịch sử truyện chữ'
+            title='Lịch sử truyện tranh'
             to={PATH.history}
             className='flex flex-col items-center px-2 py-1 rounded-md hover:text-primary min-w-[60px] focus:outline-none'
           >
@@ -723,14 +791,14 @@ const Header = () => {
             </button>
           )}
           <button
-            title='Tìm kiếm truyện chữ'
+            title='Tìm kiếm truyện tranh'
             onClick={() => setOpenNav((prev) => !prev)}
             className='bg-center bg-no-repeat w-[18px] h-[18px] p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
             style={{ backgroundImage: `url(${iconSearch})` }}
           />
           <button
             style={{position:'absolute', right:10}}
-            title='Menu truyện chữ MeTruyen+'
+            title='Menu truyện tranh Tcomic'
             onClick={() => setOpenNav((prev) => !prev)}
             className='flex flex-col gap-[5px] p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
           >

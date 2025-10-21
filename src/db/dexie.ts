@@ -2,12 +2,12 @@ import Dexie, { type EntityTable } from 'dexie'
 import { HistoryComic } from '@/utils/history'
 
 // Define the database interface
-interface MeTruyenPlusDatabase extends Dexie {
+interface TcomicDatabase extends Dexie {
   history: EntityTable<HistoryComic, 'id'>
 }
 
 // Create and configure the database
-export const db = new Dexie('MeTruyenPlusHistory') as MeTruyenPlusDatabase
+export const db = new Dexie('TcomicHistory') as TcomicDatabase
 
 // Define the schema
 db.version(1).stores({

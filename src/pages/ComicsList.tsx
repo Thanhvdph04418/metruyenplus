@@ -98,10 +98,10 @@ const ComicsList = () => {
   return (
     <>
       <Helmet>
-        <title>{`Truyện chữ ${title} online - MeTruyen+`}</title>
+        <title>{`Truyện tranh ${title} online - Tcomic`}</title>
         <meta
           name='description'
-          content={`Truyện chữ ${title} online - Tất cả truyện ${title} có thể tìm thấy tại MeTruyen+`}
+          content={`Truyện tranh ${title} online - Tất cả truyện ${title} có thể tìm thấy tại Tcomic`}
         />
         {/* Canonical URL - always points to page 1 to avoid duplicates */}
         <link rel='canonical' href={canonicalUrl} />
@@ -123,8 +123,8 @@ const ComicsList = () => {
                     className={classNames(
                       'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline focus:outline-none',
                       {
-                        'bg-primary text-white hover:no-underline': queryConfig.status === 'all',
-                        'bg-transparent text-primary': queryConfig.status !== 'all'
+                        'bg-primary text-white hover:text-white no-underline': queryConfig.status === 'all',
+                        'bg-transparent text-primary hover:text-primary no-underline': queryConfig.status !== 'all'
                       }
                     )}
                     to={{
@@ -142,9 +142,9 @@ const ComicsList = () => {
                     className={classNames(
                       'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline focus:outline-none',
                       {
-                        'bg-primary text-white hover:no-underline':
+                        'bg-primary text-white hover:text-white no-underline':
                           queryConfig.status === 'completed',
-                        'bg-transparent text-primary': queryConfig.status !== 'completed'
+                        'bg-transparent text-primary hover:text-primary no-underline': queryConfig.status !== 'completed'
                       }
                     )}
                     to={{
@@ -162,9 +162,9 @@ const ComicsList = () => {
                     className={classNames(
                       'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline focus:outline-none',
                       {
-                        'bg-primary text-white hover:no-underline':
+                        'bg-primary text-white hover:text-white no-underline':
                           queryConfig.status === 'updating',
-                        'bg-transparent text-primary': queryConfig.status !== 'updating'
+                        'bg-transparent text-primary no-underline hover:text-primary': queryConfig.status !== 'updating'
                       }
                     )}
                     to={{
