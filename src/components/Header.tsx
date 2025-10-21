@@ -14,6 +14,7 @@ import { SearchBar } from '.'
 import { useQueryConfig } from '@/hooks'
 import { useAuth } from '@/context/AuthContext'
 import { SvgMoon, SvgSun } from './Icons'
+import comicApis from '@/apis/comicApis'
 import {
   FaFacebookF,
   FaMars,
@@ -616,6 +617,193 @@ const UserInfoDesktop = () => {
   )
 }
 
+// Mobile Search Overlay Component
+const MobileSearchOverlay = ({
+  isOpen,
+  onClose,
+  searchQuery,
+  onSearchChange,
+  onSearchSubmit,
+  searchSuggestions,
+  isSearching,
+  onSuggestionClick,
+  recentSearches,
+  onRecentSearchClick,
+  onRemoveRecentSearch,
+  onClearRecentSearches
+}: {
+  isOpen: boolean
+  onClose: () => void
+  searchQuery: string
+  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onSearchSubmit: (e: React.FormEvent) => void
+  searchSuggestions: any[]
+  isSearching: boolean
+  onSuggestionClick: (suggestion: any) => void
+  recentSearches: string[]
+  onRecentSearchClick: (query: string) => void
+  onRemoveRecentSearch: (query: string) => void
+  onClearRecentSearches: () => void
+}) => {
+  if (!isOpen) return null
+
+  return (
+    <div className='fixed inset-0 z-50 bg-white dark:bg-gray-900 sm:hidden flex flex-col'>
+      {/* Header */}
+      <div className='flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0'>
+        <button
+          onClick={onClose}
+          className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
+        >
+          <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+          </svg>
+        </button>
+        <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>Tìm kiếm truyện</h2>
+        <div className='w-10' /> {/* Spacer for centering */}
+      </div>
+
+      {/* Search Form */}
+      <div className='p-4 flex-shrink-0'>
+        <form onSubmit={onSearchSubmit} className='relative'>
+          <div className='relative'>
+            <input
+              type='text'
+              value={searchQuery}
+              onChange={onSearchChange}
+              placeholder='Nhập tên truyện, tác giả...'
+              autoFocus
+              className='w-full px-4 py-3 pl-12 pr-4 text-lg border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent'
+            />
+            <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
+              <svg className='h-5 w-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+              </svg>
+            </div>
+            {searchQuery && (
+              <button
+                type='button'
+                onClick={() => onSearchChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>)}
+                className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600'
+              >
+                <svg className='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                </svg>
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
+
+      {/* Results Container - Full Height */}
+      <div className='flex-1 overflow-y-auto px-4 pb-4'>
+
+        {/* Search Suggestions */}
+        {searchQuery.trim().length > 0 ? (
+          <div className='mt-4'>
+            <h3 className='text-sm font-medium text-gray-700 dark:text-gray-300 mb-3'>
+              Gợi ý tìm kiếm
+            </h3>
+            {isSearching ? (
+              <div className='flex items-center justify-center py-8'>
+                <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary'></div>
+                <span className='ml-2 text-gray-500 dark:text-gray-400'>Đang tìm kiếm...</span>
+              </div>
+            ) : searchSuggestions.length > 0 ? (
+              <div className='space-y-2'>
+                {searchSuggestions.map((suggestion) => (
+                  <button
+                    key={suggestion.id}
+                    onClick={() => onSuggestionClick(suggestion)}
+                    className='w-full text-left px-4 py-3 bg-gray-50 dark:bg-gray-800 hover:bg-primary hover:text-white rounded-lg transition-colors flex items-center gap-3'
+                  >
+                    {/* Thumbnail */}
+                    <div className='flex-shrink-0 w-12 h-16 rounded-md overflow-hidden'>
+                      <img
+                        src={suggestion.thumbnail}
+                        alt={suggestion.title}
+                        className='w-full h-full object-cover'
+                        loading='lazy'
+                      />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className='flex-1 min-w-0'>
+                      <div className='font-medium text-sm truncate'>{suggestion.title}</div>
+                      <div className='text-xs text-gray-500 dark:text-gray-400 truncate'>{suggestion.authors}</div>
+                      <div className='text-xs text-gray-400 dark:text-gray-500 mt-1'>
+                        {suggestion.total_views} lượt xem
+                      </div>
+                    </div>
+                    
+                    {/* Arrow icon */}
+                    <svg className='w-4 h-4 text-gray-400 flex-shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className='text-center py-8 text-gray-500 dark:text-gray-400'>
+                <svg className='w-12 h-12 mx-auto mb-2 text-gray-300 dark:text-gray-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+                </svg>
+                <p>Không tìm thấy gợi ý nào</p>
+                <p className='text-xs mt-2'>Thử từ khóa khác hoặc kiểm tra kết nối mạng</p>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Recent Searches */
+          recentSearches.length > 0 && (
+            <div className='mt-6'>
+              <div className='flex items-center justify-between mb-3'>
+                <h3 className='text-sm font-medium text-gray-700 dark:text-gray-300'>Tìm kiếm gần đây</h3>
+                <button
+                  onClick={onClearRecentSearches}
+                  className='text-xs text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors'
+                >
+                  Xóa tất cả
+                </button>
+              </div>
+              <div className='space-y-2'>
+                {recentSearches.map((recent) => (
+                  <div
+                    key={recent}
+                    className='flex items-center gap-2 group'
+                  >
+                    <button
+                      onClick={() => onRecentSearchClick(recent)}
+                      className='flex-1 text-left px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-3'
+                    >
+                      <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' />
+                      </svg>
+                      {recent}
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onRemoveRecentSearch(recent)
+                      }}
+                      className='p-1 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100'
+                      title='Xóa'
+                    >
+                      <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  )
+}
+
 // Add new LoginButton component
 const LoginButtonDesktop = () => (
   <Link
@@ -652,6 +840,11 @@ const Header = () => {
   const [OpenTheme, setOpenTheme] = useState<boolean>(false)
   const [OpenNav, setOpenNav] = useState<boolean>(false)
   const [currentTheme, setCurrentTheme] = useState<string>(localStorage.getItem('theme') || 'light')
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchSuggestions, setSearchSuggestions] = useState<any[]>([])
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [recentSearches, setRecentSearches] = useState<string[]>([])
   const token = localStorage.getItem('auth_token')
 
   const heightHeader = 75
@@ -675,7 +868,114 @@ const Header = () => {
 
   useEffect(() => {
     setOpenNav(false)
+    setIsSearchOpen(false)
+    setSearchQuery('')
   }, [pathname, queryConfig.q])
+
+  // Load recent searches from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('recentSearches')
+    if (saved) {
+      try {
+        setRecentSearches(JSON.parse(saved))
+      } catch (error) {
+        console.error('Error parsing recent searches:', error)
+        setRecentSearches([])
+      }
+    }
+  }, [])
+
+  // Save recent searches to localStorage
+  const saveRecentSearch = (query: string) => {
+    if (!query.trim()) return
+    
+    const newSearches = [query, ...recentSearches.filter(s => s !== query)].slice(0, 5)
+    setRecentSearches(newSearches)
+    localStorage.setItem('recentSearches', JSON.stringify(newSearches))
+  }
+
+  // Handle search submission
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      saveRecentSearch(searchQuery.trim())
+      const searchUrl = `/tim-kiem?q=${encodeURIComponent(searchQuery.trim())}&page=1`
+      window.location.href = searchUrl
+    }
+  }
+
+  // Handle search input change with API search
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setSearchQuery(value)
+    
+    if (value.trim().length > 0) {
+      setIsSearching(true)
+      // API call with debounce
+      const timeoutId = setTimeout(async () => {
+        try {
+          const response = await comicApis.getSearch({ q: value, page: '1' })
+          console.log('Search response:', response.data) // Debug log
+          
+          // Check if response is valid and has comics
+          if (response?.data?.status === 0 && response?.data?.comics && Array.isArray(response.data.comics)) {
+            const comics = response.data.comics || []
+            console.log('Comics found:', comics) // Debug log
+            setSearchSuggestions(comics.slice(0, 5)) // Limit to 5 suggestions
+          } else {
+            console.log('API error or no comics:', response?.data)
+            setSearchSuggestions([])
+          }
+        } catch (error) {
+          console.error('Search suggestions error:', error)
+          // Don't show error to user, just clear suggestions
+          setSearchSuggestions([])
+        } finally {
+          setIsSearching(false)
+        }
+      }, 300) // 300ms debounce
+      
+      return () => clearTimeout(timeoutId)
+    } else {
+      setSearchSuggestions([])
+      setIsSearching(false)
+    }
+  }
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: any) => {
+    saveRecentSearch(suggestion.title)
+    window.location.href = `/truyen-tranh/${suggestion.slug}-${suggestion.id}`
+  }
+
+  // Handle recent search click
+  const handleRecentSearchClick = (query: string) => {
+    setSearchQuery(query)
+    saveRecentSearch(query)
+    const searchUrl = `/tim-kiem?q=${encodeURIComponent(query)}&page=1`
+    window.location.href = searchUrl
+  }
+
+  // Clear all recent searches
+  const clearRecentSearches = () => {
+    setRecentSearches([])
+    localStorage.removeItem('recentSearches')
+  }
+
+  // Remove single recent search
+  const removeRecentSearch = (queryToRemove: string) => {
+    const newSearches = recentSearches.filter(query => query !== queryToRemove)
+    setRecentSearches(newSearches)
+    localStorage.setItem('recentSearches', JSON.stringify(newSearches))
+  }
+
+  // Close search when clicking outside
+  const handleSearchClose = () => {
+    setIsSearchOpen(false)
+    setSearchQuery('')
+    setSearchSuggestions([])
+    setIsSearching(false)
+  }
 
   const handleChangeTheme = (type: 'light' | 'dark') => {
     // Add transition class for smoother theme change
@@ -725,7 +1025,7 @@ const Header = () => {
   }, [])
 
   useEffect(() => {
-    if (OpenNav) {
+    if (OpenNav || isSearchOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'unset'
@@ -733,7 +1033,7 @@ const Header = () => {
     return () => {
       document.body.style.overflow = 'unset'
     }
-  }, [OpenNav])
+  }, [OpenNav, isSearchOpen])
 
   return (
     <div className='bg-light-surface text-[#333744] dark:bg-dark-bg dark:text-[#e3e5ef] shadow dark:border-b dark:border-dark-highlight'>
@@ -781,6 +1081,13 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <div className='flex sm:hidden items-center gap-1'>
+          <div style={{
+            display:'flex',
+            alignItems:'center',
+            gap:10,
+            position:'absolute',
+            right:70
+          }}>
           {currentTheme !== 'light' ? (
             <button onClick={() => onSwitchTheme('light')} className='mr-1 p-1'>
               <SvgSun />
@@ -792,10 +1099,11 @@ const Header = () => {
           )}
           <button
             title='Tìm kiếm truyện tranh'
-            onClick={() => setOpenNav((prev) => !prev)}
+            onClick={() => setIsSearchOpen(true)}
             className='bg-center bg-no-repeat w-[18px] h-[18px] p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
             style={{ backgroundImage: `url(${iconSearch})` }}
           />
+          </div>
           <button
             style={{position:'absolute', right:10}}
             title='Menu truyện tranh Tcomic'
@@ -840,6 +1148,22 @@ const Header = () => {
             handleChangeTheme={handleChangeTheme}
           />
         </div>
+
+        {/* Mobile Search Overlay */}
+        <MobileSearchOverlay
+          isOpen={isSearchOpen}
+          onClose={handleSearchClose}
+          searchQuery={searchQuery}
+          onSearchChange={handleSearchChange}
+          onSearchSubmit={handleSearchSubmit}
+          searchSuggestions={searchSuggestions}
+          isSearching={isSearching}
+          onSuggestionClick={handleSuggestionClick}
+          recentSearches={recentSearches}
+          onRecentSearchClick={handleRecentSearchClick}
+          onRemoveRecentSearch={removeRecentSearch}
+          onClearRecentSearches={clearRecentSearches}
+        />
       </div>
     </div>
   )

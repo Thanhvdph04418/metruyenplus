@@ -29,20 +29,8 @@ const GenreList = ({
   // Get current selected genre name
   const currentGenre = dataGenreComics?.find((item) => item.id === type) || dataGenreComics?.at(0)
   
-  // Show all genres with selected genre at the top
-  const getAllGenres = () => {
-    if (!dataGenreComics) return []
-    
-    const selectedGenre = dataGenreComics.find(item => item.id === type)
-    const otherGenres = dataGenreComics.filter(item => item.id !== type)
-    
-    // Put selected genre first, then add all other genres
-    return selectedGenre 
-      ? [selectedGenre, ...otherGenres]
-      : dataGenreComics
-  }
-  
-  const allGenres = getAllGenres()
+  // Show all genres in original order
+  const allGenres = dataGenreComics || []
   const hasMoreGenres = dataGenreComics && dataGenreComics.length > 12
 
   // Filter genres based on search term
@@ -80,11 +68,28 @@ const GenreList = ({
   return (
     <div className='w-full max-w-6xl mx-auto'>
       <div className='bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700'>
+        {/* Selected genre section */}
+        {currentGenre && (
+          <div className='p-4 border-b border-gray-200 dark:border-gray-700'>
+            <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-3'>
+              Thể loại đang chọn
+            </h3>
+            <div className='flex items-center gap-2'>
+              <span className='px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg shadow-md'>
+                {currentGenre.name}
+              </span>
+              <span className='text-sm text-gray-500 dark:text-gray-400'>
+                {currentGenre.description}
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* All genres */}
         <div className='p-4'>
           <div className='flex items-center justify-between mb-3'>
             <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
-              Thể loại
+              Tất cả thể loại
             </h3>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
