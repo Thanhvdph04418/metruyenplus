@@ -27,16 +27,17 @@ const GenreList = ({
   const [showSearchResults, setShowSearchResults] = useState(false)
 
   // Get current selected genre name
-  // const currentGenre = dataGenreComics?.find((item) => item.id === type) || dataGenreComics?.at(0)
-  
+  const currentGenre = dataGenreComics?.find((item) => item.id === type) || dataGenreComics?.at(0)
+
   // Show all genres in original order
   const allGenres = dataGenreComics || []
   const hasMoreGenres = dataGenreComics && dataGenreComics.length > 12
 
   // Filter genres based on search term
-  const filteredGenres = dataGenreComics?.filter(genre => 
-    genre.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || []
+  const filteredGenres =
+    dataGenreComics?.filter((genre) =>
+      genre.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ) || []
 
   // Auto collapse when genre is selected
   const handleGenreSelect = () => {
@@ -88,9 +89,7 @@ const GenreList = ({
         {/* All genres */}
         <div className='p-4'>
           <div className='flex items-center justify-between mb-3'>
-            <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
-              Tất cả thể loại
-            </h3>
+            <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>Tất cả thể loại</h3>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className='flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary transition-colors'
@@ -102,7 +101,12 @@ const GenreList = ({
                 stroke='currentColor'
                 viewBox='0 0 24 24'
               >
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M19 9l-7 7-7-7'
+                />
               </svg>
             </button>
           </div>
@@ -141,7 +145,12 @@ const GenreList = ({
                   className='absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600'
                 >
                   <svg className='h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 18L18 6M6 6l12 12'
+                    />
                   </svg>
                 </button>
               )}
@@ -158,9 +167,7 @@ const GenreList = ({
                       className='w-full px-4 py-2 text-left text-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-between'
                     >
                       <span>{item.name}</span>
-                      {item.id === type && (
-                        <span className='text-primary text-xs'>Đang chọn</span>
-                      )}
+                      {item.id === type && <span className='text-primary text-xs'>Đang chọn</span>}
                     </button>
                   ))
                 ) : (
@@ -171,15 +178,15 @@ const GenreList = ({
               </div>
             )}
           </div>
-          
+
           {/* All genres grid */}
           <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2'>
             {allGenres ? (
               (showAll ? allGenres : allGenres.slice(0, 12)).map((item: any) => (
-                <GenreItem 
-                  key={item.id} 
-                  item={item} 
-                  type={type} 
+                <GenreItem
+                  key={item.id}
+                  item={item}
+                  type={type}
                   queryConfig={queryConfig}
                   onSelect={handleGenreSelect}
                 />
@@ -188,7 +195,7 @@ const GenreList = ({
               <SkeletonGenre />
             )}
           </div>
-          
+
           {/* Show more/less button */}
           {hasMoreGenres && (
             <div className='mt-4 text-center'>
@@ -206,16 +213,16 @@ const GenreList = ({
   )
 }
 
-const GenreItem = ({ 
-  item, 
-  type, 
-  queryConfig, 
-  onSelect 
-}: { 
-  item: any; 
-  type: any; 
-  queryConfig: any;
-  onSelect?: () => void;
+const GenreItem = ({
+  item,
+  type,
+  queryConfig,
+  onSelect
+}: {
+  item: any
+  type: any
+  queryConfig: any
+  onSelect?: () => void
 }) => {
   const isSelected = type === item.id || (!type && item.id === 'all')
 
@@ -295,7 +302,6 @@ const ComicsList = () => {
       setTotalPage(dataComics.total_pages as number)
     }
   }, [type, dataComics])
-
 
   if (data?.data.status === 404 || isError) {
     return <NotFound />
