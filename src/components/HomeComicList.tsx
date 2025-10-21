@@ -9,7 +9,7 @@ interface Props {
   path: string
 }
 
-const HomeComicList = ({ data, title, icon, path }: Props) => {
+const HomeComicList = ({ data, title, path }: Props) => {
   if (!data || data.length === 0) return null
   return (
     <div className='relative bg-white dark:bg-dark-surface rounded-2xl sm:rounded-xl p-4 sm:p-6 shadow-sm border border-light-border dark:border-dark-highlight'>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useHomeComicLimit } from '@/hooks'
-import { detectMobileOS, openAppStore } from '@/utils/deviceDetection'
+import { openAppStore } from '@/utils/deviceDetection'
 import { trackAppDownload } from '@/utils/analytics'
 import AndroidApkModal from './AndroidApkModal'
 
@@ -20,32 +20,32 @@ const MobileAppNotification = () => {
     return null
   }
 
-  const mobileOS = detectMobileOS()
-  const websiteUrl = import.meta.env.VITE_URL_WEBSITE || 'tcomicclub.com'
+  // const mobileOS = detectMobileOS()
+  // const websiteUrl = import.meta.env.VITE_URL_WEBSITE || 'tcomicclub.com'
   // Extract domain name without protocol
-  const domainName = websiteUrl.replace(/^https?:\/\//, '')
+  // const domainName = websiteUrl.replace(/^https?:\/\//, '')
 
-  const handleDownloadClick = () => {
-    if (mobileOS === 'ios') {
-      // Track iOS direct download
-      trackAppDownload({
-        platform: 'ios',
-        action: 'direct_download',
-        source: 'home_notification'
-      })
-      // iOS users go directly to App Store
-      openAppStore()
-    } else {
-      // Track Android modal opened
-      trackAppDownload({
-        platform: 'android',
-        action: 'modal_opened',
-        source: 'home_notification'
-      })
-      // Android users see the modal first
-      setIsModalOpen(true)
-    }
-  }
+  // const handleDownloadClick = () => {
+  //   if (mobileOS === 'ios') {
+  //     // Track iOS direct download
+  //     trackAppDownload({
+  //       platform: 'ios',
+  //       action: 'direct_download',
+  //       source: 'home_notification'
+  //     })
+  //     // iOS users go directly to App Store
+  //     openAppStore()
+  //   } else {
+  //     // Track Android modal opened
+  //     trackAppDownload({
+  //       platform: 'android',
+  //       action: 'modal_opened',
+  //       source: 'home_notification'
+  //     })
+  //     // Android users see the modal first
+  //     setIsModalOpen(true)
+  //   }
+  // }
 
   const handleApkDownload = () => {
     // Track APK download
@@ -58,7 +58,7 @@ const MobileAppNotification = () => {
     openAppStore()
   }
 
-  const storeText = mobileOS === 'ios' ? 'App Store' : 'APK'
+  // const storeText = mobileOS === 'ios' ? 'App Store' : 'APK'
 
   return (
     <>
@@ -84,7 +84,6 @@ const MobileAppNotification = () => {
           </div>
         </div>
       </div>
-
 
       {/* Android APK Modal */}
       <AndroidApkModal
