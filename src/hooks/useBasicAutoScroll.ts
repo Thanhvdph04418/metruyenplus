@@ -13,7 +13,6 @@ export const useBasicAutoScroll = ({
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const animationRef = useRef<number | null>(null)
   const isAutoScrollingRef = useRef(false)
-  const lastScrollTimeRef = useRef(0)
 
   const startAutoScroll = useCallback(() => {
     console.log('Starting auto scroll...')
@@ -60,7 +59,7 @@ export const useBasicAutoScroll = ({
   }, [isActive])
 
   // Phát hiện cuộn thủ công bằng wheel event
-  const handleWheel = useCallback((event: WheelEvent) => {
+  const handleWheel = useCallback(() => {
     if (!stopOnManualScroll || !isActive) return
     
     // Nếu cuộn không phải do auto scroll gây ra
