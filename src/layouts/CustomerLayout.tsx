@@ -134,28 +134,35 @@ const CustomerLayout = () => {
   const activeTabData = tabs.find((tab) => tab.id === activeTab)
 
   return (
-    <div className='flex flex-col min-h-screen dark:bg-gray-900'>
+    <div className='flex flex-col min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900'>
       <header className='sticky top-0 z-20 left-0 right-0' id='site-header'>
         <Header />
       </header>
 
-      <main className='flex-1 bg-gray-50 dark:bg-gray-900 pb-16 sm:pb-0'>
+      <main className='flex-1 pb-16 sm:pb-0'>
         <ScrollRestoration />
-        <div className='max-w-screen-2xl mx-auto px-4 py-8'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8'>
           {/* Mobile Tab Toggle */}
-          <div className='lg:hidden mb-4'>
+          <div className='lg:hidden mb-6'>
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className='w-full flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700'
+              className='w-full flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300'
             >
-              <div className='flex items-center gap-3'>
-                {activeTabData?.icon}
-                <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>
-                  {activeTabData?.label}
-                </span>
+              <div className='flex items-center gap-4'>
+                <div className='p-2 bg-primary/10 rounded-lg'>
+                  {activeTabData?.icon}
+                </div>
+                <div className='text-left'>
+                  <span className='text-base font-semibold text-gray-900 dark:text-gray-100 block'>
+                    {activeTabData?.label}
+                  </span>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
+                    {activeTabData?.description}
+                  </span>
+                </div>
               </div>
               <svg
-                className={`w-5 h-5 transition-transform ${isSidebarOpen ? 'rotate-180' : ''}`}
+                className={`w-6 h-6 transition-transform duration-300 ${isSidebarOpen ? 'rotate-180' : ''}`}
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'
@@ -170,16 +177,24 @@ const CustomerLayout = () => {
             </button>
           </div>
 
-          <div className='flex flex-col lg:flex-row gap-8'>
+          <div className='flex flex-col lg:flex-row gap-6 lg:gap-8'>
             {/* Sidebar */}
             <div
               className={`
-                lg:w-72 lg:shrink-0
+                lg:w-80 lg:shrink-0
                 ${isSidebarOpen ? 'block' : 'hidden lg:block'}
               `}
             >
-              <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 lg:sticky lg:top-[calc(var(--header-height)+2rem)]'>
-                <nav className='flex flex-col gap-2' aria-label='Tabs'>
+              <div className='bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 lg:sticky lg:top-[calc(var(--header-height)+2rem)]'>
+                <div className='mb-6'>
+                  <h2 className='text-lg font-bold text-gray-900 dark:text-white mb-2'>
+                    Tài khoản của bạn
+                  </h2>
+                  <p className='text-sm text-gray-500 dark:text-gray-400'>
+                    Quản lý thông tin và hoạt động
+                  </p>
+                </div>
+                <nav className='flex flex-col gap-1' aria-label='Tabs'>
                   {tabs.map((tab) => (
                     <button
                       key={tab.id}
@@ -188,33 +203,39 @@ const CustomerLayout = () => {
                         setIsSidebarOpen(false)
                       }}
                       className={`
-                        group w-full px-4 py-3 text-left rounded-lg font-medium
-                        transition-all duration-200 flex items-center gap-3
+                        group w-full px-4 py-3.5 text-left rounded-xl font-medium
+                        transition-all duration-300 flex items-center gap-4
                         ${
                           tab.id === 'logout'
-                            ? 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20'
+                            ? 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:shadow-md'
                             : activeTab === tab.id
-                            ? 'bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground'
-                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
+                            ? 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary dark:from-primary/20 dark:to-primary/10 dark:text-primary-foreground shadow-md'
+                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:shadow-sm'
                         }
                       `}
                     >
                       <span
                         className={`
-                        ${
-                          tab.id === 'logout'
-                            ? ''
-                            : activeTab === tab.id
-                            ? 'text-primary dark:text-primary-foreground'
-                            : ''
-                        }
-                      `}
+                          p-2 rounded-lg transition-colors duration-300
+                          ${
+                            tab.id === 'logout'
+                              ? 'bg-red-100 dark:bg-red-900/30'
+                              : activeTab === tab.id
+                              ? 'bg-primary/20 dark:bg-primary/30'
+                              : 'bg-gray-100 dark:bg-gray-700'
+                          }
+                        `}
                       >
                         {tab.icon}
                       </span>
-                      <span className='text-sm'>{tab.label}</span>
+                      <div className='flex-1'>
+                        <span className='text-sm font-medium block'>{tab.label}</span>
+                        <span className='text-xs text-gray-500 dark:text-gray-400 hidden group-hover:block'>
+                          {tab.description}
+                        </span>
+                      </div>
                       {activeTab === tab.id && (
-                        <span className='ml-auto w-1.5 h-1.5 rounded-full bg-primary'></span>
+                        <div className='w-2 h-2 rounded-full bg-primary shadow-sm'></div>
                       )}
                     </button>
                   ))}
@@ -223,17 +244,23 @@ const CustomerLayout = () => {
             </div>
 
             {/* Main Content */}
-            <div className='flex-1 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
-              <div className='mb-6'>
-                <h1 className='text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3'>
-                  {activeTabData?.icon}
-                  {activeTabData?.title}
-                </h1>
-                <p className='mt-2 text-gray-500 dark:text-gray-400'>
-                  {activeTabData?.description}
-                </p>
+            <div className='flex-1 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden'>
+              <div className='bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 px-6 py-8 border-b border-gray-100 dark:border-gray-700'>
+                <div className='flex items-center gap-4'>
+                  <div className='p-3 bg-primary/20 rounded-xl'>
+                    {activeTabData?.icon}
+                  </div>
+                  <div>
+                    <h1 className='text-2xl font-bold text-gray-900 dark:text-white'>
+                      {activeTabData?.title}
+                    </h1>
+                    <p className='mt-1 text-gray-600 dark:text-gray-400'>
+                      {activeTabData?.description}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className='divide-y divide-gray-100 dark:divide-gray-700'>
+              <div className='p-6 lg:p-8'>
                 <Outlet context={{ activeTab }} />
               </div>
             </div>

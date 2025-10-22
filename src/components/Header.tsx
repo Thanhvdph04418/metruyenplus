@@ -50,17 +50,17 @@ type SearchParams = {
 }
 
 const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
-  <ul className='hidden sm:flex items-center gap-5 ml-6 mt-1'>
+  <ul className='hidden sm:flex items-center gap-3 lg:gap-5 ml-4 lg:ml-6 mt-1'>
     <li className='hidden lg:block'>
       <Link
         title='Trang chủ Tcomic'
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         to={PATH.home}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
+        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
           useMatch(PATH.home) ? 'text-primary' : ''
         }`}
       >
-        <FaHome className='w-4 h-4 text-current' />
+        <FaHome className='w-4 h-4 text-current flex-shrink-0' />
         Trang chủ
       </Link>
     </li>
@@ -70,9 +70,9 @@ const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
         to={{
           pathname: PATH.app
         }}
-        className={`hover:text-primary text-lg capitalize flex items-center gap-2 ${useMatch(PATH.app) && 'text-primary'}`}
+        className={`hover:text-primary text-sm lg:text-lg capitalize flex items-center gap-1 lg:gap-2 whitespace-nowrap ${useMatch(PATH.app) && 'text-primary'}`}
       >
-        <FaMobileAlt className='w-4 h-4 text-current' />
+        <FaMobileAlt className='w-4 h-4 text-current flex-shrink-0' />
         Ứng dụng
       </Link>
     </li>
@@ -83,11 +83,11 @@ const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
           pathname: PATH.genres,
           search: createSearchParams({ type: 'all', page: '1' }).toString()
         }}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
+        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
           useMatch(PATH.genres) ? 'text-primary' : ''
         }`}
       >
-        <FaThList className='w-4 h-4 text-current' />
+        <FaThList className='w-4 h-4 text-current flex-shrink-0' />
         Thể loại
       </Link>
     </li>
@@ -98,11 +98,11 @@ const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
           pathname: PATH.new,
           search: createSearchParams({ status: 'all', page: '1' }).toString()
         }}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
+        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
           useMatch(PATH.new) ? 'text-primary' : ''
         }`}
       >
-        <FaStar className='w-4 h-4 text-current' />
+        <FaStar className='w-4 h-4 text-current flex-shrink-0' />
         Mới
       </Link>
     </li>
@@ -113,11 +113,11 @@ const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
           pathname: PATH.top,
           search: createSearchParams({ status: 'all', page: '1' }).toString()
         }}
-        className={`hover:text-primary text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-2 ${
+        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
           isMatchTop ? 'text-primary' : ''
         }`}
       >
-        <FaTrophy className='w-4 h-4 text-current' />
+        <FaTrophy className='w-4 h-4 text-current flex-shrink-0' />
         BXH
       </Link>
     </li>
@@ -242,10 +242,10 @@ const MobileNavigation = ({
     <div
       className={`${
         OpenNav ? 'translate-x-0' : 'translate-x-full'
-      } duration-300 transition-all dark:bg-dark-surface bg-light-bg h-full sm:hidden fixed z-50 inset-0 top-[74px] flex flex-col`}
+      } duration-300 transition-all dark:bg-dark-surface bg-light-bg h-[calc(100vh-74px)] sm:hidden fixed z-50 inset-x-0 top-[74px] flex flex-col`}
     >
       {/* Existing content */}
-      <div className='flex-1 overflow-y-auto px-4 pt-0'>
+      <div className='flex-1 overflow-y-auto px-4 pt-0 pb-4'>
         <SearchBar />
         <ul className='flex flex-col gap-1 text-[15px] pb-5'>
           {/* Group 1: Main Navigation */}
@@ -359,7 +359,7 @@ const MobileNavigation = ({
       </div>
 
       {/* Modified footer section */}
-      <div className='sticky bottom-0 left-0 right-0 bg-light-highlight dark:bg-gray-800 border-t border-light-border dark:border-gray-700 py-4 hidden'>
+      <div className='flex-shrink-0 bg-light-highlight dark:bg-gray-800 border-t border-light-border dark:border-gray-700 py-4'>
         <div className='flex items-center justify-center gap-8'>
           <Link
             to={PATH.history}

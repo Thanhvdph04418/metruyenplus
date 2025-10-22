@@ -46,26 +46,26 @@ const MobileBottomTab = () => {
 
   return (
     <div className='fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 z-50 sm:hidden'>
-      <div className='flex items-center justify-around py-2'>
+      <div className='flex items-center justify-around py-1.5 px-1'>
         {tabs.map((tab) => {
           const Icon = tab.icon
           return (
             <Link
               key={tab.to}
               to={tab.to}
-              className={`flex flex-col items-center py-2 px-4 rounded-lg transition-all duration-300 ${
+              className={`flex flex-col items-center py-1.5 px-2 rounded-lg transition-all duration-300 min-w-0 flex-1 ${
                 tab.isActive
                   ? 'bg-gradient-to-r from-primary/10 to-primary-2/10 border border-primary/20'
                   : 'text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800'
               }`}
               title={tab.title}
             >
-              <Icon className={`w-5 h-5 mb-1 transition-all duration-300 text-current ${
+              <Icon className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 sm:mb-1 transition-all duration-300 text-current flex-shrink-0 ${
                 tab.isActive 
                   ? 'text-primary drop-shadow-sm scale-110' 
                   : 'hover:scale-105'
               }`} />
-              <span className={`text-xs font-medium ${
+              <span className={`text-[10px] sm:text-xs font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${
                 tab.isActive 
                   ? 'text-transparent bg-gradient-to-r from-primary to-primary-2 bg-clip-text' 
                   : ''

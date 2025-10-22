@@ -112,12 +112,12 @@ const CustomerInfo = () => {
   }, [avatarPreview, customerInfo?.avatar])
 
   return (
-    <div className='p-4 md:p-6'>
-      <form onSubmit={handleSubmit} className='space-y-4 md:space-y-8'>
+    <div className='max-w-2xl mx-auto'>
+      <form onSubmit={handleSubmit} className='space-y-8'>
         {/* Avatar Section */}
         <div className='flex flex-col items-center'>
-          <div className='relative'>
-            <div className='w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700 border-2 md:border-4 border-white dark:border-gray-600 shadow'>
+          <div className='relative group'>
+            <div className='w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border-4 border-white dark:border-gray-600 shadow-2xl ring-4 ring-primary/20'>
               {avatarPreview ? (
                 <img
                   src={avatarPreview}
@@ -126,17 +126,17 @@ const CustomerInfo = () => {
                   className='w-full h-full object-cover'
                 />
               ) : (
-                <div className='w-full h-full flex items-center justify-center text-2xl md:text-4xl font-bold text-gray-300 dark:text-gray-500'>
+                <div className='w-full h-full flex items-center justify-center text-4xl md:text-5xl font-bold text-gray-400 dark:text-gray-500'>
                   {formData.name.charAt(0).toUpperCase()}
                 </div>
               )}
             </div>
             <label
               htmlFor='avatar'
-              className='absolute bottom-0 right-0 bg-primary hover:bg-primary/90 text-white rounded-full p-1.5 md:p-2.5 cursor-pointer shadow-lg transition-all duration-200 hover:scale-110'
+              className='absolute -bottom-2 -right-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white rounded-full p-3 cursor-pointer shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl group-hover:scale-105'
             >
               <svg
-                className='w-4 h-4 md:w-5 md:h-5'
+                className='w-5 h-5'
                 fill='none'
                 stroke='currentColor'
                 viewBox='0 0 24 24'
@@ -163,112 +163,154 @@ const CustomerInfo = () => {
               />
             </label>
           </div>
-          <div className='mt-2 space-y-1 text-center'>
-            <p className='text-xs md:text-sm text-gray-500 dark:text-gray-400'>
+          <div className='mt-6 space-y-3 text-center'>
+            <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
+              Ảnh đại diện
+            </h3>
+            <p className='text-sm text-gray-500 dark:text-gray-400'>
               JPG, PNG, GIF (≤ 2MB)
             </p>
-            <div className='text-xs md:text-sm text-yellow-600 dark:text-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 p-2 md:p-3 rounded-lg'>
-              <div className='flex items-start gap-1 md:gap-2'>
-                <svg
-                  className='w-3 h-3 md:w-4 md:h-4 mt-0.5 flex-shrink-0'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
-                  />
-                </svg>
-                <span className='text-left'>
-                  Lưu ý: Ảnh không phù hợp có thể dẫn đến khóa tài khoản
-                </span>
-              </div>
+            <div className='inline-flex items-center gap-2 text-sm text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 px-4 py-2 rounded-xl border border-amber-200 dark:border-amber-800'>
+              <svg
+                className='w-4 h-4 flex-shrink-0'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
+                />
+              </svg>
+              <span>
+                Lưu ý: Ảnh không phù hợp có thể dẫn đến khóa tài khoản
+              </span>
             </div>
           </div>
         </div>
 
         {/* Form Fields */}
-        <div className='space-y-4 md:space-y-6'>
-          <div>
-            <label
-              htmlFor='name'
-              className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 md:mb-2'
-            >
-              Tên <span className='text-red-500'>*</span>
-            </label>
-            <input
-              required
-              id='name'
-              type='text'
-              value={formData.name}
-              onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-              className='w-full px-3 py-2.5 md:px-4 md:py-3 rounded-xl border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm md:text-base'
-              placeholder='Nhập tên của bạn'
-              minLength={2}
-              maxLength={50}
-            />
-          </div>
+        <div className='space-y-6'>
+          <div className='bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-6'>
+            <h4 className='text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2'>
+              <svg className='w-5 h-5 text-primary' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+              </svg>
+              Thông tin cơ bản
+            </h4>
+            <div className='space-y-5'>
+              <div>
+                <label
+                  htmlFor='name'
+                  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+                >
+                  Tên <span className='text-red-500'>*</span>
+                </label>
+                <div className='relative'>
+                  <input
+                    required
+                    id='name'
+                    type='text'
+                    value={formData.name}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                    className='w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base transition-all duration-200'
+                    placeholder='Nhập tên của bạn'
+                    minLength={2}
+                    maxLength={50}
+                  />
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+                    <svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+                    </svg>
+                  </div>
+                </div>
+              </div>
 
-          <div>
-            <label
-              htmlFor='phone'
-              className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 md:mb-2'
-            >
-              Số điện thoại
-            </label>
-            <input
-              id='phone'
-              type='tel'
-              value={formData.phone}
-              onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
-              className='w-full px-3 py-2.5 md:px-4 md:py-3 rounded-xl border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm md:text-base'
-              placeholder='Nhập số điện thoại'
-              pattern='[0-9]{10}'
-              title='Vui lòng nhập số điện thoại hợp lệ (10 số)'
-            />
-            <p className='mt-1 text-xs md:text-sm text-gray-500'>Ví dụ: 0912345678</p>
+              <div>
+                <label
+                  htmlFor='phone'
+                  className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+                >
+                  Số điện thoại
+                </label>
+                <div className='relative'>
+                  <input
+                    id='phone'
+                    type='tel'
+                    value={formData.phone}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                    className='w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base transition-all duration-200'
+                    placeholder='Nhập số điện thoại'
+                    pattern='[0-9]{10}'
+                    title='Vui lòng nhập số điện thoại hợp lệ (10 số)'
+                  />
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+                    <svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' />
+                    </svg>
+                  </div>
+                </div>
+                <p className='mt-2 text-sm text-gray-500 dark:text-gray-400'>Ví dụ: 0912345678</p>
+              </div>
+            </div>
           </div>
         </div>
 
         {error && (
-          <div className='text-sm text-red-500 text-center bg-red-50 dark:bg-red-900/20 py-2 md:py-3 px-3 md:px-4 rounded-lg'>
-            {error}
+          <div className='flex items-center gap-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 py-3 px-4 rounded-xl border border-red-200 dark:border-red-800'>
+            <svg className='w-5 h-5 flex-shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+            </svg>
+            <span>{error}</span>
           </div>
         )}
 
         {/* Submit Button */}
         <Toaster />
-        <button
-          type='submit'
-          disabled={isLoading}
-          className='w-full flex justify-center items-center py-2.5 md:py-3 px-4 rounded-lg font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm md:text-base'
-        >
-          {isLoading ? (
-            <div className='flex items-center gap-2'>
-              <svg className='animate-spin h-4 w-4 md:h-5 md:w-5' fill='none' viewBox='0 0 24 24'>
-                <circle
-                  className='opacity-25'
-                  cx='12'
-                  cy='12'
-                  r='10'
-                  stroke='currentColor'
-                  strokeWidth='4'
-                />
-                <path
-                  className='opacity-75'
-                  fill='currentColor'
-                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                />
-              </svg>
-              <span>Đang cập nhật...</span>
-            </div>
-          ) : (
-            'Cập nhật'
-          )}
-        </button>
+        <div className='flex flex-col sm:flex-row gap-4'>
+          <button
+            type='button'
+            onClick={() => window.history.back()}
+            className='flex-1 sm:flex-none px-6 py-3 rounded-xl font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500/20 transition-all duration-200'
+          >
+            Hủy
+          </button>
+          <button
+            type='submit'
+            disabled={isLoading}
+            className='flex-1 sm:flex-none flex justify-center items-center px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl'
+          >
+            {isLoading ? (
+              <div className='flex items-center gap-2'>
+                <svg className='animate-spin h-5 w-5' fill='none' viewBox='0 0 24 24'>
+                  <circle
+                    className='opacity-25'
+                    cx='12'
+                    cy='12'
+                    r='10'
+                    stroke='currentColor'
+                    strokeWidth='4'
+                  />
+                  <path
+                    className='opacity-75'
+                    fill='currentColor'
+                    d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                  />
+                </svg>
+                <span>Đang cập nhật...</span>
+              </div>
+            ) : (
+              <div className='flex items-center gap-2'>
+                <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M5 13l4 4L19 7' />
+                </svg>
+                <span>Cập nhật thông tin</span>
+              </div>
+            )}
+          </button>
+        </div>
       </form>
     </div>
   )
