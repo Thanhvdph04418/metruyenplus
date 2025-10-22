@@ -20,7 +20,18 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            # Navigate to project directory first
             cd /home/Workspace/WebTcomic/MeTruyen/TcomicV2/metruyenplus
-            git pull origin tcomic
-            /root/.nvm/versions/node/v22.9.0/bin/yarn
-            ./action-run-build.sh
+            
+            # Use the environment setup script
+            chmod +x ./setup-env.sh
+            ./setup-env.sh bash -c "
+              # Pull latest changes
+              git pull origin tcomic
+              
+              # Install dependencies
+              yarn install --frozen-lockfile
+              
+              # Run build script
+              ./action-run-build.sh
+            "
