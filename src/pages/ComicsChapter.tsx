@@ -6,7 +6,8 @@ import {
   ListComment,
   ReadingProgress
 } from '@/components'
-import { useScrollTop } from '@/hooks'
+import { useScrollTop, useClickToScroll } from '@/hooks'
+import useBasicAutoScroll from '@/hooks/useBasicAutoScroll'
 import useScrollOnReload from '@/hooks/useScrollOnReload'
 import useScrollDirection from '@/hooks/useScrollDirection'
 import { useKeyboardNavigation } from '@/hooks/useKeyboardNavigation'
@@ -27,6 +28,7 @@ import {
   ChapterContent,
   Breadcrumb
 } from '@/components/Chapter'
+import AutoScrollButton from '@/components/AutoScrollButton'
 import {
   MobileNavigationControlsSkeleton,
   ChapterNavigationSkeleton,
@@ -180,6 +182,28 @@ const ComicsChapter = () => {
 
   const scrollDirection = useScrollDirection()
 
+  // Thêm tính năng chạm vào màn hình để cuộn xuống
+  useClickToScroll({
+    scrollAmount: 300, // Cuộn xuống 300px mỗi lần chạm
+    enabled: !!dataChapter, // Chỉ bật khi đã load xong chapter
+    excludeElements: [
+      'button', 
+      'a', 
+      'input', 
+      'textarea', 
+      'select', 
+      '[role="button"]',
+      '.comment-section', // Loại trừ vùng comment
+      '.navigation-controls' // Loại trừ vùng điều hướng
+    ]
+  })
+
+  // Thêm tính năng cuộn tự động
+  const autoScroll = useBasicAutoScroll({
+    scrollSpeed: 50, // 50px/giây
+    stopOnManualScroll: true // Tự động tắt khi người dùng cuộn thủ công
+  })
+
   return (
     <>
       <Affiliate />
@@ -202,7 +226,7 @@ const ComicsChapter = () => {
         <meta name='robots' content='index, follow' />
         <link
           rel='canonical'
-          href={`https://metruyenplus.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`}
+          href={`https://tcomicclub.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`}
         />
 
         {/* Open Graph Tags - Enhanced */}
@@ -219,7 +243,7 @@ const ComicsChapter = () => {
         <meta property='og:locale' content='vi_VN' />
         <meta
           property='og:url'
-          content={`https://metruyenplus.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`}
+          content={`https://tcomicclub.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`}
           title={`${dataComics?.title} - ${chapterInfo?.name}`}
         />
 
@@ -258,14 +282,14 @@ const ComicsChapter = () => {
             isPartOf: {
               '@type': 'Comic',
               name: dataComics?.title,
-              url: `https://metruyenplus.com${PATH.comics}/${comicIndentify}`,
+              url: `https://tcomicclub.com${PATH.comics}/${comicIndentify}`,
               description: dataComics?.description,
               author: dataComics?.authors,
               genre: dataComics?.genres?.map((genre: any) => genre.name).join(', ')
             },
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': `https://metruyenplus.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`
+              '@id': `https://tcomicclub.com${PATH.comics}/${comicIndentify}/${chapterInfo?.slug_chapter}/${idChapter}`
             },
             description: `Đọc truyện ${dataComics?.title} ${chapterInfo?.name} miễn phí tại Tcomic`
           })}
@@ -279,7 +303,7 @@ const ComicsChapter = () => {
             ) && (
               <link
                 rel='prev'
-                href={`https://metruyenplus.com${
+                href={`https://tcomicclub.com${
                   PATH.comics
                 }/${comicIndentify}/${dataChapter.chapters.find(
                   (chapter: any) => Number(chapter.id) === Number(idChapter) - 1
@@ -291,7 +315,7 @@ const ComicsChapter = () => {
             ) && (
               <link
                 rel='next'
-                href={`https://metruyenplus.com${
+                href={`https://tcomicclub.com${
                   PATH.comics
                 }/${comicIndentify}/${dataChapter.chapters.find(
                   (chapter: any) => Number(chapter.id) === Number(idChapter) + 1
@@ -362,7 +386,10 @@ const ComicsChapter = () => {
         </div>
       </div>
 
-      <div className='bg-[#111] relative' onMouseDown={() => setOpenList(false)}>
+      <div 
+        className='bg-[#111] relative' 
+        onMouseDown={() => setOpenList(false)}
+      >
         <div className='container max-w-2xl px-0'>
           <ChapterContent dataChapter={dataChapter as comicSingleChapter} isFetching={isFetching} />
         </div>
@@ -446,6 +473,15 @@ const ComicsChapter = () => {
           <CommentsListSkeleton />
         )}
       </div>
+
+      {/* Nút cuộn tự động */}
+      {dataChapter && (
+        <AutoScrollButton
+          isActive={autoScroll.isActive}
+          isPaused={false}
+          onToggle={autoScroll.toggleAutoScroll}
+        />
+      )}
     </>
   )
 }
