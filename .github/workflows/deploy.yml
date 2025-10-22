@@ -20,7 +20,36 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            # Set up PATH to include Node.js and npm/yarn
+            export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+            export PATH="$HOME/.nvm/versions/node/$(nvm current)/bin:$PATH"
+            export PATH="/opt/nodejs/bin:$PATH"
+            
+            # Alternative: source the shell profile
+            source ~/.bashrc 2>/dev/null || true
+            source ~/.profile 2>/dev/null || true
+            source ~/.zshrc 2>/dev/null || true
+            
+            # Navigate to project directory
             cd /home/Workspace/WebTcomic/MeTruyen/TcomicV2/metruyenplus
+            
+            # Check if yarn and npm are available
+            which yarn || echo "yarn not found in PATH"
+            which npm || echo "npm not found in PATH"
+            node --version || echo "node not found"
+            
+            # Pull latest changes
             git pull origin tcomic
-            yarn
+            
+            # Use full path to yarn if available, otherwise try npm
+            if command -v yarn >/dev/null 2>&1; then
+              yarn
+            elif command -v npm >/dev/null 2>&1; then
+              npm install
+            else
+              echo "Neither yarn nor npm found. Trying with full paths..."
+              /usr/local/bin/yarn || /usr/bin/yarn || ~/.nvm/versions/node/*/bin/yarn || npm install
+            fi
+            
+            # Run build script
             sh ./run-build.sh
