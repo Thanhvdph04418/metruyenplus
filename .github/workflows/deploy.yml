@@ -20,18 +20,43 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Navigate to project directory first
+            # Navigate to project directory
             cd /home/Workspace/WebTcomic/MeTruyen/TcomicV2/metruyenplus
             
-            # Use the environment setup script
-            chmod +x ./setup-env.sh
-            ./setup-env.sh bash -c "
-              # Pull latest changes
-              git pull origin tcomic
-              
-              # Install dependencies
-              yarn install --frozen-lockfile
-              
-              # Run build script
-              ./action-run-build.sh
-            "
+            # Pull latest changes
+            git pull origin tcomic
+            
+            # Setup environment (inline script)
+            export SHELL=/bin/bash
+            export TERM=xterm-256color
+            
+            # Load all shell profiles
+            if [ -f ~/.bashrc ]; then source ~/.bashrc; fi
+            if [ -f ~/.profile ]; then source ~/.profile; fi
+            if [ -f ~/.bash_profile ]; then source ~/.bash_profile; fi
+            if [ -f ~/.zshrc ]; then source ~/.zshrc; fi
+            
+            # Load NVM if available
+            if [ -f ~/.nvm/nvm.sh ]; then
+              source ~/.nvm/nvm.sh
+              nvm use v22.9.0 2>/dev/null || true
+            fi
+            
+            # Set up PATH
+            export PATH="/root/.nvm/versions/node/v22.9.0/bin:$PATH"
+            export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+            export PATH="/opt/nodejs/bin:$PATH"
+            
+            # Debug environment
+            echo "=== Environment Debug ==="
+            echo "Node: $(node --version 2>/dev/null || echo 'Not found')"
+            echo "NPM: $(npm --version 2>/dev/null || echo 'Not found')"
+            echo "Yarn: $(yarn --version 2>/dev/null || echo 'Not found')"
+            echo "PATH: $PATH"
+            echo "========================="
+            
+            # Install dependencies
+            yarn install --frozen-lockfile
+            
+            # Run build script
+            ./action-run-build.sh
