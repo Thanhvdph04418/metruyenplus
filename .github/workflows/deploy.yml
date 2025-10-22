@@ -23,4 +23,4 @@ jobs:
             cd /home/Workspace/WebTcomic/MeTruyen/TcomicV2/metruyenplus
             git pull origin tcomic
             /root/.nvm/versions/node/v22.9.0/bin/yarn
-            sh ./run-build.sh
+            ./action-run-build.sh
