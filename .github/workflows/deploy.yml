@@ -59,4 +59,4 @@ jobs:
             yarn install --frozen-lockfile
             
             # Run build script
-            ./action-run-build.sh
+            ./run-build.sh
