@@ -1,0 +1,26 @@
+name: Deploy via SSH
+
+on:
+  push:
+    branches:
+      - tcomic  # hoặc nhánh bạn muốn deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Connect to remote server and run commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/Workspace/WebTcomic/MeTruyen/TcomicV2/metruyenplus
+            git pull origin tcomic
+            yarn
+            sh ./run-build.sh
