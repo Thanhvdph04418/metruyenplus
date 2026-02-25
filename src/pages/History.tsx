@@ -10,6 +10,7 @@ import {
   syncReadingHistory
 } from '@/utils/history'
 import { Helmet } from 'react-helmet-async'
+import { SITE_NAME } from '@/config/siteConfig'
 
 const History = () => {
   const [dataComics, setDataComics] = useState<HistoryComic[]>([])
@@ -105,7 +106,7 @@ const History = () => {
   return (
     <>
       <Helmet>
-        <title>Lịch sử đọc truyện - Tcomic</title>
+        <title>{`Lịch sử đọc truyện - ${SITE_NAME}`}</title>
         <meta name='description' content='Lịch sử các bộ truyện bạn đã đọc' />
       </Helmet>
       <div className='container px-2 lg:px-0'>
@@ -163,7 +164,7 @@ const History = () => {
                   </svg>
                 )}
                 <span className='sm:hidden'>Đồng bộ</span>
-                <span className='hidden sm:inline'>Đồng bộ với app Tcomic</span>
+                <span className='hidden sm:inline'>Đồng bộ với app {SITE_NAME}</span>
               </button>
             )}
             <button

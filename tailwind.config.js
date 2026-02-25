@@ -1,3 +1,12 @@
+// Branding & màu: nguồn duy nhất từ brand.config.js
+import brand from './brand.config.js'
+
+const PRIMARY = brand.SITE_PRIMARY_COLOR
+const PRIMARY_2 = brand.SITE_PRIMARY_COLOR_2
+const SECONDARY = brand.SITE_SECONDARY_COLOR
+const GRADIENT_FROM = brand.SITE_GRADIENT_FROM ?? PRIMARY
+const GRADIENT_TO = brand.SITE_GRADIENT_TO ?? PRIMARY_2
+
 /** @type {import('tailwindcss').Config} */
 export default {
   corePlugins: {
@@ -16,19 +25,20 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Nunito', 'Nunito Fallback', 'system-ui', 'sans-serif'],
-        comic: ['Comic Neue', 'Comic Neue Fallback', 'cursive'],
-        title: ['Bangers', 'Bangers Fallback', 'cursive'],
-        manga: ['Fredoka One', 'Fredoka One Fallback', 'Bangers', 'cursive'],
-        comicBold: ['Fredoka One', 'Fredoka One Fallback', 'Bangers', 'cursive'],
-        logo: ['Inter', 'Inter Fallback', 'Arial', 'sans-serif'],
-        logoAlt: ['Poppins', 'Poppins Fallback', 'Arial', 'sans-serif'],
-        logoBold: ['Poppins', 'Poppins Fallback', 'Arial Black', 'sans-serif']
+        sans: [brand.FONT_SYSTEM, `${brand.FONT_SYSTEM} Fallback`, 'system-ui', 'sans-serif'],
+        comic: [brand.FONT_COMIC, `${brand.FONT_COMIC} Fallback`, 'cursive'],
+        title: [brand.FONT_TITLE, `${brand.FONT_TITLE} Fallback`, 'cursive'],
+        manga: [brand.FONT_LOGO, `${brand.FONT_LOGO} Fallback`, 'cursive'],
+        comicBold: [brand.FONT_LOGO, `${brand.FONT_LOGO} Fallback`, 'Arial Black', 'sans-serif'],
+        logo: [brand.FONT_LOGO, `${brand.FONT_LOGO} Fallback`, 'Arial', 'sans-serif'],
+        logoAlt: [brand.FONT_LOGO, `${brand.FONT_LOGO} Fallback`, 'Arial', 'sans-serif'],
+        logoBold: [brand.FONT_LOGO, `${brand.FONT_LOGO} Fallback`, 'Arial Black', 'sans-serif']
       },
       colors: {
-        primary: '#2196F3',          /* Medium blue from logo */
-        'primary-2': '#06B6D4',      /* Teal from logo */
-        secondary: '#4DC0B5',        /* Light teal accent */
+        // Brand colors driven by .env (VITE_SITE_*)
+        primary: PRIMARY,
+        'primary-2': PRIMARY_2,
+        secondary: SECONDARY,
         'comment-bg': '#F8FAFC',     /* Slate background */
         'dark-bg': '#0F172A',        /* Slate dark for dark mode */
         'dark-surface': '#1E293B',   /* Slate surface */
@@ -40,10 +50,11 @@ export default {
         'light-border': '#E2E8F0',
       },
       backgroundImage: {
-        gradient: 'linear-gradient(135deg, #2196F3 0%, #06B6D4 100%)',
-        'gradient-logo': 'linear-gradient(180deg, #2196F3 0%, #06B6D4 100%)',
-        'gradient-radial': 'radial-gradient(ellipse at center, #2196F3 0%, #06B6D4 100%)',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, #2196F3 0deg, #06B6D4 120deg, #4DC0B5 240deg, #2196F3 360deg)'
+        // Brand gradients aligned with VITE_SITE_GRADIENT_FROM/TO
+        gradient: `linear-gradient(135deg, ${GRADIENT_FROM} 0%, ${GRADIENT_TO} 100%)`,
+        'gradient-logo': `linear-gradient(180deg, ${GRADIENT_FROM} 0%, ${GRADIENT_TO} 100%)`,
+        'gradient-radial': `radial-gradient(ellipse at center, ${GRADIENT_FROM} 0%, ${GRADIENT_TO} 100%)`,
+        'gradient-conic': `conic-gradient(from 180deg at 50% 50%, ${GRADIENT_FROM} 0deg, ${GRADIENT_TO} 120deg, ${SECONDARY} 240deg, ${GRADIENT_FROM} 360deg)`
       },
       transitionDuration: {
         DEFAULT: '200ms',
@@ -178,39 +189,39 @@ export default {
         },
         // Logo-inspired gradient utilities
         '.gradient-logo-text': {
-          background: 'linear-gradient(180deg, #2196F3 0%, #06B6D4 100%)',
+          background: `linear-gradient(180deg, ${GRADIENT_FROM} 0%, ${GRADIENT_TO} 100%)`,
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         },
         '.gradient-logo-border': {
-          background: 'linear-gradient(180deg, #2196F3 0%, #06B6D4 100%)',
+          background: `linear-gradient(180deg, ${GRADIENT_FROM} 0%, ${GRADIENT_TO} 100%)`,
           padding: '2px',
           borderRadius: '0.5rem'
         },
         '.gradient-logo-shadow': {
-          boxShadow: '0 10px 25px -5px rgba(33, 150, 243, 0.3), 0 10px 10px -5px rgba(6, 182, 212, 0.2)'
+          boxShadow: `0 10px 25px -5px ${PRIMARY}4D, 0 10px 10px -5px ${PRIMARY_2}33`
         },
-        // Logo-appropriate text effects
+        // Logo & title từ brand.config.js
         '.logo-text': {
-          fontFamily: 'Bangers, Bangers Fallback, Arial Black, sans-serif',
+          fontFamily: `${brand.FONT_LOGO}, ${brand.FONT_LOGO} Fallback, Arial Black, sans-serif`,
           fontWeight: '400',
           letterSpacing: '0.1em',
           textTransform: 'uppercase'
         },
         '.logo-text-alt': {
-          fontFamily: 'Fredoka One, Fredoka One Fallback, Arial Black, sans-serif',
+          fontFamily: `${brand.FONT_LOGO}, ${brand.FONT_LOGO} Fallback, Arial Black, sans-serif`,
           fontWeight: '400',
           letterSpacing: '0.05em'
         },
         '.logo-text-bold': {
-          fontFamily: 'Bangers, Bangers Fallback, Arial Black, sans-serif',
+          fontFamily: `${brand.FONT_LOGO}, ${brand.FONT_LOGO} Fallback, Arial Black, sans-serif`,
           fontWeight: '400',
           letterSpacing: '0.1em',
           textTransform: 'uppercase'
         },
         '.comic-text': {
-          fontFamily: 'Fredoka One, Fredoka One Fallback, Bangers, cursive',
+          fontFamily: `${brand.FONT_COMIC}, ${brand.FONT_COMIC} Fallback, cursive`,
           textShadow: '2px 2px 0px rgba(0,0,0,0.1), 4px 4px 0px rgba(0,0,0,0.05)',
           letterSpacing: '0.05em'
         },

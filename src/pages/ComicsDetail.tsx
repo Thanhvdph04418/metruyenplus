@@ -32,6 +32,12 @@ import {
 } from '@/utils/imageOptimization'
 import { getComicHistory } from '@/utils/history'
 import { trackComicView } from '@/utils/analytics'
+import {
+  SITE_NAME,
+  SITE_TWITTER_HANDLE,
+  SITE_DOMAIN,
+  SITE_URL
+} from '@/config/siteConfig'
 
 const ComicsDetail = () => {
   const { comicIndentify } = useParams()
@@ -235,18 +241,21 @@ const ComicsDetail = () => {
       <EveningModeToggle />
       <Helmet>
         {/* Add new canonical */}
-        <link rel='canonical' href={`https://metruyenplus.com${PATH.comics}/${slug}-${id}`} />
+        <link rel='canonical' href={`${SITE_URL}${PATH.comics}/${slug}-${id}`} />
 
         {/* Primary Meta Tags */}
-        <title>{`${dataComics?.title} [${dataComics?.chapters.at(0)?.name}] | Tcomic`}</title>
-        <meta name='title' content={`${dataComics?.title} | Đọc Truyện Tranh Online - Tcomic`} />
+        <title>{`${dataComics?.title} [${dataComics?.chapters.at(0)?.name}] | ${SITE_NAME}`}</title>
+        <meta
+          name='title'
+          content={`${dataComics?.title} | Đọc Truyện Tranh Online - ${SITE_NAME}`}
+        />
         <meta
           name='description'
           content={`✅ Đọc truyện tranh ${dataComics?.title} ${
             dataComics?.other_names && dataComics?.other_names.length > 0
               ? `(${dataComics.other_names.join(', ')})`
               : ''
-          } Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại Tcomic. Thể loại: ${dataComics?.genres
+          } Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại ${SITE_NAME}. Thể loại: ${dataComics?.genres
             ?.map((g) => g.name)
             .join(', ')}`}
         />
@@ -259,10 +268,10 @@ const ComicsDetail = () => {
 
         {/* Open Graph / Facebook */}
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='Tcomic' />
+        <meta property='og:site_name' content={SITE_NAME} />
         <meta
           property='og:title'
-          content={`${dataComics?.title} | Đọc Truyện Tranh Online - Tcomic`}
+          content={`${dataComics?.title} | Đọc Truyện Tranh Online - ${SITE_NAME}`}
         />
         <meta
           property='og:description'
@@ -273,14 +282,14 @@ const ComicsDetail = () => {
         />
         <meta property='og:image' content={dataComics?.thumbnail} />
         <meta property='og:image:alt' content={`Ảnh bìa truyện ${dataComics?.title}`} />
-        <meta property='og:url' content={`https://metruyenplus.com${PATH.comics}/${slug}-${id}`} />
+        <meta property='og:url' content={`${SITE_URL}${PATH.comics}/${slug}-${id}`} />
 
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content='@Tcomic' />
+        <meta name='twitter:site' content={SITE_TWITTER_HANDLE} />
         <meta
           name='twitter:title'
-          content={`${dataComics?.title} | Đọc Truyện Tranh Online - Tcomic`}
+          content={`${dataComics?.title} | Đọc Truyện Tranh Online - ${SITE_NAME}`}
         />
         <meta
           name='twitter:description'
@@ -293,7 +302,7 @@ const ComicsDetail = () => {
         <meta name='twitter:image:alt' content={`Ảnh bìa truyện ${dataComics?.title}`} />
 
         {/* Additional Meta Tags */}
-        <meta name='author' content={dataComics?.authors || 'Tcomic'} />
+        <meta name='author' content={dataComics?.authors || SITE_NAME} />
         <meta name='robots' content='index, follow' />
 
         {/* Comic-specific structured data with more details */}
@@ -303,7 +312,7 @@ const ComicsDetail = () => {
             '@type': 'Article',
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': `https://metruyenplus.com${PATH.comics}/${slug}-${id}`
+              '@id': `${SITE_URL}${PATH.comics}/${slug}-${id}`
             },
             headline: dataComics?.title,
             alternativeHeadline: dataComics?.other_names?.join(', '),
@@ -321,7 +330,7 @@ const ComicsDetail = () => {
             keywords: `truyện tranh, ${dataComics?.title}, manga`,
             publisher: {
               '@type': 'Organization',
-              name: 'Tcomic',
+              name: SITE_NAME,
               logo: {
                 '@type': 'ImageObject',
                 url: 'https://metruyenplus.com/icon-192x192.png'

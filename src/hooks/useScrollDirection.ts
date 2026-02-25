@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
  * Custom hook that tracks scroll direction and position
  * Returns scroll direction ('up' | 'down') with optimized performance
  */
-const useScrollDirection = () => {
-  const [scrollDirection, setScrollDirection] = useState('up')
+const useScrollDirection = (): 'up' | 'down' => {
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up')
   const [prevOffset, setPrevOffset] = useState(0)
   const [lastScrollTime, setLastScrollTime] = useState(0)
 

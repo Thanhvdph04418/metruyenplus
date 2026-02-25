@@ -3,7 +3,7 @@
  * Helps prevent Google Search Console "Duplicate without user-selected canonical" issues
  */
 
-const SITE_URL = 'https://tcomicclub.com'
+const SITE_URL = 'https://tcomicfanq.com'
 
 // Query parameters that should be stripped from canonical URLs
 const EXCLUDED_PARAMS = [

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { SITE_NAME } from '@/config/siteConfig'
 
 const AppLanding = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ const AppLanding = () => {
         {/* Header */}
         <div className='bg-gradient-logo rounded-b-[50px] text-white text-center py-10 px-4 mb-8'>
           <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold'>
-            Hành trình mới cùng ứng dụng truyện tranh Tcomic!
+            Hành trình mới cùng ứng dụng truyện tranh {SITE_NAME}!
           </h1>
         </div>
 

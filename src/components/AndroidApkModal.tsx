@@ -22,7 +22,7 @@ const AndroidApkModal = ({ isOpen, onClose, onDownload }: AndroidApkModalProps) 
         {/* Header */}
         <div className='flex items-center justify-between p-4 border-b border-gray-200 dark:border-dark-border'>
           <h2 className='text-lg font-semibold text-gray-900 dark:text-gray-100'>
-            Tải ứng dụng Tcomic
+            Tải ứng dụng TComic
           </h2>
           <button
             onClick={onClose}
@@ -53,7 +53,7 @@ const AndroidApkModal = ({ isOpen, onClose, onDownload }: AndroidApkModalProps) 
               Tại sao không có trên Google Play?
             </h3>
             <p className='text-sm text-gray-600 dark:text-gray-400 leading-relaxed'>
-              Ứng dụng Tcomic hiện tại không còn trên Google Play Store do các chính sách về nội
+              Ứng dụng TComic hiện tại không còn trên Google Play Store do các chính sách về nội
               dung. Tuy nhiên, bạn vẫn có thể tải và cài đặt ứng dụng thông qua file APK.
             </p>
           </div>
@@ -75,7 +75,7 @@ const AndroidApkModal = ({ isOpen, onClose, onDownload }: AndroidApkModalProps) 
               </li>
               <li className='flex items-start gap-2'>
                 <span className='text-green-600 dark:text-green-400 mt-0.5'>✓</span>
-                <span>Ứng dụng chính thức từ Tcomic</span>
+                <span>Ứng dụng chính thức từ TComic</span>
               </li>
               <li className='flex items-start gap-2'>
                 <span className='text-green-600 dark:text-green-400 mt-0.5'>✓</span>
@@ -112,7 +112,7 @@ const AndroidApkModal = ({ isOpen, onClose, onDownload }: AndroidApkModalProps) 
           </button>
           <button
             onClick={onClose}
-            className='w-full bg-gray-100 dark:bg-dark-highlight hover:bg-gray-200 dark:hover:bg-dark-border text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-xl transition-colors'
+            className='w-full bg-gray-100 dark:bg-dark-highlight hover:bg-gray-200 dark:hover:bg-dark-border text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-lg transition-colors'
           >
             Để sau
           </button>

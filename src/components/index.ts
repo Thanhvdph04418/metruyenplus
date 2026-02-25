@@ -4,6 +4,7 @@ export { default as Navbar } from './Navbar'
 export { default as Footer } from './Footer'
 export { default as SearchBar } from './SearchBar'
 export { default as CardItem } from './CardItem'
+export { default as ComicsGrid } from './ComicsGrid'
 export { default as MiniPagination } from './MiniPagination'
 export { default as Pagination } from './Pagination'
 export { default as RatingStar } from './RatingStar'
@@ -21,8 +22,6 @@ export { default as Login } from './Login'
 export { default as Signup } from './Signup'
 export { default as HotComicSlider } from './HotComicSlider'
 export { default as HotComicCard } from './HotComicCard'
-export { default as MobileHotComicSlider } from './MobileHotComicSlider'
-export { default as MobileHotComicCard } from './MobileHotComicCard'
 export { default as HomeComicList } from './HomeComicList'
 export { default as SkeletonLoader } from './SkeletonLoader'
 export { default as MobileAppNotification } from './MobileAppNotification'
@@ -32,7 +31,10 @@ export { default as DesktopDomainNotification } from './DesktopDomainNotificatio
 export { default as Affiliate } from './Affiliate'
 export { default as AffiliateNotice } from './AffiliateNotice'
 export { default as CanonicalLink } from './CanonicalLink'
-export { default as MobileBottomTab } from './MobileBottomTab'
+export { default as MobileHotComicSlider } from './MobileHotComicSlider'
+
+// ComicMessage - comic-style toast/message
+export * from './ComicMessage'
 
 // Adstrerra components
 export * from './Adstrerra'

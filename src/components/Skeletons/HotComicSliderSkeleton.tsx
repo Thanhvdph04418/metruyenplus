@@ -40,7 +40,13 @@ const HotComicSliderSkeleton = () => {
                 <div className='flex-shrink-0 w-full sm:w-[180px] md:w-[200px] lg:w-[220px] xl:w-[240px] px-2'>
                   <div className='bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 h-[360px] sm:h-[380px] md:h-[400px]'>
                     {/* Image Container with fixed aspect ratio */}
-                    <div className='relative w-full h-[260px] sm:h-[280px] md:h-[300px] overflow-hidden bg-gray-200 dark:bg-gray-700 animate-pulse'>
+                    <div className='relative w-full h-[260px] sm:h-[280px] md:h-[300px] overflow-hidden bg-zinc-700'>
+                      <img
+                        src='/images/chapter-loading.svg'
+                        alt='Loading comic...'
+                        className='w-full h-full object-cover'
+                        loading='eager'
+                      />
                       {/* Stats Bar Skeleton */}
                       <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent px-2 sm:px-3 py-2.5'>
                         <div className='grid grid-cols-3 gap-1 sm:flex sm:items-center sm:justify-between'>

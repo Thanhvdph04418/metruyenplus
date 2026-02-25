@@ -4,6 +4,7 @@ import { PaginationSkeleton, MiniPaginationSkeleton } from '@/components/Skeleto
 import { renderSwiperSlide } from '@/components/Preview/RecentUpdateComics'
 import { useQueryConfig, useScrollTop } from '@/hooks'
 import PATH from '@/utils/path'
+import { SITE_NAME } from '@/config/siteConfig'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from 'react-query'
 import { useMediaQuery } from 'react-responsive'
@@ -67,10 +68,10 @@ const ComicsSearch = () => {
   return (
     <>
       <Helmet>
-        <title>Tìm truyện tranh online - Tcomic</title>
+        <title>{`Tìm truyện tranh online - ${SITE_NAME}`}</title>
         <meta
           name='description'
-          content='Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại Tcomic'
+          content={`Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại ${SITE_NAME}`}
         />
         {/* Canonical URL - always points to page 1 with search query */}
         <link rel='canonical' href={canonicalUrl} />

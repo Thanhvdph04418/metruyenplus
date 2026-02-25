@@ -36,7 +36,7 @@ const RecentComments = () => {
   }
 
   return (
-    <div className='bg-white dark:bg-dark-surface rounded-xl p-6 shadow-sm border border-light-border dark:border-dark-highlight max-w-full overflow-hidden'>
+    <div className='bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 max-w-full overflow-hidden'>
       <div className='flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700'>
         <h3 className='text-lg font-medium text-gray-900 dark:text-white'>Bình luận gần đây</h3>
       </div>

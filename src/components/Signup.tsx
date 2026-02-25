@@ -306,7 +306,7 @@ const Signup = () => {
                 required
                 value={formData.username}
                 onChange={(e) => setFormData((prev) => ({ ...prev, username: e.target.value }))}
-                className='block w-full px-4 py-3 rounded-xl border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
+                className='block w-full px-4 py-3 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
                 placeholder='Tên đăng nhập'
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
@@ -342,7 +342,7 @@ const Signup = () => {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-                className='block w-full px-4 py-3 rounded-xl border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
+                className='block w-full px-4 py-3 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
                 placeholder='your@email.com'
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
@@ -377,7 +377,7 @@ const Signup = () => {
                 type='text'
                 value={formData.name}
                 onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                className='block w-full px-4 py-3 rounded-xl border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
+                className='block w-full px-4 py-3 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
                 placeholder='Họ tên'
               />
             </div>
@@ -397,7 +397,7 @@ const Signup = () => {
                 type='tel'
                 value={formData.phone}
                 onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
-                className='block w-full px-4 py-3 rounded-xl border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
+                className='block w-full px-4 py-3 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
                 placeholder='Số điện thoại'
               />
             </div>
@@ -418,7 +418,7 @@ const Signup = () => {
                 required
                 value={formData.password}
                 onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
-                className='block w-full px-4 py-3 rounded-xl border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
+                className='block w-full px-4 py-3 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
                 placeholder='••••••••'
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
@@ -456,7 +456,7 @@ const Signup = () => {
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))
                 }
-                className='block w-full px-4 py-3 rounded-xl border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
+                className='block w-full px-4 py-3 rounded-lg border bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent transition-colors duration-200'
                 placeholder='••••••••'
               />
               <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>

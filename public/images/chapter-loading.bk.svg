@@ -1,0 +1,74 @@
+<svg width="400" height="600" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="600" fill="#27272a"/>
+
+  <!-- Animated gradient background -->
+  <defs>
+    <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#27272a" stop-opacity="1">
+        <animate attributeName="offset" values="-2;1" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" stop-color="#3f3f46" stop-opacity="1">
+        <animate attributeName="offset" values="-1;2" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#27272a" stop-opacity="1">
+        <animate attributeName="offset" values="0;3" dur="2s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- Brand gradient - synced with env site primary colors -->
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <!-- VITE_SITE_PRIMARY_COLOR (#8B5CF6) to VITE_SITE_PRIMARY_COLOR_2 (#A855F7) -->
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="600" fill="url(#shimmer)"/>
+
+  <!-- TComic Brand Logo -->
+  <g transform="translate(200, 250)">
+    <!-- Outer glow circle -->
+    <circle cx="0" cy="0" r="80" fill="url(#brandGradient)" opacity="0.1">
+      <animate attributeName="r" values="70;85;70" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Main brand circle -->
+    <circle cx="0" cy="0" r="65" fill="url(#brandGradient)" opacity="0.15"/>
+
+    <!-- TComic Text -->
+    <text x="0" y="10"
+          font-family="Bangers, cursive"
+          font-size="56"
+          font-weight="700"
+          fill="url(#brandGradient)"
+          text-anchor="middle">
+      TComic
+    </text>
+  </g>
+
+  <!-- Loading text - BIGGER SIZE -->
+  <text x="200" y="380"
+        font-family="Nunito, sans-serif"
+        font-size="28"
+        font-weight="700"
+        fill="#d4d4d8"
+        text-anchor="middle">
+    Đang tải ảnh...
+  </text>
+
+  <!-- Loading dots animation - using env site brand colors -->
+  <circle cx="165" cy="415" r="4" fill="#8B5CF6">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" begin="0s"/>
+    <animate attributeName="cy" values="415;410;415" dur="1.4s" repeatCount="indefinite" begin="0s"/>
+  </circle>
+  <circle cx="200" cy="415" r="4" fill="#A855F7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" begin="0.2s"/>
+    <animate attributeName="cy" values="415;410;415" dur="1.4s" repeatCount="indefinite" begin="0.2s"/>
+  </circle>
+  <circle cx="235" cy="415" r="4" fill="#C084FC">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite" begin="0.4s"/>
+    <animate attributeName="cy" values="415;410;415" dur="1.4s" repeatCount="indefinite" begin="0.4s"/>
+  </circle>
+</svg>

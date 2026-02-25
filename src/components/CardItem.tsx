@@ -9,8 +9,7 @@ import {
   mergeImageConfig,
   shouldLoadWithPriority,
   imageCache,
-  createImageErrorHandler,
-  generatePlaceholder
+  createImageErrorHandler
 } from '@/utils/imageOptimization'
 import { useScrollPosition } from './OptimizedImageGrid'
 
@@ -51,15 +50,15 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
 
   // Enhanced error handling with retry logic
   const handleImageError = createImageErrorHandler(imgError)
-  const placeholderSrc = generatePlaceholder(240, 320)
+  const placeholderSrc = '/images/chapter-loading.svg'
 
   // Track image loading for cache optimization
   const handleImageLoad = () => {
     imageCache.addToCache(thumbnail)
   }
   return (
-    <div className='relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 will-change-transform'>
-      <div className='w-full h-[200px] sm:h-[240px] xl:h-[220px] overflow-hidden relative bg-gray-100 dark:bg-gray-800 rounded-t-xl sm:rounded-t-lg'>
+    <div className='relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 will-change-transform'>
+      <div className='w-full h-[240px] xl:h-[220px] overflow-hidden relative bg-gray-100 dark:bg-gray-800 rounded-t-lg'>
         {is_trending && (
           <div className='absolute top-1 right-1 bg-gradient-to-r from-red-500 to-orange-500 text-white px-1.5 py-[1px] text-[10px] z-[1] animate-pulse rounded-full font-semibold shadow-lg'>
             HOT
@@ -174,16 +173,16 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
           </div>
         </div>
       </div>
-      <div className='p-2 sm:p-3 flex flex-col text-[#2d3748] dark:text-[#edf2f7] space-y-1.5 sm:space-y-2'>
+      <div className='p-3 flex flex-col text-[#2d3748] dark:text-[#edf2f7] space-y-2'>
         <Link
           to={`${PATH.comics}/${slug}-${id}`}
           title={titleFormatted}
-          className='hover:text-primary font-semibold text-sm sm:text-base leading-4 sm:leading-5 line-clamp-2 tracking-wide transition-colors duration-200 min-h-[2rem] sm:min-h-[2.5rem]'
+          className='hover:text-primary font-semibold text-base leading-5 line-clamp-1 tracking-wide transition-colors duration-200'
         >
           {titleFormatted}
         </Link>
-        <span className='text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium'>{updated_at}</span>
-        <p className='inline-block text-xs sm:text-sm truncate'>
+        <span className='text-sm text-gray-500 dark:text-gray-400 font-medium'>{updated_at}</span>
+        <p className='inline-block text-sm truncate'>
           <Link
             to={`${PATH.comics}/${slug}-${id}/${last_chapter.slug_chapter}/${last_chapter.id}`}
             title={last_chapter.name}

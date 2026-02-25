@@ -7,6 +7,7 @@ import {
   useNavigate
 } from 'react-router-dom'
 import PATH from '@/utils/path'
+import { SITE_LOGO_TEXT, SITE_NAME } from '@/config/siteConfig'
 import { useEffect, useMemo, useState } from 'react'
 import iconSearch from '/icon_search.webp'
 import classNames from 'classnames'
@@ -33,12 +34,12 @@ import {
 const Logo = () => (
   <Link
     to={PATH.home}
-    title='Tcomic'
+    title={SITE_LOGO_TEXT}
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     className='flex items-center'
   >
     <span className='text-2xl lg:text-3xl logo-text-bold gradient-logo-text hover:from-primary-2 hover:to-primary transition-all duration-300'>
-      Tcomic
+      {SITE_LOGO_TEXT}
     </span>
   </Link>
 )
@@ -53,7 +54,7 @@ const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
   <ul className='hidden sm:flex items-center gap-3 lg:gap-5 ml-4 lg:ml-6 mt-1'>
     <li className='hidden lg:block'>
       <Link
-        title='Trang chủ Tcomic'
+        title={`Trang chủ ${SITE_NAME}`}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         to={PATH.home}
         className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
@@ -1106,7 +1107,7 @@ const Header = () => {
           </div>
           <button
             style={{position:'absolute', right:10}}
-            title='Menu truyện tranh Tcomic'
+            title={`Menu truyện tranh ${SITE_NAME}`}
             onClick={() => setOpenNav((prev) => !prev)}
             className='flex flex-col gap-[5px] p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
           >

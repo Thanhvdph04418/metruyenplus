@@ -227,7 +227,7 @@ const SearchBar = () => {
               <LunarNewYearCountdown />
             </div> */}
             <form
-              className='z-20 relative flex items-center dark:text-white w-full sm:w-auto rounded-xl border border-white dark:border-dark-highlight'
+              className='z-20 relative flex items-center dark:text-white w-full sm:w-auto rounded-[20px] border border-white dark:border-dark-highlight'
               onSubmit={handleSearch}
             >
               <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px] dark:bg-gray-900 hidden sm:block'>
@@ -245,7 +245,7 @@ const SearchBar = () => {
               <SearchButton />
               {isOpen && (
                 <div
-                  className={`absolute top-[37px] md:top-[50px] left-0 z-40 border border-[#EDEDED] dark:border-gray-600 bg-white dark:bg-gray-900 w-full md:w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[480px] overflow-y-auto rounded-xl ${
+                  className={`absolute top-[37px] md:top-[50px] left-0 z-40 border border-[#EDEDED] dark:border-gray-600 bg-white dark:bg-gray-900 w-full md:w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[480px] overflow-y-auto ${
                     !valueForm ? 'border-0' : ''
                   }`}
                 >

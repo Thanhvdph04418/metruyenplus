@@ -1,0 +1,5 @@
+export { ComicHeroSection } from './ComicHeroSection'
+export { ComicInfoSection } from './ComicInfoSection'
+export { ComicActionsBar } from './ComicActionsBar'
+export { ComicDescription } from './ComicDescription'
+export { ComicGenresList } from './ComicGenresList'

@@ -27,7 +27,13 @@ const HomeComicListSkeleton = ({ showIcon = true }: Props) => {
               {/* Match CardItem container exactly */}
               <div className='relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm animate-pulse'>
                 {/* Image Container - Match CardItem */}
-                <div className='w-full h-[240px] xl:h-[220px] overflow-hidden relative bg-gray-200 dark:bg-gray-700 rounded-t-lg'>
+                <div className='w-full h-[240px] xl:h-[220px] overflow-hidden relative bg-zinc-700 rounded-t-lg'>
+                  <img
+                    src='/images/chapter-loading.svg'
+                    alt='Loading comic...'
+                    className='w-full h-full object-cover'
+                    loading='eager'
+                  />
                   {/* Trending Badge - Show randomly to simulate conditional rendering */}
                   {index % 3 === 0 && (
                     <div className='absolute top-1 right-1 bg-gradient-to-r from-gray-400 to-gray-500 dark:from-gray-500 dark:to-gray-600 text-transparent px-1.5 py-[1px] text-[10px] z-[1] rounded-full font-semibold shadow-lg'>

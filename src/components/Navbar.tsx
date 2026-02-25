@@ -6,9 +6,12 @@ import { Link, NavLink, createSearchParams, useLocation, useMatch } from 'react-
 import useNavbarVisibility from '@/hooks/useNavbarVisibility'
 
 // Constants for common styles
-const NAV_LINK_BASE_STYLES = 'uppercase font-semibold text-sm hover:text-primary px-1 py-4 focus:outline-none'
+const NAV_LINK_BASE_STYLES = 'uppercase font-semibold text-sm hover:text-primary px-1 py-4'
 const TOP_NAV_LINK_STYLES =
-  'capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1 focus:outline-none'
+  'capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1'
+
+const PANPAGE_URL =
+  import.meta.env.VITE_PANPAGE_URL || 'https://www.facebook.com/profile.php?id=100063825323613'
 
 // Regular nav items component
 const RegularNavItems = () => {
@@ -69,7 +72,7 @@ const RegularNavItems = () => {
           to='https://www.facebook.com/groups/523416513198612'
           target='_blank'
           rel='noopener noreferrer'
-          className='relative uppercase font-semibold text-sm hover:text-primary px-1 py-4 flex items-center gap-1 focus:outline-none'
+          className='relative uppercase font-semibold text-sm hover:text-primary px-1 py-4 flex items-center gap-1'
         >
           <span>GROUP</span>
           <span className='relative flex h-3 w-3'>
@@ -82,7 +85,7 @@ const RegularNavItems = () => {
         <Link
           target='_blank'
           rel='noopener noreferrer'
-          to='https://www.facebook.com/groups/523416513198612'
+          to={PANPAGE_URL}
           className={NAV_LINK_BASE_STYLES}
         >
           fanpage
@@ -347,7 +350,7 @@ const Navbar = () => {
   return (
     <div className={containerClasses}>
       <nav className={navClasses}>
-        <ul className='flex items-center gap-3 overflow-x-auto overflow-y-hidden hide-horizontal-scrollbar'>
+        <ul className='flex items-center gap-3 overflow-x-auto overflow-y-hidden'>
           {!isHome && !isTop && (
             <li className='uppercase font-semibold text-sm py-4 text-black dark:text-gray-400'>
               chủ đề:

@@ -3,6 +3,7 @@ import { CardItem, MiniPagination, Pagination } from '@/components'
 import { PaginationSkeleton, MiniPaginationSkeleton } from '@/components/Skeletons'
 import { useQueryConfig, useTitle, useComicListLimit } from '@/hooks'
 import PATH, { API_MAPPING_PATH } from '@/utils/path'
+import { SITE_NAME } from '@/config/siteConfig'
 import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link, createSearchParams, useLocation } from 'react-router-dom'
@@ -98,10 +99,10 @@ const ComicsList = () => {
   return (
     <>
       <Helmet>
-        <title>{`Truyện tranh ${title} online - Tcomic`}</title>
+        <title>{`Truyện tranh ${title} online - ${SITE_NAME}`}</title>
         <meta
           name='description'
-          content={`Truyện tranh ${title} online - Tất cả truyện ${title} có thể tìm thấy tại Tcomic`}
+          content={`Truyện tranh ${title} online - Tất cả truyện ${title} có thể tìm thấy tại ${SITE_NAME}`}
         />
         {/* Canonical URL - always points to page 1 to avoid duplicates */}
         <link rel='canonical' href={canonicalUrl} />

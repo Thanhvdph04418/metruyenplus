@@ -10,6 +10,7 @@ import { NotFound } from '@/App'
 import { Helmet } from 'react-helmet-async'
 import { dataGenres } from '@/types/data'
 import { generateCanonicalUrl, generatePaginationUrl } from '@/utils/canonicalUrl'
+import { SITE_NAME } from '@/config/siteConfig'
 
 // Smart GenreList with collapsible design
 const GenreList = ({
@@ -329,7 +330,7 @@ const ComicsList = () => {
   return (
     <>
       <Helmet>
-        <title>{`Truyện Thể loại ${currentGenre?.name} - Tcomic`}</title>
+        <title>{`Truyện Thể loại ${currentGenre?.name} - ${SITE_NAME}`}</title>
         <meta
           name='description'
           content={`Truyện Thể loại ${currentGenre?.name} - ${currentGenre?.description}`}

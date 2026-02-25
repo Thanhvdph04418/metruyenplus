@@ -13,23 +13,23 @@ const ListPreviewComics = ({ data }: Props) => {
   const isMobileMini = useMediaQuery({ maxWidth: 639 })
 
   return (
-    <ul className='mt-5 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 xl:gap-3'>
+    <ul className='mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-2 xl:gap-x-[3px] gap-y-5'>
       {data && (
         <>
           {isBigScreen &&
-            data.slice(0, 16).map((item, index) => (
+            data.slice(0, 14).map((item, index) => (
               <li key={item.id}>
                 <CardItem data={item} index={index} />
               </li>
             ))}
           {(isTablet || isMobile) &&
-            data.slice(0, 18).map((item, index) => (
+            data.slice(0, 15).map((item, index) => (
               <li key={item.id}>
                 <CardItem data={item} index={index} />
               </li>
             ))}
           {(isTabletMini || isMobileMini) &&
-            data.slice(0, 20).map((item, index) => (
+            data.slice(0, 16).map((item, index) => (
               <li key={item.id}>
                 <CardItem data={item} index={index} />
               </li>

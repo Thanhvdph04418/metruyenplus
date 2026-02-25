@@ -24,15 +24,19 @@ export const useChapterNavigation = (config: ChapterNavigationConfig) => {
   })
 
   const navigateToChapter = useCallback(
-    (chapterId: number, slugChapter: string, direction?: 'prev' | 'next') => {
+    async (chapterId: number, slugChapter: string, direction?: 'prev' | 'next') => {
       if (navigationState.isNavigating) return
 
       setNavigationState({ isNavigating: true, direction: direction || null })
       onNavigationStart?.()
 
-      // Check and trigger affiliate link if rate limit allows
-      // This happens synchronously with user action to avoid popup blockers
-      checkAndTriggerAffiliate()
+      // Check and trigger affiliate link - await to ensure it completes before navigation
+      try {
+        await checkAndTriggerAffiliate()
+      } catch (error) {
+        // Silently ignore errors - affiliate should not block navigation
+        console.warn('[Navigation] Affiliate trigger failed:', error)
+      }
 
       // Use original full page reload navigation
       const newPath = `${PATH.comics}/${comicIdentify}/${slugChapter}/${chapterId}`

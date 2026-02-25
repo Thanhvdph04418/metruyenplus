@@ -75,7 +75,6 @@ const MobileLogin = () => {
   const [searchParams] = useSearchParams()
   const [authState, setAuthState] = useState<AuthState>(AuthState.LOADING)
   const [error, setError] = useState('')
-  const [isRecaptchaLoaded, setIsRecaptchaLoaded] = useState(false)
   const [userInfo, setUserInfo] = useState<UserInfo>({})
   const [token, setToken] = useState('')
 
@@ -84,32 +83,6 @@ const MobileLogin = () => {
   const appName = searchParams.get('app_name') || 'Ứng dụng'
   const isTest = searchParams.get('isTest') === 'true'
 
-  // Load reCAPTCHA script
-  useEffect(() => {
-    const loadRecaptchaScript = () => {
-      const script = document.createElement('script')
-      script.src = `https://www.google.com/recaptcha/api.js?render=${
-        import.meta.env.VITE_CAPTCHA_KEY_GOOGLE
-      }`
-      script.async = true
-
-      script.onload = () => {
-        window.grecaptcha?.ready(() => {
-          setIsRecaptchaLoaded(true)
-        })
-      }
-
-      document.body.appendChild(script)
-      return script
-    }
-
-    const script = loadRecaptchaScript()
-    return () => {
-      if (script && script.parentNode) {
-        script.parentNode.removeChild(script)
-      }
-    }
-  }, [])
 
   // Validate params và auto-trigger Google login
   useEffect(() => {
@@ -125,18 +98,11 @@ const MobileLogin = () => {
       return
     }
 
-    // Chuyển sang ready state khi reCAPTCHA loaded
-    if (isRecaptchaLoaded && authState === AuthState.LOADING) {
-      setAuthState(AuthState.READY_TO_AUTH)
-    }
-  }, [deeplink, isRecaptchaLoaded, authState])
+  }, [deeplink, authState])
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       try {
-        if (!isRecaptchaLoaded) {
-          throw new Error('reCAPTCHA không khả dụng')
-        }
 
         const result = await comicApis.loginWithGoogle(response.access_token)
 

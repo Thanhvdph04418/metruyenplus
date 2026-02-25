@@ -14,6 +14,7 @@ import { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useQuery } from 'react-query'
 import { PATH_MAPPING_API } from '../utils/path'
+import { SITE_NAME, SITE_URL } from '@/config/siteConfig'
 import HistoryHome from '@/components/History/HistoryHome'
 import TopComicsSection from '@/components/TopComics/TopComicsSection'
 import RecentComments from '@/components/Comments/RecentComments'
@@ -66,19 +67,19 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Đọc Truyện Chữ Online - MeTruyen+</title>
-        <link rel='canonical' href='https://metruyenplus.com' />
+        <title>{`Đọc Truyện Chữ Online - ${SITE_NAME}`}</title>
+        <link rel='canonical' href={SITE_URL} />
         <meta
           name='description'
-          content='Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại MeTruyen+ ❤️💛💚'
+          content={`Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại ${SITE_NAME} ❤️💛💚`}
         />
       </Helmet>
       <div className='min-h-screen bg-light-bg dark:bg-dark-bg'>
         {/* Mobile App Notification - Only shows on mobile devices */}
-        <MobileAppNotification />
+        {/* <MobileAppNotification /> */}
 
         {/* Desktop Domain Notification - Only shows on desktop devices */}
-        <DesktopDomainNotification />
+        {/* <DesktopDomainNotification /> */}
 
         <div className='container px-3 sm:px-4 xl:px-0 py-4 sm:py-6'>
           {/* Hero Section */}
@@ -87,7 +88,7 @@ const Home = () => {
               <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
                 Chào mừng đến với{' '}
                 <span className='logo-text-bold gradient-logo-text'>
-                  Tcomic
+                  {SITE_NAME}
                 </span>
               </h1>
               <p className='text-lg md:text-xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed'>

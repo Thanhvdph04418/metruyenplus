@@ -2,40 +2,73 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PATH from '@/utils/path'
 import comicApis from '@/apis/comicApis'
+import '@/types/turnstile'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
-  const [isRecaptchaLoaded, setIsRecaptchaLoaded] = useState(false)
+  const [isTurnstileLoaded, setIsTurnstileLoaded] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [turnstileWidgetId, setTurnstileWidgetId] = useState<string | null>(null)
 
-  // Load reCAPTCHA script
+  // Load Cloudflare Turnstile script
   useEffect(() => {
-    const loadRecaptchaScript = () => {
-      const script = document.createElement('script')
-      script.src = `https://www.google.com/recaptcha/api.js?render=${
-        import.meta.env.VITE_CAPTCHA_KEY_GOOGLE
-      }`
-      script.async = true
+    const script = document.createElement('script')
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
+    script.async = true
+    script.defer = true
 
-      script.onload = () => {
-        window.grecaptcha?.ready(() => {
-          setIsRecaptchaLoaded(true)
-        })
-      }
-
-      document.body.appendChild(script)
-      return script
+    script.onload = () => {
+      setIsTurnstileLoaded(true)
     }
 
-    const script = loadRecaptchaScript()
+    script.onerror = () => {
+      setError('Không thể tải xác thực captcha')
+    }
+
+    document.body.appendChild(script)
+
     return () => {
-      if (script && script.parentNode) {
+      if (script.parentNode) {
         script.parentNode.removeChild(script)
       }
+      // Clean up widget if it exists
+      if (turnstileWidgetId && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetId)
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Render Turnstile widget when script is loaded
+  useEffect(() => {
+    if (isTurnstileLoaded && !turnstileWidgetId && window.turnstile) {
+      try {
+        const widgetId = window.turnstile.render('#turnstile-container', {
+          sitekey: import.meta.env.VITE_CAPTCHA_KEY_TURNSTILE,
+          theme: 'auto',
+          action: 'reset-password',
+          callback: (token: string) => {
+            setTurnstileToken(token)
+            setError('')
+          },
+          'error-callback': () => {
+            setError('Xác thực captcha thất bại')
+            setTurnstileToken(null)
+          },
+          'expired-callback': () => {
+            setError('Captcha đã hết hạn, vui lòng thử lại')
+            setTurnstileToken(null)
+          }
+        })
+        setTurnstileWidgetId(widgetId)
+      } catch (err) {
+        setError('Không thể khởi tạo captcha')
+      }
+    }
+  }, [isTurnstileLoaded, turnstileWidgetId])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -43,27 +76,31 @@ const ForgotPassword = () => {
     setSuccess(false)
 
     try {
-      if (!isRecaptchaLoaded) {
-        throw new Error('reCAPTCHA không khả dụng')
+      if (!turnstileToken) {
+        throw new Error('Vui lòng hoàn thành xác thực captcha')
       }
-
-      const tokenCaptcha = await window.grecaptcha.execute(
-        import.meta.env.VITE_CAPTCHA_KEY_GOOGLE,
-        { action: 'reset_password' }
-      )
 
       setIsLoading(true)
 
-      await comicApis.forgotPassword({
-        email,
-        tokenCaptcha
-      })
-      setSuccess(true)
+      try {
+        await comicApis.forgotPassword({
+          email,
+          tokenCaptcha: turnstileToken
+        })
+        setSuccess(true)
+      } catch (error) {
+        // Reset Turnstile widget on error
+        if (turnstileWidgetId && window.turnstile) {
+          window.turnstile.reset(turnstileWidgetId)
+          setTurnstileToken(null)
+        }
+        throw error
+      } finally {
+        setIsLoading(false)
+      }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Đã xảy ra lỗi'
       setError(message)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -106,9 +143,12 @@ const ForgotPassword = () => {
           </div>
         )}
 
+        {/* Cloudflare Turnstile Widget */}
+        <div id='turnstile-container' className='flex justify-center my-4'></div>
+
         <button
           type='submit'
-          disabled={isLoading || !isRecaptchaLoaded}
+          disabled={isLoading || !isTurnstileLoaded || !turnstileToken}
           className='w-full flex justify-center py-2.5 sm:py-3 px-4 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 disabled:hover:bg-primary'
         >
           {isLoading ? (

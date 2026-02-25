@@ -1,0 +1,70 @@
+<svg width="400" height="600" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient using site brand colors -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <!-- VITE_SITE_GRADIENT_FROM / VITE_SITE_PRIMARY_COLOR -->
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <!-- VITE_SITE_GRADIENT_TO / VITE_SITE_PRIMARY_COLOR_2 -->
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+
+    <!-- Simple spinner gradient ring -->
+    <linearGradient id="spinnerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="100%" stop-color="#C084FC" stop-opacity="0.3" />
+    </linearGradient>
+  </defs>
+
+  <!-- Simple centered spinner -->
+  <g transform="translate(200, 260)">
+    <!-- Faded outer circle for subtle depth -->
+    <circle cx="0" cy="0" r="46" stroke="rgba(255,255,255,0.15)" stroke-width="8" fill="none" />
+
+    <!-- Animated arc -->
+    <circle
+      cx="0"
+      cy="0"
+      r="38"
+      fill="none"
+      stroke="url(#spinnerGradient)"
+      stroke-width="8"
+      stroke-linecap="round"
+      stroke-dasharray="140 260"
+      transform="rotate(-90)"
+    >
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0"
+        to="360"
+        dur="1.2s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </g>
+
+  <!-- Loading text -->
+  <text
+    x="200"
+    y="360"
+    font-family="Nunito, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="20"
+    font-weight="700"
+    fill="#F9FAFB"
+    text-anchor="middle"
+  >
+    đang tải nội dung
+  </text>
+
+  <!-- Sub text -->
+  <text
+    x="200"
+    y="390"
+    font-family="Nunito, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="14"
+    fill="rgba(249,250,251,0.8)"
+    text-anchor="middle"
+  >
+    Vui lòng chờ trong giây lát
+  </text>
+</svg>
