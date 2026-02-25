@@ -251,7 +251,7 @@ const ComicsDetail = () => {
         <meta
           name='description'
           content={`✅ Đọc truyện tranh ${dataComics?.title} ${
-            dataComics?.other_names && dataComics?.other_names.length > 0
+            dataComics?.other_names && (dataComics?.other_names.length > 0)
               ? `(${dataComics.other_names.join(', ')})`
               : ''
           } Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại ${SITE_NAME}. Thể loại: ${dataComics?.genres
@@ -356,23 +356,18 @@ const ComicsDetail = () => {
       <Toaster />
       {!(isError || Number(dataComics?.status) === 404) && (
         <>
-          <div className='w-full min-h-[400px] relative overflow-hidden'>
-            <p
-              className='bg-no-repeat bg-cover h-[400px]'
-              style={{
-                backgroundColor: 'rgba(0,0,0,0.4)',
-                backgroundImage: `url('${dataComics?.thumbnail}')`,
-                filter: 'blur(60px)'
-              }}
+          <div className='w-full h-48 sm:h-56 bg-neutral-100 dark:bg-neutral-900 relative overflow-hidden'>
+            <div
+              className='absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-20'
+              style={{ backgroundImage: `url('${dataComics?.thumbnail}')`, filter: 'blur(24px)' }}
             />
           </div>
-          <div className='container mt-[-300px] blur-0'>
-            <div className='w-full'>
-              <div className='h-full container rounded-t-lg bg-white dark:bg-gray-900 px-2 sm:px-4 lg:px-10'>
-                <div className='pt-[35px] pb-[30px] min-h-[300px]' style={{ contain: 'layout' }}>
-                  {dataComics && !isMainContentLoading && (
-                    <div className='flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-5'>
-                      <figure className='w-[200px] h-[280px] sm:w-[240px] sm:h-[330px] dark:border dark:border-gray-600 -mt-20 flex-shrink-0 rounded-md overflow-hidden shadow-[0_0_5px_#444]'>
+          <div className='container px-4 sm:px-6 xl:px-0 max-w-[1100px] -mt-24 sm:-mt-28 relative'>
+            <div className='rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden'>
+              <div className='p-4 sm:p-6 lg:p-8 min-h-[200px]' style={{ contain: 'layout' }}>
+                {dataComics && !isMainContentLoading && (
+                  <div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6'>
+                    <figure className='w-[160px] h-[224px] sm:w-[200px] sm:h-[280px] flex-shrink-0 rounded overflow-hidden border border-neutral-200 dark:border-neutral-700'>
                         <LazyLoadImage
                           src={dataComics.thumbnail}
                           alt={dataComics.title}
@@ -401,11 +396,11 @@ const ComicsDetail = () => {
                           }}
                         />
                       </figure>
-                      <div className='w-full text-center sm:text-left px-4 sm:px-0'>
-                        <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-2 sm:gap-6'>
+                      <div className='w-full text-center sm:text-left'>
+                        <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-2 sm:gap-4'>
                           <h1
                             title={dataComics.title}
-                            className='font-semibold text-lg sm:text-2xl text-black dark:text-white line-clamp-3 sm:line-clamp-2'
+                            className='font-semibold text-xl sm:text-2xl text-neutral-900 dark:text-white line-clamp-3 sm:line-clamp-2'
                           >
                             {dataComics.title
                               .split(' ')
@@ -414,13 +409,12 @@ const ComicsDetail = () => {
                           </h1>
                           <RatingStar rating={dataComics.rate_average} />
                         </div>
-                        {dataComics.other_names && dataComics.other_names.length > 0 && (
-                          <p className='text-sm text-black/50 dark:text-gray-400 mt-1 italic'>
+                        {dataComics.other_names && (dataComics.other_names.length > 0) && (
+                          <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-1'>
                             {dataComics.other_names.join(' • ')}
                           </p>
                         )}
-                        {/* Mobile stats display */}
-                        <div className='sm:hidden flex flex-col gap-3 mt-3 text-black dark:text-white'>
+                        <div className='sm:hidden flex flex-col gap-3 mt-3 text-neutral-700 dark:text-neutral-200'>
                           <div className='flex items-center gap-3'>
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -450,123 +444,62 @@ const ComicsDetail = () => {
                             <span
                               className={`font-medium px-2 py-0.5 rounded text-sm ${
                                 dataComics.status === 'ONGOING'
-                                  ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                                  : 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                                  ? 'bg-primary/10 text-primary'
+                                  : 'bg-green-500/10 text-green-600 dark:text-green-400'
                               }`}
                             >
                               {dataComics.status === 'ONGOING' ? 'Đang cập nhật' : 'Đã hoàn thành'}
                             </span>
                           </div>
                           <div className='flex items-center gap-3'>
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              className='w-5 h-5'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                fill='currentColor'
-                                d='m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z'
-                              />
-                            </svg>
                             <span className='min-w-[90px]'>Lượt thích</span>
-                            <span className='font-medium text-[#ff6b6b]'>
-                              {formatCurrency(dataComics.total_likes)}
-                            </span>
+                            <span className='font-medium text-primary'>{formatCurrency(dataComics.total_likes)}</span>
                           </div>
                           <div className='flex items-center gap-3'>
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              className='w-5 h-5'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                fill='currentColor'
-                                d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2zm0 7c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm6 5H6v-.99c.2-.72 3.3-2.01 6-2.01s5.8 1.29 6 2v1z'
-                              />
-                            </svg>
                             <span className='min-w-[90px]'>Lượt theo dõi</span>
-                            <span className='font-medium text-[#64d363]'>
-                              {formatCurrency(dataComics.followers)}
-                            </span>
+                            <span className='font-medium text-primary'>{formatCurrency(dataComics.followers)}</span>
                           </div>
                           <div className='flex items-center gap-3'>
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              className='w-5 h-5'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                fill='currentColor'
-                                d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5m0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3'
-                              />
-                            </svg>
                             <span className='min-w-[90px]'>Lượt xem</span>
-                            <span className='font-medium text-[#4b8fd7]'>
-                              {formatCurrency(dataComics.total_views)}
-                            </span>
+                            <span className='font-medium text-primary'>{formatCurrency(dataComics.total_views)}</span>
                           </div>
                         </div>
 
-                        {/* Desktop stats display */}
-                        <div className='hidden sm:block text-black dark:text-white'>
-                          <div className='flex flex-col gap-2'>
-                            <span className='text-base capitalize'>
-                              tác giả:{' '}
-                              <strong className='text-primary'>{dataComics.authors}</strong>
-                            </span>
-                            <span className='text-base capitalize flex items-center gap-1'>
-                              tình trạng:{' '}
+                        <div className='hidden sm:block text-neutral-700 dark:text-neutral-200'>
+                          <div className='flex flex-col gap-1.5 text-sm'>
+                            <span>Tác giả: <strong className='text-primary'>{dataComics.authors}</strong></span>
+                            <span className='flex items-center gap-2'>
+                              Tình trạng:{' '}
                               <span
                                 className={`font-medium px-2 py-0.5 rounded text-sm ${
                                   dataComics.status === 'ONGOING'
-                                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                                    : 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                                    ? 'bg-primary/10 text-primary'
+                                    : 'bg-green-500/10 text-green-600 dark:text-green-400'
                                 }`}
                               >
-                                {dataComics.status === 'ONGOING'
-                                  ? 'Đang cập nhật'
-                                  : 'Đã hoàn thành'}
+                                {dataComics.status === 'ONGOING' ? 'Đang cập nhật' : 'Đã hoàn thành'}
                               </span>
                             </span>
                           </div>
-                          <p className='flex flex-wrap items-center gap-x-6 gap-y-2 text-base mt-3'>
-                            <span className='flex items-center gap-1'>
-                              <span>Lượt xem: </span>
-                              <strong className='text-[#4b8fd7]'>
-                                {formatCurrency(dataComics.total_views)}
-                              </strong>
-                            </span>
-                            <span className='flex items-center gap-1'>
-                              <span>Theo dõi: </span>
-                              <strong className='text-[#64d363]'>
-                                {formatCurrency(dataComics.followers)}
-                              </strong>
-                            </span>
-                            <span className='flex items-center gap-1'>
-                              <span>Lượt thích: </span>
-                              <strong className='text-[#ff6b6b]'>
-                                {formatCurrency(dataComics.total_likes)}
-                              </strong>
-                            </span>
+                          <p className='flex flex-wrap items-center gap-x-6 gap-y-1 text-sm mt-2 text-neutral-500 dark:text-neutral-400'>
+                            <span>Lượt xem: <strong className='text-neutral-700 dark:text-neutral-200'>{formatCurrency(dataComics.total_views)}</strong></span>
+                            <span>Theo dõi: <strong className='text-neutral-700 dark:text-neutral-200'>{formatCurrency(dataComics.followers)}</strong></span>
+                            <span>Thích: <strong className='text-neutral-700 dark:text-neutral-200'>{formatCurrency(dataComics.total_likes)}</strong></span>
                           </p>
                         </div>
-                        <div className='flex flex-wrap gap-[6px] items-center my-2 mb-3 dark:text-white'>
+                        <div className='flex flex-wrap gap-2 items-center my-3'>
                           {dataComics.genres.map((genre) => {
                             return genre.id !== undefined ? (
                               <Link
                                 to={{
                                   pathname: PATH.genres,
-                                  search: createSearchParams({
-                                    type: genre.slug_genre,
-                                    page: '1'
-                                  }).toString()
+                                  search: createSearchParams({ type: genre.slug_genre, page: '1' }).toString()
                                 }}
                                 title={genre.name}
                                 key={genre.id}
+                                className='text-xs px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors'
                               >
-                                <span className='py-1 px-2 text-[13px] border border-dashed border-[#d9d9d9] hover:text-primary truncate focus:outline-none'>
-                                  {genre.name}
-                                </span>
+                                {genre.name}
                               </Link>
                             ) : null
                           })}
@@ -574,24 +507,19 @@ const ComicsDetail = () => {
                         <div className='relative'>
                           <p
                             ref={description}
-                            className={`text-base text-black/70 dark:text-gray-300 whitespace-pre-line text-left ${
+                            className={`text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line text-left leading-relaxed ${
                               !isOpen ? 'overflow-hidden max-h-[72px]' : ''
                             }`}
                             dangerouslySetInnerHTML={{ __html: dataComics.description }}
                           />
                           {isShow && (
                             <button
+                              type='button'
                               title={isOpen ? 'Thu gọn mô tả' : 'Xem thêm mô tả'}
                               onClick={() => setIsOpen((prev) => !prev)}
-                              className={`${
-                                !isOpen
-                                  ? 'absolute right-0 bg-white/90 dark:bg-gray-900/90 rounded-full bottom-0 z-10 min-w-[60px] px-2 overflow-hidden'
-                                  : ''
-                              }`}
+                              className={!isOpen ? 'absolute right-0 bg-white dark:bg-neutral-900 bottom-0 z-10 pl-4' : 'mt-1'}
                             >
-                              <span className='text-black dark:text-white font-medium whitespace-nowrap'>
-                                {isOpen ? 'Show less' : '...more'}
-                              </span>
+                              <span className='text-primary text-sm font-medium'>{isOpen ? 'Thu gọn' : '...Xem thêm'}</span>
                             </button>
                           )}
                         </div>
@@ -611,11 +539,7 @@ const ComicsDetail = () => {
                                 ? lastReadChapter.id
                                 : dataComics.chapters[dataComics.chapters.length - 1].id
                             }`}
-                            className={`text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-[42px] sm:h-[42px] capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 ${
-                              lastReadChapter
-                                ? 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800'
-                                : 'bg-gradient'
-                            }`}
+                            className='text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-11 capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 bg-primary hover:opacity-90 transition-opacity'
                           >
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -641,12 +565,12 @@ const ComicsDetail = () => {
                           {/* Follow Button */}
                           <button
                             disabled={isFollowing}
-                            className={`hidden sm:flex items-center gap-2 h-[42px] px-4 rounded font-medium transition-all duration-200 ${
+                            className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
                               isFollowing ? 'opacity-70 cursor-not-allowed' : ''
                             } ${
                               dataComics?.is_follow
-                                ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-md hover:shadow-blue-300/50 dark:hover:shadow-blue-900/50'
-                                : 'border border-gray-300 text-gray-700 dark:text-gray-200 dark:border-gray-600 hover:text-blue-500 dark:hover:text-blue-400 hover:shadow-sm focus:outline-none'
+                                ? 'bg-primary text-white hover:opacity-90'
+                                : 'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:text-primary focus:outline-none'
                             }`}
                             onClick={handleFollow}
                           >
@@ -682,12 +606,12 @@ const ComicsDetail = () => {
                           {/* Like Button */}
                           <button
                             disabled={isLiking}
-                            className={`hidden sm:flex items-center gap-2 h-[42px] px-4 rounded font-medium transition-all duration-200 ${
+                            className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
                               isLiking ? 'opacity-70 cursor-not-allowed' : ''
                             } ${
                               dataComics?.is_like
-                                ? 'bg-rose-500 text-white hover:bg-rose-600 dark:bg-rose-600 dark:hover:bg-rose-700 shadow-md hover:shadow-rose-300/50 dark:hover:shadow-rose-900/50'
-                                : 'border border-gray-300 text-gray-700 dark:text-gray-200 dark:border-gray-600 hover:text-rose-500 dark:hover:text-rose-400 hover:shadow-sm focus:outline-none'
+                                ? 'bg-primary text-white hover:opacity-90'
+                                : 'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:text-primary focus:outline-none'
                             }`}
                             onClick={handleLike}
                           >
@@ -810,14 +734,14 @@ const ComicsDetail = () => {
                 </div>
 
                 {/* Affiliate Notice - Between description and chapter list */}
-                <div className='px-4 sm:px-0 my-4'>
+                {/* <div className='px-4 sm:px-0 my-4'>
                   <AffiliateNotice />
-                </div>
+                </div> */}
 
                 <div className='flex flex-col md:flex-row gap-4 lg:gap-[30px] justify-between'>
                   <div className='flex-1 max-w-[852px]'>
                     <section className='min-h-[400px] px-4 sm:px-0' style={{ contain: 'layout' }}>
-                      <h2 className='flex items-center gap-2 border-b border-slate-200 dark:border-gray-500 pb-1 capitalize text-primary text-lg'>
+                      <h2 className='flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-700 pb-2 text-sm font-medium text-neutral-700 dark:text-neutral-300'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           xmlnsXlink='http://www.w3.org/1999/xlink'
@@ -846,12 +770,12 @@ const ComicsDetail = () => {
                     {dataComics?.id && <RecommendComics comicId={Number(dataComics.id)} />}
                   </div>
                   <div className='flex-shrink-0 w-[238px] hidden md:flex flex-col gap-6'>
-                    <>
-                      <h3 className='px-5 pl-3 py-3 border dark:border-gray-500 flex items-center font-semibold text-lg text-black dark:text-white'>
+                    <div>
+                      <h3 className='px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-t bg-neutral-50 dark:bg-neutral-800/50'>
                         Top tuần
                       </h3>
                       <div
-                        className='border border-t-0 dark:border-gray-500 flex flex-col -mt-6 min-h-[600px]'
+                        className='border border-t-0 border-neutral-200 dark:border-neutral-700 flex flex-col rounded-b min-h-[600px] overflow-hidden'
                         style={{ contain: 'layout' }}
                       >
                         {dataWeeklyComics &&
@@ -875,13 +799,13 @@ const ComicsDetail = () => {
                           <SidebarComicsSkeleton count={10} />
                         )}
                       </div>
-                    </>
+                    </div>
                     <div className='sticky top-[50px]'>
-                      <h3 className='px-5 pl-3 py-3 border dark:border-gray-500 flex items-center font-semibold text-lg text-black dark:text-white'>
+                      <h3 className='px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-t bg-neutral-50 dark:bg-neutral-800/50'>
                         Nổi bật
                       </h3>
                       <div
-                        className='border border-t-0 dark:border-gray-500 flex flex-col min-h-[600px]'
+                        className='border border-t-0 border-neutral-200 dark:border-neutral-700 flex flex-col rounded-b min-h-[600px] overflow-hidden'
                         style={{ contain: 'layout' }}
                       >
                         {dataPopularComics &&
@@ -910,7 +834,6 @@ const ComicsDetail = () => {
                 </div>
               </div>
             </div>
-          </div>
           <div
             onMouseDown={() => {
               setIsOpenModal(false)
@@ -921,7 +844,7 @@ const ComicsDetail = () => {
             }`}
           >
             <div
-              className='bg-white dark:bg-gray-900 p-5 rounded-lg'
+              className='bg-white dark:bg-neutral-900 p-5 rounded border border-neutral-200 dark:border-neutral-700'
               onMouseDown={(e) => e.stopPropagation()}
             >
               <section className='w-full sm:w-[450px] md:w-[550px] lg:w-[700px]'>
@@ -939,51 +862,26 @@ export default ComicsDetail
 
 const skeletonListChapter = () => {
   return (
-    <div className='border rounded-lg p-2 sm:p-4 dark:border-gray-700 shadow-sm animate-pulse'>
-      {/* Toolbar Skeleton - Match ListChapter */}
+    <div className='border border-neutral-200 dark:border-neutral-700 rounded p-4 animate-pulse'>
       <div className='flex flex-col sm:flex-row gap-2 sm:gap-4 mb-3 sm:items-center'>
         <div className='relative flex-1'>
-          <div className='w-full h-10 bg-gray-200 dark:bg-gray-700 rounded-lg' />
-          <div className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 bg-gray-300 dark:bg-gray-600 rounded' />
+          <div className='w-full h-10 bg-neutral-200 dark:bg-neutral-700 rounded' />
+          <div className='absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 bg-neutral-300 dark:bg-neutral-600 rounded' />
         </div>
-        <div className='w-32 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg' />
+        <div className='w-32 h-10 bg-neutral-200 dark:bg-neutral-700 rounded' />
       </div>
-
-      {/* Header Skeleton - Match ListChapter */}
-      <div className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-800 dark:text-gray-200 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-t-md text-sm sm:text-base'>
-        <div className='col-span-6'>
-          <div className='h-4 bg-gray-300 dark:bg-gray-600 rounded w-20' />
-        </div>
-        <div className='col-span-3'>
-          <div className='h-4 bg-gray-300 dark:bg-gray-600 rounded w-16' />
-        </div>
-        <div className='col-span-3 text-right'>
-          <div className='h-4 bg-gray-300 dark:bg-gray-600 rounded w-16 ml-auto' />
-        </div>
+      <div className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2 sm:py-3 border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 rounded-t-lg text-sm'>
+        <div className='col-span-6'><div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-20' /></div>
+        <div className='col-span-3'><div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-16' /></div>
+        <div className='col-span-3 text-right'><div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-16 ml-auto' /></div>
       </div>
-
-      {/* Virtual Chapter List Skeleton - Match ListChapter */}
-      <div className='h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600'>
+      <div className='h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-600'>
         <div className='space-y-0'>
           {Array.from({ length: 15 }, (_, i) => (
-            <div
-              key={i}
-              className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2.5 sm:py-3.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 border-b border-dashed dark:border-gray-700'
-            >
-              {/* Chapter Name */}
-              <div className='col-span-6 flex items-center'>
-                <div className='h-4 bg-gray-200 dark:bg-gray-700 rounded w-full max-w-48' />
-              </div>
-
-              {/* Update Date */}
-              <div className='col-span-3 flex items-center'>
-                <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-16' />
-              </div>
-
-              {/* View Count */}
-              <div className='col-span-3 text-right flex items-center justify-end'>
-                <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-12' />
-              </div>
+            <div key={i} className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2.5 sm:py-3.5 border-b border-neutral-100 dark:border-neutral-800'>
+              <div className='col-span-6 flex items-center'><div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-full max-w-48' /></div>
+              <div className='col-span-3 flex items-center'><div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-16' /></div>
+              <div className='col-span-3 text-right flex items-center justify-end'><div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-12' /></div>
             </div>
           ))}
         </div>

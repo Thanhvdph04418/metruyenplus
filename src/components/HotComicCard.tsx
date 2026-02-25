@@ -60,9 +60,8 @@ const HotComicCard = ({ data, index, scrollPosition, isAboveFold = false }: Prop
 
   return (
     <div className='flex-shrink-0 w-full sm:w-[180px] md:w-[200px] lg:w-[220px] xl:w-[240px] px-2'>
-      <div className='bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 h-[360px] sm:h-[380px] md:h-[400px]'>
-        {/* Image Container with fixed aspect ratio */}
-        <div className='relative w-full h-[260px] sm:h-[280px] md:h-[300px] overflow-hidden bg-gray-100 dark:bg-gray-800'>
+      <div className='bg-white dark:bg-neutral-900 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 h-[360px] sm:h-[380px] md:h-[400px]'>
+        <div className='relative w-full h-[260px] sm:h-[280px] md:h-[300px] overflow-hidden bg-neutral-100 dark:bg-neutral-800'>
           <Link to={`${PATH.comics}/${slug}-${id}`} title={title} className='block w-full h-full'>
             <LazyLoadImage
               src={thumbnail}

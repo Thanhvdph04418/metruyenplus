@@ -27,17 +27,15 @@ const HistoryMobile = ({ dataComics }: HistoryMobileProps) => {
 
   return (
     <div className='block xl:hidden'>
-      <div className='flex items-center justify-between mb-6 px-2'>
-        <div className='flex items-center gap-2 lg:gap-4'>
-          <h2 className='text-xl font-bold text-gray-900 dark:text-white min-h-[28px]'>
-            Lịch sử đọc
-          </h2>
-        </div>
+      <div className='flex items-center justify-between mb-4 px-0'>
+        <p className='text-[11px] font-semibold uppercase tracking-[0.25em] text-neutral-400 dark:text-neutral-500'>
+          Lịch sử đọc
+        </p>
         <Link
           to={PATH.history}
-          className='flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-primary-2/10 hover:from-primary/20 hover:to-primary-2/20 rounded-xl text-sm font-medium text-primary dark:text-primary-2 transition-all duration-300 hover:scale-105'
+          className='text-xs font-medium text-primary hover:underline flex items-center gap-1'
         >
-          <span>Xem tất cả</span>
+          Xem tất cả
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'

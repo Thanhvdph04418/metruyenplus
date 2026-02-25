@@ -57,38 +57,18 @@ body,
 html {
   padding: 0;
   margin: 0;
-  /* font hệ thống lấy từ theme (brand.config.js → FONT_SYSTEM) */
-  @apply font-sans;
+  @apply font-sans antialiased;
   user-select: none;
-  /* Intentionally disabled: CSS smooth scrolling conflicts with JS/router scroll restoration
-     and can cause janky back/forward navigation. We restore scroll positions manually
-     (e.g., returning from chapter to list/detail) */
-  /* scroll-behavior: smooth; */
   scrollbar-gutter: stable;
 }
 
-/* Custom CSS variables for colors */
-:root {
-  --color-text-light: #2d3748; /* Darker text for better contrast */
-  --color-text-dark: #edf2f7;
-  --color-link-hover: #8B5CF6;
-
-  /* Evening mode variables - activated with JS */
-  --evening-bg-light: #f0f4f8;
-  --evening-text-light: #2d3748;
-}
-
-/* Apply better default text colors */
 body {
-  @apply bg-light-bg text-gray-900; /* High contrast text for better readability */
-  line-height: 1.6;
-  letter-spacing: 0.015em; /* Slightly increased letter spacing for readability */
-  font-weight: 400; /* Ensures font isn't too thin */
+  @apply bg-white text-neutral-800;
+  line-height: 1.5;
 }
 
 body.dark {
-  @apply bg-dark-bg text-white; /* High contrast white text for better readability */
-  line-height: 1.65; /* Improved line height for dark mode */
+  @apply bg-neutral-900 text-neutral-200;
 }
 
 /* Apply eye-relief filters to all images */
@@ -107,50 +87,19 @@ body.dark {
   color: var(--evening-text-light);
 }
 
-html ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-html ::-webkit-scrollbar-track {
-  background: rgba(243, 244, 246, 0.6); /* Neutral light gray track */
-}
-
-html ::-webkit-scrollbar-thumb {
-  background: rgba(209, 213, 219, 0.5); /* Neutral gray thumb */
-  border-radius: 8px;
-}
-
-html.dark ::-webkit-scrollbar-track {
-  background: rgba(26, 30, 46, 0.4);
-}
-
-html.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-}
+html ::-webkit-scrollbar { width: 6px; height: 6px; }
+html ::-webkit-scrollbar-track { background: #f5f5f5; }
+html ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+html.dark ::-webkit-scrollbar-track { background: #262626; }
+html.dark ::-webkit-scrollbar-thumb { background: #525252; border-radius: 3px; }
 
 strong {
   font-size: unset;
   font-weight: unset;
 }
 
-/* Add improved focus styles for better accessibility */
-a:focus,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
-  @apply outline-none ring-2 ring-primary ring-opacity-50;
-}
-
-/* Reduce eye strain with improved transitions */
-a,
-button,
-input,
-select,
-textarea {
-  transition: all 0.2s ease-in-out;
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  @apply outline-none ring-1 ring-primary;
 }
 
 /* remove common styles pagination swiper */
@@ -464,131 +413,24 @@ html {
   margin-bottom: 1.5em;
 }
 
-/* Increased contrast for important UI text */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading {
-  @apply text-[#1a202c] dark:text-white;
-  font-weight: 600;
-}
+h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+.card { background-color: var(--tw-color-white, #fff); }
+.dark .card { background-color: rgb(38 38 38); }
+.dark .bg-gray-800 { background-color: rgb(38 38 38); }
+.dark .bg-gray-900 { background-color: rgb(23 23 23); }
+.bg-gray-50, .bg-gray-100 { @apply bg-neutral-100 dark:bg-neutral-800; }
+.paper-surface { background-color: var(--tw-color-white, #fff); box-shadow: none; }
+.dark .paper-surface { background-color: rgb(38 38 38); }
+a:hover { @apply text-primary; }
 
-/* Improved focus styles for better accessibility */
-a:focus,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus {
-  @apply outline-none ring-2 ring-primary ring-opacity-50;
-}
-
-/* Reduce eye strain with improved transitions */
-a,
-button,
-input,
-select,
-textarea {
-  transition: all 0.2s ease-in-out;
-}
-
-/* Improved card backgrounds */
-.card,
-.bg-white {
-  @apply bg-light-card dark:bg-dark-surface;
-}
-
-/* Softer dark backgrounds */
-.dark .bg-gray-800 {
-  @apply bg-dark-surface;
-}
-
-.dark .bg-gray-900 {
-  @apply bg-dark-bg;
-}
-
-/* Light mode gray backgrounds should use the warmer tones */
-.bg-gray-50 {
-  @apply bg-light-highlight;
-}
-
-.bg-gray-100 {
-  @apply bg-light-highlight;
-}
-
-/* Clean surfaces for light mode */
-.paper-surface {
-  @apply bg-light-card;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Improved link colors */
-a:hover {
-  @apply text-primary;
-}
-
-/* Reduce eye strain with subtle transitions on theme change */
-html.transition,
-html.transition *,
-html.transition *:before,
-html.transition *:after {
-  transition: all 750ms !important;
-  transition-delay: 0 !important;
-}
-
-/* Evening Reading Mode Component */
 .evening-reading-mode {
-  position: fixed;
-  bottom: 20px; /* Default position, can be overridden */
-  right: 20px; /* Default position, can be overridden */
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: fixed; bottom: 20px; right: 20px; z-index: 100;
+  background: rgba(255,255,255,0.15); border-radius: 50%;
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
-
-.evening-reading-mode:hover {
-  transform: scale(1.1);
-}
-
-.dark .evening-reading-mode {
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.evening-mode-active .evening-reading-mode {
-  background: rgba(225, 175, 105, 0.2);
-}
-
-/* Add custom evening mode status indicator */
-.evening-mode-status {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1000;
-}
-
-.evening-mode-status.show {
-  opacity: 1;
-}
+.dark .evening-reading-mode { background: rgba(0,0,0,0.2); }
+.evening-mode-status { display: none; }
 
 .is-hide-header {
   transition: all 0.5s ease;
@@ -596,36 +438,7 @@ html.transition *:after {
   z-index: -1;
 }
 
-/* Remove borders on focus/active for navigation and interactive elements */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* Remove borders on active states for navigation links */
-a:active,
-button:active {
-  border: none !important;
-  outline: none !important;
-}
-
-/* Remove borders on hover for navigation elements */
-nav a:hover,
-nav button:hover {
-  border: none !important;
-  outline: none !important;
-}
-
 @media (max-width: 639px) {
-  .is-input-mobile-search-bar {
-    border-radius: 12px 0 0 12px;
-  }
-  .is-btn-mobile-search-bar {
-    border-radius: 0 12px 12px 0;
-  }
+  .is-input-mobile-search-bar { border-radius: 8px 0 0 8px; }
+  .is-btn-mobile-search-bar { border-radius: 0 8px 8px 0; }
 }

@@ -4,11 +4,11 @@
  */
 export default {
   // Site info
-  SITE_NAME: 'Tcomic+',
-  SITE_LOGO_TEXT: 'Tcomic+',
-  SITE_DOMAIN: 'tcomicplus.com',
-  SITE_BRAND_EMAIL: 'tcomicplus@gmail.com',
-  SITE_TWITTER_HANDLE: '@Tcomic+',
+  SITE_NAME: 'NetTruyen+',
+  SITE_LOGO_TEXT: 'NetTruyen+',
+  SITE_DOMAIN: 'nettruyenplus.com',
+  SITE_BRAND_EMAIL: 'nettruyenplus@gmail.com',
+  SITE_TWITTER_HANDLE: '@NetTruyen+',
 
   // Màu brand theo logo NetTruyen: xanh dương (N), xanh lá (e), cam (t), hồng (Truyen)
   SITE_PRIMARY_COLOR: '#0EA5E9',   // xanh dương N

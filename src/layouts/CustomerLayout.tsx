@@ -134,23 +134,22 @@ const CustomerLayout = () => {
   const activeTabData = tabs.find((tab) => tab.id === activeTab)
 
   return (
-    <div className='flex flex-col min-h-screen dark:bg-gray-900'>
+    <div className='flex flex-col min-h-screen bg-light-bg dark:bg-dark-bg'>
       <header className='sticky top-0 z-20 left-0 right-0' id='site-header'>
         <Header />
       </header>
 
-      <main className='flex-1 bg-gray-50 dark:bg-gray-900'>
+      <main className='flex-1'>
         <ScrollRestoration />
-        <div className='max-w-screen-2xl mx-auto px-4 py-8'>
-          {/* Mobile Tab Toggle */}
+        <div className='max-w-[1200px] mx-auto px-4 py-8'>
           <div className='lg:hidden mb-4'>
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className='w-full flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700'
+              className='w-full flex items-center justify-between px-4 py-3 bg-light-surface dark:bg-dark-surface rounded-2xl border border-light-border dark:border-dark-highlight'
             >
               <div className='flex items-center gap-3'>
                 {activeTabData?.icon}
-                <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>
+                <span className='text-sm font-medium text-stone-900 dark:text-stone-100'>
                   {activeTabData?.label}
                 </span>
               </div>
@@ -178,7 +177,7 @@ const CustomerLayout = () => {
                 ${isSidebarOpen ? 'block' : 'hidden lg:block'}
               `}
             >
-              <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 lg:sticky lg:top-[calc(var(--header-height)+2rem)]'>
+              <div className='bg-light-surface dark:bg-dark-surface rounded-2xl border border-light-border dark:border-dark-highlight p-4 lg:sticky lg:top-24'>
                 <nav className='flex flex-col gap-2' aria-label='Tabs'>
                   {tabs.map((tab) => (
                     <button
@@ -194,8 +193,8 @@ const CustomerLayout = () => {
                           tab.id === 'logout'
                             ? 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20'
                             : activeTab === tab.id
-                            ? 'bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground'
-                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
+                            ? 'bg-primary/10 text-primary dark:bg-primary/15 dark:text-primary'
+                            : 'text-stone-600 dark:text-stone-400 hover:bg-light-highlight dark:hover:bg-dark-highlight'
                         }
                       `}
                     >
@@ -222,18 +221,17 @@ const CustomerLayout = () => {
               </div>
             </div>
 
-            {/* Main Content */}
-            <div className='flex-1 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
+            <div className='flex-1 bg-light-surface dark:bg-dark-surface rounded-2xl border border-light-border dark:border-dark-highlight p-6'>
               <div className='mb-6'>
-                <h1 className='text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3'>
+                <h1 className='text-xl font-semibold text-stone-900 dark:text-stone-100 flex items-center gap-3'>
                   {activeTabData?.icon}
                   {activeTabData?.title}
                 </h1>
-                <p className='mt-2 text-gray-500 dark:text-gray-400'>
+                <p className='mt-2 text-sm text-stone-500 dark:text-stone-400'>
                   {activeTabData?.description}
                 </p>
               </div>
-              <div className='divide-y divide-gray-100 dark:divide-gray-700'>
+              <div className='divide-y divide-light-border dark:divide-dark-highlight'>
                 <Outlet context={{ activeTab }} />
               </div>
             </div>

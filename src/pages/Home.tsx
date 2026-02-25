@@ -73,40 +73,20 @@ const Home = () => {
           content={`Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại ${SITE_NAME} ❤️💛💚`}
         />
       </Helmet>
-      <div className='min-h-screen bg-light-bg dark:bg-dark-bg'>
-        {/* Mobile App Notification - Only shows on mobile devices */}
-        {/* <MobileAppNotification /> */}
-
-        {/* Desktop Domain Notification - Only shows on desktop devices */}
-        {/* <DesktopDomainNotification /> */}
-
-        <div className='container px-3 sm:px-4 xl:px-0 py-4 sm:py-6'>
-          {/* Hero Section */}
-          <section className='mb-6 sm:mb-8'>
-            <div className='text-center mb-8'>
-              <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4'>
-                Chào mừng đến với{' '}
-                <span className='logo-text-bold gradient-logo-text'>
-                  {SITE_NAME}
-                </span>
-              </h1>
-              <p className='text-lg md:text-xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed'>
-                Khám phá thế giới truyện tranh phong phú với hàng ngàn tác phẩm hay, 
-                cập nhật liên tục và trải nghiệm đọc tuyệt vời
-              </p>
-            </div>
-            
-            {/* Hot Comics Slider - Responsive */}
+      <div className='min-h-screen bg-white dark:bg-neutral-900'>
+        <div className='container px-4 sm:px-6 xl:px-0 py-5 sm:py-6 max-w-[1100px]'>
+          <section className='mb-8'>
+            <p className='text-sm text-neutral-500 dark:text-neutral-400 mb-3'>
+              Nổi bật
+            </p>
             <div className='relative w-full'>
               {isLoadingHot && !dataHot ? (
                 <HotComicSliderSkeleton />
               ) : (
                 <>
-                  {/* Mobile Slider */}
                   <div className='block md:hidden'>
                     <MobileHotComicSlider data={dataHotComics as comics[]} />
                   </div>
-                  {/* Desktop Slider */}
                   <div className='hidden md:block'>
                     <HotComicSlider data={dataHotComics as comics[]} />
                   </div>
@@ -115,16 +95,13 @@ const Home = () => {
             </div>
           </section>
 
-          {/* Reading History Section */}
-          <section className='mb-6 sm:mb-8'>
+          <section className='mb-10'>
             <HistoryHome />
           </section>
 
-          {/* Content Grid */}
-          <section className='mb-6 sm:mb-8'>
-            <div className='grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6'>
-              {/* Main Content */}
-              <div className='xl:col-span-3'>
+          <section>
+            <div className='grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-10'>
+              <div className='xl:col-span-8'>
                 {isLoadingRecentUpdated && !dataRecentUpdated ? (
                   <HomeComicListSkeleton showIcon={true} />
                 ) : (
@@ -132,12 +109,11 @@ const Home = () => {
                     data={dataRecentUpdatedComics}
                     title='Mới cập nhật'
                     path={PATH.recent}
+                    layout='list'
                   />
                 )}
               </div>
-
-              {/* Sidebar */}
-              <div className='xl:col-span-1 space-y-6'>
+              <aside className='xl:col-span-4 space-y-6'>
                 {isMainContentLoading ? (
                   <SidebarSkeleton />
                 ) : (
@@ -146,7 +122,7 @@ const Home = () => {
                     <RecentComments />
                   </>
                 )}
-              </div>
+              </aside>
             </div>
           </section>
         </div>

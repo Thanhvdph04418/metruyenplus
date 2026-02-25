@@ -61,44 +61,44 @@ const TopComicsSection = () => {
   const isCurrentTabLoading = currentTab?.isLoading
 
   return (
-    <div className='bg-white dark:bg-dark-surface rounded-xl shadow-sm border border-light-border dark:border-dark-highlight overflow-hidden'>
-      <div className='flex'>
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as Tab)}
-            className={`flex-1 px-3 py-3 text-sm font-medium transition-all text-center leading-tight border-b-2
-              ${
+    <div className='bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden'>
+      {/* Pill tabs */}
+      <div className='p-3 pb-0'>
+        <div className='inline-flex p-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 gap-1'>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type='button'
+              onClick={() => setActiveTab(tab.id as Tab)}
+              className={`px-3 py-2 rounded-md text-[13px] font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-primary to-primary-2 text-white shadow-lg border-b-primary'
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border-r border-gray-200 dark:border-gray-600 border-b-gray-200 dark:border-b-gray-600 last:border-r-0'
+                  ? 'bg-white dark:bg-neutral-700 text-primary shadow-sm'
+                  : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
               }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className='p-6'>
-        {/* Show loading state for current tab */}
+      <div className='p-3 pt-4'>
         {isCurrentTabLoading && !currentData && (
-          <div className='space-y-2'>
+          <div className='space-y-3'>
             {[...Array(5)].map((_, i) => (
-              <div key={i} className='flex gap-2 py-2 animate-pulse'>
-                <div className='w-[60px] h-[80px] bg-gray-200 dark:bg-gray-700 rounded'></div>
+              <div key={i} className='flex gap-3 py-2 animate-pulse'>
+                <div className='w-14 h-[72px] bg-neutral-200 dark:bg-neutral-700 rounded-lg shrink-0' />
                 <div className='flex-1 space-y-2'>
-                  <div className='h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4'></div>
-                  <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2'></div>
-                  <div className='h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3'></div>
+                  <div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4' />
+                  <div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2' />
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Show content only for active tab - optimized rendering */}
         {!isCurrentTabLoading && currentData && (
-          <div className='space-y-2'>
+          <div className='space-y-1'>
             {currentData.slice(0, 6).map((item, i) => (
               <SuggestComics
                 key={item.id}
@@ -116,10 +116,9 @@ const TopComicsSection = () => {
           </div>
         )}
 
-        {/* Show empty state if no data */}
         {!isCurrentTabLoading && !currentData && (
-          <div className='text-center py-8 text-gray-500 dark:text-gray-400'>
-            <p>Không có dữ liệu</p>
+          <div className='text-center py-8 text-neutral-500 dark:text-neutral-400 text-sm'>
+            Không có dữ liệu
           </div>
         )}
       </div>

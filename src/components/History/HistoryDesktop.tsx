@@ -14,30 +14,14 @@ const HistoryDesktop = ({ dataComics }: HistoryDesktopProps) => {
   return (
     <div className='hidden xl:block'>
       <div className='flex items-center justify-between mb-4'>
-        <div className='flex items-center gap-2'>
-          <h2 className='flex items-center gap-2 capitalize font-semibold text-2xl text-gray-900 dark:text-white leading-5'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth={1.8}
-              stroke='currentColor'
-              className='w-7 h-7 text-primary dark:text-primary-2'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M12 8v4.25l2.5 2.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
-              />
-            </svg>
-            <span>Lịch sử đọc</span>
-          </h2>
-        </div>
+        <p className='text-[11px] font-semibold uppercase tracking-[0.25em] text-neutral-400 dark:text-neutral-500'>
+          Lịch sử đọc
+        </p>
         <Link
           to={PATH.history}
-          className='flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-primary-2/10 hover:from-primary/20 hover:to-primary-2/20 rounded-xl text-sm font-medium text-primary dark:text-primary-2 transition-all duration-300 hover:scale-105'
+          className='text-xs font-medium text-primary hover:underline flex items-center gap-1'
         >
-          <span>Xem tất cả</span>
+          Xem tất cả
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'

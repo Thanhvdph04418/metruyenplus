@@ -1,12 +1,8 @@
-import { Footer, Header, Navbar, ScrollToTop, SearchBar, LunarNewYearCouplets } from '@/components'
-import { useMediaQuery } from 'react-responsive'
+import { Footer, Header, Navbar, ScrollToTop, LunarNewYearCouplets } from '@/components'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { usePageTracking } from '@/hooks/useAnalytics'
 
 const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
-  const isMobileMini = useMediaQuery({ maxWidth: 639 })
-
-  // Track page views for all routes using this layout
   usePageTracking()
 
   return (
@@ -15,7 +11,6 @@ const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
         <Header />
       </header>
       <main>
-        {!isMobileMini && <SearchBar />}
         {!hideNav && <Navbar />}
         <Outlet />
         <ScrollRestoration />

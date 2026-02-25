@@ -66,11 +66,11 @@ const SuggestComics = ({
   const placeholderSrc = generatePlaceholder(60, 80)
 
   return (
-    <div className='hover:bg-[#f6f6f6] dark:hover:bg-[rgba(255,255,255,0.1)]'>
+    <div className='hover:bg-neutral-50 dark:hover:bg-neutral-800/50 rounded-lg transition-colors'>
       <div className='px-2'>
         <div
-          className={`flex gap-2 py-2 ${
-            index !== 0 && 'border-t border-dashed border-[#D9D9D9] dark:border-gray-500'
+          className={`flex gap-3 py-2 ${
+            index !== 0 ? 'border-t border-neutral-200 dark:border-neutral-700' : ''
           }`}
         >
           <Link title={title} to={`${PATH.comics}/${slug}-${idComic}`} className='flex-shrink-0'>
@@ -100,7 +100,7 @@ const SuggestComics = ({
             <Link
               title={title}
               to={`${PATH.comics}/${slug}-${idComic}`}
-              className='font-semibold hover:text-primary text-black dark:text-white dark:hover:text-primary line-clamp-1'
+              className='font-medium hover:text-primary text-neutral-900 dark:text-neutral-100 line-clamp-1 text-sm'
             >
               {highlightText(
                 title
@@ -113,11 +113,11 @@ const SuggestComics = ({
             <Link
               to={`${PATH.comics}/${slug}-${idComic}/${slugChapter}/${idChapter}`}
               title={chapter}
-              className='line-clamp-1 capitalize text-primary text-xs'
+              className='line-clamp-1 text-primary hover:underline text-xs'
             >
               {chapter}
             </Link>
-            <p className={`line-clamp-2 text-black dark:text-white text-xs`}>
+            <p className='line-clamp-2 text-neutral-500 dark:text-neutral-400 text-xs'>
               {Array.isArray(genres) && genres.join(', ')}
             </p>
           </div>

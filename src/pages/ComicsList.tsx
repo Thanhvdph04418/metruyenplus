@@ -1,5 +1,5 @@
 import comicApis from '@/apis/comicApis'
-import { CardItem, MiniPagination, Pagination } from '@/components'
+import { ComicListRow, MiniPagination, Pagination } from '@/components'
 import { PaginationSkeleton, MiniPaginationSkeleton } from '@/components/Skeletons'
 import { useQueryConfig, useTitle, useComicListLimit } from '@/hooks'
 import PATH, { API_MAPPING_PATH } from '@/utils/path'
@@ -111,150 +111,165 @@ const ComicsList = () => {
         {prevUrl && <link rel='prev' href={prevUrl} />}
         {nextUrl && <link rel='next' href={nextUrl} />}
       </Helmet>
-      <div className='container px-4 xl:px-0'>
-        {data?.data.status === 404 || isError || isErrorNew ? (
-          <NotFound />
-        ) : (
-          <>
-            <div className='mt-8 flex items-center justify-between h-9'>
-              {isTopAndNew ? (
-                <div className='flex items-center gap-2'>
-                  <Link
-                    title='Tất cả truyện'
-                    className={classNames(
-                      'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline focus:outline-none',
-                      {
-                        'bg-primary text-white hover:text-white no-underline': queryConfig.status === 'all',
-                        'bg-transparent text-primary hover:text-primary no-underline': queryConfig.status !== 'all'
-                      }
-                    )}
-                    to={{
-                      search: createSearchParams({
-                        ...(queryConfig as Record<string, string>),
-                        page: '1',
-                        status: 'all'
-                      }).toString()
-                    }}
-                  >
-                    tất cả
-                  </Link>
-                  <Link
-                    title='Truyện đã hoàn thành'
-                    className={classNames(
-                      'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline focus:outline-none',
-                      {
-                        'bg-primary text-white hover:text-white no-underline':
-                          queryConfig.status === 'completed',
-                        'bg-transparent text-primary hover:text-primary no-underline': queryConfig.status !== 'completed'
-                      }
-                    )}
-                    to={{
-                      search: createSearchParams({
-                        ...(queryConfig as Record<string, string>),
-                        page: '1',
-                        status: 'completed'
-                      }).toString()
-                    }}
-                  >
-                    hoàn thành
-                  </Link>
-                  <Link
-                    title='Truyện đang cập nhật'
-                    className={classNames(
-                      'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline focus:outline-none',
-                      {
-                        'bg-primary text-white hover:text-white no-underline':
-                          queryConfig.status === 'updating',
-                        'bg-transparent text-primary no-underline hover:text-primary': queryConfig.status !== 'updating'
-                      }
-                    )}
-                    to={{
-                      search: createSearchParams({
-                        ...(queryConfig as Record<string, string>),
-                        page: '1',
-                        status: 'updating'
-                      }).toString()
-                    }}
-                  >
-                    cập nhật
-                  </Link>
-                </div>
-              ) : (
-                <h2 className='capitalize font-semibold text-black dark:text-white text-xl lg:text-2xl'>
-                  <strong className='text-primary'>{title}</strong>{' '}
-                  <span className='hidden md:inline-block'>- trang {queryConfig.page}</span>
-                  {/* Debug: showing {comicListLimit} items per page on {deviceType} */}
-                </h2>
-              )}
-              {isTopAndNew && isMobile ? null : (
-                <>
-                  {totalPage ? (
-                    <MiniPagination
-                      queryConfig={queryConfig}
-                      page={Number(queryConfig.page)}
-                      totalPage={totalPage}
-                    />
-                  ) : (
-                    !dataComics && <MiniPaginationSkeleton />
+      <div className='min-h-screen bg-white dark:bg-neutral-900'>
+        <div className='container px-4 sm:px-6 xl:px-0 py-5 sm:py-6 max-w-[1100px]'>
+          {data?.data.status === 404 || isError || isErrorNew ? (
+            <NotFound />
+          ) : (
+            <>
+              {/* Header: label + filters (when top/new) + page nav */}
+              <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6'>
+                <div className='flex flex-col gap-3'>
+                  <p className='text-sm font-medium text-neutral-700 dark:text-neutral-300'>
+                    {title}
+                  </p>
+                  {isTopAndNew && (
+                    <div className='inline-flex p-0.5 rounded bg-neutral-100 dark:bg-neutral-800 gap-0.5'>
+                      <Link
+                        title='Tất cả truyện'
+                        className={classNames(
+                          'px-2.5 py-1.5 rounded text-sm font-medium',
+                          queryConfig.status === 'all'
+                            ? 'bg-white dark:bg-neutral-700 text-primary'
+                            : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
+                        )}
+                        to={{
+                          search: createSearchParams({
+                            ...(queryConfig as Record<string, string>),
+                            page: '1',
+                            status: 'all'
+                          }).toString()
+                        }}
+                      >
+                        Tất cả
+                      </Link>
+                      <Link
+                        title='Truyện đã hoàn thành'
+                        className={classNames(
+                          'px-2.5 py-1.5 rounded text-sm font-medium',
+                          queryConfig.status === 'completed'
+                            ? 'bg-white dark:bg-neutral-700 text-primary'
+                            : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
+                        )}
+                        to={{
+                          search: createSearchParams({
+                            ...(queryConfig as Record<string, string>),
+                            page: '1',
+                            status: 'completed'
+                          }).toString()
+                        }}
+                      >
+                        Hoàn thành
+                      </Link>
+                      <Link
+                        title='Truyện đang cập nhật'
+                        className={classNames(
+                          'px-2.5 py-1.5 rounded text-sm font-medium',
+                          queryConfig.status === 'updating'
+                            ? 'bg-white dark:bg-neutral-700 text-primary'
+                            : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
+                        )}
+                        to={{
+                          search: createSearchParams({
+                            ...(queryConfig as Record<string, string>),
+                            page: '1',
+                            status: 'updating'
+                          }).toString()
+                        }}
+                      >
+                        Cập nhật
+                      </Link>
+                    </div>
                   )}
-                </>
-              )}
-            </div>
-            <div className='mt-6 min-h-[600px]'>
-              <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-2 xl:gap-x-[3px] gap-y-5'>
-                {dataComics &&
-                  dataComics.comics.map((item, index) => (
-                    <li key={item.id}>
-                      <CardItem data={item} index={index} />
-                    </li>
-                  ))}
-                {!dataComics && skeleton(comicListLimit)}
-              </ul>
-            </div>
-            <div className='mt-6'>
-              {totalPage ? (
-                <Pagination
-                  queryConfig={queryConfig}
-                  page={Number(queryConfig.page)}
-                  totalPage={totalPage}
-                />
-              ) : (
-                !dataComics && <PaginationSkeleton />
-              )}
-            </div>
-          </>
-        )}
+                </div>
+                {!isTopAndNew || !isMobile ? (
+                  <div className='flex items-center gap-2 shrink-0'>
+                    {totalPage ? (
+                      <MiniPagination
+                        queryConfig={queryConfig}
+                        page={Number(queryConfig.page)}
+                        totalPage={totalPage}
+                      />
+                    ) : (
+                      !dataComics && <MiniPaginationSkeleton />
+                    )}
+                  </div>
+                ) : null}
+              </div>
+
+              {/* List layout — 2 columns */}
+              <div className='border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden'>
+                {dataComics?.comics?.length ? (
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-6'>
+                    <div className='divide-y divide-neutral-200 dark:divide-neutral-700 px-3 md:px-4'>
+                      {dataComics.comics
+                        .filter((_, i) => i % 2 === 0)
+                        .map((item, index) => (
+                          <ComicListRow key={item.id} data={item} index={index * 2} />
+                        ))}
+                    </div>
+                    {/* Right column */}
+                    <div className='divide-y divide-neutral-200 dark:divide-neutral-700 px-3 md:px-4'>
+                      {dataComics.comics
+                        .filter((_, i) => i % 2 === 1)
+                        .map((item, index) => (
+                          <ComicListRow key={item.id} data={item} index={index * 2 + 1} />
+                        ))}
+                    </div>
+                  </div>
+                ) : dataComics && !dataComics.comics?.length ? (
+                  <div className='py-12 text-center text-neutral-500 dark:text-neutral-400 text-sm'>
+                    Chưa có truyện nào.
+                  </div>
+                ) : (
+                  !dataComics && listSkeleton(comicListLimit)
+                )}
+              </div>
+
+              <div className='mt-6'>
+                {totalPage ? (
+                  <Pagination
+                    queryConfig={queryConfig}
+                    page={Number(queryConfig.page)}
+                    totalPage={totalPage}
+                  />
+                ) : (
+                  !dataComics && <PaginationSkeleton />
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </>
   )
 }
 export default ComicsList
 
-const skeleton = (limit: number = 21) => {
+function listSkeleton(limit: number = 16) {
+  const half = Math.ceil(limit / 2)
+  const row = (i: number) => (
+    <div key={i} className='flex items-center gap-3 py-3 animate-pulse'>
+      <div className='w-20 h-[6.5rem] rounded-lg bg-neutral-200 dark:bg-neutral-700 shrink-0' />
+      <div className='flex-1 space-y-2'>
+        <div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-3/4' />
+        <div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-1/2' />
+      </div>
+      <div className='h-3 w-14 bg-neutral-200 dark:bg-neutral-700 rounded shrink-0' />
+    </div>
+  )
   return (
-    <>
-      {Array(limit)
-        .fill(0)
-        .map((_, i) => (
-          <li key={i} className='w-full min-h-[292px] overflow-hidden animate-pulse'>
-            <div className='flex items-center justify-center w-full h-[240px] xl:h-[220px] bg-gray-300 dark:bg-gray-700 flex-shrink-0'>
-              <svg
-                className='w-16 h-16 text-gray-200 dark:text-gray-600'
-                aria-hidden='true'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='currentColor'
-                viewBox='0 0 20 18'
-              >
-                <path d='M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z' />
-              </svg>
-            </div>
-            <div className='mt-2 flex flex-col'>
-              <span className='h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-40 mb-4 mt-1' />
-              <span className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-16 mb-2' />
-              <span className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-32' />
-            </div>
-          </li>
-        ))}
-    </>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-6'>
+      <div className='divide-y divide-neutral-200 dark:divide-neutral-700 px-3 md:px-4'>
+        {Array(half)
+          .fill(0)
+          .map((_, i) => row(i))}
+      </div>
+      <div className='divide-y divide-neutral-200 dark:divide-neutral-700 px-3 md:px-4'>
+        {Array(half)
+          .fill(0)
+          .map((_, i) => row(half + i))}
+      </div>
+    </div>
   )
 }

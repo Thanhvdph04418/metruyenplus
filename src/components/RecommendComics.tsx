@@ -5,9 +5,6 @@ import imgError from '/img-error.webp'
 import imgLoading from '/loading.gif'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
-// Import Embla Carousel
-import useEmblaCarousel from 'embla-carousel-react'
-import { useCallback } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
@@ -25,24 +22,6 @@ const RecommendComics = ({ comicId }: Props) => {
 
   const recommendedComics = data?.data || []
 
-  // Embla Carousel configuration for mobile
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: 'start',
-    containScroll: 'trimSnaps',
-    dragFree: true,
-    slidesToScroll: 1
-  })
-
-  // Navigation handlers
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev()
-  }, [emblaApi])
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext()
-  }, [emblaApi])
-
   if (isLoading) {
     return (
       <div className='flex items-center justify-center gap-2 h-[200px] text-black dark:text-white'>
@@ -58,10 +37,10 @@ const RecommendComics = ({ comicId }: Props) => {
 
   const ComicCard = ({ comic }: { comic: comics }) => {
     return (
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-row gap-3 items-stretch'>
         <Link
           to={`${PATH.comics}/${comic.slug}-${comic.id}`}
-          className='relative group block overflow-hidden rounded-lg aspect-[3/4]'
+          className='relative group block overflow-hidden rounded aspect-[3/4] w-20 flex-shrink-0 sm:w-24'
         >
           <LazyLoadImage
             src={comic.thumbnail}
@@ -72,25 +51,20 @@ const RecommendComics = ({ comicId }: Props) => {
             height='100%'
             threshold={100}
             wrapperClassName='block w-full h-full'
-            className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-110'
+            className='w-full h-full object-cover'
             onError={({ currentTarget }) => {
               currentTarget.onerror = null
               currentTarget.src = imgError
             }}
           />
           {comic.is_trending && (
-            <span className='absolute top-2 right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-2 py-0.5 text-xs rounded-full font-medium animate-pulse'>
+            <span className='absolute top-1 right-1 bg-gradient-to-r from-red-500 to-orange-500 text-white px-1.5 py-0.5 text-[10px] rounded-full font-medium animate-pulse'>
               HOT
             </span>
           )}
-          <div className='absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
-            <span className='text-white text-sm font-medium px-3 py-1.5 border-2 border-white rounded-full'>
-              Đọc ngay
-            </span>
-          </div>
         </Link>
 
-        <div className='flex flex-col gap-1 px-1'>
+        <div className='flex flex-col gap-1 min-w-0 flex-1 justify-center'>
           <Link
             to={`${PATH.comics}/${comic.slug}-${comic.id}`}
             className='font-medium text-black dark:text-white hover:text-primary dark:hover:text-primary line-clamp-2 text-sm'
@@ -113,7 +87,7 @@ const RecommendComics = ({ comicId }: Props) => {
             {comic.last_chapter.name}
           </Link>
 
-          <div className='flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400'>
+          <div className='flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400'>
             <span className='flex items-center gap-1'>
               <i className='fas fa-eye'></i>
               {comic.total_views?.toLocaleString() || 0}
@@ -130,10 +104,10 @@ const RecommendComics = ({ comicId }: Props) => {
 
   return (
     <section className='mt-8 px-4 sm:px-0'>
-      <h2 className='flex items-center gap-2 border-b border-slate-200 dark:border-gray-500 pb-2 mb-4 capitalize text-primary text-lg'>
+      <h2 className='flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-700 pb-2 mb-4 text-sm font-medium text-neutral-700 dark:text-neutral-300'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='w-6 h-6 flex-shrink-0'
+          className='w-5 h-5 flex-shrink-0 text-primary'
           viewBox='0 0 24 24'
           fill='currentColor'
         >
@@ -142,80 +116,7 @@ const RecommendComics = ({ comicId }: Props) => {
         Có thể bạn sẽ thích
       </h2>
 
-      {/* Mobile Slider */}
-      <div className='sm:hidden'>
-        <div className='relative'>
-          <div className='embla-recommend' ref={emblaRef}>
-            <div className='embla-recommend__container'>
-              {/* Group comics into slides of 4 (2x2 grid) */}
-              {Array.from({ length: Math.ceil(recommendedComics.length / 4) }, (_, slideIndex) => (
-                <div className='embla-recommend__slide' key={slideIndex}>
-                  <div className='embla-recommend__slide-group'>
-                    {recommendedComics
-                      .slice(slideIndex * 4, slideIndex * 4 + 4)
-                      .map((comic: comics) => (
-                        <ComicCard key={comic.id} comic={comic} />
-                      ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Buttons */}
-          {recommendedComics.length > 4 && (
-            <>
-              <button
-                className='embla__button embla__button--prev absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8
-                           bg-white/90 dark:bg-gray-800/90 rounded-full shadow-lg
-                           flex items-center justify-center z-10 transition-all duration-200
-                           hover:bg-white dark:hover:bg-gray-800 hover:scale-105'
-                aria-label='Previous slide'
-                onClick={scrollPrev}
-              >
-                <svg
-                  className='w-4 h-4 text-gray-600 dark:text-gray-300'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M15 19l-7-7 7-7'
-                  />
-                </svg>
-              </button>
-              <button
-                className='embla__button embla__button--next absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8
-                           bg-white/90 dark:bg-gray-800/90 rounded-full shadow-lg
-                           flex items-center justify-center z-10 transition-all duration-200
-                           hover:bg-white dark:hover:bg-gray-800 hover:scale-105'
-                aria-label='Next slide'
-                onClick={scrollNext}
-              >
-                <svg
-                  className='w-4 h-4 text-gray-600 dark:text-gray-300'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M9 5l7 7-7 7'
-                  />
-                </svg>
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Desktop Grid */}
-      <div className='hidden sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
+      <div className='grid grid-cols-2 gap-4'>
         {recommendedComics.map((comic: comics) => (
           <ComicCard key={comic.id} comic={comic} />
         ))}

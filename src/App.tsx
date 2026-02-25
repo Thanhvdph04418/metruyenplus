@@ -54,7 +54,7 @@ function App() {
     }
 
     // Setup theme
-    document.body.classList.add('dark:bg-gray-900')
+    document.body.classList.add('dark:bg-neutral-900')
     if (!localStorage.theme) {
       localStorage.setItem('theme', 'dark')
       document.documentElement.classList.add('dark')

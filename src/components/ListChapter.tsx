@@ -103,7 +103,7 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
   }, [])
 
   return (
-    <div className='border rounded-lg p-2 sm:p-4 dark:border-gray-700 shadow-sm'>
+    <div className='border border-neutral-200 dark:border-neutral-700 rounded p-4 shadow-sm'>
       {/* Toolbar */}
       <div className='flex flex-col sm:flex-row gap-2 sm:gap-4 mb-3 sm:items-center'>
         <div className='relative flex-1'>
@@ -112,13 +112,13 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
             placeholder='Tìm chương...'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className='w-full pl-10 pr-4 py-2 rounded-lg border dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500'
+            className='w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary'
           />
-          <FaSearch className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' size={14} />
+          <FaSearch className='absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400' size={14} />
         </div>
         <button
           onClick={handleSortToggle}
-          className='flex items-center gap-2 px-4 py-2 rounded-lg border dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200'
+          className='flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors'
         >
           <FaSort
             className={`transition-transform duration-200 ${
@@ -130,7 +130,7 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
       </div>
 
       {/* Header */}
-      <div className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-800 dark:text-gray-200 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-t-md text-sm sm:text-base'>
+      <div className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2 sm:py-3 font-semibold text-neutral-700 dark:text-neutral-300 border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 rounded-t-lg text-sm'>
         <div className='col-span-6'>Số chương</div>
         <div className='col-span-3'>Cập nhật</div>
         <div className='col-span-3 text-right'>Lượt xem</div>
@@ -139,7 +139,7 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
       {/* Virtual Chapter List */}
       <div
         ref={scrollElementRef}
-        className='h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600'
+        className='h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-600'
         style={{
           WebkitOverflowScrolling: 'touch'
         }}
@@ -159,8 +159,8 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
                 <Link
                   key={item.id}
                   to={`${PATH.comics}/${slug}-${id}/${item.slug_chapter}/${item.id}`}
-                  className={`absolute left-0 right-0 grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2.5 sm:py-3.5 hover:bg-gray-50 dark:hover:bg-gray-800/50 border-b border-dashed dark:border-gray-700 transition-colors duration-200 ${
-                    readChapters.includes(item.id) ? 'bg-gray-50/30 dark:bg-gray-800/10' : ''
+                  className={`absolute left-0 right-0 grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2.5 sm:py-3.5 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 border-b border-neutral-100 dark:border-neutral-800 transition-colors ${
+                    readChapters.includes(item.id) ? 'bg-neutral-50/50 dark:bg-neutral-800/20' : ''
                   }`}
                   style={{
                     height: `${virtualItem.size}px`,
@@ -168,21 +168,21 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
                   }}
                   title={item.name}
                 >
-                  <div className='col-span-6 font-medium hover:text-blue-600 dark:hover:text-blue-400 text-[13px] sm:text-base truncate flex items-center gap-2'>
+                  <div className='col-span-6 font-medium hover:text-primary text-[13px] sm:text-base truncate flex items-center gap-2'>
                     <span
                       className={`${
                         readChapters.includes(item.id)
-                          ? 'text-gray-500/80 dark:text-gray-400/80'
-                          : 'text-gray-900 dark:text-gray-100'
+                          ? 'text-neutral-500 dark:text-neutral-400'
+                          : 'text-neutral-900 dark:text-neutral-100'
                       }`}
                     >
                       {item.name}
                     </span>
                   </div>
-                  <div className='col-span-3 text-gray-500 dark:text-gray-400 text-[13px] sm:text-sm whitespace-nowrap'>
+                  <div className='col-span-3 text-neutral-500 dark:text-neutral-400 text-[13px] sm:text-sm whitespace-nowrap'>
                     {convertTimestampToText(item.created_at)}
                   </div>
-                  <div className='col-span-3 text-right text-gray-500 dark:text-gray-400 text-[13px] sm:text-sm'>
+                  <div className='col-span-3 text-right text-neutral-500 dark:text-neutral-400 text-[13px] sm:text-sm'>
                     {formatViewCount(item.view_count)}
                   </div>
                 </Link>
@@ -190,7 +190,7 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
             })}
           </div>
         ) : (
-          <div className='py-8 text-center text-gray-500 dark:text-gray-400'>
+          <div className='py-8 text-center text-neutral-500 dark:text-neutral-400'>
             Không tìm thấy chương nào
           </div>
         )}

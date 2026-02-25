@@ -20,11 +20,7 @@ import {
   FaFacebookF,
   FaMars,
   FaVenus,
-  FaHome,
-  FaMobileAlt,
-  FaThList,
   FaStar,
-  FaTrophy,
   FaClock,
   FaFire,
   FaCheckCircle
@@ -36,11 +32,13 @@ const Logo = () => (
     to={PATH.home}
     title={SITE_LOGO_TEXT}
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-    className='flex items-center'
+    className='flex items-center shrink-0'
   >
-    <span className='text-2xl lg:text-3xl logo-text-bold gradient-logo-text hover:from-primary-2 hover:to-primary transition-all duration-300'>
-      {SITE_LOGO_TEXT}
-    </span>
+    <img
+      src='/logo.png'
+      alt={SITE_LOGO_TEXT}
+      className='h-8 w-auto object-contain'
+    />
   </Link>
 )
 
@@ -50,80 +48,36 @@ type SearchParams = {
   page: string
 }
 
-const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => (
-  <ul className='hidden sm:flex items-center gap-3 lg:gap-5 ml-4 lg:ml-6 mt-1'>
-    <li className='hidden lg:block'>
-      <Link
-        title={`Trang chủ ${SITE_NAME}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        to={PATH.home}
-        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
-          useMatch(PATH.home) ? 'text-primary' : ''
-        }`}
-      >
-        <FaHome className='w-4 h-4 text-current flex-shrink-0' />
-        Trang chủ
-      </Link>
-    </li>
-    <li>
-      <Link
-        title='Ứng dụng'
-        to={{
-          pathname: PATH.app
-        }}
-        className={`hover:text-primary text-sm lg:text-lg capitalize flex items-center gap-1 lg:gap-2 whitespace-nowrap ${useMatch(PATH.app) && 'text-primary'}`}
-      >
-        <FaMobileAlt className='w-4 h-4 text-current flex-shrink-0' />
-        Ứng dụng
-      </Link>
-    </li>
-    <li>
-      <Link
-        title='Tất cả thể loại truyện tranh'
-        to={{
-          pathname: PATH.genres,
-          search: createSearchParams({ type: 'all', page: '1' }).toString()
-        }}
-        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
-          useMatch(PATH.genres) ? 'text-primary' : ''
-        }`}
-      >
-        <FaThList className='w-4 h-4 text-current flex-shrink-0' />
-        Thể loại
-      </Link>
-    </li>
-    <li>
-      <Link
-        title='Truyện tranh mới nhất'
-        to={{
-          pathname: PATH.new,
-          search: createSearchParams({ status: 'all', page: '1' }).toString()
-        }}
-        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
-          useMatch(PATH.new) ? 'text-primary' : ''
-        }`}
-      >
-        <FaStar className='w-4 h-4 text-current flex-shrink-0' />
-        Mới
-      </Link>
-    </li>
-    <li>
-      <Link
-        title='Bảng xếp hạng truyện tranh'
-        to={{
-          pathname: PATH.top,
-          search: createSearchParams({ status: 'all', page: '1' }).toString()
-        }}
-        className={`hover:text-primary text-sm lg:text-lg capitalize font-medium tracking-wide px-2 py-1 rounded-lg transition-colors flex items-center gap-1 lg:gap-2 whitespace-nowrap ${
-          isMatchTop ? 'text-primary' : ''
-        }`}
-      >
-        <FaTrophy className='w-4 h-4 text-current flex-shrink-0' />
-        BXH
-      </Link>
-    </li>
-  </ul>
-)
+const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => {
+  const linkClass = (active: boolean) =>
+    `text-sm font-medium py-2 ${
+      active ? 'text-primary' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+    }`
+  return (
+    <ul className='hidden sm:flex items-center gap-6 ml-8'>
+      <li className='hidden lg:block'>
+        <Link title={`Trang chủ ${SITE_NAME}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to={PATH.home} className={linkClass(!!useMatch(PATH.home))}>
+          Trang chủ
+        </Link>
+      </li>
+      <li>
+        <Link to={{ pathname: PATH.genres, search: createSearchParams({ type: 'all', page: '1' }).toString() }} className={linkClass(!!useMatch(PATH.genres))}>
+          Thể loại
+        </Link>
+      </li>
+      <li>
+        <Link to={{ pathname: PATH.new, search: createSearchParams({ status: 'all', page: '1' }).toString() }} className={linkClass(!!useMatch(PATH.new))}>
+          Mới
+        </Link>
+      </li>
+      <li>
+        <Link to={{ pathname: PATH.top, search: createSearchParams({ status: 'all', page: '1' }).toString() }} className={linkClass(isMatchTop)}>
+          BXH
+        </Link>
+      </li>
+    </ul>
+  )
+}
 
 const ThemeToggle = ({
   OpenTheme,
@@ -154,15 +108,14 @@ const ThemeToggle = ({
         d='M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z'
       />
     </svg>
-    <span className='capitalize text-xs mt-[2px]'>giao diện</span>
+    <span className='text-[10px] mt-0.5 text-neutral-400 uppercase tracking-wider'>Theme</span>
 
-    {/* Theme Dropdown - Positioned with transform to prevent layout shifts */}
     <div
-      className={`absolute top-10 bg-transparent py-2 z-50 transition-all duration-200 ${
+      className={`absolute top-10 py-2 z-50 transition-all duration-200 ${
         OpenTheme ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
       }`}
     >
-      <div className='p-1 lg:p-2 border dark:border-gray-400 shadow-lg rounded-md flex flex-col justify-center items-center bg-light-surface text-black dark:bg-dark-surface dark:text-white min-w-[120px]'>
+      <div className='py-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-lg flex flex-col min-w-[100px]'>
         {/* Light Theme Button */}
         <button
           title='Nền sáng'
@@ -243,45 +196,21 @@ const MobileNavigation = ({
     <div
       className={`${
         OpenNav ? 'translate-x-0' : 'translate-x-full'
-      } duration-300 transition-all dark:bg-dark-surface bg-light-bg h-[calc(100vh-74px)] sm:hidden fixed z-50 inset-x-0 top-[74px] flex flex-col`}
+      } duration-300 transition-all bg-white dark:bg-neutral-900 border-l border-neutral-200 dark:border-neutral-700 h-[calc(100vh-3.5rem)] sm:hidden fixed z-50 inset-x-0 top-14 flex flex-col`}
     >
       {/* Existing content */}
-      <div className='flex-1 overflow-y-auto px-4 pt-0 pb-4'>
+      <div className='flex-1 overflow-y-auto px-4 pt-4 pb-4'>
         <SearchBar />
-        <ul className='flex flex-col gap-1 text-[15px] pb-5'>
-          {/* Group 1: Main Navigation */}
-          <div className='mb-3'>
-            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
-              Điều hướng
-            </h3>
-            {[
-              { to: PATH.app, title: 'Ứng dụng', icon: <FaMobileAlt className='w-4 h-4' />},
-            ].map((link) => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  className={`hover:text-primary text-left inline-flex items-center uppercase leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors ${
-                    useMatch(link.to) && 'text-primary bg-primary/10'
-                  }`}
-                  title={link.title}
-                >
-                  {link?.icon}
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </div>
-
-          {/* Group 2: Comic Categories */}
-          <div className='mb-3'>
-            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+        <ul className='flex flex-col gap-0.5 text-[15px] pb-5'>
+          <div className='mb-4'>
+            <h3 className='text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 px-3'>
               Thể loại truyện
             </h3>
             {[
-              { to: PATH.new, title: 'Mới', params: { status: 'all', page: '1' } as SearchParams, icon: <FaStar className='w-4 h-4' /> },
-              { to: PATH.recent, title: 'Mới cập nhật', params: { page: '1' } as SearchParams, icon: <FaClock className='w-4 h-4' /> },
-              { to: PATH.popular, title: 'Nổi bật', params: { page: '1' } as SearchParams, icon: <FaFire className='w-4 h-4' /> },
-              { to: PATH.completed, title: 'Đã hoàn thành', params: { page: '1' } as SearchParams, icon: <FaCheckCircle className='w-4 h-4' /> },
+              { to: PATH.new, title: 'Mới', params: { status: 'all', page: '1' } as SearchParams, icon: <FaStar className='w-4 h-4 opacity-80' /> },
+              { to: PATH.recent, title: 'Mới cập nhật', params: { page: '1' } as SearchParams, icon: <FaClock className='w-4 h-4 opacity-80' /> },
+              { to: PATH.popular, title: 'Nổi bật', params: { page: '1' } as SearchParams, icon: <FaFire className='w-4 h-4 opacity-80' /> },
+              { to: PATH.completed, title: 'Đã hoàn thành', params: { page: '1' } as SearchParams, icon: <FaCheckCircle className='w-4 h-4 opacity-80' /> },
             ].map((link) => (
               <li key={link.to}>
                 <NavLink
@@ -290,8 +219,8 @@ const MobileNavigation = ({
                     search: createSearchParams(link.params).toString()
                   }}
                   className={({ isActive }) =>
-                    `uppercase inline-flex items-center hover:text-primary text-left leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors ${
-                      isActive && 'text-primary bg-primary/10'
+                    `inline-flex items-center text-left gap-3 py-2.5 px-3 rounded-xl transition-colors ${
+                      isActive ? 'text-primary font-medium' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`
                   }
                 >
@@ -302,9 +231,8 @@ const MobileNavigation = ({
             ))}
           </div>
 
-          {/* Group 3: Gender Categories */}
-          <div className='mb-3'>
-            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+          <div className='mb-4'>
+            <h3 className='text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-2 px-3'>
               Phân loại
             </h3>
             {[
@@ -328,8 +256,8 @@ const MobileNavigation = ({
                     search: createSearchParams(link.params).toString()
                   }}
                   className={({ isActive }) =>
-                    `uppercase inline-flex items-center hover:text-primary text-left leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors ${
-                      isActive && 'text-primary bg-primary/10'
+                    `inline-flex items-center text-left gap-3 py-2.5 px-3 rounded-xl transition-colors ${
+                      isActive ? 'text-primary font-medium' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`
                   }
                 >
@@ -340,18 +268,17 @@ const MobileNavigation = ({
             ))}
           </div>
 
-          {/* Group 4: Social */}
-          <div className='mb-3'>
-            <h3 className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2 px-4'>
+          <div className='mb-4'>
+            <h3 className='text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-2 px-3'>
               Cộng đồng
             </h3>
             <li>
               <Link
                 to='https://www.facebook.com/groups/523416513198612'
-                className='hover:text-primary text-left inline-flex items-center uppercase leading-[19px] gap-3 py-3 px-4 rounded-xl transition-colors'
+                className='text-left inline-flex items-center gap-3 py-2.5 px-3 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                 title='Facebook'
               >
-                <FaFacebookF className='w-4 h-4' />
+                <FaFacebookF className='w-4 h-4 opacity-80' />
                 Group
               </Link>
             </li>
@@ -359,8 +286,7 @@ const MobileNavigation = ({
         </ul>
       </div>
 
-      {/* Modified footer section */}
-      <div className='flex-shrink-0 bg-light-highlight dark:bg-gray-800 border-t border-light-border dark:border-gray-700 py-4'>
+      <div className='flex-shrink-0 bg-neutral-50 dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 py-4'>
         <div className='flex items-center justify-center gap-8'>
           <Link
             to={PATH.history}
@@ -531,7 +457,7 @@ const UserInfoDesktop = () => {
       </div>
 
       <div
-        className={`absolute top-12 right-0 bg-light-card dark:bg-gray-900 border border-light-border dark:border-gray-700 shadow-lg rounded-xl py-2 z-50 min-w-[200px] divide-y divide-light-border dark:divide-gray-700 transition-all duration-200 ${
+        className={`absolute top-12 right-0 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-lg py-2 z-50 min-w-[200px] divide-y divide-neutral-100 dark:divide-neutral-800 transition-all duration-200 ${
           isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
         }`}
         onMouseEnter={handleMouseEnter}
@@ -805,32 +731,12 @@ const MobileSearchOverlay = ({
   )
 }
 
-// Add new LoginButton component
 const LoginButtonDesktop = () => (
   <Link
     to={PATH.login}
-    className='group relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium text-primary transition duration-300 ease-out border-2 border-primary rounded-xl shadow-md focus:outline-none'
+    className='text-[13px] font-medium text-primary hover:underline'
   >
-    <span className='absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary group-hover:translate-x-0 ease'>
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        fill='none'
-        viewBox='0 0 24 24'
-        strokeWidth={2}
-        stroke='currentColor'
-        className='w-5 h-5'
-      >
-        <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9'
-        />
-      </svg>
-    </span>
-    <span className='absolute flex items-center justify-center w-full h-full text-primary transition-all duration-300 transform group-hover:translate-x-full ease'>
-      Đăng nhập
-    </span>
-    <span className='relative invisible'>Đăng nhập</span>
+    Đăng nhập
   </Link>
 )
 
@@ -848,7 +754,7 @@ const Header = () => {
   const [recentSearches, setRecentSearches] = useState<string[]>([])
   const token = localStorage.getItem('auth_token')
 
-  const heightHeader = 75
+  const heightHeader = 56
 
   const onSwitchTheme = (theme: 'light' | 'dark') => {
     handleChangeTheme(theme)
@@ -992,7 +898,7 @@ const Header = () => {
     if (type === 'dark') {
       document.documentElement.classList.remove('light')
       document.documentElement.classList.add('dark')
-      document.body.classList.add('dark:bg-gray-900')
+      document.body.classList.add('dark:bg-neutral-950')
       localStorage.setItem('theme', 'dark')
       setCurrentTheme('dark')
     }
@@ -1037,41 +943,32 @@ const Header = () => {
   }, [OpenNav, isSearchOpen])
 
   return (
-    <div className='bg-light-surface text-[#333744] dark:bg-dark-bg dark:text-[#e3e5ef] shadow dark:border-b dark:border-dark-highlight'>
-      <div className='container px-4 xl:px-0 h-[74px] flex items-center justify-between'>
-        {/* Left Section */}
-        <div className='flex items-center'>
+    <header className='bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800'>
+      <div className='container px-4 xl:px-0 h-14 flex items-center justify-between gap-4'>
+        <div className='flex items-center min-w-0'>
           <Logo />
           <DesktopNavLinks isMatchTop={isMatchTop} />
         </div>
 
-        {/* Desktop Right Section - Fixed height to prevent layout shifts */}
-        <div className='hidden sm:flex items-center h-[44px]'>
-          <div className='min-w-[120px]'>
+        {/* Desktop: Search in header */}
+        <div className='hidden sm:block flex-1 max-w-md mx-4 min-w-0'>
+          <SearchBar embedded />
+        </div>
+
+        <div className='hidden sm:flex items-center gap-1 shrink-0'>
+          <div className='min-w-[100px]'>
             {token ? <UserInfoDesktop /> : <LoginButtonDesktop />}
           </div>
           <Link
-            title='Lịch sử truyện tranh'
+            title='Lịch sử đọc'
             to={PATH.history}
-            className='flex flex-col items-center px-2 py-1 rounded-md hover:text-primary min-w-[60px] focus:outline-none'
+            className='p-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors'
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth={1.5}
-              stroke='currentColor'
-              className='w-6 h-6'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'
-              />
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-5 h-5'>
+              <path strokeLinecap='round' strokeLinejoin='round' d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z' />
             </svg>
-            <span className='capitalize text-xs mt-[2px]'>lịch sử</span>
           </Link>
-          <div className='min-w-[60px]'>
+          <div className='min-w-[52px]'>
             <ThemeToggle
               OpenTheme={OpenTheme}
               setOpenTheme={setOpenTheme}
@@ -1166,7 +1063,7 @@ const Header = () => {
           onClearRecentSearches={clearRecentSearches}
         />
       </div>
-    </div>
+    </header>
   )
 }
 

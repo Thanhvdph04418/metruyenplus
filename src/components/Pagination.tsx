@@ -16,11 +16,8 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       if (!dotBefore) {
         dotBefore = true
         return (
-          <span
-            key={index}
-            className='bg-white dark:bg-gray-900 text-black dark:text-white px-1 pt-2'
-          >
-            ...
+          <span key={index} className='px-1 text-neutral-400'>
+            …
           </span>
         )
       }
@@ -30,11 +27,8 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       if (!dotAfter) {
         dotAfter = true
         return (
-          <span
-            key={index}
-            className='bg-white dark:bg-gray-900 text-black dark:text-white px-1 pt-2'
-          >
-            ...
+          <span key={index} className='px-1 text-neutral-400'>
+            …
           </span>
         )
       }
@@ -75,13 +69,10 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
             }}
             key={index}
             className={classNames(
-              'mx-1 cursor-pointer rounded border dark:border-gray-600 bg-white dark:bg-gray-900 text-black dark:text-white px-3 h-[34px] shadow-sm flex items-center justify-center',
-              {
-                'border-primary text-primary dark:border-primary dark:text-primary':
-                  pageNumber === page,
-                'border hover:border-primary hover:text-primary dark:border-gray-500 dark:hover:text-primary dark:hover:border-primary':
-                  pageNumber !== page
-              }
+              'mx-0.5 cursor-pointer rounded border px-3 h-9 flex items-center justify-center text-sm font-medium transition-colors',
+              pageNumber === page
+                ? 'border-primary text-primary bg-primary/5'
+                : 'border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:border-primary hover:text-primary bg-white dark:bg-neutral-900'
             )}
           >
             {pageNumber}
@@ -90,17 +81,10 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       })
   }
   return (
-    <div className='mt-8 flex flex-wrap justify-center gap-1 gap-y-2'>
+    <nav className='flex flex-wrap justify-center items-center gap-1 gap-y-2' aria-label='Phân trang'>
       {page === 1 ? (
-        <span className='cursor-default rounded border dark:border-gray-500 dark:text-gray-400 text-black dark:bg-gray-900 opacity-60 px-3 h-[34px] shadow-sm flex items-center justify-center'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-4 h-4 opacity-60'
-          >
+        <span className='cursor-default rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-400' aria-hidden>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
             <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
           </svg>
         </span>
@@ -113,32 +97,19 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
               page: (page - 1).toString()
             }).toString()
           }}
-          className='cursor-pointer rounded border dark:border-gray-500 dark:text-white text-black bg-white dark:bg-gray-900 px-3 h-[34px] shadow-sm flex items-center justify-center hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
+          className='rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:border-primary hover:text-primary transition-colors'
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-4 h-4'
-          >
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
             <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
           </svg>
         </Link>
       )}
 
       {renderPagination()}
+
       {page === totalPage ? (
-        <span className='cursor-default rounded border dark:border-gray-500 opacity-60 px-3 h-[34px] shadow-sm flex items-center justify-center text-black dark:text-gray-300'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-4 h-4 opacity-60'
-          >
+        <span className='cursor-default rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-400' aria-hidden>
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
         </span>
@@ -151,20 +122,13 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
               page: (page + 1).toString()
             }).toString()
           }}
-          className='cursor-pointer rounded border text-black dark:text-gray-300 dark:border-gray-500 bg-white dark:bg-gray-900 px-3 h-[34px] flex items-center justify-center shadow-sm hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary'
+          className='rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:border-primary hover:text-primary transition-colors'
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-4 h-4'
-          >
+          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
         </Link>
       )}
-    </div>
+    </nav>
   )
 }

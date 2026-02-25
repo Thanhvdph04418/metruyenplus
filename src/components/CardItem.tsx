@@ -57,14 +57,14 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
     imageCache.addToCache(thumbnail)
   }
   return (
-    <div className='relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 will-change-transform'>
-      <div className='w-full h-[240px] xl:h-[220px] overflow-hidden relative bg-gray-100 dark:bg-gray-800 rounded-t-lg'>
+    <div className='relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded overflow-hidden'>
+      <div className='w-full h-[220px] xl:h-[200px] overflow-hidden relative bg-neutral-100 dark:bg-neutral-800 rounded-t'>
         {is_trending && (
-          <div className='absolute top-1 right-1 bg-gradient-to-r from-red-500 to-orange-500 text-white px-1.5 py-[1px] text-[10px] z-[1] animate-pulse rounded-full font-semibold shadow-lg'>
+          <span className='absolute top-2 right-2 bg-primary text-white text-[10px] font-semibold px-1.5 py-0.5 rounded'>
             HOT
-          </div>
+          </span>
         )}
-        <Link to={`${PATH.comics}/${slug}-${id}`} title={titleFormatted} className='group'>
+        <Link to={`${PATH.comics}/${slug}-${id}`} title={titleFormatted} className='group block'>
           <LazyLoadImage
             src={thumbnail}
             alt={titleFormatted}
@@ -80,7 +80,7 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
             width='100%'
             height='100%'
             wrapperClassName='w-full h-full block aspect-[3/4]'
-            className={`w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-500 ease-out xl:pointer-events-none transform-gpu ${
+            className={`w-full h-full object-cover xl:pointer-events-none ${
               isPriorityImage ? 'priority-image' : ''
             }`}
             loading={isPriorityImage ? 'eager' : 'lazy'}
@@ -97,11 +97,11 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
           />
         </Link>
         {/* Hover overlay with fixed positioning to prevent layout shifts */}
-        <div className='hidden xl:block absolute top-[-15px] left-[-30px] z-[2] shadow-2xl pointer-events-none group-hover:pointer-events-auto'>
-          <div className='w-[226px] h-[330px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden scale-[0.73] group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-300 origin-top-left will-change-transform transform-gpu'>
+        <div className='hidden xl:block absolute top-[-15px] left-[-30px] z-[2] shadow-xl pointer-events-none group-hover:pointer-events-auto'>
+          <div className='w-[226px] h-[330px] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden scale-[0.73] group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-300 origin-top-left'>
             <Link to={`${PATH.comics}/${slug}-${id}`} title={titleFormatted} className='block'>
               <div
-                className='w-[226px] h-[160px] bg-cover bg-no-repeat bg-[center_30%] bg-gray-100 dark:bg-gray-800'
+                className='w-[226px] h-[160px] bg-cover bg-no-repeat bg-[center_30%] bg-neutral-100 dark:bg-neutral-800'
                 style={{
                   backgroundImage: `url('${thumbnail}'), url('${imgError}')`
                 }}
@@ -112,14 +112,14 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
               <Link
                 to={`${PATH.comics}/${slug}-${id}`}
                 title={titleFormatted}
-                className='hover:text-primary dark:hover:text-primary text-[#2d3748] dark:text-[#edf2f7] font-semibold text-base leading-6 tracking-wide block'
+                className='hover:text-primary text-neutral-800 dark:text-neutral-200 font-medium text-sm block'
               >
                 {titleFormatted}
               </Link>
-              <span className='text-sm text-gray-500 dark:text-gray-400 block font-medium'>
+              <span className='text-xs text-neutral-500 dark:text-neutral-400 block'>
                 {updated_at}
               </span>
-              <div className='flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mt-2 mb-2'>
+              <div className='flex items-center gap-3 text-xs text-stone-500 dark:text-stone-400 mt-2 mb-2'>
                 <span className='flex items-center gap-1 hover:text-primary transition-colors'>
                   <i className='fas fa-eye text-[13px]'></i>
                   <span className='font-medium'>{data.total_views?.toLocaleString() || 0}</span>
@@ -154,14 +154,14 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
                         page: '1'
                       }).toString()
                     }}
-                    className='text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-[#2d3748] dark:text-gray-300 rounded-full hover:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors'
+                    className='text-xs px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded hover:text-primary transition-colors'
                   >
                     {genre.name}
                   </Link>
                 ))}
               </div>
               <div
-                className='text-sm text-gray-600 dark:text-gray-400 line-clamp-3 h-[4.8em] leading-6 overflow-hidden'
+                className='text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3 h-[4.8em] leading-6 overflow-hidden'
                 dangerouslySetInnerHTML={{
                   __html:
                     short_description.length > 350
@@ -173,20 +173,20 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
           </div>
         </div>
       </div>
-      <div className='p-3 flex flex-col text-[#2d3748] dark:text-[#edf2f7] space-y-2'>
+      <div className='p-3 flex flex-col text-neutral-900 dark:text-neutral-100 space-y-1.5'>
         <Link
           to={`${PATH.comics}/${slug}-${id}`}
           title={titleFormatted}
-          className='hover:text-primary font-semibold text-base leading-5 line-clamp-1 tracking-wide transition-colors duration-200'
+          className='hover:text-primary font-medium text-sm leading-snug line-clamp-2 transition-colors'
         >
           {titleFormatted}
         </Link>
-        <span className='text-sm text-gray-500 dark:text-gray-400 font-medium'>{updated_at}</span>
-        <p className='inline-block text-sm truncate'>
+        <span className='text-xs text-neutral-500 dark:text-neutral-400'>{updated_at}</span>
+        <p className='truncate text-sm'>
           <Link
             to={`${PATH.comics}/${slug}-${id}/${last_chapter.slug_chapter}/${last_chapter.id}`}
             title={last_chapter.name}
-            className='text-primary whitespace-nowrap font-medium hover:underline transition-all duration-200'
+            className='text-primary font-medium hover:underline'
           >
             {last_chapter.name}
           </Link>

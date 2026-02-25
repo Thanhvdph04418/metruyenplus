@@ -19,8 +19,12 @@ interface HistoryItem {
   slugChapter?: string
 }
 
-const SearchBar = () => {
-  // State management
+interface SearchBarProps {
+  /** Compact style when rendered inside Header */
+  embedded?: boolean
+}
+
+const SearchBar = ({ embedded = false }: SearchBarProps) => {
   const [valueForm, setValueForm] = useState<string>('')
   const [debouncedValue, setDebouncedValue] = useState<string>('')
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -95,87 +99,67 @@ const SearchBar = () => {
     }
   }
 
-  // UI Components
   const SearchIcon = () => (
-    <p
-      className='bg-cover bg-no-repeat w-[18px] h-[18px] brightness-0 invert dark:brightness-100 dark:invert-0 sm:brightness-100 sm:invert-0'
-      style={{ backgroundImage: `url(${iconSearch})` }}
-    />
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className={embedded ? 'w-4 h-4 text-neutral-400' : 'w-5 h-5 text-neutral-400'}
+      fill='none'
+      viewBox='0 0 24 24'
+      stroke='currentColor'
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+    </svg>
   )
 
   const SearchButton = () => (
     <button
-      title='Tìm Kiếm'
-      className='text-white capitalize flex items-center justify-center dark: dark:bg-gray-700 sm:bg-gradient h-[33px] sm:h-[50px] w-[50px] sm:w-[100px] lg:w-[140px] bg-red-500 is-btn-mobile-search-bar'
+      type='submit'
+      title='Tìm kiếm'
+      className={`flex items-center justify-center bg-primary text-white font-medium hover:opacity-90 transition-opacity shrink-0 ${
+        embedded
+          ? 'h-9 w-9 rounded-r-lg'
+          : 'h-10 w-10 sm:h-11 sm:w-auto sm:px-5 rounded-r-xl sm:rounded-r-lg text-sm'
+      }`}
     >
-      <span className='sm:inline-block hidden'>Tìm Kiếm</span>
-      <span className='sm:hidden'>
-        <SearchIcon />
-      </span>
+      <span className={embedded ? 'hidden' : 'hidden sm:inline'}>Tìm kiếm</span>
+      <span className={embedded ? 'inline' : 'sm:hidden'}><SearchIcon /></span>
     </button>
   )
 
   const HistoryList = () => (
     <>
+      <p className='px-3 py-2 text-sm text-neutral-500'>
+        Đã tìm
+      </p>
       {searchHistory.map((item, i) => (
-        <div key={i} className='relative group'>
+        <div key={i} className='relative group flex items-center gap-3 px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50'>
           <div
             onMouseDown={() => handleClick(item.id, item.title, item)}
-            className='cursor-pointer'
+            className='flex-1 flex items-center gap-3 min-w-0 cursor-pointer'
           >
-            <div className='flex items-center'>
-              <div className='absolute left-4 top-[50%] -translate-y-[50%] text-gray-400'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-                  />
-                </svg>
-              </div>
-              <div className='pl-12 w-full'>
-                <SuggestComics
-                  index={i}
-                  isStyleSearch={true}
-                  title={item.title}
-                  src={item.thumbnail || iconSearch}
-                  idComic={item.id}
-                  chapter={item.chapter || ''}
-                  genres={['']}
-                  searchTerm=''
-                  slug={item.slug}
-                  slugChapter={item.slugChapter}
-                />
-              </div>
-            </div>
+            <SuggestComics
+              index={i}
+              isStyleSearch={true}
+              title={item.title}
+              src={item.thumbnail || iconSearch}
+              idComic={item.id}
+              chapter={item.chapter || ''}
+              genres={['']}
+              searchTerm=''
+              slug={item.slug}
+              slugChapter={item.slugChapter}
+            />
           </div>
           <button
-            className='absolute right-2 top-[50%] -translate-y-[50%] p-2 hover:text-red-500 transition-colors'
+            type='button'
+            className='p-1.5 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 rounded transition-colors shrink-0'
             onMouseDown={(e) => {
               e.stopPropagation()
               removeFromHistory(i)
             }}
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
-              />
+            <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
             </svg>
           </button>
         </div>
@@ -189,7 +173,7 @@ const SearchBar = () => {
         <div
           key={item.id}
           onMouseDown={() => handleClick(item.id, item.title, item)}
-          className='cursor-pointer'
+          className='px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 cursor-pointer'
         >
           <SuggestComics
             index={i}
@@ -206,56 +190,48 @@ const SearchBar = () => {
         </div>
       ))}
       {isLoading && (
-        <div className='flex items-center justify-center h-[100px] gap-2'>
-          <img src={imgLoading} alt='loading icon' loading='lazy' />
-          Loading...
+        <div className='flex items-center justify-center py-8 gap-2 text-sm text-neutral-500'>
+          <img src={imgLoading} alt='' loading='lazy' className='w-6 h-6' />
+          Đang tìm...
         </div>
       )}
       {Array.isArray(dataComicSuggest) && !dataComicSuggest.length && (
-        <div className='flex items-center justify-center h-[100px]'>Not found</div>
+        <div className='py-8 text-center text-sm text-neutral-500'>Không tìm thấy</div>
       )}
     </>
   )
 
-  // Main render
   return (
-    <div className='w-full'>
-      <div className='bg-no-repeat bg-cover py-3 sm:bg-[url("/search-bg.webp")] sm:dark:relative sm:dark:after:content-[""] sm:dark:after:absolute sm:dark:after:inset-0 sm:dark:after:bg-gray-900/80'>
-        <div className='h-full'>
-          <div className='h-full flex items-center justify-center'>
-            {/* <div className='hidden lg:block mr-4'>
-              <LunarNewYearCountdown />
-            </div> */}
-            <form
-              className='z-20 relative flex items-center dark:text-white w-full sm:w-auto rounded-[20px] border border-white dark:border-dark-highlight'
-              onSubmit={handleSearch}
-            >
-              <div className='flex-shrink-0 bg-white py-4 pl-[18px] pr-[14px] dark:bg-gray-900 hidden sm:block'>
-                <SearchIcon />
-              </div>
-              <input
-                onFocus={() => setIsOpen(true)}
-                onBlur={() => setIsOpen(false)}
-                onChange={(e) => setValueForm(e.target.value)}
-                value={valueForm}
-                type='text'
-                placeholder='Tìm kiếm...'
-                className='h-[33px] sm:h-[50px] leading-5 sm:leading-[50px] pr-4 pl-4 sm:pl-0 w-full sm:w-[320px] lg:w-[420px] outline-none dark:bg-gray-900 is-input-mobile-search-bar'
-              />
-              <SearchButton />
-              {isOpen && (
-                <div
-                  className={`absolute top-[37px] md:top-[50px] left-0 z-40 border border-[#EDEDED] dark:border-gray-600 bg-white dark:bg-gray-900 w-full md:w-[470px] shadow-[0_2px_4px_0_rgba(0,0,0,0.10)] max-h-[480px] overflow-y-auto ${
-                    !valueForm ? 'border-0' : ''
-                  }`}
-                >
-                  {!valueForm && searchHistory.length > 0 && <HistoryList />}
-                  <SuggestionsList />
-                </div>
-              )}
-            </form>
+    <div className={embedded ? 'w-full' : 'w-full py-3'}>
+      <div className={embedded ? 'w-full' : 'flex items-center justify-center'}>
+        <form
+          className={`relative flex w-full rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden focus-within:ring-1 focus-within:ring-primary ${
+            embedded ? 'shadow-none' : 'sm:w-auto max-w-[500px]'
+          }`}
+          onSubmit={handleSearch}
+        >
+          <div className={`flex-shrink-0 flex items-center pointer-events-none ${embedded ? 'pl-3' : 'pl-4'}`}>
+            <SearchIcon />
           </div>
-        </div>
+          <input
+            onFocus={() => setIsOpen(true)}
+            onBlur={() => setIsOpen(false)}
+            onChange={(e) => setValueForm(e.target.value)}
+            value={valueForm}
+            type='text'
+            placeholder='Tìm truyện, tác giả...'
+            className={`flex-1 min-w-0 bg-transparent text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 outline-none ${
+              embedded ? 'h-9 px-2 py-1.5 text-sm' : 'h-10 sm:h-11 px-3 py-2 text-sm'
+            }`}
+          />
+          <SearchButton />
+          {isOpen && (
+            <div className='absolute top-full left-0 right-0 mt-1 z-50 rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 max-h-[400px] overflow-y-auto py-2'>
+              {!valueForm && searchHistory.length > 0 && <HistoryList />}
+              <SuggestionsList />
+            </div>
+          )}
+        </form>
       </div>
     </div>
   )

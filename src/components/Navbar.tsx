@@ -5,10 +5,8 @@ import { useMemo } from 'react'
 import { Link, NavLink, createSearchParams, useLocation, useMatch } from 'react-router-dom'
 import useNavbarVisibility from '@/hooks/useNavbarVisibility'
 
-// Constants for common styles
-const NAV_LINK_BASE_STYLES = 'uppercase font-semibold text-sm hover:text-primary px-1 py-4'
-const TOP_NAV_LINK_STYLES =
-  'capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1'
+const NAV_LINK_BASE_STYLES = 'text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-primary py-2 px-2'
+const TOP_NAV_LINK_STYLES = 'whitespace-nowrap text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-primary py-2 px-2 flex items-center justify-center gap-2'
 
 const PANPAGE_URL =
   import.meta.env.VITE_PANPAGE_URL || 'https://www.facebook.com/profile.php?id=100063825323613'
@@ -72,12 +70,12 @@ const RegularNavItems = () => {
           to='https://www.facebook.com/groups/523416513198612'
           target='_blank'
           rel='noopener noreferrer'
-          className='relative uppercase font-semibold text-sm hover:text-primary px-1 py-4 flex items-center gap-1'
+          className={`${NAV_LINK_BASE_STYLES} flex items-center gap-1.5`}
         >
-          <span>GROUP</span>
-          <span className='relative flex h-3 w-3'>
-            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75' />
-            <span className='relative inline-flex rounded-full h-3 w-3 bg-secondary' />
+          <span>Group</span>
+          <span className='relative flex h-2 w-2'>
+            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-60' />
+            <span className='relative inline-flex rounded-full h-2 w-2 bg-secondary' />
           </span>
         </Link>
       </li>
@@ -88,7 +86,7 @@ const RegularNavItems = () => {
           to={PANPAGE_URL}
           className={NAV_LINK_BASE_STYLES}
         >
-          fanpage
+          Fanpage
         </Link>
       </li>
     </>
@@ -112,8 +110,7 @@ const TopNavItems = ({ pathname, queryConfig }: { pathname: string; queryConfig:
             }).toString()
           }}
           className={classNames(TOP_NAV_LINK_STYLES, {
-            'text-primary': pathname === PATH.top,
-            'text-current': pathname !== PATH.top
+            'text-primary': pathname === PATH.top
           })}
         >
           <svg
@@ -331,10 +328,10 @@ const Navbar = () => {
   const { isVisible } = useNavbarVisibility({ threshold: 80 })
 
   const containerClasses = classNames(
-    'text-black/60 dark:text-white transition-transform duration-300 ease-in-out',
+    'text-neutral-600 dark:text-neutral-400 transition-transform duration-300',
     {
-      'bg-white dark:bg-gray-900': isHome,
-      'bg-[#f8f8f9] dark:bg-gray-800 py-5 lg:p-5': !isHome,
+      'bg-white dark:bg-neutral-950': isHome,
+      'bg-neutral-50 dark:bg-neutral-900/50 py-3 border-t border-neutral-200 dark:border-neutral-800': !isHome,
       'hidden sm:block': !isTop,
       block: isTop,
       'transform -translate-y-full': !isVisible && !isHome,
@@ -342,18 +339,18 @@ const Navbar = () => {
     }
   )
 
-  const navClasses = classNames('container min-h-[56px]', {
-    'p-4 lg:py-0 xl:p-0': isHome,
-    'p-3 bg-white dark:bg-gray-900 border-t-[3px] border-primary': !isHome
+  const navClasses = classNames('container min-h-[44px]', {
+    'p-3 lg:py-0 xl:p-0': isHome,
+    'px-3': !isHome
   })
 
   return (
     <div className={containerClasses}>
       <nav className={navClasses}>
-        <ul className='flex items-center gap-3 overflow-x-auto overflow-y-hidden'>
+        <ul className='flex items-center gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide'>
           {!isHome && !isTop && (
-            <li className='uppercase font-semibold text-sm py-4 text-black dark:text-gray-400'>
-              chủ đề:
+            <li className='text-[13px] font-medium py-2.5 pr-2 text-neutral-500 shrink-0'>
+              Chủ đề
             </li>
           )}
           {!isTop && <RegularNavItems />}

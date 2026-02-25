@@ -39,15 +39,15 @@ export default {
         primary: PRIMARY,
         'primary-2': PRIMARY_2,
         secondary: SECONDARY,
-        'comment-bg': '#F8FAFC',     /* Slate background */
-        'dark-bg': '#0F172A',        /* Slate dark for dark mode */
-        'dark-surface': '#1E293B',   /* Slate surface */
-        'dark-highlight': '#334155', /* Lighter slate highlight */
-        'light-bg': '#F8FAFC',       /* Very light slate */
+        'comment-bg': '#FAFAF9',
+        'dark-bg': '#18181B',        /* Soft zinc dark */
+        'dark-surface': '#27272A',
+        'dark-highlight': '#3F3F46',
+        'light-bg': '#FAFAF9',       /* Warm off-white */
         'light-surface': '#ffffff',
-        'light-highlight': '#F1F5F9',
+        'light-highlight': '#F5F5F4',
         'light-card': '#ffffff',
-        'light-border': '#E2E8F0',
+        'light-border': '#E7E5E4',   /* Stone-200 */
       },
       backgroundImage: {
         // Brand gradients aligned with VITE_SITE_GRADIENT_FROM/TO
