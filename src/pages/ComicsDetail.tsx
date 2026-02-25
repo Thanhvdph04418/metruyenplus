@@ -35,7 +35,6 @@ import { trackComicView } from '@/utils/analytics'
 import {
   SITE_NAME,
   SITE_TWITTER_HANDLE,
-  SITE_DOMAIN,
   SITE_URL
 } from '@/config/siteConfig'
 

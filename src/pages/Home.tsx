@@ -1,11 +1,10 @@
 import comicApis from '@/apis/comicApis'
-import iconRecentUpdate from '/icon-recentUpdate.webp'
 import {
   HotComicSlider,
   MobileHotComicSlider,
   HomeComicList,
-  MobileAppNotification,
-  DesktopDomainNotification
+  // MobileAppNotification,
+  // DesktopDomainNotification
 } from '@/components'
 import { useQueryConfig, useHomeComicLimit } from '@/hooks'
 import { comics } from '@/types/data'
@@ -132,7 +131,6 @@ const Home = () => {
                   <HomeComicList
                     data={dataRecentUpdatedComics}
                     title='Mới cập nhật'
-                    icon={iconRecentUpdate}
                     path={PATH.recent}
                   />
                 )}

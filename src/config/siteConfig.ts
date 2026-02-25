@@ -1,5 +1,5 @@
 // Branding: nguồn duy nhất từ brand.config.js (không dùng .env VITE_SITE_*)
-import brand from '../../brand.config.js'
+import brand from '../../brand.config'
 
 export const SITE_NAME = brand.SITE_NAME
 export const SITE_LOGO_TEXT = brand.SITE_LOGO_TEXT ?? brand.SITE_NAME

@@ -43,7 +43,7 @@ const ForgotPassword = () => {
     setSuccess(false)
 
     try {
-      if (!isRecaptchaLoaded) {
+      if (!isRecaptchaLoaded || !window.grecaptcha) {
         throw new Error('reCAPTCHA không khả dụng')
       }
 

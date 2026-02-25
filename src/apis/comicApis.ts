@@ -53,10 +53,10 @@ const comicApis = {
     const url = `/api/web/categories`
     return axiosClients.get<dataGenres>(url)
   },
-  getComicsByGenre(id: string, params?: { page?: string }) {
+  getComicsByGenre(id: string, params?: { page?: string; limit?: number }) {
     const url = `/api/web/comic${PATH_MAPPING_API.genres}/${id}`
     const uri = url.replace(/\/\d+(?=\/|$)/g, '')
-    const authKey = generateAuthKey(uri, pick(params, 'page'))
+    const authKey = generateAuthKey(uri, pick(params, 'page', 'limit'))
     return axiosClients.get<dataComics>(url, { params, headers: { 'x-request-id': authKey } })
   },
   getNew(params?: paramOption) {
