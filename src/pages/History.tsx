@@ -12,6 +12,8 @@ import {
 import { Helmet } from 'react-helmet-async'
 import { SITE_NAME } from '@/config/siteConfig'
 
+const ITEMS_PER_PAGE = 12
+
 const History = () => {
   const [dataComics, setDataComics] = useState<HistoryComic[]>([])
   const [allHistory, setAllHistory] = useState<HistoryComic[]>([])
@@ -20,7 +22,6 @@ const History = () => {
   const [isSyncing, setIsSyncing] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isInitialLoading, setIsInitialLoading] = useState(true)
-  const ITEMS_PER_PAGE = 16
 
   // Load all history data once on mount
   const loadAllHistory = useCallback(async () => {
@@ -103,182 +104,205 @@ const History = () => {
     loadAllHistory()
   }, [loadAllHistory])
 
+  const totalCount = allHistory.length
+  const hasResults = dataComics.length > 0
+  const showEmpty = !isInitialLoading && !hasResults
+
   return (
     <>
       <Helmet>
         <title>{`Lịch sử đọc truyện - ${SITE_NAME}`}</title>
         <meta name='description' content='Lịch sử các bộ truyện bạn đã đọc' />
       </Helmet>
-      <div className='container px-2 lg:px-0'>
-        <div className='mt-4 sm:mt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 sm:justify-between text-black dark:text-white'>
-          <div className='flex items-center gap-2'>
-            <Link
-              to={PATH.home}
-              className='flex items-center gap-1 hover:text-primary text-base sm:text-lg'
-            >
-              Trang chủ{' '}
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                xmlnsXlink='http://www.w3.org/1999/xlink'
-                aria-hidden='true'
-                className='w-4 h-4 sm:w-5 sm:h-5'
-                viewBox='0 0 48 48'
-              >
-                <path
-                  fill='none'
-                  stroke='currentColor'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={3}
-                  d='M19 12L31 24L19 36'
-                />
-              </svg>
+      <div className='min-h-screen bg-white dark:bg-neutral-900'>
+        <div className='container max-w-[1100px] px-4 sm:px-6 py-5 sm:py-6'>
+          {/* Breadcrumb */}
+          <nav className='flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 mb-4'>
+            <Link to={PATH.home} className='hover:text-primary transition-colors'>
+              Trang chủ
             </Link>
-            <span className='flex items-center gap-1 text-base sm:text-lg'>Lịch sử</span>
-          </div>
-          <div className='flex flex-wrap sm:flex-nowrap items-center gap-2'>
-            {localStorage.getItem('auth_token') && (
-              <button
-                onClick={handleSync}
-                disabled={isSyncing}
-                className='flex-1 sm:flex-none text-sm sm:text-base active:scale-90 border border-gray-500 dark:border-gray-400 
-                  hover:bg-primary hover:text-white 
-                  dark:hover:bg-primary dark:hover:text-white 
-                  transition-colors duration-200 
-                  px-3 py-1.5 sm:py-1 rounded-md flex items-center justify-center gap-1.5 focus:outline-none'
-              >
-                {isSyncing ? (
-                  <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-current'></div>
-                ) : (
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-4 w-4'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  >
-                    <path d='M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3' />
-                  </svg>
-                )}
-                <span className='sm:hidden'>Đồng bộ</span>
-                <span className='hidden sm:inline'>Đồng bộ với app {SITE_NAME}</span>
-              </button>
-            )}
-            <button
-              onClick={handleDeleteAll}
-              className='flex-1 sm:flex-none text-sm sm:text-base active:scale-90 border border-gray-500 dark:border-gray-400 
-                hover:bg-primary hover:text-white 
-                dark:hover:bg-primary dark:hover:text-white 
-                transition-colors duration-200 
-                px-3 py-1.5 sm:py-1 rounded-md focus:outline-none'
-            >
-              Xóa tất cả
-            </button>
-          </div>
-        </div>
-        <div className='mt-4 sm:mt-8 min-h-[550px]'>
-          {isInitialLoading && (
-            <div className='flex justify-center items-center h-[550px]'>
-              <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary'></div>
+            <span aria-hidden>/</span>
+            <span className='text-neutral-700 dark:text-neutral-300 font-medium'>
+              Lịch sử đọc truyện
+            </span>
+          </nav>
+
+          {/* Title + actions */}
+          <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6'>
+            <div>
+              <h1 className='text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white'>
+                Lịch sử đọc truyện
+              </h1>
+              {!isInitialLoading && (
+                <p className='mt-1 text-sm text-neutral-600 dark:text-neutral-400'>
+                  {totalCount > 0
+                    ? `${totalCount} truyện đã đọc`
+                    : 'Các truyện bạn đã đọc sẽ hiển thị tại đây'}
+                </p>
+              )}
             </div>
-          )}
-          {!isInitialLoading && dataComics && dataComics.length > 0 && (
-            <>
-              <div className={`grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-4 lg:gap-6`}>
-                {dataComics.map((item) => (
-                  <div
-                    key={item.id}
-                    className='col-span-1 sm:col-span-12 md:col-span-6 p-2 sm:p-3 hover:bg-[rgba(0,0,0,0.04)] dark:hover:bg-[rgba(255,255,255,0.04)] rounded-lg'
-                  >
-                    <div className='flex text-black dark:text-white'>
+            <div className='flex flex-wrap items-center gap-2'>
+              {localStorage.getItem('auth_token') && (
+                <button
+                  onClick={handleSync}
+                  disabled={isSyncing}
+                  className='inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-primary hover:text-white hover:border-primary dark:hover:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                >
+                  {isSyncing ? (
+                    <div className='animate-spin rounded-full h-4 w-4 border-2 border-current border-t-transparent' />
+                  ) : (
+                    <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                      <path d='M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3' />
+                    </svg>
+                  )}
+                  <span className='sm:hidden'>Đồng bộ</span>
+                  <span className='hidden sm:inline'>Đồng bộ với app</span>
+                </button>
+              )}
+              <button
+                onClick={handleDeleteAll}
+                disabled={!hasResults && totalCount === 0}
+                className='inline-flex items-center justify-center px-3 py-2 text-sm font-medium rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-red-600 hover:text-white hover:border-red-600 dark:hover:border-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+              >
+                Xóa tất cả
+              </button>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className='min-h-[400px]'>
+            {isInitialLoading && <HistorySkeleton />}
+            {!isInitialLoading && hasResults && (
+              <>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6'>
+                  {dataComics.map((item) => (
+                    <article
+                      key={item.id}
+                      className='flex gap-3 sm:gap-4 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors'
+                    >
                       <Link
                         to={`${PATH.comics}/${item.slug_comic}-${item.id}`}
                         title={item.title}
-                        className='flex-shrink-0'
+                        className='flex-shrink-0 rounded-lg overflow-hidden ring-1 ring-black/5 dark:ring-white/5'
                       >
                         <img
                           src={item.thumbnail}
                           alt={item.title}
-                          title={item.title}
+                          width={100}
+                          height={133}
                           loading='lazy'
-                          className='w-[100px] sm:w-[140px] h-[133px] sm:h-[186px] object-cover rounded-md'
+                          className='w-[100px] sm:w-[120px] h-[133px] sm:h-[160px] object-cover'
                           onError={({ currentTarget }) => {
                             currentTarget.onerror = null
                             currentTarget.src = imgError
                           }}
                         />
                       </Link>
-                      <div className='pl-3 sm:pl-4 flex flex-col flex-1'>
+                      <div className='flex flex-col flex-1 min-w-0'>
                         <Link
                           to={`${PATH.comics}/${item.slug_comic}-${item.id}`}
-                          className='text-sm sm:text-base text-black hover:text-primary dark:text-white dark:hover:text-primary font-bold leading-tight line-clamp-2'
+                          className='font-semibold text-neutral-900 dark:text-white line-clamp-2 text-[15px] leading-snug hover:text-primary'
                           title={item.title}
                         >
                           {item.title}
                         </Link>
-                        <span className='text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-2'>
+                        <span className='text-xs text-neutral-500 dark:text-neutral-400 mt-0.5'>
                           {item.time}
                         </span>
-                        <p className='mt-2 sm:mt-3'>
+                        <Link
+                          to={`${PATH.comics}/${item.slug_comic}-${item.id}/${item.slug_chapter}/${item.chapter_id}`}
+                          title={item.last_reading}
+                          className='text-sm text-primary hover:underline line-clamp-1 mt-1'
+                        >
+                          {item.last_reading}
+                        </Link>
+                        <div className='flex gap-2 mt-auto pt-3'>
                           <Link
                             to={`${PATH.comics}/${item.slug_comic}-${item.id}/${item.slug_chapter}/${item.chapter_id}`}
-                            title={item.last_reading}
-                            className='text-sm sm:text-base text-primary hover:text-primary/80'
-                          >
-                            {item.last_reading}
-                          </Link>
-                        </p>
-                        <div className='flex gap-2 mt-auto pt-2 sm:pt-4'>
-                          <Link
-                            title={item.last_reading}
-                            to={`${PATH.comics}/${item.slug_comic}-${item.id}/${item.slug_chapter}/${item.chapter_id}`}
-                            className='flex-1 text-sm sm:text-base bg-[#4b8fd7] hover:bg-[#4b8fd7]/90 text-white rounded-md px-3 sm:px-4 py-1.5 sm:py-2 text-center active:scale-95 transition-transform'
+                            className='flex-1 text-center text-sm font-medium py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors'
                           >
                             Đọc tiếp
                           </Link>
                           <button
+                            type='button'
                             onClick={() => handleDeleteComic(item.id)}
-                            className='flex-1 text-sm sm:text-base border-primary hover:bg-primary/10 rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-center border text-primary active:scale-95 transition-transform focus:outline-none'
+                            className='flex-1 text-sm font-medium py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors'
                           >
                             Xóa
                           </button>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {hasMore && (
-                <div className='mt-8 text-center'>
-                  <button
-                    onClick={handleLoadMore}
-                    disabled={isLoading}
-                    className='inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2'></div>
-                        Đang tải...
-                      </>
-                    ) : (
-                      'Xem thêm'
-                    )}
-                  </button>
+                    </article>
+                  ))}
                 </div>
-              )}
-            </>
-          )}
-          {!isInitialLoading && Array.isArray(dataComics) && !dataComics.length && (
-            <h3 className='flex items-center justify-center text-xl sm:text-2xl h-[550px] text-black dark:text-white'>
-              Không tìm thấy lịch sử
-            </h3>
-          )}
+                {hasMore && (
+                  <div className='mt-8 flex justify-center'>
+                    <button
+                      onClick={handleLoadMore}
+                      disabled={isLoading}
+                      className='inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                    >
+                      {isLoading ? (
+                        <>
+                          <div className='animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent' />
+                          Đang tải...
+                        </>
+                      ) : (
+                        'Xem thêm'
+                      )}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+            {showEmpty && (
+              <div className='flex flex-col items-center justify-center min-h-[400px] text-center px-4'>
+                <div className='w-16 h-16 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4'>
+                  <svg xmlns='http://www.w3.org/2000/svg' className='w-8 h-8 text-neutral-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' />
+                  </svg>
+                </div>
+                <p className='text-lg font-medium text-neutral-800 dark:text-white'>
+                  Chưa có lịch sử đọc
+                </p>
+                <p className='mt-1 text-sm text-neutral-500 dark:text-neutral-400'>
+                  Truyện bạn đọc sẽ được lưu tại đây
+                </p>
+                <Link
+                  to={PATH.home}
+                  className='mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-primary hover:underline'
+                >
+                  Khám phá truyện →
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
+  )
+}
+
+function HistorySkeleton() {
+  return (
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 animate-pulse'>
+      {Array(6)
+        .fill(0)
+        .map((_, i) => (
+          <div key={i} className='flex gap-3 sm:gap-4 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/40'>
+            <div className='w-[100px] sm:w-[120px] h-[133px] sm:h-[160px] bg-neutral-200 dark:bg-neutral-700 rounded-lg flex-shrink-0' />
+            <div className='flex-1 min-w-0 space-y-2'>
+              <div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-4/5' />
+              <div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-16' />
+              <div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-full' />
+              <div className='flex gap-2 pt-2'>
+                <div className='h-9 bg-neutral-200 dark:bg-neutral-700 rounded w-20' />
+                <div className='h-9 bg-neutral-200 dark:bg-neutral-700 rounded w-14' />
+              </div>
+            </div>
+          </div>
+        ))}
+    </div>
   )
 }
 

@@ -13,9 +13,6 @@ const Footer = () => {
           <Link to={PATH.privatePolicy} className='hover:text-primary'>
             Chính sách
           </Link>
-          <Link to={PATH.app} className='hover:text-primary'>
-            Ứng dụng
-          </Link>
           <a href={`mailto:${SITE_BRAND_EMAIL}`} className='hover:text-primary'>
             Liên hệ
           </a>

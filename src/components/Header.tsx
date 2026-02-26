@@ -91,7 +91,7 @@ const ThemeToggle = ({
   <div
     onMouseEnter={() => setOpenTheme(true)}
     onMouseLeave={() => setOpenTheme(false)}
-    className='relative flex flex-col items-center px-2 py-1 hover:text-primary cursor-pointer'
+    className='relative flex flex-col items-center px-2 py-1 text-neutral-600 dark:text-neutral-400 hover:text-primary cursor-pointer'
   >
     {/* Theme Icon */}
     <svg
@@ -998,7 +998,7 @@ const Header = () => {
           <button
             title='Tìm kiếm truyện tranh'
             onClick={() => setIsSearchOpen(true)}
-            className='bg-center bg-no-repeat w-[18px] h-[18px] p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
+            className='bg-center bg-no-repeat w-[18px] h-[18px] p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 dark:[filter:brightness(0)_invert(1)] transition-colors'
             style={{ backgroundImage: `url(${iconSearch})` }}
           />
           </div>

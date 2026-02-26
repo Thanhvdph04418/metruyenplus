@@ -102,7 +102,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
   const SearchIcon = () => (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      className={embedded ? 'w-4 h-4 text-neutral-400' : 'w-5 h-5 text-neutral-400'}
+      className={embedded ? 'w-4 h-4 text-white-400' : 'w-5 h-5 text-white-400'}
       fill='none'
       viewBox='0 0 24 24'
       stroke='currentColor'
