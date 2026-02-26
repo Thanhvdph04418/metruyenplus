@@ -107,7 +107,12 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
       viewBox='0 0 24 24'
       stroke='currentColor'
     >
-      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth={2}
+        d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+      />
     </svg>
   )
 
@@ -122,17 +127,20 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
       }`}
     >
       <span className={embedded ? 'hidden' : 'hidden sm:inline'}>Tìm kiếm</span>
-      <span className={embedded ? 'inline' : 'sm:hidden'}><SearchIcon /></span>
+      <span className={embedded ? 'inline' : 'sm:hidden'}>
+        <SearchIcon />
+      </span>
     </button>
   )
 
   const HistoryList = () => (
     <>
-      <p className='px-3 py-2 text-sm text-neutral-500'>
-        Đã tìm
-      </p>
+      <p className='px-3 py-2 text-sm text-neutral-500'>Đã tìm</p>
       {searchHistory.map((item, i) => (
-        <div key={i} className='relative group flex items-center gap-3 px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50'>
+        <div
+          key={i}
+          className='relative group flex items-center gap-3 px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50'
+        >
           <div
             onMouseDown={() => handleClick(item.id, item.title, item)}
             className='flex-1 flex items-center gap-3 min-w-0 cursor-pointer'
@@ -158,8 +166,19 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
               removeFromHistory(i)
             }}
           >
-            <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-4 w-4'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M6 18L18 6M6 6l12 12'
+              />
             </svg>
           </button>
         </div>
@@ -210,7 +229,11 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
           }`}
           onSubmit={handleSearch}
         >
-          <div className={`flex-shrink-0 flex items-center pointer-events-none ${embedded ? 'pl-3' : 'pl-4'}`}>
+          <div
+            className={`flex-shrink-0 flex items-center pointer-events-none ${
+              embedded ? 'pl-3' : 'pl-4'
+            }`}
+          >
             <SearchIcon />
           </div>
           <input

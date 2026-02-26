@@ -16,7 +16,9 @@ const HomeComicList = ({ data, title, path }: Props) => {
       {/* Title Section */}
       <div className='flex items-center justify-between mb-6 sm:mb-8 px-2'>
         <div className='flex items-center gap-3 lg:gap-4'>
-          <h2 className='text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent min-h-[28px] sm:min-h-[32px]'>{title}</h2>
+          <h2 className='text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent min-h-[28px] sm:min-h-[32px]'>
+            {title}
+          </h2>
         </div>
         <Link
           to={{

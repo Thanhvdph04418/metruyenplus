@@ -348,7 +348,7 @@ export const getTimeUntilNextTrigger = (): number => {
  */
 export const checkAndTriggerAffiliate = async (): Promise<boolean> => {
   console.log('checkAndTriggerAffiliate', {
-    AFFILIATE_ENABLED,
+    AFFILIATE_ENABLED
   })
   if (!AFFILIATE_ENABLED) {
     return false
@@ -399,7 +399,6 @@ export const getAffiliateConfig = () => ({
  * @returns Promise<string | null> - affiliate link URL or null if unavailable
  */
 export const getAffiliateLink = async (): Promise<string | null> => {
-
   if (AFFILIATE_MODE === 'api') {
     return await fetchAffiliateLinkFromAPI()
   }

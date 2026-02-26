@@ -5,8 +5,7 @@ export const SITE_NAME = brand.SITE_NAME
 export const SITE_LOGO_TEXT = brand.SITE_LOGO_TEXT ?? brand.SITE_NAME
 
 export const SITE_DOMAIN = brand.SITE_DOMAIN
-export const SITE_URL =
-  import.meta.env.VITE_URL_WEBSITE || `https://${brand.SITE_DOMAIN}`
+export const SITE_URL = import.meta.env.VITE_URL_WEBSITE || `https://${brand.SITE_DOMAIN}`
 
 export const SITE_BRAND_EMAIL = brand.SITE_BRAND_EMAIL
 export const SITE_TWITTER_HANDLE = brand.SITE_TWITTER_HANDLE

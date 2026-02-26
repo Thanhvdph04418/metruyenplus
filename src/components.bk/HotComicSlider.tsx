@@ -107,30 +107,28 @@ const HotComicSlider = ({ data }: Props) => {
         </div>
       </div>
 
-       {/* Embla Carousel Section */}
-       <div className='relative mx-[-8px] px-4' style={{ minHeight: '400px' }}>
-         <div className='embla' ref={emblaRef}>
-           <div className='embla__container'>
-             {isLoading ? (
-               // Loading skeleton
-               Array.from({ length: 6 }).map((_, index) => (
-                 <div className='embla__slide loading' key={`loading-${index}`}>
-                   <div className='w-full h-[400px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse'></div>
-                 </div>
-               ))
-             ) : (
-               limitedData.map((comic, index) => (
-                 <div className='embla__slide' key={`${comic.id}-${index}`}>
-                   <HotComicCard
-                     data={comic}
-                     index={index}
-                     isAboveFold={index < 5} // Mark first 5 cards as above fold for priority loading
-                   />
-                 </div>
-               ))
-             )}
-           </div>
-         </div>
+      {/* Embla Carousel Section */}
+      <div className='relative mx-[-8px] px-4' style={{ minHeight: '400px' }}>
+        <div className='embla' ref={emblaRef}>
+          <div className='embla__container'>
+            {isLoading
+              ? // Loading skeleton
+                Array.from({ length: 6 }).map((_, index) => (
+                  <div className='embla__slide loading' key={`loading-${index}`}>
+                    <div className='w-full h-[400px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse'></div>
+                  </div>
+                ))
+              : limitedData.map((comic, index) => (
+                  <div className='embla__slide' key={`${comic.id}-${index}`}>
+                    <HotComicCard
+                      data={comic}
+                      index={index}
+                      isAboveFold={index < 5} // Mark first 5 cards as above fold for priority loading
+                    />
+                  </div>
+                ))}
+          </div>
+        </div>
 
         {/* Custom Navigation Buttons - Desktop only */}
         <div className='hidden md:block'>
@@ -155,9 +153,9 @@ const HotComicSlider = ({ data }: Props) => {
             </svg>
           </button>
           <button
-          style={{
-            right: '15px'
-          }}
+            style={{
+              right: '15px'
+            }}
             className='embla__button embla__button--next absolute -right-0 top-1/2 -translate-y-1/2 w-12 h-12 
                        bg-white/95 dark:bg-gray-800/95 rounded-full shadow-xl border border-gray-200 dark:border-gray-700
                        flex items-center justify-center z-20 transition-all duration-200

@@ -9,7 +9,7 @@ import {
   mergeImageConfig,
   shouldLoadWithPriority,
   imageCache,
-  createImageErrorHandler,
+  createImageErrorHandler
 } from '@/utils/imageOptimization'
 
 interface Props {
@@ -51,7 +51,7 @@ const MobileHotComicCard = ({ data, index, scrollPosition, isAboveFold = false }
   const handleImageError = createImageErrorHandler(imgError, () => {
     console.log(`Retrying image load for: ${title}`)
   })
-  const placeholderSrc = "/images/chapter-loading.svg"
+  const placeholderSrc = '/images/chapter-loading.svg'
 
   // Track image loading for cache optimization
   const handleImageLoad = () => {

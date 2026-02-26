@@ -83,7 +83,6 @@ const MobileLogin = () => {
   const appName = searchParams.get('app_name') || 'Ứng dụng'
   const isTest = searchParams.get('isTest') === 'true'
 
-
   // Validate params và auto-trigger Google login
   useEffect(() => {
     if (!deeplink) {
@@ -97,13 +96,11 @@ const MobileLogin = () => {
       setAuthState(AuthState.ERROR)
       return
     }
-
   }, [deeplink, authState])
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (response) => {
       try {
-
         const result = await comicApis.loginWithGoogle(response.access_token)
 
         if (result?.data?.token) {

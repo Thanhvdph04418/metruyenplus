@@ -48,40 +48,31 @@ export const useHistoryData = (limit?: number): UseHistoryDataReturn => {
   }, [allHistory, limit])
 
   // Sync mutation
-  const syncMutation = useMutation(
-    (token: string) => syncReadingHistory(token),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['history', 'local'])
-        refetchLocal()
-      },
-      onError: (error) => {
-        console.error('Sync failed:', error)
-      }
+  const syncMutation = useMutation((token: string) => syncReadingHistory(token), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['history', 'local'])
+      refetchLocal()
+    },
+    onError: (error) => {
+      console.error('Sync failed:', error)
     }
-  )
+  })
 
   // Delete single item mutation
-  const deleteMutation = useMutation(
-    (id: string) => historyDeleteComic(id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['history', 'local'])
-        refetchLocal()
-      }
+  const deleteMutation = useMutation((id: string) => historyDeleteComic(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['history', 'local'])
+      refetchLocal()
     }
-  )
+  })
 
   // Delete all items mutation
-  const deleteAllMutation = useMutation(
-    () => historyDeleteComics(),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['history', 'local'])
-        refetchLocal()
-      }
+  const deleteAllMutation = useMutation(() => historyDeleteComics(), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['history', 'local'])
+      refetchLocal()
     }
-  )
+  })
 
   // Handle sync with token check
   const handleSync = useCallback(async () => {

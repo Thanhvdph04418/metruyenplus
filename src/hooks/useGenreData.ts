@@ -22,9 +22,7 @@ export const useGenreData = () => {
   )
 
   const descGenre = useMemo(
-    () =>
-      genres.find((item) => item.id === currentType)?.description ??
-      genres[0]?.description,
+    () => genres.find((item) => item.id === currentType)?.description ?? genres[0]?.description,
     [genres, currentType]
   )
 

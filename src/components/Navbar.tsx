@@ -5,8 +5,10 @@ import { useMemo } from 'react'
 import { Link, NavLink, createSearchParams, useLocation, useMatch } from 'react-router-dom'
 import useNavbarVisibility from '@/hooks/useNavbarVisibility'
 
-const NAV_LINK_BASE_STYLES = 'text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-primary py-2 px-2'
-const TOP_NAV_LINK_STYLES = 'whitespace-nowrap text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-primary py-2 px-2 flex items-center justify-center gap-2'
+const NAV_LINK_BASE_STYLES =
+  'text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-primary py-2 px-2'
+const TOP_NAV_LINK_STYLES =
+  'whitespace-nowrap text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-primary py-2 px-2 flex items-center justify-center gap-2'
 
 const PANPAGE_URL =
   import.meta.env.VITE_PANPAGE_URL || 'https://www.facebook.com/profile.php?id=100063825323613'
@@ -331,7 +333,8 @@ const Navbar = () => {
     'text-neutral-600 dark:text-neutral-400 transition-transform duration-300',
     {
       'bg-white dark:bg-neutral-950': isHome,
-      'bg-neutral-50 dark:bg-neutral-900/50 py-3 border-t border-neutral-200 dark:border-neutral-800': !isHome,
+      'bg-neutral-50 dark:bg-neutral-900/50 py-3 border-t border-neutral-200 dark:border-neutral-800':
+        !isHome,
       'hidden sm:block': !isTop,
       block: isTop,
       'transform -translate-y-full': !isVisible && !isHome,

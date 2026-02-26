@@ -182,7 +182,9 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
         >
           {titleFormatted}
         </Link>
-        <span className='text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium'>{updated_at}</span>
+        <span className='text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium'>
+          {updated_at}
+        </span>
         <p className='inline-block text-xs sm:text-sm truncate'>
           <Link
             to={`${PATH.comics}/${slug}-${id}/${last_chapter.slug_chapter}/${last_chapter.id}`}

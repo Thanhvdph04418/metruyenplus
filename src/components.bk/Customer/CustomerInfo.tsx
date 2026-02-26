@@ -135,12 +135,7 @@ const CustomerInfo = () => {
               htmlFor='avatar'
               className='absolute -bottom-2 -right-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white rounded-full p-3 cursor-pointer shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl group-hover:scale-105'
             >
-              <svg
-                className='w-5 h-5'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
+              <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -164,12 +159,8 @@ const CustomerInfo = () => {
             </label>
           </div>
           <div className='mt-6 space-y-3 text-center'>
-            <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
-              Ảnh đại diện
-            </h3>
-            <p className='text-sm text-gray-500 dark:text-gray-400'>
-              JPG, PNG, GIF (≤ 2MB)
-            </p>
+            <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>Ảnh đại diện</h3>
+            <p className='text-sm text-gray-500 dark:text-gray-400'>JPG, PNG, GIF (≤ 2MB)</p>
             <div className='inline-flex items-center gap-2 text-sm text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 px-4 py-2 rounded-xl border border-amber-200 dark:border-amber-800'>
               <svg
                 className='w-4 h-4 flex-shrink-0'
@@ -184,9 +175,7 @@ const CustomerInfo = () => {
                   d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
                 />
               </svg>
-              <span>
-                Lưu ý: Ảnh không phù hợp có thể dẫn đến khóa tài khoản
-              </span>
+              <span>Lưu ý: Ảnh không phù hợp có thể dẫn đến khóa tài khoản</span>
             </div>
           </div>
         </div>
@@ -195,8 +184,18 @@ const CustomerInfo = () => {
         <div className='space-y-6'>
           <div className='bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-6'>
             <h4 className='text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2'>
-              <svg className='w-5 h-5 text-primary' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+              <svg
+                className='w-5 h-5 text-primary'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                />
               </svg>
               Thông tin cơ bản
             </h4>
@@ -221,8 +220,18 @@ const CustomerInfo = () => {
                     maxLength={50}
                   />
                   <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
-                    <svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+                    <svg
+                      className='w-5 h-5 text-gray-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                      />
                     </svg>
                   </div>
                 </div>
@@ -247,8 +256,18 @@ const CustomerInfo = () => {
                     title='Vui lòng nhập số điện thoại hợp lệ (10 số)'
                   />
                   <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
-                    <svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' />
+                    <svg
+                      className='w-5 h-5 text-gray-400'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'
+                      />
                     </svg>
                   </div>
                 </div>
@@ -260,8 +279,18 @@ const CustomerInfo = () => {
 
         {error && (
           <div className='flex items-center gap-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 py-3 px-4 rounded-xl border border-red-200 dark:border-red-800'>
-            <svg className='w-5 h-5 flex-shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+            <svg
+              className='w-5 h-5 flex-shrink-0'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+              />
             </svg>
             <span>{error}</span>
           </div>
@@ -304,7 +333,12 @@ const CustomerInfo = () => {
             ) : (
               <div className='flex items-center gap-2'>
                 <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M5 13l4 4L19 7' />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M5 13l4 4L19 7'
+                  />
                 </svg>
                 <span>Cập nhật thông tin</span>
               </div>

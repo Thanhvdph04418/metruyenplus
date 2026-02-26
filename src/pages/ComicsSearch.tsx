@@ -68,15 +68,24 @@ const ComicsSearch = () => {
   const totalComics = dataSearch?.comics?.length ?? 0
   const totalEntries = dataSearch?.total ?? 0
   const hasResults = Array.isArray(dataSearch?.comics) && dataSearch.comics.length > 0
-  const showEmpty = !isFetching && ((Array.isArray(dataSearch?.comics) && !dataSearch.comics.length) || isError)
+  const showEmpty =
+    !isFetching && ((Array.isArray(dataSearch?.comics) && !dataSearch.comics.length) || isError)
 
   return (
     <>
       <Helmet>
-        <title>{queryConfig.q ? `Kết quả tìm kiếm "${queryConfig.q}" - ${SITE_NAME}` : `Tìm truyện tranh - ${SITE_NAME}`}</title>
+        <title>
+          {queryConfig.q
+            ? `Kết quả tìm kiếm "${queryConfig.q}" - ${SITE_NAME}`
+            : `Tìm truyện tranh - ${SITE_NAME}`}
+        </title>
         <meta
           name='description'
-          content={queryConfig.q ? `Kết quả tìm kiếm truyện tranh "${queryConfig.q}" tại ${SITE_NAME}` : `Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại ${SITE_NAME}`}
+          content={
+            queryConfig.q
+              ? `Kết quả tìm kiếm truyện tranh "${queryConfig.q}" tại ${SITE_NAME}`
+              : `Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại ${SITE_NAME}`
+          }
         />
         <link rel='canonical' href={canonicalUrl} />
         {prevUrl && <link rel='prev' href={prevUrl} />}
@@ -90,13 +99,22 @@ const ComicsSearch = () => {
               Trang chủ
             </Link>
             <span aria-hidden>/</span>
-            <Link to={{ pathname: PATH.search, search: createSearchParams({ q: queryConfig.q || '', page: '1' }).toString() }} className='hover:text-primary transition-colors'>
+            <Link
+              to={{
+                pathname: PATH.search,
+                search: createSearchParams({ q: queryConfig.q || '', page: '1' }).toString()
+              }}
+              className='hover:text-primary transition-colors'
+            >
               Tìm kiếm
             </Link>
             {queryConfig.q && (
               <>
                 <span aria-hidden>/</span>
-                <span className='text-primary font-medium truncate max-w-[180px] sm:max-w-none' title={queryConfig.q}>
+                <span
+                  className='text-primary font-medium truncate max-w-[180px] sm:max-w-none'
+                  title={queryConfig.q}
+                >
                   &quot;{queryConfig.q}&quot;
                 </span>
               </>
@@ -112,7 +130,9 @@ const ComicsSearch = () => {
               {queryConfig.q && (
                 <p className='mt-1 text-sm text-neutral-600 dark:text-neutral-400'>
                   {hasResults && !isFetching
-                    ? `Tìm thấy ${totalEntries > 0 ? totalEntries : totalComics} kết quả cho từ khóa "${queryConfig.q}"`
+                    ? `Tìm thấy ${
+                        totalEntries > 0 ? totalEntries : totalComics
+                      } kết quả cho từ khóa "${queryConfig.q}"`
                     : `Từ khóa: "${queryConfig.q}"`}
                 </p>
               )}
@@ -126,12 +146,15 @@ const ComicsSearch = () => {
                 />
               </div>
             )}
-            {!isMobile && isFetching && dataSearch?.total_pages == null && <MiniPaginationSkeleton />}
+            {!isMobile && isFetching && dataSearch?.total_pages == null && (
+              <MiniPaginationSkeleton />
+            )}
           </div>
 
           {/* Results */}
           <div className='min-h-[400px]'>
-            {hasResults && !isFetching &&
+            {hasResults &&
+              !isFetching &&
               (isMobile
                 ? renderMobileComics(dataSearch!.comics, queryConfig.q || '')
                 : renderDesktopComics(dataSearch!.comics, queryConfig.q || ''))}
@@ -141,7 +164,9 @@ const ComicsSearch = () => {
                   Không tìm thấy truyện
                 </p>
                 <p className='mt-1 text-sm text-neutral-500 dark:text-neutral-400'>
-                  {queryConfig.q ? `Thử từ khóa khác hoặc kiểm tra chính tả cho &quot;${queryConfig.q}&quot;` : 'Nhập từ khóa để tìm truyện.'}
+                  {queryConfig.q
+                    ? `Thử từ khóa khác hoặc kiểm tra chính tả cho &quot;${queryConfig.q}&quot;`
+                    : 'Nhập từ khóa để tìm truyện.'}
                 </p>
               </div>
             )}
@@ -217,10 +242,14 @@ const renderDesktopComics = (comicsList: comics[], searchTerm: string) => (
           <h3 className='font-semibold text-neutral-900 dark:text-white line-clamp-2 text-[15px] leading-snug'>
             {highlightText(comic.title, searchTerm)}
           </h3>
-          <span className='text-xs text-neutral-500 dark:text-neutral-400 mt-0.5'>{comic.updated_at}</span>
+          <span className='text-xs text-neutral-500 dark:text-neutral-400 mt-0.5'>
+            {comic.updated_at}
+          </span>
           <p
             className='text-sm text-neutral-600 dark:text-neutral-400 mt-2 line-clamp-2 leading-relaxed'
-            dangerouslySetInnerHTML={{ __html: highlightHtmlContent(comic.short_description, searchTerm) }}
+            dangerouslySetInnerHTML={{
+              __html: highlightHtmlContent(comic.short_description, searchTerm)
+            }}
           />
           <div className='mt-auto pt-2'>
             <Link

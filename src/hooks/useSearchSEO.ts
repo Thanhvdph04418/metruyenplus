@@ -35,9 +35,7 @@ export const useSearchSEO = ({ queryConfig, totalPages = 1 }: UseSearchSEOParams
 
   const metaTags = useMemo(
     () => ({
-      title: searchTerm
-        ? `Tìm kiếm: ${searchTerm} - TComic`
-        : 'Tìm truyện tranh online - TComic',
+      title: searchTerm ? `Tìm kiếm: ${searchTerm} - TComic` : 'Tìm truyện tranh online - TComic',
       description: searchTerm
         ? `Kết quả tìm kiếm cho "${searchTerm}" - Tìm thấy truyện tranh phù hợp với từ khóa`
         : 'Tìm truyện tranh - Tất cả truyện đều có thể tìm thấy tại TComic',

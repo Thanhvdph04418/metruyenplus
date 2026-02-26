@@ -13,24 +13,18 @@ export interface UsePaginationOptions {
  * @param options - Pagination options
  * @returns Pagination state and navigation functions
  */
-export const usePagination = <T>(
-  items: T[],
-  options: UsePaginationOptions = {}
-) => {
-  const {
-    initialPage = 1,
-    itemsPerPage = 10,
-    onPageChange,
-  } = options
+export const usePagination = <T>(items: T[], options: UsePaginationOptions = {}) => {
+  const { initialPage = 1, itemsPerPage = 10, onPageChange } = options
 
   const [currentPage, setCurrentPage] = useState(initialPage)
 
   const paginationInfo = useMemo(
-    () => calculatePagination({
-      currentPage,
-      totalItems: items.length,
-      itemsPerPage,
-    }),
+    () =>
+      calculatePagination({
+        currentPage,
+        totalItems: items.length,
+        itemsPerPage
+      }),
     [currentPage, items.length, itemsPerPage]
   )
 
@@ -44,11 +38,14 @@ export const usePagination = <T>(
     [items, currentPage, itemsPerPage]
   )
 
-  const goToPage = useCallback((page: number) => {
-    if (page < 1 || page > paginationInfo.totalPages) return
-    setCurrentPage(page)
-    onPageChange?.(page)
-  }, [paginationInfo.totalPages, onPageChange])
+  const goToPage = useCallback(
+    (page: number) => {
+      if (page < 1 || page > paginationInfo.totalPages) return
+      setCurrentPage(page)
+      onPageChange?.(page)
+    },
+    [paginationInfo.totalPages, onPageChange]
+  )
 
   const goToNextPage = useCallback(() => {
     if (paginationInfo.hasNextPage) {
@@ -78,6 +75,6 @@ export const usePagination = <T>(
     goToNextPage,
     goToPreviousPage,
     goToFirstPage,
-    goToLastPage,
+    goToLastPage
   }
 }

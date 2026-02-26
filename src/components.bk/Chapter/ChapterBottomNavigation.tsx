@@ -36,11 +36,7 @@ const ChapterBottomNavigation = ({
           stroke='currentColor'
           className='w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-0.5 transition-transform duration-200'
         >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            d='M15.75 19.5L8.25 12l7.5-7.5'
-          />
+          <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
         </svg>
         <span className='font-medium sm:font-semibold text-sm sm:text-base'>Tập trước</span>
       </button>

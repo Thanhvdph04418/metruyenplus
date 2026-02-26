@@ -14,10 +14,7 @@ export interface FileValidationResult {
  * @param maxSizeMB - Maximum size in MB (default: 2MB based on existing CustomerInfo.tsx)
  * @returns Validation result
  */
-export const validateFileSize = (
-  file: File,
-  maxSizeMB: number = 2
-): FileValidationResult => {
+export const validateFileSize = (file: File, maxSizeMB: number = 2): FileValidationResult => {
   const maxSizeBytes = maxSizeMB * 1024 * 1024
 
   if (file.size > maxSizeBytes) {
@@ -25,8 +22,8 @@ export const validateFileSize = (
       valid: false,
       error: {
         type: 'size',
-        message: `File quá lớn. Kích thước tối đa: ${maxSizeMB}MB`,
-      },
+        message: `File quá lớn. Kích thước tối đa: ${maxSizeMB}MB`
+      }
     }
   }
 
@@ -48,8 +45,8 @@ export const validateFileType = (
       valid: false,
       error: {
         type: 'type',
-        message: `Định dạng file không hợp lệ. Chỉ chấp nhận: ${allowedTypes.join(', ')}`,
-      },
+        message: `Định dạng file không hợp lệ. Chỉ chấp nhận: ${allowedTypes.join(', ')}`
+      }
     }
   }
 

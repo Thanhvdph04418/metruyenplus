@@ -80,7 +80,10 @@ const RecentCommentItem = ({ comment }: RecentCommentItemProps) => {
                 </Link>
                 {comment.chapterInfo && (
                   <Link
-                    to={`${PATH.comics}/${convertToSlug(comment.comicInfo.name)}-${comment.comicId}/${convertToSlug(comment.chapterInfo?.name || '')}/${comment.chapterInfo?.chapterId}`}
+                    to={`${PATH.comics}/${convertToSlug(comment.comicInfo.name)}-${
+                      comment.comicId
+                    }/${convertToSlug(comment.chapterInfo?.name || '')}/${comment.chapterInfo
+                      ?.chapterId}`}
                     className='text-xs text-primary hover:underline truncate'
                     title={comment.chapterInfo?.name || ''}
                   >

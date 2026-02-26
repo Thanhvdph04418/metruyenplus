@@ -34,7 +34,8 @@ const StatusFilterTabs = ({ currentStatus, queryConfig }: StatusFilterTabsProps)
         className={classNames(
           'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
           {
-            'bg-primary text-white hover:no-underline hover:!text-white': currentStatus === 'completed',
+            'bg-primary text-white hover:no-underline hover:!text-white':
+              currentStatus === 'completed',
             'bg-transparent text-primary': currentStatus !== 'completed'
           }
         )}
@@ -53,7 +54,8 @@ const StatusFilterTabs = ({ currentStatus, queryConfig }: StatusFilterTabsProps)
         className={classNames(
           'capitalize text-center px-2 py-1 rounded-md border border-primary leading-5 hover:underline',
           {
-            'bg-primary text-white hover:no-underline hover:!text-white': currentStatus === 'updating',
+            'bg-primary text-white hover:no-underline hover:!text-white':
+              currentStatus === 'updating',
             'bg-transparent text-primary': currentStatus !== 'updating'
           }
         )}

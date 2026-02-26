@@ -72,13 +72,17 @@ const MobileBottomTab = () => {
             >
               <Icon
                 className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 ${
-                  isActive ? 'text-primary drop-shadow-sm scale-110' : 'text-current group-hover:scale-105'
+                  isActive
+                    ? 'text-primary drop-shadow-sm scale-110'
+                    : 'text-current group-hover:scale-105'
                 }`}
                 aria-hidden
               />
               <span
                 className={`text-[10px] font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${
-                  isActive ? 'text-transparent bg-gradient-to-r from-primary to-primary-2 bg-clip-text' : ''
+                  isActive
+                    ? 'text-transparent bg-gradient-to-r from-primary to-primary-2 bg-clip-text'
+                    : ''
                 }`}
               >
                 {tab.title}

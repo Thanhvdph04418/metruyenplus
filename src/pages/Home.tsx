@@ -2,7 +2,7 @@ import comicApis from '@/apis/comicApis'
 import {
   HotComicSlider,
   MobileHotComicSlider,
-  HomeComicList,
+  HomeComicList
   // MobileAppNotification,
   // DesktopDomainNotification
 } from '@/components'
@@ -76,9 +76,7 @@ const Home = () => {
       <div className='min-h-screen bg-white dark:bg-neutral-900'>
         <div className='container px-4 sm:px-6 xl:px-0 py-5 sm:py-6 max-w-[1100px]'>
           <section className='mb-8'>
-            <p className='text-sm text-neutral-500 dark:text-neutral-400 mb-3'>
-              Nổi bật
-            </p>
+            <p className='text-sm text-neutral-500 dark:text-neutral-400 mb-3'>Nổi bật</p>
             <div className='relative w-full'>
               {isLoadingHot && !dataHot ? (
                 <HotComicSliderSkeleton />

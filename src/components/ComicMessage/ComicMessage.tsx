@@ -30,8 +30,7 @@ const VARIANTS: Record<
   },
   error: {
     label: 'Lỗi!',
-    borderClass:
-      'border-rose-500 dark:border-rose-400 shadow-rose-200/50 dark:shadow-rose-900/30',
+    borderClass: 'border-rose-500 dark:border-rose-400 shadow-rose-200/50 dark:shadow-rose-900/30',
     bgClass: 'bg-rose-200 dark:bg-rose-800',
     labelClass: 'text-rose-700 dark:text-rose-300'
   },
@@ -90,10 +89,14 @@ export const ComicMessage = ({
       <div
         className={classNames(
           'absolute -bottom-1 left-5 w-2.5 h-2.5 rotate-45',
-          type === 'success' && 'bg-emerald-200 dark:bg-emerald-800 border-emerald-500 dark:border-emerald-400 border-r-2 border-b-2',
-          type === 'error' && 'bg-rose-200 dark:bg-rose-800 border-rose-500 dark:border-rose-400 border-r-2 border-b-2',
-          type === 'info' && 'bg-orange-200 dark:bg-orange-800 border-primary border-r-2 border-b-2',
-          type === 'warning' && 'bg-amber-200 dark:bg-amber-800 border-amber-500 dark:border-amber-400 border-r-2 border-b-2'
+          type === 'success' &&
+            'bg-emerald-200 dark:bg-emerald-800 border-emerald-500 dark:border-emerald-400 border-r-2 border-b-2',
+          type === 'error' &&
+            'bg-rose-200 dark:bg-rose-800 border-rose-500 dark:border-rose-400 border-r-2 border-b-2',
+          type === 'info' &&
+            'bg-orange-200 dark:bg-orange-800 border-primary border-r-2 border-b-2',
+          type === 'warning' &&
+            'bg-amber-200 dark:bg-amber-800 border-amber-500 dark:border-amber-400 border-r-2 border-b-2'
         )}
         aria-hidden
       />
@@ -119,7 +122,13 @@ export const ComicMessage = ({
               className='flex-shrink-0 p-0.5 rounded hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-gray-500 dark:text-gray-400'
               aria-label='Đóng'
             >
-              <svg className='w-3.5 h-3.5' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth={2}>
+              <svg
+                className='w-3.5 h-3.5'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+                strokeWidth={2}
+              >
                 <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
               </svg>
             </button>

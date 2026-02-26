@@ -26,7 +26,7 @@ export const useCustomerProfile = (
   options?: UseCustomerProfileOptions
 ) => {
   const queryClient = useQueryClient()
-  
+
   // Get initial data from localStorage if not provided
   const getInitialData = useCallback(() => {
     if (initialData) return initialData
@@ -35,13 +35,13 @@ export const useCustomerProfile = (
       return {
         name: customerInfo?.name || '',
         phone: customerInfo?.phone || '',
-        avatar: customerInfo?.avatar || null,
+        avatar: customerInfo?.avatar || null
       }
     } catch {
       return {
         name: '',
         phone: '',
-        avatar: null,
+        avatar: null
       }
     }
   }, [initialData])
@@ -61,9 +61,12 @@ export const useCustomerProfile = (
     },
     {
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể tải avatar lên. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể tải avatar lên. Vui lòng thử lại.'
         toast.error(message)
-      },
+      }
     }
   )
 
@@ -79,56 +82,62 @@ export const useCustomerProfile = (
         if (response.code !== 0) {
           throw new Error(response.message)
         }
-        
+
         queryClient.invalidateQueries(['customer', 'profile'])
-        
+
         // Update localStorage
         const updatedInfo = {
           name: response.data.name,
           phone: response.data.phone,
-          avatar: response.data.avatar,
+          avatar: response.data.avatar
         }
         localStorage.setItem('customerInfo', JSON.stringify(updatedInfo))
-        
+
         toast.success('Đã cập nhật thông tin')
         options?.onSuccess?.()
       },
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể cập nhật thông tin. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể cập nhật thông tin. Vui lòng thử lại.'
         toast.error(message)
-      },
+      }
     }
   )
 
   // Handle avatar change
-  const handleAvatarChange = useCallback((file: File | null) => {
-    // Clean up previous preview if it was an object URL
-    if (avatarPreview && avatarPreview.startsWith('blob:')) {
-      revokeFilePreviewUrl(avatarPreview)
-    }
+  const handleAvatarChange = useCallback(
+    (file: File | null) => {
+      // Clean up previous preview if it was an object URL
+      if (avatarPreview && avatarPreview.startsWith('blob:')) {
+        revokeFilePreviewUrl(avatarPreview)
+      }
 
-    if (!file) {
-      setFormData((prev) => ({ ...prev, avatar: null }))
-      setAvatarPreview(null)
-      return
-    }
+      if (!file) {
+        setFormData((prev) => ({ ...prev, avatar: null }))
+        setAvatarPreview(null)
+        return
+      }
 
-    // Validate file (2MB max, image types only)
-    const validation = validateFile(file, {
-      maxSizeMB: 2,
-      allowedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'],
-    })
-    
-    if (!validation.valid) {
-      toast.error(validation.error?.message || 'File không hợp lệ')
-      return
-    }
+      // Validate file (2MB max, image types only)
+      const validation = validateFile(file, {
+        maxSizeMB: 2,
+        allowedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+      })
 
-    // Create preview
-    const previewUrl = createFilePreviewUrl(file)
-    setFormData((prev) => ({ ...prev, avatar: file }))
-    setAvatarPreview(previewUrl)
-  }, [avatarPreview])
+      if (!validation.valid) {
+        toast.error(validation.error?.message || 'File không hợp lệ')
+        return
+      }
+
+      // Create preview
+      const previewUrl = createFilePreviewUrl(file)
+      setFormData((prev) => ({ ...prev, avatar: file }))
+      setAvatarPreview(previewUrl)
+    },
+    [avatarPreview]
+  )
 
   // Handle form field change
   const handleFieldChange = useCallback((field: keyof CustomerProfileData, value: string) => {
@@ -138,7 +147,7 @@ export const useCustomerProfile = (
   // Handle form submit
   const handleSubmit = useCallback(async () => {
     const loadingToast = toast.loading('Đang cập nhật thông tin...')
-    
+
     try {
       let avatarUrl: string | undefined
 
@@ -156,7 +165,7 @@ export const useCustomerProfile = (
       await updateProfileMutation.mutateAsync({
         name: formData.name,
         ...(formData.phone && { phone: formData.phone }),
-        ...(avatarUrl && { avatar: avatarUrl }),
+        ...(avatarUrl && { avatar: avatarUrl })
       })
 
       // Update preview to use the new URL
@@ -192,6 +201,6 @@ export const useCustomerProfile = (
     handleSubmit,
     isUploading: uploadAvatarMutation.isLoading,
     isUpdating: updateProfileMutation.isLoading,
-    isLoading: uploadAvatarMutation.isLoading || updateProfileMutation.isLoading,
+    isLoading: uploadAvatarMutation.isLoading || updateProfileMutation.isLoading
   }
 }

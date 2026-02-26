@@ -19,7 +19,6 @@ const DesktopDomainNotification: React.FC = () => {
     <div className='hidden md:block w-full bg-white dark:bg-gray-900 border-y border-red-200 dark:border-red-900'>
       <div className='container px-4 xl:px-0 mx-auto py-3'>
         <div className='flex items-center justify-center gap-3'>
-    
           <div className='flex-shrink-0'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -31,7 +30,6 @@ const DesktopDomainNotification: React.FC = () => {
               <path d='M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z' />
             </svg>
           </div>
-
 
           <div className='text-sm'>
             <span className='text-red-600 dark:text-red-400'>

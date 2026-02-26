@@ -15,11 +15,7 @@
 
 import { useState } from 'react'
 import { trackAffiliateClick } from '@/utils/analytics'
-import {
-  getAffiliateLink,
-  getStaticAffiliateUrl,
-  getAffiliateMode
-} from '@/utils/affiliate'
+import { getAffiliateLink, getStaticAffiliateUrl, getAffiliateMode } from '@/utils/affiliate'
 
 const AffiliateNotice = () => {
   const [isLoading, setIsLoading] = useState(false)

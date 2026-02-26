@@ -48,7 +48,9 @@ export const useComicsListData = ({ pathname, queryConfig }: UseComicsListDataPa
   )
 
   const isLoading = isNewPage ? newQuery.isLoading : listQuery.isLoading
-  const isError = isNewPage ? newQuery.isError || newQuery.data?.data?.status === 404 : listQuery.isError || listQuery.data?.data?.status === 404
+  const isError = isNewPage
+    ? newQuery.isError || newQuery.data?.data?.status === 404
+    : listQuery.isError || listQuery.data?.data?.status === 404
 
   return {
     dataComics,

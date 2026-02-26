@@ -32,11 +32,7 @@ import {
 } from '@/utils/imageOptimization'
 import { getComicHistory } from '@/utils/history'
 import { trackComicView } from '@/utils/analytics'
-import {
-  SITE_NAME,
-  SITE_TWITTER_HANDLE,
-  SITE_URL
-} from '@/config/siteConfig'
+import { SITE_NAME, SITE_TWITTER_HANDLE, SITE_URL } from '@/config/siteConfig'
 
 const ComicsDetail = () => {
   const { comicIndentify } = useParams()
@@ -251,7 +247,7 @@ const ComicsDetail = () => {
         <meta
           name='description'
           content={`✅ Đọc truyện tranh ${dataComics?.title} ${
-            dataComics?.other_names && (dataComics?.other_names.length > 0)
+            dataComics?.other_names && dataComics?.other_names.length > 0
               ? `(${dataComics.other_names.join(', ')})`
               : ''
           } Tiếng Việt bản dịch Full mới nhất, ảnh đẹp chất lượng cao, cập nhật nhanh và sớm nhất tại ${SITE_NAME}. Thể loại: ${dataComics?.genres
@@ -368,79 +364,116 @@ const ComicsDetail = () => {
                 {dataComics && !isMainContentLoading && (
                   <div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6'>
                     <figure className='w-[160px] h-[224px] sm:w-[200px] sm:h-[280px] flex-shrink-0 rounded overflow-hidden border border-neutral-200 dark:border-neutral-700'>
-                        <LazyLoadImage
-                          src={dataComics.thumbnail}
-                          alt={dataComics.title}
+                      <LazyLoadImage
+                        src={dataComics.thumbnail}
+                        alt={dataComics.title}
+                        title={dataComics.title}
+                        width={240}
+                        height={330}
+                        effect={heroImageConfig.effect}
+                        placeholderSrc={heroPlaceholderSrc}
+                        threshold={heroImageConfig.threshold}
+                        delayTime={heroImageConfig.delayTime}
+                        delayMethod={heroImageConfig.delayMethod}
+                        useIntersectionObserver={heroImageConfig.useIntersectionObserver}
+                        visibleByDefault={heroImageConfig.visibleByDefault}
+                        loading='eager' // Always load hero images eagerly
+                        decoding='sync' // Synchronous decoding for better LCP
+                        wrapperClassName='block w-full h-full'
+                        className='h-full w-full object-cover pointer-events-none select-none priority-image'
+                        onLoad={handleHeroImageLoad}
+                        onError={handleHeroImageError}
+                        beforeLoad={() => {
+                          // Pre-load hero image for better performance
+                          if (!isHeroCached) {
+                            const img = new Image()
+                            img.src = dataComics.thumbnail
+                          }
+                        }}
+                      />
+                    </figure>
+                    <div className='w-full text-center sm:text-left'>
+                      <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-2 sm:gap-4'>
+                        <h1
                           title={dataComics.title}
-                          width={240}
-                          height={330}
-                          effect={heroImageConfig.effect}
-                          placeholderSrc={heroPlaceholderSrc}
-                          threshold={heroImageConfig.threshold}
-                          delayTime={heroImageConfig.delayTime}
-                          delayMethod={heroImageConfig.delayMethod}
-                          useIntersectionObserver={heroImageConfig.useIntersectionObserver}
-                          visibleByDefault={heroImageConfig.visibleByDefault}
-                          loading='eager' // Always load hero images eagerly
-                          decoding='sync' // Synchronous decoding for better LCP
-                          wrapperClassName='block w-full h-full'
-                          className='h-full w-full object-cover pointer-events-none select-none priority-image'
-                          onLoad={handleHeroImageLoad}
-                          onError={handleHeroImageError}
-                          beforeLoad={() => {
-                            // Pre-load hero image for better performance
-                            if (!isHeroCached) {
-                              const img = new Image()
-                              img.src = dataComics.thumbnail
-                            }
-                          }}
-                        />
-                      </figure>
-                      <div className='w-full text-center sm:text-left'>
-                        <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-2 sm:gap-4'>
-                          <h1
-                            title={dataComics.title}
-                            className='font-semibold text-xl sm:text-2xl text-neutral-900 dark:text-white line-clamp-3 sm:line-clamp-2'
+                          className='font-semibold text-xl sm:text-2xl text-neutral-900 dark:text-white line-clamp-3 sm:line-clamp-2'
+                        >
+                          {dataComics.title
+                            .split(' ')
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ')}
+                        </h1>
+                        <RatingStar rating={dataComics.rate_average} />
+                      </div>
+                      {dataComics.other_names && dataComics.other_names.length > 0 && (
+                        <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-1'>
+                          {dataComics.other_names.join(' • ')}
+                        </p>
+                      )}
+                      <div className='sm:hidden flex flex-col gap-3 mt-3 text-neutral-700 dark:text-neutral-200'>
+                        <div className='flex items-center gap-3'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='w-5 h-5'
+                            viewBox='0 0 24 24'
                           >
-                            {dataComics.title
-                              .split(' ')
-                              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                              .join(' ')}
-                          </h1>
-                          <RatingStar rating={dataComics.rate_average} />
+                            <path
+                              fill='currentColor'
+                              d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2zm0 7c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm6 5H6v-.99c.2-.72 3.3-2.01 6-2.01s5.8 1.29 6 2v1z'
+                            />
+                          </svg>
+                          <span className='min-w-[90px]'>Tác giả</span>
+                          <span className='text-primary font-medium'>{dataComics.authors}</span>
                         </div>
-                        {dataComics.other_names && (dataComics.other_names.length > 0) && (
-                          <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-1'>
-                            {dataComics.other_names.join(' • ')}
-                          </p>
-                        )}
-                        <div className='sm:hidden flex flex-col gap-3 mt-3 text-neutral-700 dark:text-neutral-200'>
-                          <div className='flex items-center gap-3'>
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              className='w-5 h-5'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                fill='currentColor'
-                                d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2zm0 7c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm6 5H6v-.99c.2-.72 3.3-2.01 6-2.01s5.8 1.29 6 2v1z'
-                              />
-                            </svg>
-                            <span className='min-w-[90px]'>Tác giả</span>
-                            <span className='text-primary font-medium'>{dataComics.authors}</span>
-                          </div>
-                          <div className='flex items-center gap-3'>
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              className='w-5 h-5'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                fill='currentColor'
-                                d='M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6c0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6c0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4l-4-4v3z'
-                              />
-                            </svg>
-                            <span className='min-w-[90px]'>Tình trạng</span>
+                        <div className='flex items-center gap-3'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='w-5 h-5'
+                            viewBox='0 0 24 24'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6c0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6c0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4l-4-4v3z'
+                            />
+                          </svg>
+                          <span className='min-w-[90px]'>Tình trạng</span>
+                          <span
+                            className={`font-medium px-2 py-0.5 rounded text-sm ${
+                              dataComics.status === 'ONGOING'
+                                ? 'bg-primary/10 text-primary'
+                                : 'bg-green-500/10 text-green-600 dark:text-green-400'
+                            }`}
+                          >
+                            {dataComics.status === 'ONGOING' ? 'Đang cập nhật' : 'Đã hoàn thành'}
+                          </span>
+                        </div>
+                        <div className='flex items-center gap-3'>
+                          <span className='min-w-[90px]'>Lượt thích</span>
+                          <span className='font-medium text-primary'>
+                            {formatCurrency(dataComics.total_likes)}
+                          </span>
+                        </div>
+                        <div className='flex items-center gap-3'>
+                          <span className='min-w-[90px]'>Lượt theo dõi</span>
+                          <span className='font-medium text-primary'>
+                            {formatCurrency(dataComics.followers)}
+                          </span>
+                        </div>
+                        <div className='flex items-center gap-3'>
+                          <span className='min-w-[90px]'>Lượt xem</span>
+                          <span className='font-medium text-primary'>
+                            {formatCurrency(dataComics.total_views)}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className='hidden sm:block text-neutral-700 dark:text-neutral-200'>
+                        <div className='flex flex-col gap-1.5 text-sm'>
+                          <span>
+                            Tác giả: <strong className='text-primary'>{dataComics.authors}</strong>
+                          </span>
+                          <span className='flex items-center gap-2'>
+                            Tình trạng:{' '}
                             <span
                               className={`font-medium px-2 py-0.5 rounded text-sm ${
                                 dataComics.status === 'ONGOING'
@@ -450,390 +483,383 @@ const ComicsDetail = () => {
                             >
                               {dataComics.status === 'ONGOING' ? 'Đang cập nhật' : 'Đã hoàn thành'}
                             </span>
-                          </div>
-                          <div className='flex items-center gap-3'>
-                            <span className='min-w-[90px]'>Lượt thích</span>
-                            <span className='font-medium text-primary'>{formatCurrency(dataComics.total_likes)}</span>
-                          </div>
-                          <div className='flex items-center gap-3'>
-                            <span className='min-w-[90px]'>Lượt theo dõi</span>
-                            <span className='font-medium text-primary'>{formatCurrency(dataComics.followers)}</span>
-                          </div>
-                          <div className='flex items-center gap-3'>
-                            <span className='min-w-[90px]'>Lượt xem</span>
-                            <span className='font-medium text-primary'>{formatCurrency(dataComics.total_views)}</span>
-                          </div>
+                          </span>
                         </div>
-
-                        <div className='hidden sm:block text-neutral-700 dark:text-neutral-200'>
-                          <div className='flex flex-col gap-1.5 text-sm'>
-                            <span>Tác giả: <strong className='text-primary'>{dataComics.authors}</strong></span>
-                            <span className='flex items-center gap-2'>
-                              Tình trạng:{' '}
-                              <span
-                                className={`font-medium px-2 py-0.5 rounded text-sm ${
-                                  dataComics.status === 'ONGOING'
-                                    ? 'bg-primary/10 text-primary'
-                                    : 'bg-green-500/10 text-green-600 dark:text-green-400'
-                                }`}
-                              >
-                                {dataComics.status === 'ONGOING' ? 'Đang cập nhật' : 'Đã hoàn thành'}
-                              </span>
-                            </span>
-                          </div>
-                          <p className='flex flex-wrap items-center gap-x-6 gap-y-1 text-sm mt-2 text-neutral-500 dark:text-neutral-400'>
-                            <span>Lượt xem: <strong className='text-neutral-700 dark:text-neutral-200'>{formatCurrency(dataComics.total_views)}</strong></span>
-                            <span>Theo dõi: <strong className='text-neutral-700 dark:text-neutral-200'>{formatCurrency(dataComics.followers)}</strong></span>
-                            <span>Thích: <strong className='text-neutral-700 dark:text-neutral-200'>{formatCurrency(dataComics.total_likes)}</strong></span>
-                          </p>
-                        </div>
-                        <div className='flex flex-wrap gap-2 items-center my-3'>
-                          {dataComics.genres.map((genre) => {
-                            return genre.id !== undefined ? (
-                              <Link
-                                to={{
-                                  pathname: PATH.genres,
-                                  search: createSearchParams({ type: genre.slug_genre, page: '1' }).toString()
-                                }}
-                                title={genre.name}
-                                key={genre.id}
-                                className='text-xs px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors'
-                              >
-                                {genre.name}
-                              </Link>
-                            ) : null
-                          })}
-                        </div>
-                        <div className='relative'>
-                          <p
-                            ref={description}
-                            className={`text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line text-left leading-relaxed ${
-                              !isOpen ? 'overflow-hidden max-h-[72px]' : ''
-                            }`}
-                            dangerouslySetInnerHTML={{ __html: dataComics.description }}
-                          />
-                          {isShow && (
-                            <button
-                              type='button'
-                              title={isOpen ? 'Thu gọn mô tả' : 'Xem thêm mô tả'}
-                              onClick={() => setIsOpen((prev) => !prev)}
-                              className={!isOpen ? 'absolute right-0 bg-white dark:bg-neutral-900 bottom-0 z-10 pl-4' : 'mt-1'}
+                        <p className='flex flex-wrap items-center gap-x-6 gap-y-1 text-sm mt-2 text-neutral-500 dark:text-neutral-400'>
+                          <span>
+                            Lượt xem:{' '}
+                            <strong className='text-neutral-700 dark:text-neutral-200'>
+                              {formatCurrency(dataComics.total_views)}
+                            </strong>
+                          </span>
+                          <span>
+                            Theo dõi:{' '}
+                            <strong className='text-neutral-700 dark:text-neutral-200'>
+                              {formatCurrency(dataComics.followers)}
+                            </strong>
+                          </span>
+                          <span>
+                            Thích:{' '}
+                            <strong className='text-neutral-700 dark:text-neutral-200'>
+                              {formatCurrency(dataComics.total_likes)}
+                            </strong>
+                          </span>
+                        </p>
+                      </div>
+                      <div className='flex flex-wrap gap-2 items-center my-3'>
+                        {dataComics.genres.map((genre) => {
+                          return genre.id !== undefined ? (
+                            <Link
+                              to={{
+                                pathname: PATH.genres,
+                                search: createSearchParams({
+                                  type: genre.slug_genre,
+                                  page: '1'
+                                }).toString()
+                              }}
+                              title={genre.name}
+                              key={genre.id}
+                              className='text-xs px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors'
                             >
-                              <span className='text-primary text-sm font-medium'>{isOpen ? 'Thu gọn' : '...Xem thêm'}</span>
-                            </button>
-                          )}
-                        </div>
-                        <div className='flex items-center justify-center sm:justify-start gap-3 mt-4 sm:mt-2'>
-                          <Link
-                            title={
-                              lastReadChapter
-                                ? `Đọc tiếp ${lastReadChapter.name}`
-                                : 'Đọc ngay chương mới nhất'
+                              {genre.name}
+                            </Link>
+                          ) : null
+                        })}
+                      </div>
+                      <div className='relative'>
+                        <p
+                          ref={description}
+                          className={`text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line text-left leading-relaxed ${
+                            !isOpen ? 'overflow-hidden max-h-[72px]' : ''
+                          }`}
+                          dangerouslySetInnerHTML={{ __html: dataComics.description }}
+                        />
+                        {isShow && (
+                          <button
+                            type='button'
+                            title={isOpen ? 'Thu gọn mô tả' : 'Xem thêm mô tả'}
+                            onClick={() => setIsOpen((prev) => !prev)}
+                            className={
+                              !isOpen
+                                ? 'absolute right-0 bg-white dark:bg-neutral-900 bottom-0 z-10 pl-4'
+                                : 'mt-1'
                             }
-                            to={`${PATH.comics}/${slug}-${id}/${
-                              lastReadChapter
-                                ? lastReadChapter.slug_chapter
-                                : dataComics.chapters[dataComics.chapters.length - 1].slug_chapter
-                            }/${
-                              lastReadChapter
-                                ? lastReadChapter.id
-                                : dataComics.chapters[dataComics.chapters.length - 1].id
-                            }`}
-                            className='text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-11 capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 bg-primary hover:opacity-90 hover:text-white transition-opacity'
                           >
-                            <svg
-                              xmlns='http://www.w3.org/2000/svg'
-                              xmlnsXlink='http://www.w3.org/1999/xlink'
-                              aria-hidden='true'
-                              className='w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0'
-                              viewBox='0 0 32 32'
-                            >
-                              <path
-                                fill='currentColor'
-                                d='M19 10h7v2h-7zm0 5h7v2h-7zm0 5h7v2h-7zM6 10h7v2H6zm0 5h7v2H6zm0 5h7v2H6z'
-                              />
-                              <path
-                                fill='currentColor'
-                                d='M28 5H4a2.002 2.002 0 0 0-2 2v18a2.002 2.002 0 0 0 2 2h24a2.002 2.002 0 0 0 2-2V7a2.002 2.002 0 0 0-2-2ZM4 7h11v18H4Zm13 18V7h11v18Z'
-                              />
-                            </svg>
-                            <span className='truncate text-sm sm:text-base'>
-                              {lastReadChapter ? `Đọc tiếp ${lastReadChapter.name}` : 'Đọc Ngay'}
+                            <span className='text-primary text-sm font-medium'>
+                              {isOpen ? 'Thu gọn' : '...Xem thêm'}
                             </span>
-                          </Link>
-
-                          {/* Follow Button */}
-                          <button
-                            disabled={isFollowing}
-                            className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
-                              isFollowing ? 'opacity-70 cursor-not-allowed' : ''
-                            } ${
-                              dataComics?.is_follow
-                                ? 'bg-primary text-white hover:opacity-90'
-                                : 'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:text-primary focus:outline-none'
-                            }`}
-                            onClick={handleFollow}
-                          >
-                            {isFollowing ? (
-                              <svg
-                                className='animate-spin h-5 w-5'
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                              >
-                                <circle
-                                  className='opacity-25'
-                                  cx='12'
-                                  cy='12'
-                                  r='10'
-                                  stroke='currentColor'
-                                  strokeWidth='4'
-                                ></circle>
-                                <path
-                                  className='opacity-75'
-                                  fill='currentColor'
-                                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                                ></path>
-                              </svg>
-                            ) : dataComics?.is_follow ? (
-                              <FaUserCheck className='w-5 h-5' />
-                            ) : (
-                              <FaUserPlus className='w-5 h-5' />
-                            )}
-                            <span>{dataComics?.is_follow ? 'Đã theo dõi' : 'Theo dõi'}</span>
                           </button>
-
-                          {/* Like Button */}
-                          <button
-                            disabled={isLiking}
-                            className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
-                              isLiking ? 'opacity-70 cursor-not-allowed' : ''
-                            } ${
-                              dataComics?.is_like
-                                ? 'bg-primary text-white hover:opacity-90'
-                                : 'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:text-primary focus:outline-none'
-                            }`}
-                            onClick={handleLike}
+                        )}
+                      </div>
+                      <div className='flex items-center justify-center sm:justify-start gap-3 mt-4 sm:mt-2'>
+                        <Link
+                          title={
+                            lastReadChapter
+                              ? `Đọc tiếp ${lastReadChapter.name}`
+                              : 'Đọc ngay chương mới nhất'
+                          }
+                          to={`${PATH.comics}/${slug}-${id}/${
+                            lastReadChapter
+                              ? lastReadChapter.slug_chapter
+                              : dataComics.chapters[dataComics.chapters.length - 1].slug_chapter
+                          }/${
+                            lastReadChapter
+                              ? lastReadChapter.id
+                              : dataComics.chapters[dataComics.chapters.length - 1].id
+                          }`}
+                          className='text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-11 capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 bg-primary hover:opacity-90 hover:text-white transition-opacity'
+                        >
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            xmlnsXlink='http://www.w3.org/1999/xlink'
+                            aria-hidden='true'
+                            className='w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0'
+                            viewBox='0 0 32 32'
                           >
-                            {isLiking ? (
-                              <svg
-                                className='animate-spin h-5 w-5'
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                              >
-                                <circle
-                                  className='opacity-25'
-                                  cx='12'
-                                  cy='12'
-                                  r='10'
-                                  stroke='currentColor'
-                                  strokeWidth='4'
-                                ></circle>
-                                <path
-                                  className='opacity-75'
-                                  fill='currentColor'
-                                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                                ></path>
-                              </svg>
-                            ) : dataComics?.is_like ? (
-                              <AiFillHeart className='w-5 h-5' />
-                            ) : (
-                              <AiOutlineHeart className='w-5 h-5' />
-                            )}
-                            <span>{dataComics?.is_like ? 'Đã thích' : 'Yêu thích'}</span>
-                          </button>
-                        </div>
+                            <path
+                              fill='currentColor'
+                              d='M19 10h7v2h-7zm0 5h7v2h-7zm0 5h7v2h-7zM6 10h7v2H6zm0 5h7v2H6zm0 5h7v2H6z'
+                            />
+                            <path
+                              fill='currentColor'
+                              d='M28 5H4a2.002 2.002 0 0 0-2 2v18a2.002 2.002 0 0 0 2 2h24a2.002 2.002 0 0 0 2-2V7a2.002 2.002 0 0 0-2-2ZM4 7h11v18H4Zm13 18V7h11v18Z'
+                            />
+                          </svg>
+                          <span className='truncate text-sm sm:text-base'>
+                            {lastReadChapter ? `Đọc tiếp ${lastReadChapter.name}` : 'Đọc Ngay'}
+                          </span>
+                        </Link>
 
-                        {/* Mobile Action Buttons */}
-                        <div className='flex sm:hidden items-center gap-2 mt-3'>
-                          <button
-                            disabled={isFollowing}
-                            className={`flex-1 h-10 flex items-center justify-center gap-2 rounded font-medium transition-all duration-200 ${
-                              isFollowing ? 'opacity-70 cursor-not-allowed' : ''
-                            } ${
-                              dataComics?.is_follow
-                                ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-md hover:shadow-blue-300/50 dark:hover:shadow-blue-900/50'
-                                : 'border border-gray-300 text-gray-700 dark:text-gray-200 dark:border-gray-600 hover:text-blue-500 dark:hover:text-blue-400 hover:shadow-sm focus:outline-none'
-                            }`}
-                            onClick={handleFollow}
-                          >
-                            {isFollowing ? (
-                              <svg
-                                className='animate-spin h-4 w-4'
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                              >
-                                <circle
-                                  className='opacity-25'
-                                  cx='12'
-                                  cy='12'
-                                  r='10'
-                                  stroke='currentColor'
-                                  strokeWidth='4'
-                                ></circle>
-                                <path
-                                  className='opacity-75'
-                                  fill='currentColor'
-                                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                                ></path>
-                              </svg>
-                            ) : dataComics?.is_follow ? (
-                              <FaUserCheck className='w-4 h-4' />
-                            ) : (
-                              <FaUserPlus className='w-4 h-4' />
-                            )}
-                            <span>{dataComics?.is_follow ? 'Đã theo dõi' : 'Theo dõi'}</span>
-                          </button>
+                        {/* Follow Button */}
+                        <button
+                          disabled={isFollowing}
+                          className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
+                            isFollowing ? 'opacity-70 cursor-not-allowed' : ''
+                          } ${
+                            dataComics?.is_follow
+                              ? 'bg-primary text-white hover:opacity-90'
+                              : 'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:text-primary focus:outline-none'
+                          }`}
+                          onClick={handleFollow}
+                        >
+                          {isFollowing ? (
+                            <svg
+                              className='animate-spin h-5 w-5'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                            >
+                              <circle
+                                className='opacity-25'
+                                cx='12'
+                                cy='12'
+                                r='10'
+                                stroke='currentColor'
+                                strokeWidth='4'
+                              ></circle>
+                              <path
+                                className='opacity-75'
+                                fill='currentColor'
+                                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                              ></path>
+                            </svg>
+                          ) : dataComics?.is_follow ? (
+                            <FaUserCheck className='w-5 h-5' />
+                          ) : (
+                            <FaUserPlus className='w-5 h-5' />
+                          )}
+                          <span>{dataComics?.is_follow ? 'Đã theo dõi' : 'Theo dõi'}</span>
+                        </button>
 
-                          <button
-                            disabled={isLiking}
-                            className={`flex-1 h-10 flex items-center justify-center gap-2 rounded font-medium transition-all duration-200 ${
-                              isLiking ? 'opacity-70 cursor-not-allowed' : ''
-                            } ${
-                              dataComics?.is_like
-                                ? 'bg-rose-500 text-white hover:bg-rose-600 dark:bg-rose-600 dark:hover:bg-rose-700 shadow-md hover:shadow-rose-300/50 dark:hover:shadow-rose-900/50'
-                                : 'border border-gray-300 text-gray-700 dark:text-gray-200 dark:border-gray-600 hover:text-rose-500 dark:hover:text-rose-400 hover:shadow-sm focus:outline-none'
-                            }`}
-                            onClick={handleLike}
-                          >
-                            {isLiking ? (
-                              <svg
-                                className='animate-spin h-4 w-4'
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                              >
-                                <circle
-                                  className='opacity-25'
-                                  cx='12'
-                                  cy='12'
-                                  r='10'
-                                  stroke='currentColor'
-                                  strokeWidth='4'
-                                ></circle>
-                                <path
-                                  className='opacity-75'
-                                  fill='currentColor'
-                                  d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                                ></path>
-                              </svg>
-                            ) : dataComics?.is_like ? (
-                              <AiFillHeart className='w-4 h-4' />
-                            ) : (
-                              <AiOutlineHeart className='w-4 h-4' />
-                            )}
-                            <span>{dataComics?.is_like ? 'Đã thích' : 'Yêu thích'}</span>
-                          </button>
-                        </div>
+                        {/* Like Button */}
+                        <button
+                          disabled={isLiking}
+                          className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
+                            isLiking ? 'opacity-70 cursor-not-allowed' : ''
+                          } ${
+                            dataComics?.is_like
+                              ? 'bg-primary text-white hover:opacity-90'
+                              : 'border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:text-primary focus:outline-none'
+                          }`}
+                          onClick={handleLike}
+                        >
+                          {isLiking ? (
+                            <svg
+                              className='animate-spin h-5 w-5'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                            >
+                              <circle
+                                className='opacity-25'
+                                cx='12'
+                                cy='12'
+                                r='10'
+                                stroke='currentColor'
+                                strokeWidth='4'
+                              ></circle>
+                              <path
+                                className='opacity-75'
+                                fill='currentColor'
+                                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                              ></path>
+                            </svg>
+                          ) : dataComics?.is_like ? (
+                            <AiFillHeart className='w-5 h-5' />
+                          ) : (
+                            <AiOutlineHeart className='w-5 h-5' />
+                          )}
+                          <span>{dataComics?.is_like ? 'Đã thích' : 'Yêu thích'}</span>
+                        </button>
+                      </div>
+
+                      {/* Mobile Action Buttons */}
+                      <div className='flex sm:hidden items-center gap-2 mt-3'>
+                        <button
+                          disabled={isFollowing}
+                          className={`flex-1 h-10 flex items-center justify-center gap-2 rounded font-medium transition-all duration-200 ${
+                            isFollowing ? 'opacity-70 cursor-not-allowed' : ''
+                          } ${
+                            dataComics?.is_follow
+                              ? 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 shadow-md hover:shadow-blue-300/50 dark:hover:shadow-blue-900/50'
+                              : 'border border-gray-300 text-gray-700 dark:text-gray-200 dark:border-gray-600 hover:text-blue-500 dark:hover:text-blue-400 hover:shadow-sm focus:outline-none'
+                          }`}
+                          onClick={handleFollow}
+                        >
+                          {isFollowing ? (
+                            <svg
+                              className='animate-spin h-4 w-4'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                            >
+                              <circle
+                                className='opacity-25'
+                                cx='12'
+                                cy='12'
+                                r='10'
+                                stroke='currentColor'
+                                strokeWidth='4'
+                              ></circle>
+                              <path
+                                className='opacity-75'
+                                fill='currentColor'
+                                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                              ></path>
+                            </svg>
+                          ) : dataComics?.is_follow ? (
+                            <FaUserCheck className='w-4 h-4' />
+                          ) : (
+                            <FaUserPlus className='w-4 h-4' />
+                          )}
+                          <span>{dataComics?.is_follow ? 'Đã theo dõi' : 'Theo dõi'}</span>
+                        </button>
+
+                        <button
+                          disabled={isLiking}
+                          className={`flex-1 h-10 flex items-center justify-center gap-2 rounded font-medium transition-all duration-200 ${
+                            isLiking ? 'opacity-70 cursor-not-allowed' : ''
+                          } ${
+                            dataComics?.is_like
+                              ? 'bg-rose-500 text-white hover:bg-rose-600 dark:bg-rose-600 dark:hover:bg-rose-700 shadow-md hover:shadow-rose-300/50 dark:hover:shadow-rose-900/50'
+                              : 'border border-gray-300 text-gray-700 dark:text-gray-200 dark:border-gray-600 hover:text-rose-500 dark:hover:text-rose-400 hover:shadow-sm focus:outline-none'
+                          }`}
+                          onClick={handleLike}
+                        >
+                          {isLiking ? (
+                            <svg
+                              className='animate-spin h-4 w-4'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                            >
+                              <circle
+                                className='opacity-25'
+                                cx='12'
+                                cy='12'
+                                r='10'
+                                stroke='currentColor'
+                                strokeWidth='4'
+                              ></circle>
+                              <path
+                                className='opacity-75'
+                                fill='currentColor'
+                                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                              ></path>
+                            </svg>
+                          ) : dataComics?.is_like ? (
+                            <AiFillHeart className='w-4 h-4' />
+                          ) : (
+                            <AiOutlineHeart className='w-4 h-4' />
+                          )}
+                          <span>{dataComics?.is_like ? 'Đã thích' : 'Yêu thích'}</span>
+                        </button>
                       </div>
                     </div>
-                  )}
-                  {isMainContentLoading && <ComicsDetailHeroSkeleton />}
-                </div>
+                  </div>
+                )}
+                {isMainContentLoading && <ComicsDetailHeroSkeleton />}
+              </div>
 
-                {/* Affiliate Notice - Between description and chapter list */}
-                {/* <div className='px-4 sm:px-0 my-4'>
+              {/* Affiliate Notice - Between description and chapter list */}
+              {/* <div className='px-4 sm:px-0 my-4'>
                   <AffiliateNotice />
                 </div> */}
 
-                <div className='flex flex-col md:flex-row gap-4 lg:gap-[30px] justify-between'>
-                  <div className='flex-1 max-w-[852px]'>
-                    <section className='min-h-[400px] px-4 sm:px-0' style={{ contain: 'layout' }}>
-                      <h2 className='flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-700 pb-2 text-sm font-medium text-neutral-700 dark:text-neutral-300'>
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          xmlnsXlink='http://www.w3.org/1999/xlink'
-                          aria-hidden='true'
-                          className='w-6 h-6 flex-shrink-0 text-primary'
-                          viewBox='0 0 32 32'
-                        >
-                          <path
-                            fill='none'
-                            stroke='currentColor'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            d='M16 7S9 1 2 6v22c7-5 14 0 14 0s7-5 14 0V6c-7-5-14 1-14 1Zm0 0v21'
-                          />
-                        </svg>
-                        Danh sách chương
-                      </h2>
-                      {dataComics && !isMainContentLoading && slug && id && (
-                        <ListChapter slug={slug} data={dataComics.chapters} id={id} />
-                      )}
-                      {isMainContentLoading && skeletonListChapter()}
-                    </section>
+              <div className='flex flex-col md:flex-row gap-4 lg:gap-[30px] justify-between'>
+                <div className='flex-1 max-w-[852px]'>
+                  <section className='min-h-[400px] px-4 sm:px-0' style={{ contain: 'layout' }}>
+                    <h2 className='flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-700 pb-2 text-sm font-medium text-neutral-700 dark:text-neutral-300'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        xmlnsXlink='http://www.w3.org/1999/xlink'
+                        aria-hidden='true'
+                        className='w-6 h-6 flex-shrink-0 text-primary'
+                        viewBox='0 0 32 32'
+                      >
+                        <path
+                          fill='none'
+                          stroke='currentColor'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M16 7S9 1 2 6v22c7-5 14 0 14 0s7-5 14 0V6c-7-5-14 1-14 1Zm0 0v21'
+                        />
+                      </svg>
+                      Danh sách chương
+                    </h2>
+                    {dataComics && !isMainContentLoading && slug && id && (
+                      <ListChapter slug={slug} data={dataComics.chapters} id={id} />
+                    )}
+                    {isMainContentLoading && skeletonListChapter()}
+                  </section>
 
-                    <section className='mt-2'>{id && <ListComment id={id} />}</section>
-                    {dataComics?.id && <RecommendComics comicId={Number(dataComics.id)} />}
-                  </div>
-                  <div className='flex-shrink-0 w-[238px] hidden md:flex flex-col gap-6'>
-                    <div>
-                      <h3 className='px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-t bg-neutral-50 dark:bg-neutral-800/50'>
-                        Top tuần
-                      </h3>
-                      <div
-                        className='border border-t-0 border-neutral-200 dark:border-neutral-700 flex flex-col rounded-b min-h-[600px] overflow-hidden'
-                        style={{ contain: 'layout' }}
-                      >
-                        {dataWeeklyComics &&
-                          dataWeeklyComics
-                            .slice(0, 10)
-                            .map((item, i) => (
-                              <SuggestComics
-                                key={item.id}
-                                index={i}
-                                title={item.title}
-                                src={item.thumbnail}
-                                idChapter={item.last_chapter.id}
-                                chapter={item.last_chapter.name}
-                                genres={item.genres.map((item) => item.name) as [string]}
-                                idComic={item.id}
-                                slug={item.slug}
-                                slugChapter={item.last_chapter.slug_chapter}
-                              />
-                            ))}
-                        {isLoadingWeekly && !dataWeeklyComics && (
-                          <SidebarComicsSkeleton count={10} />
-                        )}
-                      </div>
+                  <section className='mt-2'>{id && <ListComment id={id} />}</section>
+                  {dataComics?.id && <RecommendComics comicId={Number(dataComics.id)} />}
+                </div>
+                <div className='flex-shrink-0 w-[238px] hidden md:flex flex-col gap-6'>
+                  <div>
+                    <h3 className='px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-t bg-neutral-50 dark:bg-neutral-800/50'>
+                      Top tuần
+                    </h3>
+                    <div
+                      className='border border-t-0 border-neutral-200 dark:border-neutral-700 flex flex-col rounded-b min-h-[600px] overflow-hidden'
+                      style={{ contain: 'layout' }}
+                    >
+                      {dataWeeklyComics &&
+                        dataWeeklyComics
+                          .slice(0, 10)
+                          .map((item, i) => (
+                            <SuggestComics
+                              key={item.id}
+                              index={i}
+                              title={item.title}
+                              src={item.thumbnail}
+                              idChapter={item.last_chapter.id}
+                              chapter={item.last_chapter.name}
+                              genres={item.genres.map((item) => item.name) as [string]}
+                              idComic={item.id}
+                              slug={item.slug}
+                              slugChapter={item.last_chapter.slug_chapter}
+                            />
+                          ))}
+                      {isLoadingWeekly && !dataWeeklyComics && <SidebarComicsSkeleton count={10} />}
                     </div>
-                    <div className='sticky top-[50px]'>
-                      <h3 className='px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-t bg-neutral-50 dark:bg-neutral-800/50'>
-                        Nổi bật
-                      </h3>
-                      <div
-                        className='border border-t-0 border-neutral-200 dark:border-neutral-700 flex flex-col rounded-b min-h-[600px] overflow-hidden'
-                        style={{ contain: 'layout' }}
-                      >
-                        {dataPopularComics &&
-                          dataPopularComics
-                            .slice(0, 7)
-                            .map((item, i) => (
-                              <SuggestComics
-                                key={item.id}
-                                index={i}
-                                title={item.title}
-                                src={item.thumbnail}
-                                idChapter={item.last_chapter.id}
-                                chapter={item.last_chapter.name}
-                                genres={item.genres.map((item) => item.name) as [string]}
-                                idComic={item.id}
-                                slug={item.slug}
-                                slugChapter={item.last_chapter.slug_chapter}
-                              />
-                            ))}
-                        {isLoadingPopular && !dataPopularComics && (
-                          <SidebarComicsSkeleton count={7} />
-                        )}
-                      </div>
+                  </div>
+                  <div className='sticky top-[50px]'>
+                    <h3 className='px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 rounded-t bg-neutral-50 dark:bg-neutral-800/50'>
+                      Nổi bật
+                    </h3>
+                    <div
+                      className='border border-t-0 border-neutral-200 dark:border-neutral-700 flex flex-col rounded-b min-h-[600px] overflow-hidden'
+                      style={{ contain: 'layout' }}
+                    >
+                      {dataPopularComics &&
+                        dataPopularComics
+                          .slice(0, 7)
+                          .map((item, i) => (
+                            <SuggestComics
+                              key={item.id}
+                              index={i}
+                              title={item.title}
+                              src={item.thumbnail}
+                              idChapter={item.last_chapter.id}
+                              chapter={item.last_chapter.name}
+                              genres={item.genres.map((item) => item.name) as [string]}
+                              idComic={item.id}
+                              slug={item.slug}
+                              slugChapter={item.last_chapter.slug_chapter}
+                            />
+                          ))}
+                      {isLoadingPopular && !dataPopularComics && (
+                        <SidebarComicsSkeleton count={7} />
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
           <div
             onMouseDown={() => {
               setIsOpenModal(false)
@@ -871,17 +897,32 @@ const skeletonListChapter = () => {
         <div className='w-32 h-10 bg-neutral-200 dark:bg-neutral-700 rounded' />
       </div>
       <div className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2 sm:py-3 border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 rounded-t-lg text-sm'>
-        <div className='col-span-6'><div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-20' /></div>
-        <div className='col-span-3'><div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-16' /></div>
-        <div className='col-span-3 text-right'><div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-16 ml-auto' /></div>
+        <div className='col-span-6'>
+          <div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-20' />
+        </div>
+        <div className='col-span-3'>
+          <div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-16' />
+        </div>
+        <div className='col-span-3 text-right'>
+          <div className='h-4 bg-neutral-300 dark:bg-neutral-600 rounded w-16 ml-auto' />
+        </div>
       </div>
       <div className='h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-600'>
         <div className='space-y-0'>
           {Array.from({ length: 15 }, (_, i) => (
-            <div key={i} className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2.5 sm:py-3.5 border-b border-neutral-100 dark:border-neutral-800'>
-              <div className='col-span-6 flex items-center'><div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-full max-w-48' /></div>
-              <div className='col-span-3 flex items-center'><div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-16' /></div>
-              <div className='col-span-3 text-right flex items-center justify-end'><div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-12' /></div>
+            <div
+              key={i}
+              className='grid grid-cols-12 gap-2 sm:gap-4 px-2 sm:px-4 py-2.5 sm:py-3.5 border-b border-neutral-100 dark:border-neutral-800'
+            >
+              <div className='col-span-6 flex items-center'>
+                <div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-full max-w-48' />
+              </div>
+              <div className='col-span-3 flex items-center'>
+                <div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-16' />
+              </div>
+              <div className='col-span-3 text-right flex items-center justify-end'>
+                <div className='h-3 bg-neutral-200 dark:bg-neutral-700 rounded w-12' />
+              </div>
             </div>
           ))}
         </div>

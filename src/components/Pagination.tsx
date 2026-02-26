@@ -81,10 +81,23 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       })
   }
   return (
-    <nav className='flex flex-wrap justify-center items-center gap-1 gap-y-2' aria-label='Phân trang'>
+    <nav
+      className='flex flex-wrap justify-center items-center gap-1 gap-y-2'
+      aria-label='Phân trang'
+    >
       {page === 1 ? (
-        <span className='cursor-default rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-400' aria-hidden>
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
+        <span
+          className='cursor-default rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-400'
+          aria-hidden
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
           </svg>
         </span>
@@ -99,7 +112,14 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
           }}
           className='rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:border-primary hover:text-primary transition-colors'
         >
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
           </svg>
         </Link>
@@ -108,8 +128,18 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
       {renderPagination()}
 
       {page === totalPage ? (
-        <span className='cursor-default rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-400' aria-hidden>
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
+        <span
+          className='cursor-default rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-400'
+          aria-hidden
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
         </span>
@@ -124,7 +154,14 @@ export default function Pagination({ page, totalPage, queryConfig }: Props) {
           }}
           className='rounded border border-neutral-200 dark:border-neutral-700 px-3 h-9 flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:border-primary hover:text-primary transition-colors'
         >
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
         </Link>

@@ -6,7 +6,8 @@ import { Link, NavLink, createSearchParams, useLocation, useMatch } from 'react-
 import useNavbarVisibility from '@/hooks/useNavbarVisibility'
 
 // Constants for common styles
-const NAV_LINK_BASE_STYLES = 'uppercase font-semibold text-sm hover:text-primary px-1 py-4 focus:outline-none'
+const NAV_LINK_BASE_STYLES =
+  'uppercase font-semibold text-sm hover:text-primary px-1 py-4 focus:outline-none'
 const TOP_NAV_LINK_STYLES =
   'capitalize whitespace-nowrap font-semibold text-[15px] hover:text-primary px-1 py-3 flex items-center justify-center gap-1 focus:outline-none'
 
