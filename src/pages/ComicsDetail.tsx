@@ -1,6 +1,5 @@
 import comicApis from '@/apis/comicApis'
 import {
-  AffiliateNotice,
   EveningModeToggle,
   ListChapter,
   ListComment,

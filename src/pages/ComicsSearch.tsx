@@ -66,7 +66,7 @@ const ComicsSearch = () => {
   )
 
   const totalComics = dataSearch?.comics?.length ?? 0
-  const totalEntries = dataSearch?.total ?? 0
+  const totalEntries = dataSearch?.comics?.length ?? 0
   const hasResults = Array.isArray(dataSearch?.comics) && dataSearch.comics.length > 0
   const showEmpty =
     !isFetching && ((Array.isArray(dataSearch?.comics) && !dataSearch.comics.length) || isError)
