@@ -1,4 +1,4 @@
-import { Footer, Header, Navbar, ScrollToTop, LunarNewYearCouplets } from '@/components'
+import { Footer, Header, Navbar, ScrollToTop, LunarNewYearCouplets, MobileBottomTab } from '@/components'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { usePageTracking } from '@/hooks/useAnalytics'
 
@@ -10,7 +10,7 @@ const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
       <header className='sticky top-0 z-30 left-0 right-0' id='site-header'>
         <Header />
       </header>
-      <main>
+      <main className='pb-20 sm:pb-0'>
         {!hideNav && <Navbar />}
         <Outlet />
         <ScrollRestoration />
@@ -19,6 +19,7 @@ const MainLayout = ({ hideNav = false }: { hideNav?: boolean }) => {
         </div>
       </main>
       <Footer />
+      <MobileBottomTab />
       <LunarNewYearCouplets enabled={true} />
     </>
   )

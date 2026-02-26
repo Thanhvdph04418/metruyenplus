@@ -33,6 +33,7 @@ export { default as Affiliate } from './Affiliate'
 export { default as AffiliateNotice } from './AffiliateNotice'
 export { default as CanonicalLink } from './CanonicalLink'
 export { default as MobileHotComicSlider } from './MobileHotComicSlider'
+export { default as MobileBottomTab } from './MobileBottomTab'
 
 // ComicMessage - comic-style toast/message
 export * from './ComicMessage'
