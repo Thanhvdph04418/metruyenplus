@@ -360,9 +360,9 @@ const ComicsDetail = () => {
           </div>
           <div className='container px-4 sm:px-6 xl:px-0 max-w-[1100px] -mt-24 sm:-mt-28 relative'>
             <div className='rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden'>
-              <div className='p-4 sm:p-6 lg:p-8 min-h-[200px]' style={{ contain: 'layout' }}>
+              <div className='p-2 sm:p-5 lg:p-6 min-h-[200px]' style={{ contain: 'layout' }}>
                 {dataComics && !isMainContentLoading && (
-                  <div className='flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6'>
+                  <div className='flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-5'>
                     <figure className='w-[160px] h-[224px] sm:w-[200px] sm:h-[280px] flex-shrink-0 rounded overflow-hidden border border-neutral-200 dark:border-neutral-700'>
                       <LazyLoadImage
                         src={dataComics.thumbnail}
@@ -393,7 +393,7 @@ const ComicsDetail = () => {
                       />
                     </figure>
                     <div className='w-full text-center sm:text-left'>
-                      <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-2 sm:gap-4'>
+                      <div className='flex flex-col sm:flex-row items-center sm:items-start sm:justify-between gap-1.5 sm:gap-3'>
                         <h1
                           title={dataComics.title}
                           className='font-semibold text-xl sm:text-2xl text-neutral-900 dark:text-white line-clamp-3 sm:line-clamp-2'
@@ -406,11 +406,11 @@ const ComicsDetail = () => {
                         <RatingStar rating={dataComics.rate_average} />
                       </div>
                       {dataComics.other_names && dataComics.other_names.length > 0 && (
-                        <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-1'>
+                        <p className='text-sm text-neutral-500 dark:text-neutral-400 mt-0.5'>
                           {dataComics.other_names.join(' • ')}
                         </p>
                       )}
-                      <div className='sm:hidden flex flex-col gap-3 mt-3 text-neutral-700 dark:text-neutral-200'>
+                      <div className='sm:hidden flex flex-col gap-2 mt-2 text-neutral-700 dark:text-neutral-200'>
                         <div className='flex items-center gap-3'>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -467,8 +467,8 @@ const ComicsDetail = () => {
                         </div>
                       </div>
 
-                      <div className='hidden sm:block text-neutral-700 dark:text-neutral-200'>
-                        <div className='flex flex-col gap-1.5 text-sm'>
+                      <div className='hidden sm:block text-neutral-700 dark:text-neutral-200 mt-2'>
+                        <div className='flex flex-col gap-1 text-sm'>
                           <span>
                             Tác giả: <strong className='text-primary'>{dataComics.authors}</strong>
                           </span>
@@ -485,7 +485,7 @@ const ComicsDetail = () => {
                             </span>
                           </span>
                         </div>
-                        <p className='flex flex-wrap items-center gap-x-6 gap-y-1 text-sm mt-2 text-neutral-500 dark:text-neutral-400'>
+                        <p className='flex flex-wrap items-center gap-x-6 gap-y-1 text-sm mt-1.5 text-neutral-500 dark:text-neutral-400'>
                           <span>
                             Lượt xem:{' '}
                             <strong className='text-neutral-700 dark:text-neutral-200'>
@@ -506,7 +506,7 @@ const ComicsDetail = () => {
                           </span>
                         </p>
                       </div>
-                      <div className='flex flex-wrap gap-2 items-center my-3'>
+                      <div className='flex flex-wrap gap-2 items-center mt-2 mb-2.5'>
                         {dataComics.genres.map((genre) => {
                           return genre.id !== undefined ? (
                             <Link
@@ -551,7 +551,7 @@ const ComicsDetail = () => {
                           </button>
                         )}
                       </div>
-                      <div className='flex items-center justify-center sm:justify-start gap-3 mt-4 sm:mt-2'>
+                      <div className='flex items-center justify-center sm:justify-start gap-3 mt-3'>
                         <Link
                           title={
                             lastReadChapter

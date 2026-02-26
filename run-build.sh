@@ -1,2 +1,2 @@
 npm run build
-sudo rsync -a --delete ./dist/ /var/www/metruyenplus.com/
+sudo rsync -a --delete ./dist/ /var/www/nettruyencomic.com/

@@ -53,7 +53,7 @@ const MobileHotComicSlider = ({ data }: Props) => {
   if (!data || data.length === 0) return null
 
   // Get more comics for scrollable banners
-  const scrollableBanners = useMemo(() => data.slice(0, 6), [data])
+  const scrollableBanners = useMemo(() => data.slice(0, 10), [data])
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true)
