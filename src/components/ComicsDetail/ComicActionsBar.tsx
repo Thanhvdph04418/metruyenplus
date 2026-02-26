@@ -68,7 +68,7 @@ export const ComicActionsBar = ({
           <Link
             title={lastReadChapter ? `Đọc tiếp ${lastReadChapter.name}` : 'Đọc ngay chương mới nhất'}
             to={getReadButtonUrl()}
-            className={`text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-[42px] sm:h-[42px] capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 ${
+            className={`text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-[42px] sm:h-[42px] capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 hover:text-white ${
               lastReadChapter
                 ? 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800'
                 : 'bg-gradient'

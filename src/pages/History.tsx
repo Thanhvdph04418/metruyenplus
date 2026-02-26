@@ -219,7 +219,7 @@ const History = () => {
                         <div className='flex gap-2 mt-auto pt-3'>
                           <Link
                             to={`${PATH.comics}/${item.slug_comic}-${item.id}/${item.slug_chapter}/${item.chapter_id}`}
-                            className='flex-1 text-center text-sm font-medium py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors'
+                            className='flex-1 text-center text-sm font-medium py-2 rounded-lg bg-primary text-white hover:bg-primary/90 hover:text-white transition-colors'
                           >
                             Đọc tiếp
                           </Link>

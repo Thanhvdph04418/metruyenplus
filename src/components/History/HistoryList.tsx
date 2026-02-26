@@ -59,7 +59,7 @@ const HistoryList = ({ items, onDelete, isLoading }: HistoryListProps) => {
                 <Link
                   title={item.last_reading}
                   to={`${PATH.comics}/${item.slug_comic}-${item.id}/${item.slug_chapter}/${item.chapter_id}`}
-                  className='flex-1 text-sm sm:text-base bg-[#4b8fd7] hover:bg-[#4b8fd7]/90 text-white rounded-md px-3 sm:px-4 py-1.5 sm:py-2 text-center active:scale-95 transition-transform'
+                  className='flex-1 text-sm sm:text-base bg-[#4b8fd7] hover:bg-[#4b8fd7]/90 text-white hover:text-white rounded-md px-3 sm:px-4 py-1.5 sm:py-2 text-center active:scale-95 transition-transform'
                 >
                   Đọc tiếp
                 </Link>

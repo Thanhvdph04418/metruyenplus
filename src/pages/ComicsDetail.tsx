@@ -539,7 +539,7 @@ const ComicsDetail = () => {
                                 ? lastReadChapter.id
                                 : dataComics.chapters[dataComics.chapters.length - 1].id
                             }`}
-                            className='text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-11 capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 bg-primary hover:opacity-90 transition-opacity'
+                            className='text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-11 capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 bg-primary hover:opacity-90 hover:text-white transition-opacity'
                           >
                             <svg
                               xmlns='http://www.w3.org/2000/svg'

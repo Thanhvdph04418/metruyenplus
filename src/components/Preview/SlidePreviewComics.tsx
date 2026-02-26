@@ -85,7 +85,7 @@ const SlidePreviewComics = ({ data }: Props) => {
                             <Link
                               title='Đọc ngay chương mới nhất'
                               to={`${PATH.comics}/${item.slug}-${item.id}/${item.last_chapter.slug_chapter}/${item.last_chapter.id}`}
-                              className='text-white flex-shrink-0 text-sm bg-primary w-[100px] h-[34px] uppercase font-semibold flex items-center justify-center rounded text-center'
+                              className='text-white flex-shrink-0 text-sm bg-primary hover:text-white w-[100px] h-[34px] uppercase font-semibold flex items-center justify-center rounded text-center'
                             >
                               Đọc Ngay
                             </Link>
