@@ -1,10 +1,6 @@
 import classNames from 'classnames'
 import { comicSingleChapter } from '@/types/data'
-import {
-  MobileNavigationControls,
-  Breadcrumb,
-  ChapterNavigation
-} from '@/components/Chapter'
+import { MobileNavigationControls, Breadcrumb, ChapterNavigation } from '@/components/Chapter'
 import {
   MobileNavigationControlsSkeleton,
   BreadcrumbSkeleton,

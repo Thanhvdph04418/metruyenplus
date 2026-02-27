@@ -39,10 +39,7 @@ export const parseQueryString = (queryString: string): Record<string, string> =>
  * @param params - Object with query parameters to update
  * @param replace - If true, replace current history entry instead of adding new one
  */
-export const updateQueryParams = (
-  params: Record<string, any>,
-  replace: boolean = false
-): void => {
+export const updateQueryParams = (params: Record<string, any>, replace: boolean = false): void => {
   const url = new URL(window.location.href)
 
   Object.entries(params).forEach(([key, value]) => {

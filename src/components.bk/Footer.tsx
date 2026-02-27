@@ -176,13 +176,9 @@ const Footer = () => {
         {/* Logo and Slogan */}
         <div className='text-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-800'>
           <div className='mb-2'>
-            <span className='text-3xl logo-text-bold gradient-logo-text'>
-              Tcomic
-            </span>
+            <span className='text-3xl logo-text-bold gradient-logo-text'>Tcomic</span>
           </div>
-          <p className='text-sm font-medium gradient-logo-text'>
-            Quality - Quickly - Quantity
-          </p>
+          <p className='text-sm font-medium gradient-logo-text'>Quality - Quickly - Quantity</p>
           <p className='text-xs mt-2 text-gray-500 dark:text-gray-400'>
             Copyright © {new Date().getFullYear()} Tcomic. All Right Reserved
           </p>

@@ -98,7 +98,11 @@ export const useChapterSEO = ({
       <meta property='og:image:width' content='1200' />
       <meta property='og:image:height' content='630' />
       <meta property='og:locale' content='vi_VN' />
-      <meta property='og:url' content={ogUrl} title={`${dataComics?.title} - ${chapterInfo?.name}`} />
+      <meta
+        property='og:url'
+        content={ogUrl}
+        title={`${dataComics?.title} - ${chapterInfo?.name}`}
+      />
 
       {/* Twitter Card Tags - Enhanced */}
       <meta name='twitter:card' content='summary_large_image' />
@@ -118,13 +122,17 @@ export const useChapterSEO = ({
       {prevChapter && (
         <link
           rel='prev'
-          href={`https://tcomicfanq.com${PATH.comics}/${comicIndentify}/${prevChapter.slug_chapter}/${Number(idChapter) - 1}`}
+          href={`https://tcomicfanq.com${PATH.comics}/${comicIndentify}/${
+            prevChapter.slug_chapter
+          }/${Number(idChapter) - 1}`}
         />
       )}
       {nextChapter && (
         <link
           rel='next'
-          href={`https://tcomicfanq.com${PATH.comics}/${comicIndentify}/${nextChapter.slug_chapter}/${Number(idChapter) + 1}`}
+          href={`https://tcomicfanq.com${PATH.comics}/${comicIndentify}/${
+            nextChapter.slug_chapter
+          }/${Number(idChapter) + 1}`}
         />
       )}
     </Helmet>

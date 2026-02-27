@@ -22,27 +22,27 @@ const TopComicsTabs = ({
   dailyData,
   isLoadingMonthly,
   isLoadingWeekly,
-  isLoadingDaily,
+  isLoadingDaily
 }: TopComicsTabsProps) => {
   const tabs = [
     {
       id: 'month' as TopComicsTab,
       label: 'Top tháng',
       data: monthlyData,
-      isLoading: isLoadingMonthly,
+      isLoading: isLoadingMonthly
     },
     {
       id: 'week' as TopComicsTab,
       label: 'Top tuần',
       data: weeklyData,
-      isLoading: isLoadingWeekly,
+      isLoading: isLoadingWeekly
     },
     {
       id: 'day' as TopComicsTab,
       label: 'Top ngày',
       data: dailyData,
-      isLoading: isLoadingDaily,
-    },
+      isLoading: isLoadingDaily
+    }
   ]
 
   // Get current tab data and loading state
@@ -60,9 +60,10 @@ const TopComicsTabs = ({
             className={`flex-1 px-4 py-2.5 text-sm font-medium transition-all
               ${index === 0 ? 'rounded-tl-lg' : ''}
               ${index === tabs.length - 1 ? 'rounded-tr-lg' : ''}
-              ${activeTab === tab.id
-                ? 'bg-primary text-white shadow-sm'
-                : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+              ${
+                activeTab === tab.id
+                  ? 'bg-primary text-white shadow-sm'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
               }`}
           >
             {tab.label}

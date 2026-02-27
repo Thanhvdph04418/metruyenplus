@@ -28,7 +28,7 @@ export const useSEO = (config: SEOConfig) => {
     keywords = [],
     author,
     publishedTime,
-    modifiedTime,
+    modifiedTime
   } = config
 
   const fullTitle = title.includes('TComic') ? title : `${title} - TComic`
@@ -37,34 +37,34 @@ export const useSEO = (config: SEOConfig) => {
     <Helmet>
       {/* Basic meta tags */}
       <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
-      {author && <meta name="author" content={author} />}
+      <meta name='description' content={description} />
+      {keywords.length > 0 && <meta name='keywords' content={keywords.join(', ')} />}
+      {author && <meta name='author' content={author} />}
 
       {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:url" content={url} />
-      <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="TComic" />
+      <meta property='og:title' content={fullTitle} />
+      <meta property='og:description' content={description} />
+      <meta property='og:image' content={image} />
+      <meta property='og:url' content={url} />
+      <meta property='og:type' content={type} />
+      <meta property='og:site_name' content='TComic' />
 
       {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:title' content={fullTitle} />
+      <meta name='twitter:description' content={description} />
+      <meta name='twitter:image' content={image} />
 
       {/* Article meta (if type is article) */}
       {type === 'article' && publishedTime && (
-        <meta property="article:published_time" content={publishedTime} />
+        <meta property='article:published_time' content={publishedTime} />
       )}
       {type === 'article' && modifiedTime && (
-        <meta property="article:modified_time" content={modifiedTime} />
+        <meta property='article:modified_time' content={modifiedTime} />
       )}
 
       {/* Canonical URL */}
-      <link rel="canonical" href={url} />
+      <link rel='canonical' href={url} />
     </Helmet>
   )
 }

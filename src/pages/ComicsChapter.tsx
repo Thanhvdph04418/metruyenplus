@@ -132,7 +132,7 @@ const ComicsChapter = () => {
   return (
     <>
       <Affiliate />
-      
+
       <ReadingProgress />
 
       <EveningModeToggle />

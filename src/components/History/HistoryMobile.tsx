@@ -85,7 +85,9 @@ const HistoryMobile = ({ dataComics }: HistoryMobileProps) => {
               >
                 {comic.title}
               </Link>
-              <span className='text-xs text-gray-500 dark:text-gray-400 mt-1 block'>{comic.time}</span>
+              <span className='text-xs text-gray-500 dark:text-gray-400 mt-1 block'>
+                {comic.time}
+              </span>
             </div>
           </div>
         ))}

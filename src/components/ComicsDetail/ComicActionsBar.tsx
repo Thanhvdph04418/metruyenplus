@@ -66,7 +66,9 @@ export const ComicActionsBar = ({
       <div className='flex items-center justify-center sm:justify-start gap-3 mt-4 sm:mt-2'>
         {hasChapters ? (
           <Link
-            title={lastReadChapter ? `Đọc tiếp ${lastReadChapter.name}` : 'Đọc ngay chương mới nhất'}
+            title={
+              lastReadChapter ? `Đọc tiếp ${lastReadChapter.name}` : 'Đọc ngay chương mới nhất'
+            }
             to={getReadButtonUrl()}
             className={`text-white flex-shrink-0 w-full sm:w-auto min-w-[180px] h-[42px] sm:h-[42px] capitalize font-semibold flex items-center justify-center rounded gap-2 px-4 hover:text-white ${
               lastReadChapter

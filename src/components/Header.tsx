@@ -34,11 +34,7 @@ const Logo = () => (
     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     className='flex items-center shrink-0'
   >
-    <img
-      src='/logo.png'
-      alt={SITE_LOGO_TEXT}
-      className='h-8 w-auto object-contain'
-    />
+    <img src='/logo.png' alt={SITE_LOGO_TEXT} className='h-8 w-auto object-contain' />
   </Link>
 )
 
@@ -51,27 +47,52 @@ type SearchParams = {
 const DesktopNavLinks = ({ isMatchTop }: { isMatchTop: boolean }) => {
   const linkClass = (active: boolean) =>
     `text-sm font-medium py-2 ${
-      active ? 'text-primary' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+      active
+        ? 'text-primary'
+        : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
     }`
   return (
     <ul className='hidden sm:flex items-center gap-6 ml-8'>
       <li className='hidden lg:block'>
-        <Link title={`Trang chủ ${SITE_NAME}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to={PATH.home} className={linkClass(!!useMatch(PATH.home))}>
+        <Link
+          title={`Trang chủ ${SITE_NAME}`}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          to={PATH.home}
+          className={linkClass(!!useMatch(PATH.home))}
+        >
           Trang chủ
         </Link>
       </li>
       <li>
-        <Link to={{ pathname: PATH.genres, search: createSearchParams({ type: 'all', page: '1' }).toString() }} className={linkClass(!!useMatch(PATH.genres))}>
+        <Link
+          to={{
+            pathname: PATH.genres,
+            search: createSearchParams({ type: 'all', page: '1' }).toString()
+          }}
+          className={linkClass(!!useMatch(PATH.genres))}
+        >
           Thể loại
         </Link>
       </li>
       <li>
-        <Link to={{ pathname: PATH.new, search: createSearchParams({ status: 'all', page: '1' }).toString() }} className={linkClass(!!useMatch(PATH.new))}>
+        <Link
+          to={{
+            pathname: PATH.new,
+            search: createSearchParams({ status: 'all', page: '1' }).toString()
+          }}
+          className={linkClass(!!useMatch(PATH.new))}
+        >
           Mới
         </Link>
       </li>
       <li>
-        <Link to={{ pathname: PATH.top, search: createSearchParams({ status: 'all', page: '1' }).toString() }} className={linkClass(isMatchTop)}>
+        <Link
+          to={{
+            pathname: PATH.top,
+            search: createSearchParams({ status: 'all', page: '1' }).toString()
+          }}
+          className={linkClass(isMatchTop)}
+        >
           BXH
         </Link>
       </li>
@@ -191,7 +212,6 @@ const MobileNavigation = ({
     window.location.reload()
   }
 
-
   return (
     <div
       className={`${
@@ -207,10 +227,30 @@ const MobileNavigation = ({
               Thể loại truyện
             </h3>
             {[
-              { to: PATH.new, title: 'Mới', params: { status: 'all', page: '1' } as SearchParams, icon: <FaStar className='w-4 h-4 opacity-80' /> },
-              { to: PATH.recent, title: 'Mới cập nhật', params: { page: '1' } as SearchParams, icon: <FaClock className='w-4 h-4 opacity-80' /> },
-              { to: PATH.popular, title: 'Nổi bật', params: { page: '1' } as SearchParams, icon: <FaFire className='w-4 h-4 opacity-80' /> },
-              { to: PATH.completed, title: 'Đã hoàn thành', params: { page: '1' } as SearchParams, icon: <FaCheckCircle className='w-4 h-4 opacity-80' /> },
+              {
+                to: PATH.new,
+                title: 'Mới',
+                params: { status: 'all', page: '1' } as SearchParams,
+                icon: <FaStar className='w-4 h-4 opacity-80' />
+              },
+              {
+                to: PATH.recent,
+                title: 'Mới cập nhật',
+                params: { page: '1' } as SearchParams,
+                icon: <FaClock className='w-4 h-4 opacity-80' />
+              },
+              {
+                to: PATH.popular,
+                title: 'Nổi bật',
+                params: { page: '1' } as SearchParams,
+                icon: <FaFire className='w-4 h-4 opacity-80' />
+              },
+              {
+                to: PATH.completed,
+                title: 'Đã hoàn thành',
+                params: { page: '1' } as SearchParams,
+                icon: <FaCheckCircle className='w-4 h-4 opacity-80' />
+              }
             ].map((link) => (
               <li key={link.to}>
                 <NavLink
@@ -220,7 +260,9 @@ const MobileNavigation = ({
                   }}
                   className={({ isActive }) =>
                     `inline-flex items-center text-left gap-3 py-2.5 px-3 rounded-xl transition-colors ${
-                      isActive ? 'text-primary font-medium' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                      isActive
+                        ? 'text-primary font-medium'
+                        : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`
                   }
                 >
@@ -257,7 +299,9 @@ const MobileNavigation = ({
                   }}
                   className={({ isActive }) =>
                     `inline-flex items-center text-left gap-3 py-2.5 px-3 rounded-xl transition-colors ${
-                      isActive ? 'text-primary font-medium' : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                      isActive
+                        ? 'text-primary font-medium'
+                        : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                     }`
                   }
                 >
@@ -426,7 +470,7 @@ const UserInfoDesktop = () => {
     <div className='relative' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div
         onClick={handleUserInfoClick}
-            className='flex items-center gap-2 px-2 py-1 hover:bg-light-highlight dark:hover:bg-gray-800 rounded-full cursor-pointer transition-colors duration-200 focus:outline-none'
+        className='flex items-center gap-2 px-2 py-1 hover:bg-light-highlight dark:hover:bg-gray-800 rounded-full cursor-pointer transition-colors duration-200 focus:outline-none'
       >
         <div className='w-8 h-8 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex-shrink-0'>
           {user?.avatar ? (
@@ -583,7 +627,12 @@ const MobileSearchOverlay = ({
           className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
         >
           <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M6 18L18 6M6 6l12 12'
+            />
           </svg>
         </button>
         <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>Tìm kiếm truyện</h2>
@@ -603,18 +652,35 @@ const MobileSearchOverlay = ({
               className='w-full px-4 py-3 pl-12 pr-4 text-lg border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent'
             />
             <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-              <svg className='h-5 w-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+              <svg
+                className='h-5 w-5 text-gray-400'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+                />
               </svg>
             </div>
             {searchQuery && (
               <button
                 type='button'
-                onClick={() => onSearchChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>)}
+                onClick={() =>
+                  onSearchChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>)
+                }
                 className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600'
               >
                 <svg className='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
                 </svg>
               </button>
             )}
@@ -624,7 +690,6 @@ const MobileSearchOverlay = ({
 
       {/* Results Container - Full Height */}
       <div className='flex-1 overflow-y-auto px-4 pb-4'>
-
         {/* Search Suggestions */}
         {searchQuery.trim().length > 0 ? (
           <div className='mt-4'>
@@ -653,27 +718,49 @@ const MobileSearchOverlay = ({
                         loading='lazy'
                       />
                     </div>
-                    
+
                     {/* Content */}
                     <div className='flex-1 min-w-0'>
                       <div className='font-medium text-sm truncate'>{suggestion.title}</div>
-                      <div className='text-xs text-gray-500 dark:text-gray-400 truncate'>{suggestion.authors}</div>
+                      <div className='text-xs text-gray-500 dark:text-gray-400 truncate'>
+                        {suggestion.authors}
+                      </div>
                       <div className='text-xs text-gray-400 dark:text-gray-500 mt-1'>
                         {suggestion.total_views} lượt xem
                       </div>
                     </div>
-                    
+
                     {/* Arrow icon */}
-                    <svg className='w-4 h-4 text-gray-400 flex-shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+                    <svg
+                      className='w-4 h-4 text-gray-400 flex-shrink-0'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M9 5l7 7-7 7'
+                      />
                     </svg>
                   </button>
                 ))}
               </div>
             ) : (
               <div className='text-center py-8 text-gray-500 dark:text-gray-400'>
-                <svg className='w-12 h-12 mx-auto mb-2 text-gray-300 dark:text-gray-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
+                <svg
+                  className='w-12 h-12 mx-auto mb-2 text-gray-300 dark:text-gray-600'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+                  />
                 </svg>
                 <p>Không tìm thấy gợi ý nào</p>
                 <p className='text-xs mt-2'>Thử từ khóa khác hoặc kiểm tra kết nối mạng</p>
@@ -685,7 +772,9 @@ const MobileSearchOverlay = ({
           recentSearches.length > 0 && (
             <div className='mt-6'>
               <div className='flex items-center justify-between mb-3'>
-                <h3 className='text-sm font-medium text-gray-700 dark:text-gray-300'>Tìm kiếm gần đây</h3>
+                <h3 className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+                  Tìm kiếm gần đây
+                </h3>
                 <button
                   onClick={onClearRecentSearches}
                   className='text-xs text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors'
@@ -695,16 +784,23 @@ const MobileSearchOverlay = ({
               </div>
               <div className='space-y-2'>
                 {recentSearches.map((recent) => (
-                  <div
-                    key={recent}
-                    className='flex items-center gap-2 group'
-                  >
+                  <div key={recent} className='flex items-center gap-2 group'>
                     <button
                       onClick={() => onRecentSearchClick(recent)}
                       className='flex-1 text-left px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors flex items-center gap-3'
                     >
-                      <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' />
+                      <svg
+                        className='w-4 h-4'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+                        />
                       </svg>
                       {recent}
                     </button>
@@ -716,8 +812,18 @@ const MobileSearchOverlay = ({
                       className='p-1 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100'
                       title='Xóa'
                     >
-                      <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                      <svg
+                        className='w-4 h-4'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M6 18L18 6M6 6l12 12'
+                        />
                       </svg>
                     </button>
                   </div>
@@ -732,10 +838,7 @@ const MobileSearchOverlay = ({
 }
 
 const LoginButtonDesktop = () => (
-  <Link
-    to={PATH.login}
-    className='text-[13px] font-medium text-primary hover:underline'
-  >
+  <Link to={PATH.login} className='text-[13px] font-medium text-primary hover:underline'>
     Đăng nhập
   </Link>
 )
@@ -795,8 +898,8 @@ const Header = () => {
   // Save recent searches to localStorage
   const saveRecentSearch = (query: string) => {
     if (!query.trim()) return
-    
-    const newSearches = [query, ...recentSearches.filter(s => s !== query)].slice(0, 5)
+
+    const newSearches = [query, ...recentSearches.filter((s) => s !== query)].slice(0, 5)
     setRecentSearches(newSearches)
     localStorage.setItem('recentSearches', JSON.stringify(newSearches))
   }
@@ -815,7 +918,7 @@ const Header = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchQuery(value)
-    
+
     if (value.trim().length > 0) {
       setIsSearching(true)
       // API call with debounce
@@ -823,9 +926,13 @@ const Header = () => {
         try {
           const response = await comicApis.getSearch({ q: value, page: '1' })
           console.log('Search response:', response.data) // Debug log
-          
+
           // Check if response is valid and has comics
-          if (response?.data?.status === 0 && response?.data?.comics && Array.isArray(response.data.comics)) {
+          if (
+            response?.data?.status === 0 &&
+            response?.data?.comics &&
+            Array.isArray(response.data.comics)
+          ) {
             const comics = response.data.comics || []
             console.log('Comics found:', comics) // Debug log
             setSearchSuggestions(comics.slice(0, 5)) // Limit to 5 suggestions
@@ -841,7 +948,7 @@ const Header = () => {
           setIsSearching(false)
         }
       }, 300) // 300ms debounce
-      
+
       return () => clearTimeout(timeoutId)
     } else {
       setSearchSuggestions([])
@@ -871,7 +978,7 @@ const Header = () => {
 
   // Remove single recent search
   const removeRecentSearch = (queryToRemove: string) => {
-    const newSearches = recentSearches.filter(query => query !== queryToRemove)
+    const newSearches = recentSearches.filter((query) => query !== queryToRemove)
     setRecentSearches(newSearches)
     localStorage.setItem('recentSearches', JSON.stringify(newSearches))
   }
@@ -964,8 +1071,19 @@ const Header = () => {
             to={PATH.history}
             className='p-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors'
           >
-            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-5 h-5'>
-              <path strokeLinecap='round' strokeLinejoin='round' d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z' />
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-5 h-5'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'
+              />
             </svg>
           </Link>
           <div className='min-w-[52px]'>
@@ -979,31 +1097,33 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <div className='flex sm:hidden items-center gap-1'>
-          <div style={{
-            display:'flex',
-            alignItems:'center',
-            gap:10,
-            position:'absolute',
-            right:70
-          }}>
-          {currentTheme !== 'light' ? (
-            <button onClick={() => onSwitchTheme('light')} className='mr-1 p-1'>
-              <SvgSun />
-            </button>
-          ) : (
-            <button onClick={() => onSwitchTheme('dark')} className='mr-1 p-1'>
-              <SvgMoon />
-            </button>
-          )}
-          <button
-            title='Tìm kiếm truyện tranh'
-            onClick={() => setIsSearchOpen(true)}
-            className='bg-center bg-no-repeat w-[18px] h-[18px] p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 dark:[filter:brightness(0)_invert(1)] transition-colors'
-            style={{ backgroundImage: `url(${iconSearch})` }}
-          />
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              position: 'absolute',
+              right: 70
+            }}
+          >
+            {currentTheme !== 'light' ? (
+              <button onClick={() => onSwitchTheme('light')} className='mr-1 p-1'>
+                <SvgSun />
+              </button>
+            ) : (
+              <button onClick={() => onSwitchTheme('dark')} className='mr-1 p-1'>
+                <SvgMoon />
+              </button>
+            )}
+            <button
+              title='Tìm kiếm truyện tranh'
+              onClick={() => setIsSearchOpen(true)}
+              className='bg-center bg-no-repeat w-[18px] h-[18px] p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 dark:[filter:brightness(0)_invert(1)] transition-colors'
+              style={{ backgroundImage: `url(${iconSearch})` }}
+            />
           </div>
           <button
-            style={{position:'absolute', right:10}}
+            style={{ position: 'absolute', right: 10 }}
             title={`Menu truyện tranh ${SITE_NAME}`}
             onClick={() => setOpenNav((prev) => !prev)}
             className='flex flex-col gap-[5px] p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'

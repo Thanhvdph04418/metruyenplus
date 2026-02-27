@@ -60,16 +60,20 @@ const MobileBottomTab = () => {
               }`}
               title={tab.title}
             >
-              <Icon className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 sm:mb-1 transition-all duration-300 text-current flex-shrink-0 ${
-                tab.isActive 
-                  ? 'text-primary drop-shadow-sm scale-110' 
-                  : 'hover:scale-105'
-              }`} />
-              <span className={`text-[10px] sm:text-xs font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${
-                tab.isActive 
-                  ? 'text-transparent bg-gradient-to-r from-primary to-primary-2 bg-clip-text' 
-                  : ''
-              }`}>{tab.title}</span>
+              <Icon
+                className={`w-4 h-4 sm:w-5 sm:h-5 mb-0.5 sm:mb-1 transition-all duration-300 text-current flex-shrink-0 ${
+                  tab.isActive ? 'text-primary drop-shadow-sm scale-110' : 'hover:scale-105'
+                }`}
+              />
+              <span
+                className={`text-[10px] sm:text-xs font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${
+                  tab.isActive
+                    ? 'text-transparent bg-gradient-to-r from-primary to-primary-2 bg-clip-text'
+                    : ''
+                }`}
+              >
+                {tab.title}
+              </span>
             </Link>
           )
         })}

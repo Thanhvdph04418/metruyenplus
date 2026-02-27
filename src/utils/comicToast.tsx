@@ -86,7 +86,11 @@ export const comicToast: ComicToastApi = {
   },
 
   /** Show message with custom type (e.g. from API response) */
-  show: (type: ComicMessageType, message: string, options?: { duration?: number; title?: string }) => {
+  show: (
+    type: ComicMessageType,
+    message: string,
+    options?: { duration?: number; title?: string }
+  ) => {
     return toast.custom(
       (t) => (
         <ComicMessage

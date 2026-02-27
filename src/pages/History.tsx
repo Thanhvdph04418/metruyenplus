@@ -151,7 +151,16 @@ const History = () => {
                   {isSyncing ? (
                     <div className='animate-spin rounded-full h-4 w-4 border-2 border-current border-t-transparent' />
                   ) : (
-                    <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-4 w-4'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    >
                       <path d='M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3' />
                     </svg>
                   )}
@@ -258,8 +267,19 @@ const History = () => {
             {showEmpty && (
               <div className='flex flex-col items-center justify-center min-h-[400px] text-center px-4'>
                 <div className='w-16 h-16 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4'>
-                  <svg xmlns='http://www.w3.org/2000/svg' className='w-8 h-8 text-neutral-400' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5} d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' />
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='w-8 h-8 text-neutral-400'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={1.5}
+                      d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+                    />
                   </svg>
                 </div>
                 <p className='text-lg font-medium text-neutral-800 dark:text-white'>
@@ -289,7 +309,10 @@ function HistorySkeleton() {
       {Array(6)
         .fill(0)
         .map((_, i) => (
-          <div key={i} className='flex gap-3 sm:gap-4 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/40'>
+          <div
+            key={i}
+            className='flex gap-3 sm:gap-4 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/40'
+          >
             <div className='w-[100px] sm:w-[120px] h-[133px] sm:h-[160px] bg-neutral-200 dark:bg-neutral-700 rounded-lg flex-shrink-0' />
             <div className='flex-1 min-w-0 space-y-2'>
               <div className='h-4 bg-neutral-200 dark:bg-neutral-700 rounded w-4/5' />

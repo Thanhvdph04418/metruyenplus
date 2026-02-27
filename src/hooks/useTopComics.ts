@@ -17,7 +17,7 @@ export const useTopComics = (activeTab: TopComicsTab) => {
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
-    keepPreviousData: true,
+    keepPreviousData: true
   })
 
   // Query for weekly data (enabled only when tab is active)
@@ -28,7 +28,7 @@ export const useTopComics = (activeTab: TopComicsTab) => {
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
-    keepPreviousData: true,
+    keepPreviousData: true
   })
 
   // Query for daily data (enabled only when tab is active)
@@ -39,7 +39,7 @@ export const useTopComics = (activeTab: TopComicsTab) => {
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
-    keepPreviousData: true,
+    keepPreviousData: true
   })
 
   return {
@@ -48,6 +48,6 @@ export const useTopComics = (activeTab: TopComicsTab) => {
     dailyData: dailyQuery.data?.data.comics as comics[] | undefined,
     isLoadingMonthly: monthlyQuery.isLoading,
     isLoadingWeekly: weeklyQuery.isLoading,
-    isLoadingDaily: dailyQuery.isLoading,
+    isLoadingDaily: dailyQuery.isLoading
   }
 }

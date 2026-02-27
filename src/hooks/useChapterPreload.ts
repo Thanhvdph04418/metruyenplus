@@ -7,10 +7,7 @@ import { useEffect } from 'react'
  * @param nextChapterImages - Array of image URLs from the next chapter
  * @param enabled - Whether preloading is enabled (default: true)
  */
-export const useChapterPreload = (
-  nextChapterImages?: string[],
-  enabled: boolean = true
-) => {
+export const useChapterPreload = (nextChapterImages?: string[], enabled: boolean = true) => {
   useEffect(() => {
     if (!enabled || !nextChapterImages || nextChapterImages.length === 0) {
       return

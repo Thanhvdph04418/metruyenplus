@@ -12,7 +12,8 @@ export const useGenreComics = ({ type, page }: UseGenreComicsParams) => {
 
   return useQuery({
     queryKey: ['comicByGenre', type, page, comicListLimit, deviceType],
-    queryFn: () => comicApis.getComicsByGenre(type, { page: page.toString(), limit: comicListLimit }),
+    queryFn: () =>
+      comicApis.getComicsByGenre(type, { page: page.toString(), limit: comicListLimit }),
     staleTime: 3 * 60 * 1000
   })
 }

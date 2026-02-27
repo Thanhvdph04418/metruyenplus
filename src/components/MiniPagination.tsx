@@ -46,12 +46,17 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
           onClick={PrevPage}
           className={classNames(
             'p-2 rounded border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 flex justify-center',
-            page === 1
-              ? 'opacity-50 cursor-default'
-              : 'hover:border-primary hover:text-primary'
+            page === 1 ? 'opacity-50 cursor-default' : 'hover:border-primary hover:text-primary'
           )}
         >
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
           </svg>
         </button>
@@ -66,7 +71,14 @@ const MiniPagination = ({ totalPage, page, queryConfig }: Props) => {
               : 'hover:border-primary hover:text-primary'
           )}
         >
-          <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-4 h-4'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-4 h-4'
+          >
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
         </button>

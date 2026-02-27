@@ -12,7 +12,7 @@ import { formatNumber } from '@/utils/formatNumber'
 
 //   const now = new Date()
 //   const date = new Date(dateString)
-  
+
 //   // Check if date is valid
 //   if (isNaN(date.getTime())) {
 //     return 'Không xác định'
@@ -65,7 +65,6 @@ const MobileHotComicSlider = ({ data }: Props) => {
     }
   }, [scrollableBanners])
 
-
   return (
     <div className='relative w-full'>
       {/* Scrollable Banner Section */}
@@ -73,7 +72,10 @@ const MobileHotComicSlider = ({ data }: Props) => {
         {isLoading ? (
           <div className='flex gap-3 overflow-x-auto pb-2'>
             {Array.from({ length: 4 }).map((_, index) => (
-              <div key={`loading-${index}`} className='flex-shrink-0 w-[280px] h-[380px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse'></div>
+              <div
+                key={`loading-${index}`}
+                className='flex-shrink-0 w-[280px] h-[380px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse'
+              ></div>
             ))}
           </div>
         ) : (
@@ -87,37 +89,41 @@ const MobileHotComicSlider = ({ data }: Props) => {
                       alt={comic.title}
                       className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
                     />
-                    
+
                     {/* Enhanced gradient overlay for better text readability */}
                     <div className='absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent' />
-                    
+
                     {/* Professional info overlay */}
                     <div className='absolute bottom-0 left-0 right-0 p-5 text-white'>
                       {/* Title with enhanced styling */}
-                      <h3 className='font-bold text-xl mb-3 line-clamp-2 leading-tight text-white'>{comic.title}</h3>
-                      
+                      <h3 className='font-bold text-xl mb-3 line-clamp-2 leading-tight text-white'>
+                        {comic.title}
+                      </h3>
+
                       {/* Stats section with professional layout */}
                       <div className='space-y-2 mb-3'>
                         <div className='flex items-center gap-2 text-sm'>
                           <div className='w-2 h-2 bg-red-500 rounded-full'></div>
-                          <span className='font-medium text-gray-100'>{formatNumber(comic.total_views || 0)} lượt xem</span>
+                          <span className='font-medium text-gray-100'>
+                            {formatNumber(comic.total_views || 0)} lượt xem
+                          </span>
                         </div>
-                        
+
                         <div className='flex items-center gap-2 text-sm'>
                           <div className='w-2 h-2 bg-blue-500 rounded-full'></div>
-                          <span className='font-medium text-gray-100'>Manhwa Truyện Màu Action</span>
+                          <span className='font-medium text-gray-100'>
+                            Manhwa Truyện Màu Action
+                          </span>
                         </div>
-                        
+
                         <div className='flex items-center gap-2 text-sm'>
                           <div className='w-2 h-2 bg-green-500 rounded-full'></div>
-                          <span className='font-medium text-gray-100'>Chapter {comic.last_chapter?.name || '1'}</span>
+                          <span className='font-medium text-gray-100'>
+                            Chapter {comic.last_chapter?.name || '1'}
+                          </span>
                         </div>
                       </div>
-                      
-               
                     </div>
-
-                    
                   </div>
                 </Link>
               </div>

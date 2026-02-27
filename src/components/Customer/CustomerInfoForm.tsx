@@ -5,13 +5,13 @@ interface CustomerInfoFormProps {
   name: string
   phone?: string
   avatarPreview: string | null
-  
+
   // Event handlers
   onNameChange: (value: string) => void
   onPhoneChange: (value: string) => void
   onAvatarChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onSubmit: (e: React.FormEvent) => void
-  
+
   // State
   isLoading: boolean
 }

@@ -19,9 +19,7 @@ const HomeComicList = ({ data, title, path, layout = 'grid' }: Props) => {
     return (
       <div className='relative'>
         <div className='flex items-center justify-between mb-4'>
-          <h2 className='text-sm font-medium text-neutral-700 dark:text-neutral-300'>
-            {title}
-          </h2>
+          <h2 className='text-sm font-medium text-neutral-700 dark:text-neutral-300'>{title}</h2>
           <Link to={{ pathname: path, search }} className='text-sm text-primary hover:underline'>
             Xem tất cả →
           </Link>
@@ -46,27 +44,25 @@ const HomeComicList = ({ data, title, path, layout = 'grid' }: Props) => {
   return (
     <div className='relative'>
       <div className='flex items-center justify-between mb-5'>
-<h2 className='text-sm font-medium text-neutral-700 dark:text-neutral-300'>
-        {title}
-      </h2>
-      <Link to={{ pathname: path, search }} className='text-sm text-primary hover:underline'>
-        Xem tất cả →
-      </Link>
-    </div>
-    <div className='min-h-[200px]'>
-      <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4'>
-        {data.map((item, index) => (
-          <li key={item.id}>
-            <CardItem data={item} index={index} />
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div className='mt-5 text-center'>
-      <Link
-        to={{ pathname: path, search }}
-        className='inline-block px-4 py-2 text-sm text-primary border border-neutral-300 dark:border-neutral-600 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800'
-      >
+        <h2 className='text-sm font-medium text-neutral-700 dark:text-neutral-300'>{title}</h2>
+        <Link to={{ pathname: path, search }} className='text-sm text-primary hover:underline'>
+          Xem tất cả →
+        </Link>
+      </div>
+      <div className='min-h-[200px]'>
+        <ul className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4'>
+          {data.map((item, index) => (
+            <li key={item.id}>
+              <CardItem data={item} index={index} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className='mt-5 text-center'>
+        <Link
+          to={{ pathname: path, search }}
+          className='inline-block px-4 py-2 text-sm text-primary border border-neutral-300 dark:border-neutral-600 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800'
+        >
           Xem thêm
         </Link>
       </div>

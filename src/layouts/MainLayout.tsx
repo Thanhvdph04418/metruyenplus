@@ -1,4 +1,11 @@
-import { Footer, Header, Navbar, ScrollToTop, LunarNewYearCouplets, MobileBottomTab } from '@/components'
+import {
+  Footer,
+  Header,
+  Navbar,
+  ScrollToTop,
+  LunarNewYearCouplets,
+  MobileBottomTab
+} from '@/components'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { usePageTracking } from '@/hooks/useAnalytics'
 

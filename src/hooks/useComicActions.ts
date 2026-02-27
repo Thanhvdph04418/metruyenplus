@@ -14,10 +14,7 @@ export interface UseComicActionsOptions {
  * @param options - Optional callbacks
  * @returns Object with action functions and loading states
  */
-export const useComicActions = (
-  comicId: string | number,
-  options?: UseComicActionsOptions
-) => {
+export const useComicActions = (comicId: string | number, options?: UseComicActionsOptions) => {
   const queryClient = useQueryClient()
 
   const followMutation = useMutation(
@@ -35,9 +32,12 @@ export const useComicActions = (
         options?.onFollowSuccess?.()
       },
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể theo dõi truyện. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể theo dõi truyện. Vui lòng thử lại.'
         comicToast.error(message)
-      },
+      }
     }
   )
 
@@ -56,9 +56,12 @@ export const useComicActions = (
         options?.onUnfollowSuccess?.()
       },
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể bỏ theo dõi. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể bỏ theo dõi. Vui lòng thử lại.'
         comicToast.error(message)
-      },
+      }
     }
   )
 
@@ -76,9 +79,12 @@ export const useComicActions = (
         options?.onLikeSuccess?.()
       },
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể thích truyện. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể thích truyện. Vui lòng thử lại.'
         comicToast.error(message)
-      },
+      }
     }
   )
 
@@ -88,6 +94,6 @@ export const useComicActions = (
     likeComic: likeMutation.mutate,
     isFollowing: followMutation.isLoading,
     isUnfollowing: unfollowMutation.isLoading,
-    isLiking: likeMutation.isLoading,
+    isLiking: likeMutation.isLoading
   }
 }

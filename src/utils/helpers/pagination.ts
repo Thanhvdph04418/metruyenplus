@@ -18,9 +18,7 @@ export interface PaginationInfo {
  * @param config - Pagination configuration
  * @returns Pagination information object
  */
-export const calculatePagination = (
-  config: PaginationConfig
-): PaginationInfo => {
+export const calculatePagination = (config: PaginationConfig): PaginationInfo => {
   const { currentPage, totalItems, itemsPerPage } = config
 
   const totalPages = Math.ceil(totalItems / itemsPerPage)
@@ -33,7 +31,7 @@ export const calculatePagination = (
     startIndex,
     endIndex,
     hasNextPage: currentPage < totalPages,
-    hasPreviousPage: currentPage > 1,
+    hasPreviousPage: currentPage > 1
   }
 }
 
@@ -93,11 +91,7 @@ export const generatePageNumbers = (
  * @param itemsPerPage - Number of items per page
  * @returns Slice of items for current page
  */
-export const paginateArray = <T>(
-  items: T[],
-  currentPage: number,
-  itemsPerPage: number
-): T[] => {
+export const paginateArray = <T>(items: T[], currentPage: number, itemsPerPage: number): T[] => {
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   return items.slice(startIndex, endIndex)

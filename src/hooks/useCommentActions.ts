@@ -20,34 +20,31 @@ export interface UseCommentActionsOptions {
  * @param options - Optional callbacks
  * @returns Object with action functions and loading states
  */
-export const useCommentActions = (
-  comicId: string | number,
-  options?: UseCommentActionsOptions
-) => {
+export const useCommentActions = (comicId: string | number, options?: UseCommentActionsOptions) => {
   const queryClient = useQueryClient()
 
   const addCommentMutation = useMutation(
     (data: AddCommentData) => {
       const token = localStorage.getItem('auth_token')
       if (!token) throw new Error('Unauthorized')
-      
+
       // If parentId is provided, it's a reply
       if (data.parentId) {
         return comicApis.addReplyComment({
           token,
           commentId: data.parentId,
           content: data.content,
-          gifUrl: data.gifUrl,
+          gifUrl: data.gifUrl
         })
       }
-      
+
       // Otherwise, it's a new comment
       return comicApis.addCommentComic({
         token,
         comicId: Number(comicId),
         content: data.content,
         chapterNumber: data.chapterNumber,
-        gifUrl: data.gifUrl,
+        gifUrl: data.gifUrl
       })
     },
     {
@@ -57,9 +54,12 @@ export const useCommentActions = (
         options?.onAddSuccess?.()
       },
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể thêm bình luận. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể thêm bình luận. Vui lòng thử lại.'
         toast.error(message)
-      },
+      }
     }
   )
 
@@ -70,7 +70,7 @@ export const useCommentActions = (
       return comicApis.toggleLikeComment({
         token,
         commentId,
-        replyId,
+        replyId
       })
     },
     {
@@ -79,9 +79,12 @@ export const useCommentActions = (
         options?.onLikeSuccess?.()
       },
       onError: (error: any) => {
-        const message = error?.response?.data?.message || error?.message || 'Không thể thích bình luận. Vui lòng thử lại.'
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          'Không thể thích bình luận. Vui lòng thử lại.'
         toast.error(message)
-      },
+      }
     }
   )
 
@@ -89,6 +92,6 @@ export const useCommentActions = (
     addComment: addCommentMutation.mutate,
     likeComment: likeCommentMutation.mutate,
     isAddingComment: addCommentMutation.isLoading,
-    isLikingComment: likeCommentMutation.isLoading,
+    isLikingComment: likeCommentMutation.isLoading
   }
 }

@@ -54,7 +54,7 @@ export const validateMinLength = (
   if (value.length < minLength) {
     return {
       valid: false,
-      error: `${fieldName} phải có ít nhất ${minLength} ký tự`,
+      error: `${fieldName} phải có ít nhất ${minLength} ký tự`
     }
   }
 
@@ -76,7 +76,7 @@ export const validateMaxLength = (
   if (value.length > maxLength) {
     return {
       valid: false,
-      error: `${fieldName} không được vượt quá ${maxLength} ký tự`,
+      error: `${fieldName} không được vượt quá ${maxLength} ký tự`
     }
   }
 
