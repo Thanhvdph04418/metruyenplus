@@ -1,7 +1,7 @@
 import comicApis from '@/apis/comicApis'
 import {
-  HotComicSlider,
-  MobileHotComicSlider,
+  HonettruyenSlider,
+  MobileHonettruyenSlider,
   HomeComicList
   // MobileAppNotification,
   // DesktopDomainNotification
@@ -18,7 +18,7 @@ import HistoryHome from '@/components/History/HistoryHome'
 import TopComicsSection from '@/components/TopComics/TopComicsSection'
 import RecentComments from '@/components/Comments/RecentComments'
 import {
-  HotComicSliderSkeleton,
+  HonettruyenSliderSkeleton,
   HomeComicListSkeleton,
   SidebarSkeleton
 } from '@/components/Skeletons'
@@ -36,10 +36,10 @@ const Home = () => {
     [queryConfig, homeComicLimit]
   )
 
-  // Load popular comics (critical for HotComicSlider)
+  // Load popular comics (critical for HonettruyenSlider)
   const { data: dataHot, isLoading: isLoadingHot } = useQuery({
     queryKey: [PATH_MAPPING_API.popular, 'home', deviceType, homeComicLimit],
-    queryFn: () => comicApis.getComicsByUrl(PATH_MAPPING_API.popular, homeQueryConfig),
+    queryFn: () => comicApis.genettruyensByUrl(PATH_MAPPING_API.popular, homeQueryConfig),
     staleTime: 5 * 60 * 1000, // Increased cache time for better performance
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false, // Prevent unnecessary refetches
@@ -50,14 +50,14 @@ const Home = () => {
   const { data: dataRecentUpdated, isLoading: isLoadingRecentUpdated } = useQuery({
     queryKey: [PATH_MAPPING_API.recent, 'home', deviceType, homeComicLimit, { isHome: 1 }],
     queryFn: () =>
-      comicApis.getComicsByUrl(PATH_MAPPING_API.recent, { ...homeQueryConfig, isHome: 1 }),
+      comicApis.genettruyensByUrl(PATH_MAPPING_API.recent, { ...homeQueryConfig, isHome: 1 }),
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
     keepPreviousData: true
   })
 
-  const dataHotComics = useMemo(() => dataHot?.data.comics, [dataHot])
+  const dataHonettruyens = useMemo(() => dataHot?.data.comics, [dataHot])
   const dataRecentUpdatedComics = useMemo(() => dataRecentUpdated?.data.comics, [dataRecentUpdated])
 
   // Load sidebar content immediately (no dependencies for better performance)
@@ -79,14 +79,14 @@ const Home = () => {
             <p className='text-sm text-neutral-500 dark:text-neutral-400 mb-3'>Nổi bật</p>
             <div className='relative w-full'>
               {isLoadingHot && !dataHot ? (
-                <HotComicSliderSkeleton />
+                <HonettruyenSliderSkeleton />
               ) : (
                 <>
                   <div className='block md:hidden'>
-                    <MobileHotComicSlider data={dataHotComics as comics[]} />
+                    <MobileHonettruyenSlider data={dataHonettruyens as comics[]} />
                   </div>
                   <div className='hidden md:block'>
-                    <HotComicSlider data={dataHotComics as comics[]} />
+                    <HonettruyenSlider data={dataHonettruyens as comics[]} />
                   </div>
                 </>
               )}

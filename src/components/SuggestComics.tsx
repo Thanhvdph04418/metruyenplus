@@ -26,7 +26,7 @@ interface Props {
   scrollPosition?: ScrollPosition // For trackWindowScroll HOC
 }
 
-const SuggestComics = ({
+const Suggesnettruyens = ({
   index,
   src,
   title,
@@ -127,4 +127,4 @@ const SuggestComics = ({
   )
 }
 
-export default SuggestComics
+export default Suggesnettruyens

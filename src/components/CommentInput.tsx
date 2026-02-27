@@ -67,7 +67,7 @@ export function CommentInput({
           gifUrl: selectedGif || undefined
         })
       } else {
-        response = await comicApis.addCommentComic({
+        response = await comicApis.addCommennettruyen({
           token,
           comicId,
           chapterNumber,

@@ -32,7 +32,7 @@ export const useGenreSEO = ({ currentGenre, type, totalPages }: UseGenreSEOParam
 
   const metaTags = useMemo(
     () => ({
-      title: `Truyện Thể loại ${currentGenre?.name || ''} - TComic`,
+      title: `Truyện Thể loại ${currentGenre?.name || ''} - nettruyen`,
       description: `Truyện Thể loại ${currentGenre?.name || ''} - ${
         currentGenre?.description || ''
       }`,

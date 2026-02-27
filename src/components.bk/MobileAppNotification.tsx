@@ -6,7 +6,7 @@ import AndroidApkModal from './AndroidApkModal'
 
 /**
  * Mobile App Notification Component
- * Shows a simple notification encouraging users to download the Tcomic mobile app
+ * Shows a simple notification encouraging users to download the nettruyen mobile app
  * Only visible on mobile devices with automatic iOS/Android detection
  * For Android: Shows modal explaining APK installation
  * For iOS: Direct link to App Store
@@ -21,7 +21,7 @@ const MobileAppNotification = () => {
   }
 
   // const mobileOS = detectMobileOS()
-  // const websiteUrl = import.meta.env.VITE_URL_WEBSITE || 'tcomicclub.com'
+  // const websiteUrl = import.meta.env.VITE_URL_WEBSITE || 'nettruyenclub.com'
   // Extract domain name without protocol
   // const domainName = websiteUrl.replace(/^https?:\/\//, '')
 

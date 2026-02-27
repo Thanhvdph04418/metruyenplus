@@ -20,7 +20,7 @@ export interface SEOConfig {
  */
 export const useSEO = (config: SEOConfig) => {
   const {
-    title = 'TComic - Đọc truyện tranh online',
+    title = 'nettruyen - Đọc truyện tranh online',
     description = 'Đọc truyện tranh online miễn phí, cập nhật liên tục',
     image = '/default-og-image.jpg',
     url = window.location.href,
@@ -31,7 +31,7 @@ export const useSEO = (config: SEOConfig) => {
     modifiedTime
   } = config
 
-  const fullTitle = title.includes('TComic') ? title : `${title} - TComic`
+  const fullTitle = title.includes('nettruyen') ? title : `${title} - nettruyen`
 
   return (
     <Helmet>
@@ -47,7 +47,7 @@ export const useSEO = (config: SEOConfig) => {
       <meta property='og:image' content={image} />
       <meta property='og:url' content={url} />
       <meta property='og:type' content={type} />
-      <meta property='og:site_name' content='TComic' />
+      <meta property='og:site_name' content='nettruyen' />
 
       {/* Twitter Card */}
       <meta name='twitter:card' content='summary_large_image' />

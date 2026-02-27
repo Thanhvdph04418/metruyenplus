@@ -122,7 +122,7 @@ const getPageTitle = (path: string): string => {
     return 'Đọc chương'
   }
 
-  return 'TComic - Đọc truyện tranh online'
+  return 'nettruyen - Đọc truyện tranh online'
 }
 
 // Comic-related event tracking

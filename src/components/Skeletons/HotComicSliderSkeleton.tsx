@@ -1,4 +1,4 @@
-const HotComicSliderSkeleton = () => {
+const HonettruyenSliderSkeleton = () => {
   return (
     <div
       className='relative w-full overflow-hidden'
@@ -7,7 +7,7 @@ const HotComicSliderSkeleton = () => {
         isolation: 'isolate'
       }}
     >
-      {/* Mobile Layout - Match MobileHotComicSlider: NO title, horizontal scroll with loading image */}
+      {/* Mobile Layout - Match MobileHonettruyenSlider: NO title, horizontal scroll with loading image */}
       <div className='block md:hidden mb-6'>
         <div className='flex gap-3 overflow-x-auto pb-2'>
           {Array.from({ length: 4 }).map((_, index) => (
@@ -26,7 +26,7 @@ const HotComicSliderSkeleton = () => {
         </div>
       </div>
 
-      {/* Desktop Layout - Match HotComicSlider: HAS title section + Embla carousel with loading image */}
+      {/* Desktop Layout - Match HonettruyenSlider: HAS title section + Embla carousel with loading image */}
       <div className='hidden md:block'>
         {/* Title Section - Only on desktop */}
         <div className='flex items-center justify-between mb-6 px-2'>
@@ -117,4 +117,4 @@ const HotComicSliderSkeleton = () => {
   )
 }
 
-export default HotComicSliderSkeleton
+export default HonettruyenSliderSkeleton

@@ -26,7 +26,7 @@ export const useComicDetailData = (comicId: string): UseComicDetailDataReturn =>
   // PRIORITY 1: Comic Detail - Critical data first
   const { data, isError, isLoading, refetch } = useQuery({
     queryKey: ['comic_detail', comicId],
-    queryFn: () => comicApis.getComicDetail(comicId),
+    queryFn: () => comicApis.genettruyenDetail(comicId),
     staleTime: 5 * 60 * 1000, // 5 minutes fresh
     cacheTime: 10 * 60 * 1000, // 10 minutes in cache
     refetchOnWindowFocus: false, // Prevent unnecessary refetches
@@ -39,7 +39,7 @@ export const useComicDetailData = (comicId: string): UseComicDetailDataReturn =>
   const { data: dataWeekly, isLoading: isLoadingWeekly } = useQuery({
     queryKey: [`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, { page: '1', status: 'all' }],
     queryFn: () =>
-      comicApis.getComicsByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, {
+      comicApis.genettruyensByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, {
         page: '1',
         status: 'all'
       }),
@@ -53,7 +53,7 @@ export const useComicDetailData = (comicId: string): UseComicDetailDataReturn =>
   // Load popular data in parallel (no dependencies for better performance)
   const { data: dataPopular, isLoading: isLoadingPopular } = useQuery({
     queryKey: [`${PATH_MAPPING_API.popular}`, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(`${PATH_MAPPING_API.popular}`, { page: '1' }),
+    queryFn: () => comicApis.genettruyensByUrl(`${PATH_MAPPING_API.popular}`, { page: '1' }),
     staleTime: 10 * 60 * 1000,
     cacheTime: 15 * 60 * 1000,
     keepPreviousData: true, // No loading flashes

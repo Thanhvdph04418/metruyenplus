@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import PATH from '@/utils/path'
 import { FaSort, FaSearch } from 'react-icons/fa'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { getComicHistory } from '@/utils/history'
+import { genettruyenHistory } from '@/utils/history'
 
 interface Props {
   data: comicsChapter
@@ -21,7 +21,7 @@ const ListChapter = memo(({ data, slug, id }: Props) => {
   useEffect(() => {
     const loadReadChapters = async () => {
       try {
-        const history = await getComicHistory(id)
+        const history = await genettruyenHistory(id)
         if (history?.read_chapter_ids) {
           setReadChapters(history.read_chapter_ids)
         }

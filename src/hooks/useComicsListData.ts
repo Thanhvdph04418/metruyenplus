@@ -29,7 +29,7 @@ export const useComicsListData = ({ pathname, queryConfig }: UseComicsListDataPa
   // Query 1: Regular list
   const listQuery = useQuery({
     queryKey: [PATH_MAPPING, 'list', deviceType, comicListLimit, queryConfig],
-    queryFn: () => comicApis.getComicsByUrl(PATH_MAPPING, listQueryConfig),
+    queryFn: () => comicApis.genettruyensByUrl(PATH_MAPPING, listQueryConfig),
     staleTime: 3 * 60 * 1000,
     enabled: !isNewPage
   })

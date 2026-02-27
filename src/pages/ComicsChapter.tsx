@@ -42,7 +42,7 @@ const ComicsChapter = () => {
     queryFn: async () => {
       const attemptFetch = async (): Promise<any> => {
         try {
-          return await comicApis.getComicChapter(Number(idChapter), Number(comicId))
+          return await comicApis.genettruyenChapter(Number(idChapter), Number(comicId))
         } catch (error: any) {
           console.log('error', error)
           throw error
@@ -59,7 +59,7 @@ const ComicsChapter = () => {
 
   const { data: dataComic } = useQuery({
     queryKey: ['comic_detail', comicId],
-    queryFn: () => comicApis.getComicDetail(String(comicId)),
+    queryFn: () => comicApis.genettruyenDetail(String(comicId)),
     staleTime: 3 * 60 * 1000,
     enabled: comicId !== ''
   })

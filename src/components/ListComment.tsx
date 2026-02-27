@@ -32,7 +32,7 @@ const ListComment = ({ id, chapterNumber }: { id: string; chapterNumber?: number
 
   const { data, isError, isFetching, refetch } = useQuery({
     queryKey: ['comic_comment', id, { page, sortBy }],
-    queryFn: () => comicApis.getComicComments(id as string, { page, sortBy }),
+    queryFn: () => comicApis.genettruyenComments(id as string, { page, sortBy }),
     staleTime: 3 * 60 * 1000,
     keepPreviousData: true,
     enabled: id !== ''

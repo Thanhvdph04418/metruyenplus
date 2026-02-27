@@ -1,5 +1,5 @@
 import iconSearch from '/icon_search.webp'
-import { SuggestComics } from '.'
+import { Suggesnettruyens } from '.'
 import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
@@ -145,7 +145,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
             onMouseDown={() => handleClick(item.id, item.title, item)}
             className='flex-1 flex items-center gap-3 min-w-0 cursor-pointer'
           >
-            <SuggestComics
+            <Suggesnettruyens
               index={i}
               isStyleSearch={true}
               title={item.title}
@@ -194,7 +194,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
           onMouseDown={() => handleClick(item.id, item.title, item)}
           className='px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 cursor-pointer'
         >
-          <SuggestComics
+          <Suggesnettruyens
             index={i}
             isStyleSearch={true}
             title={item.title}

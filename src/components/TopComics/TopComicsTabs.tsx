@@ -1,4 +1,4 @@
-import { SuggestComics } from '@/components'
+import { Suggesnettruyens } from '@/components'
 import { comics } from '@/types/data'
 
 export type TopComicsTab = 'month' | 'week' | 'day'
@@ -92,7 +92,7 @@ const TopComicsTabs = ({
         {!isCurrentTabLoading && currentData && (
           <div className='space-y-2'>
             {currentData.slice(0, 6).map((item, i) => (
-              <SuggestComics
+              <Suggesnettruyens
                 key={item.id}
                 index={i}
                 title={item.title}

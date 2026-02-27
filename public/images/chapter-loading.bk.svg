@@ -26,7 +26,7 @@
 
   <rect width="400" height="600" fill="url(#shimmer)"/>
 
-  <!-- TComic Brand Logo -->
+  <!-- nettruyen Brand Logo -->
   <g transform="translate(200, 250)">
     <!-- Outer glow circle -->
     <circle cx="0" cy="0" r="80" fill="url(#brandGradient)" opacity="0.1">
@@ -37,14 +37,14 @@
     <!-- Main brand circle -->
     <circle cx="0" cy="0" r="65" fill="url(#brandGradient)" opacity="0.15"/>
 
-    <!-- TComic Text -->
+    <!-- nettruyen Text -->
     <text x="0" y="10"
           font-family="Bangers, cursive"
           font-size="56"
           font-weight="700"
           fill="url(#brandGradient)"
           text-anchor="middle">
-      TComic
+      nettruyen
     </text>
   </g>
 

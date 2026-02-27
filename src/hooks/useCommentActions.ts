@@ -39,7 +39,7 @@ export const useCommentActions = (comicId: string | number, options?: UseComment
       }
 
       // Otherwise, it's a new comment
-      return comicApis.addCommentComic({
+      return comicApis.addCommennettruyen({
         token,
         comicId: Number(comicId),
         content: data.content,

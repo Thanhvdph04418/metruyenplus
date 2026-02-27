@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'tcomic-web',
+      name: 'nettruyen-web',
       script: 'serve',
       env: {
         PM2_SERVE_PATH: './dist',

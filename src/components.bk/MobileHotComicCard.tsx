@@ -19,7 +19,7 @@ interface Props {
   isAboveFold?: boolean // Explicitly mark above-fold images
 }
 
-const MobileHotComicCard = ({ data, index, scrollPosition, isAboveFold = false }: Props) => {
+const MobileHonettruyenCard = ({ data, index, scrollPosition, isAboveFold = false }: Props) => {
   const {
     id,
     slug,
@@ -157,4 +157,4 @@ const MobileHotComicCard = ({ data, index, scrollPosition, isAboveFold = false }
   )
 }
 
-export default MobileHotComicCard
+export default MobileHonettruyenCard

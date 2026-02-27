@@ -1,4 +1,4 @@
-export { default as HotComicSliderSkeleton } from './HotComicSliderSkeleton'
+export { default as HonettruyenSliderSkeleton } from './HonettruyenSliderSkeleton'
 export { default as HomeComicListSkeleton } from './HomeComicListSkeleton'
 export { default as HistoryHomeSkeleton } from './HistoryHomeSkeleton'
 export { default as SidebarSkeleton } from './SidebarSkeleton'

@@ -159,7 +159,7 @@ const TopPreviewComics = () => {
   const { data: dataDaily } = useQuery({
     queryKey: [`${PATH_MAPPING_API.top}${PATH_MAPPING_API.daily}`, { page: '1', status: 'all' }],
     queryFn: () =>
-      comicApis.getComicsByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.daily}`, {
+      comicApis.genettruyensByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.daily}`, {
         page: '1',
         status: 'all'
       }),
@@ -169,7 +169,7 @@ const TopPreviewComics = () => {
   const { data: dataWeekly } = useQuery({
     queryKey: [`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, { page: '1', status: 'all' }],
     queryFn: () =>
-      comicApis.getComicsByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, {
+      comicApis.genettruyensByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, {
         page: '1',
         status: 'all'
       }),
@@ -179,7 +179,7 @@ const TopPreviewComics = () => {
   const { data: dataMonthly } = useQuery({
     queryKey: [`${PATH_MAPPING_API.top}${PATH_MAPPING_API.monthly}`, { page: '1', status: 'all' }],
     queryFn: () =>
-      comicApis.getComicsByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.monthly}`, {
+      comicApis.genettruyensByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.monthly}`, {
         page: '1',
         status: 'all'
       }),

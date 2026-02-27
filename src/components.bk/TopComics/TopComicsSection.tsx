@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
 import { PATH_MAPPING_API } from '@/utils/path'
-import { SuggestComics } from '@/components'
+import { Suggesnettruyens } from '@/components'
 
 type Tab = 'month' | 'week' | 'day'
 
@@ -15,7 +15,7 @@ const TopComicsSection = () => {
   // Load monthly data immediately (default active tab)
   const { data: monthlyData, isLoading: isLoadingMonthly } = useQuery({
     queryKey: [urlPathMonth, { page: '1', status: 'all' }],
-    queryFn: () => comicApis.getComicsByUrl(urlPathMonth, { page: '1', status: 'all' }),
+    queryFn: () => comicApis.genettruyensByUrl(urlPathMonth, { page: '1', status: 'all' }),
     staleTime: 5 * 60 * 1000, // Increased cache time for better performance
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false, // Prevent unnecessary refetches
@@ -25,7 +25,7 @@ const TopComicsSection = () => {
   // Load weekly data only when tab is selected
   const { data: weeklyData, isLoading: isLoadingWeekly } = useQuery({
     queryKey: [urlPathWeek, { page: '1', status: 'all' }],
-    queryFn: () => comicApis.getComicsByUrl(urlPathWeek, { page: '1', status: 'all' }),
+    queryFn: () => comicApis.genettruyensByUrl(urlPathWeek, { page: '1', status: 'all' }),
     enabled: activeTab === 'week', // Only fetch when tab is active
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
@@ -36,7 +36,7 @@ const TopComicsSection = () => {
   // Load daily data only when tab is selected
   const { data: dailyData, isLoading: isLoadingDaily } = useQuery({
     queryKey: [urlPathDay, { page: '1', status: 'all' }],
-    queryFn: () => comicApis.getComicsByUrl(urlPathDay, { page: '1', status: 'all' }),
+    queryFn: () => comicApis.genettruyensByUrl(urlPathDay, { page: '1', status: 'all' }),
     enabled: activeTab === 'day', // Only fetch when tab is active
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
@@ -100,7 +100,7 @@ const TopComicsSection = () => {
         {!isCurrentTabLoading && currentData && (
           <div className='space-y-2'>
             {currentData.slice(0, 6).map((item, i) => (
-              <SuggestComics
+              <Suggesnettruyens
                 key={item.id}
                 index={i}
                 title={item.title}

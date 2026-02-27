@@ -79,7 +79,7 @@ const Footer = () => {
               GIỚI THIỆU
             </h2>
             <p className='text-xs leading-relaxed'>
-              TcomicClub.com - Đọc Truyện Tranh Online Hoàn Toàn Miễn Phí - Nơi Thỏa Mãn Đam Mê.
+              nettruyenClub.com - Đọc Truyện Tranh Online Hoàn Toàn Miễn Phí - Nơi Thỏa Mãn Đam Mê.
             </p>
             <p className='text-xs mt-2 leading-relaxed'>
               Cập nhật các bộ truyện tranh hay, mới nhất, nhanh nhất để phục vụ độc giả, hỗ trợ trên
@@ -117,7 +117,7 @@ const Footer = () => {
                     <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
                   </svg>
                 </span>
-                tcomicvn@gmail.com
+                nettruyenvn@gmail.com
               </p>
               <div className='space-y-3'>
                 <Link
@@ -154,7 +154,7 @@ const Footer = () => {
                   >
                     <path d='M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z' />
                   </svg>
-                  <span className='text-sm font-medium'>TẢI ỨNG DỤNG TCOMIC</span>
+                  <span className='text-sm font-medium'>TẢI ỨNG DỤNG nettruyen</span>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1'
@@ -176,11 +176,11 @@ const Footer = () => {
         {/* Logo and Slogan */}
         <div className='text-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-800'>
           <div className='mb-2'>
-            <span className='text-3xl logo-text-bold gradient-logo-text'>Tcomic</span>
+            <span className='text-3xl logo-text-bold gradient-logo-text'>nettruyen</span>
           </div>
           <p className='text-sm font-medium gradient-logo-text'>Quality - Quickly - Quantity</p>
           <p className='text-xs mt-2 text-gray-500 dark:text-gray-400'>
-            Copyright © {new Date().getFullYear()} Tcomic. All Right Reserved
+            Copyright © {new Date().getFullYear()} nettruyen. All Right Reserved
           </p>
         </div>
       </div>

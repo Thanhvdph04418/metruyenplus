@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { comicSingleChapter } from '@/types/data'
-import { historyAddComic, getComicHistory, updateReadChapters } from '@/utils/history'
+import { historyAddComic, genettruyenHistory, updateReadChapters } from '@/utils/history'
 
 interface UseChapterHistoryParams {
   dataComics: any // Comic detail data
@@ -26,7 +26,7 @@ export const useChapterHistory = ({
       if (dataComics && dataChapter) {
         try {
           // Get existing history entry for this comic
-          const existingData = await getComicHistory(dataComics.id)
+          const existingData = await genettruyenHistory(dataComics.id)
           const currentChapterId = Number(idChapter)
 
           // Initialize or update read_chapter_ids

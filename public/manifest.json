@@ -1,15 +1,15 @@
 {
-  "name": "Tcomic",
-  "short_name": "Tcomic",
-  "description": "Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại Tcomic ❤️💛💚",
-  "author": "Tcomic",
+  "name": "nettruyen",
+  "short_name": "nettruyen",
+  "description": "Web đọc truyện tranh online lớn nhất được cập nhật liên tục mỗi ngày - Cùng tham gia đọc truyện và thảo luận với hơn 10 triệu thành viên 🎉 tại nettruyen ❤️💛💚",
+  "author": "nettruyen",
   "theme_color": "#2196F3",
   "background_color": "#F8FAFC",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "browser_action": {
-    "default_title": "Tcomic"
+    "default_title": "nettruyen"
   },
   "icons": [
     {

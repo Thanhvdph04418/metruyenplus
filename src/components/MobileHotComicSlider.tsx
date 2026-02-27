@@ -49,7 +49,7 @@ interface Props {
   data?: comics[]
 }
 
-const MobileHotComicSlider = ({ data }: Props) => {
+const MobileHonettruyenSlider = ({ data }: Props) => {
   if (!data || data.length === 0) return null
 
   // Get more comics for scrollable banners
@@ -135,4 +135,4 @@ const MobileHotComicSlider = ({ data }: Props) => {
   )
 }
 
-export default MobileHotComicSlider
+export default MobileHonettruyenSlider

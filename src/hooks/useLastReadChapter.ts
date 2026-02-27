@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getComicHistory } from '@/utils/history'
+import { genettruyenHistory } from '@/utils/history'
 import { comicsDetail } from '@/types/data'
 
 export interface LastReadChapter {
@@ -42,7 +42,7 @@ export const useLastReadChapter = (
 
     setIsLoadingHistory(true)
     try {
-      const history = await getComicHistory(String(comicId))
+      const history = await genettruyenHistory(String(comicId))
       if (history) {
         const chapter = chapters.find((c) => c.id === history.chapter_id)
         if (chapter) {

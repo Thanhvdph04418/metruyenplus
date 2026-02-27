@@ -275,7 +275,7 @@ const ComicsList = () => {
 
   const { data, isError } = useQuery({
     queryKey: ['comicByGenre', type, queryConfig.page],
-    queryFn: () => comicApis.getComicsByGenre(type, queryConfig),
+    queryFn: () => comicApis.genettruyensByGenre(type, queryConfig),
     staleTime: 3 * 60 * 1000
   })
 
@@ -372,7 +372,7 @@ const ComicsList = () => {
                 <CardItem key={item.id} data={item} index={index} />
               ))
             ) : (
-              <SkeletonListComic />
+              <SkeletonLisnettruyen />
             )}
           </div>
         </div>
@@ -404,7 +404,7 @@ const SkeletonGenre = () => {
   )
 }
 
-const SkeletonListComic = () => {
+const SkeletonLisnettruyen = () => {
   return (
     <>
       {Array(12)

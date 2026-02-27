@@ -1,4 +1,4 @@
-const HotComicSliderSkeleton = () => {
+const HonettruyenSliderSkeleton = () => {
   const iconRecommend = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -110,4 +110,4 @@ const HotComicSliderSkeleton = () => {
   )
 }
 
-export default HotComicSliderSkeleton
+export default HonettruyenSliderSkeleton

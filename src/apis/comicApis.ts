@@ -39,7 +39,7 @@ export type typeUrlComics =
   | string
 
 const comicApis = {
-  getComicsByUrl(url: typeUrlComics, params?: paramOption) {
+  genettruyensByUrl(url: typeUrlComics, params?: paramOption) {
     const urlAPI = `/api/web/comic${url}`
     const authKey = generateAuthKey(urlAPI, params)
     return axiosClients.get<dataComics>(urlAPI, { params, headers: { 'x-request-id': authKey } })
@@ -53,7 +53,7 @@ const comicApis = {
     const url = `/api/web/categories`
     return axiosClients.get<dataGenres>(url)
   },
-  getComicsByGenre(id: string, params?: { page?: string; limit?: number }) {
+  genettruyensByGenre(id: string, params?: { page?: string; limit?: number }) {
     const url = `/api/web/comic${PATH_MAPPING_API.genres}/${id}`
     const uri = url.replace(/\/\d+(?=\/|$)/g, '')
     const authKey = generateAuthKey(uri, pick(params, 'page', 'limit'))
@@ -65,7 +65,7 @@ const comicApis = {
     const authKey = generateAuthKey(uri, params)
     return axiosClients.get<dataComics>(url, { params, headers: { 'x-request-id': authKey } })
   },
-  getComicDetail(id: string) {
+  genettruyenDetail(id: string) {
     const url = `/api/web/comic${PATH_MAPPING_API.comics}/${id}`
     const uri = url.replace(/\/\d+(?=\/|$)/g, '')
     const authKey = generateAuthKey(uri, {})
@@ -77,13 +77,13 @@ const comicApis = {
       }
     })
   },
-  getComicComments(id: string, params?: { page: number; sortBy?: 'createdAt' | 'hot' }) {
+  genettruyenComments(id: string, params?: { page: number; sortBy?: 'createdAt' | 'hot' }) {
     const url = `/api/web/comic/comments/${id}`
     const uri = url.replace(/\/\d+(?=\/|$)/g, '')
     const authKey = generateAuthKey(uri, params)
     return axiosClients.get<CommentResponse>(url, { params, headers: { 'x-request-id': authKey } })
   },
-  async getComicChapter(chapterId: number, comicId: number) {
+  async genettruyenChapter(chapterId: number, comicId: number) {
     // Get the verification token from localStorage
     // const verifyToken = localStorage.getItem('verify-token-chapter')
     // if (!verifyToken) {
@@ -339,7 +339,7 @@ const comicApis = {
     return response.data
   },
 
-  async addCommentComic({
+  async addCommennettruyen({
     token,
     comicId,
     chapterNumber,

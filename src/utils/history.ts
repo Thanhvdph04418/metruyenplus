@@ -111,7 +111,7 @@ export const getAllLocalHistory = async (): Promise<HistoryComic[]> => {
 }
 
 // Get history for a specific comic
-export const getComicHistory = async (comicId: string): Promise<HistoryComic | undefined> => {
+export const genettruyenHistory = async (comicId: string): Promise<HistoryComic | undefined> => {
   try {
     return await db.history.get(comicId)
   } catch (error) {

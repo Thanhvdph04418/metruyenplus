@@ -31,7 +31,7 @@ const SidebarSkeleton = () => {
                       index !== 0 && 'border-t border-dashed border-[#D9D9D9] dark:border-gray-500'
                     }`}
                   >
-                    {/* Thumbnail Skeleton - Match SuggestComics */}
+                    {/* Thumbnail Skeleton - Match Suggesnettruyens */}
                     <div className='flex-shrink-0 w-[60px] h-[80px] bg-gray-200 dark:bg-gray-700 rounded' />
 
                     {/* Content Skeleton */}

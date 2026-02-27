@@ -1,5 +1,5 @@
 import iconSearch from '/icon_search.webp'
-import { SuggestComics } from '.'
+import { Suggesnettruyens } from '.'
 import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
@@ -141,7 +141,7 @@ const SearchBar = () => {
                 </svg>
               </div>
               <div className='pl-12 w-full'>
-                <SuggestComics
+                <Suggesnettruyens
                   index={i}
                   isStyleSearch={true}
                   title={item.title}
@@ -191,7 +191,7 @@ const SearchBar = () => {
           onMouseDown={() => handleClick(item.id, item.title, item)}
           className='cursor-pointer'
         >
-          <SuggestComics
+          <Suggesnettruyens
             index={i}
             isStyleSearch={true}
             title={item.title}

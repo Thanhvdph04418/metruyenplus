@@ -20,12 +20,12 @@ const SiteMap = () => {
   return (
     <>
       <Helmet>
-        <title>Sơ đồ trang web - TComic</title>
+        <title>Sơ đồ trang web - nettruyen</title>
         <meta
           name='description'
-          content='Sơ đồ trang web của TComic - Tất cả các đường dẫn trên website'
+          content='Sơ đồ trang web của nettruyen - Tất cả các đường dẫn trên website'
         />
-        <link rel='canonical' href='https://tcomicfanq.com/so-do-trang-web' />
+        <link rel='canonical' href='https://nettruyenfanq.com/so-do-trang-web' />
       </Helmet>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         <div className='bg-white dark:bg-gray-900 rounded-xl shadow-lg dark:shadow-gray-900/30 overflow-hidden'>
@@ -201,7 +201,7 @@ const SiteMap = () => {
                 </li>
                 <li>
                   <a
-                    href='mailto:support@tcomicfanq.com'
+                    href='mailto:support@nettruyenfanq.com'
                     title='Liên hệ'
                     className='flex items-center text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary/90 transition-colors'
                   >

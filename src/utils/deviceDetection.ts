@@ -10,11 +10,11 @@ export interface AppStoreUrls {
 }
 
 /**
- * App store URLs for TComic mobile app
+ * App store URLs for nettruyen mobile app
  */
-export const TCOMIC_APP_URLS: AppStoreUrls = {
-  ios: 'https://apps.apple.com/vn/app/tcomic-truy%E1%BB%87n-tranh-t%E1%BB%95ng-h%E1%BB%A3p/id1592247388',
-  android: 'https://s3.ap-southeast-1.wasabisys.com/imgcdn.tcomic.top/tcomic.apk' // Direct APK download
+export const nettruyen_APP_URLS: AppStoreUrls = {
+  ios: 'https://apps.apple.com/vn/app/nettruyen-truy%E1%BB%87n-tranh-t%E1%BB%95ng-h%E1%BB%A3p/id1592247388',
+  android: 'https://s3.ap-southeast-1.wasabisys.com/imgcdn.nettruyen.top/nettruyen.apk' // Direct APK download
 }
 
 /**
@@ -50,12 +50,12 @@ export const getAppStoreUrl = (): string => {
 
   switch (os) {
     case 'ios':
-      return TCOMIC_APP_URLS.ios
+      return nettruyen_APP_URLS.ios
     case 'android':
-      return TCOMIC_APP_URLS.android
+      return nettruyen_APP_URLS.android
     default:
       // Default to Android Play Store for unknown devices
-      return TCOMIC_APP_URLS.android
+      return nettruyen_APP_URLS.android
   }
 }
 

@@ -1,14 +1,14 @@
 import { comics } from '@/types/data'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
-import { HotComicCard } from '@/components'
+import { HonettruyenCard } from '@/components'
 import { useMemo, useCallback, useState, useEffect } from 'react'
 
 interface Props {
   data?: comics[]
 }
 
-const HotComicSlider = ({ data }: Props) => {
+const HonettruyenSlider = ({ data }: Props) => {
   if (!data || data.length === 0) return null
 
   // Limit to 15 comics and ensure minimum slides for smooth loop
@@ -120,7 +120,7 @@ const HotComicSlider = ({ data }: Props) => {
                 ))
               : limitedData.map((comic, index) => (
                   <div className='embla__slide' key={`${comic.id}-${index}`}>
-                    <HotComicCard
+                    <HonettruyenCard
                       data={comic}
                       index={index}
                       isAboveFold={index < 5} // Mark first 5 cards as above fold for priority loading
@@ -181,4 +181,4 @@ const HotComicSlider = ({ data }: Props) => {
   )
 }
 
-export default HotComicSlider
+export default HonettruyenSlider

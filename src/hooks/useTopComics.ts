@@ -13,7 +13,7 @@ export const useTopComics = (activeTab: TopComicsTab) => {
   // Query for monthly data
   const monthlyQuery = useQuery({
     queryKey: [urlPathMonth, { page: '1', status: 'all' }],
-    queryFn: () => comicApis.getComicsByUrl(urlPathMonth, { page: '1', status: 'all' }),
+    queryFn: () => comicApis.genettruyensByUrl(urlPathMonth, { page: '1', status: 'all' }),
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
@@ -23,7 +23,7 @@ export const useTopComics = (activeTab: TopComicsTab) => {
   // Query for weekly data (enabled only when tab is active)
   const weeklyQuery = useQuery({
     queryKey: [urlPathWeek, { page: '1', status: 'all' }],
-    queryFn: () => comicApis.getComicsByUrl(urlPathWeek, { page: '1', status: 'all' }),
+    queryFn: () => comicApis.genettruyensByUrl(urlPathWeek, { page: '1', status: 'all' }),
     enabled: activeTab === 'week',
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,
@@ -34,7 +34,7 @@ export const useTopComics = (activeTab: TopComicsTab) => {
   // Query for daily data (enabled only when tab is active)
   const dailyQuery = useQuery({
     queryKey: [urlPathDay, { page: '1', status: 'all' }],
-    queryFn: () => comicApis.getComicsByUrl(urlPathDay, { page: '1', status: 'all' }),
+    queryFn: () => comicApis.genettruyensByUrl(urlPathDay, { page: '1', status: 'all' }),
     enabled: activeTab === 'day',
     staleTime: 5 * 60 * 1000,
     cacheTime: 10 * 60 * 1000,

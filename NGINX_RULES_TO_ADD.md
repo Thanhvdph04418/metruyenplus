@@ -34,9 +34,9 @@ if ($args ~* "(.*)(?:^|&)(utm_source|utm_medium|utm_campaign|utm_content|utm_ter
 ```nginx
 server {
     listen 80;
-    server_name tcomicclub.com www.tcomicclub.com;
+    server_name nettruyenclub.com www.nettruyenclub.com;
 
-    root /var/www/tcomic;
+    root /var/www/nettruyen;
     index index.html;
 
     # ==========================================
@@ -87,9 +87,9 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 # 3. Test redirects
-curl -I https://tcomicclub.com/the-loai/?page=1     # → 301 redirect to /the-loai
-curl -I https://tcomicclub.com/the-loai//           # → 301 redirect to /the-loai
-curl -I https://tcomicclub.com/truyen-tranh/abc//0  # → 301 redirect to /truyen-tranh/abc
+curl -I https://nettruyenclub.com/the-loai/?page=1     # → 301 redirect to /the-loai
+curl -I https://nettruyenclub.com/the-loai//           # → 301 redirect to /the-loai
+curl -I https://nettruyenclub.com/truyen-tranh/abc//0  # → 301 redirect to /truyen-tranh/abc
 ```
 
 ## Giải Thích

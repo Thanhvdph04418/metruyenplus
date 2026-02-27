@@ -73,7 +73,7 @@ const HistoryActions = ({ onSync, onDeleteAll, isSyncing, hasItems }: HistoryAct
               </svg>
             )}
             <span className='sm:hidden'>Đồng bộ</span>
-            <span className='hidden sm:inline'>Đồng bộ với app TComic</span>
+            <span className='hidden sm:inline'>Đồng bộ với app nettruyen</span>
           </button>
         )}
         <button

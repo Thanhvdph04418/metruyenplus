@@ -52,8 +52,8 @@ export const useComicsListSEO = ({
   }, [showNextLink, currentPage, pathname, isTopAndNew, queryConfig, totalPages])
 
   return {
-    title: `Truyện tranh ${title} online - TComic`,
-    description: `Truyện tranh ${title} online - Tất cả truyện ${title} có thể tìm thấy tại TComic`,
+    title: `Truyện tranh ${title} online - nettruyen`,
+    description: `Truyện tranh ${title} online - Tất cả truyện ${title} có thể tìm thấy tại nettruyen`,
     canonicalUrl,
     prevUrl,
     nextUrl

@@ -5,7 +5,7 @@ import {
   ListComment,
   ListDownloadChapter,
   RatingStar,
-  SuggestComics
+  Suggesnettruyens
 } from '@/components'
 import { ComicsDetailHeroSkeleton, SidebarComicsSkeleton } from '@/components/Skeletons'
 import { formatCurrency } from '@/utils/formatNumber'
@@ -29,7 +29,7 @@ import {
   generatePlaceholder,
   LAZY_LOAD_CONFIGS
 } from '@/utils/imageOptimization'
-import { getComicHistory } from '@/utils/history'
+import { genettruyenHistory } from '@/utils/history'
 import { trackComicView } from '@/utils/analytics'
 import { SITE_NAME, SITE_TWITTER_HANDLE, SITE_URL } from '@/config/siteConfig'
 
@@ -53,7 +53,7 @@ const ComicsDetail = () => {
   // PRIORITY 1: Comic Detail - Critical data first
   const { data, isError, isLoading, refetch } = useQuery({
     queryKey: ['comic_detail', id],
-    queryFn: () => comicApis.getComicDetail(id as string),
+    queryFn: () => comicApis.genettruyenDetail(id as string),
     staleTime: 5 * 60 * 1000, // 5 minutes fresh
     cacheTime: 10 * 60 * 1000, // 10 minutes in cache
     refetchOnWindowFocus: false, // Prevent unnecessary refetches
@@ -66,7 +66,7 @@ const ComicsDetail = () => {
   const { data: dataWeekly, isLoading: isLoadingWeekly } = useQuery({
     queryKey: [`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, { page: '1', status: 'all' }],
     queryFn: () =>
-      comicApis.getComicsByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, {
+      comicApis.genettruyensByUrl(`${PATH_MAPPING_API.top}${PATH_MAPPING_API.weekly}`, {
         page: '1',
         status: 'all'
       }),
@@ -80,7 +80,7 @@ const ComicsDetail = () => {
   // Load popular data in parallel (no dependencies for better performance)
   const { data: dataPopular, isLoading: isLoadingPopular } = useQuery({
     queryKey: [`${PATH_MAPPING_API.popular}`, { page: '1' }],
-    queryFn: () => comicApis.getComicsByUrl(`${PATH_MAPPING_API.popular}`, { page: '1' }),
+    queryFn: () => comicApis.genettruyensByUrl(`${PATH_MAPPING_API.popular}`, { page: '1' }),
     staleTime: 10 * 60 * 1000,
     cacheTime: 15 * 60 * 1000,
     keepPreviousData: true, // No loading flashes
@@ -117,7 +117,7 @@ const ComicsDetail = () => {
     const loadLastReadChapter = async () => {
       if (dataComics?.id) {
         try {
-          const history = await getComicHistory(dataComics.id)
+          const history = await genettruyenHistory(dataComics.id)
           if (history) {
             const chapter = dataComics.chapters.find((c) => c.id === history.chapter_id)
             if (chapter) {
@@ -809,7 +809,7 @@ const ComicsDetail = () => {
                         dataWeeklyComics
                           .slice(0, 10)
                           .map((item, i) => (
-                            <SuggestComics
+                            <Suggesnettruyens
                               key={item.id}
                               index={i}
                               title={item.title}
@@ -837,7 +837,7 @@ const ComicsDetail = () => {
                         dataPopularComics
                           .slice(0, 7)
                           .map((item, i) => (
-                            <SuggestComics
+                            <Suggesnettruyens
                               key={item.id}
                               index={i}
                               title={item.title}

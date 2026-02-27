@@ -11,7 +11,7 @@ import React from 'react'
  * - Red text for emphasis matching mobile notification style
  */
 const DesktopDomainNotification: React.FC = () => {
-  const websiteUrl = import.meta.env.VITE_URL_WEBSITE || 'tcomicfanq.com'
+  const websiteUrl = import.meta.env.VITE_URL_WEBSITE || 'nettruyenfanq.com'
   // Extract domain name without protocol
   const domainName = websiteUrl.replace(/^https?:\/\//, '')
 

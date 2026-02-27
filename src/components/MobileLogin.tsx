@@ -23,7 +23,7 @@ interface UserInfo {
 
 // Whitelist domains được phép sử dụng deeplink
 const ALLOWED_DEEPLINK_DOMAINS = [
-  'tcomic://'
+  'nettruyen://'
   // Thêm các schemes khác khi cần
 ]
 
