@@ -65,10 +65,11 @@ const ComicsSearch = () => {
     [showNextLink, currentPage, queryConfig.q, totalPages]
   )
 
-  const totalComics = dataSearch?.comics?.length ?? 0
-  const totalEntries = dataSearch?.total ?? 0
-  const hasResults = Array.isArray(dataSearch?.comics) && dataSearch.comics.length > 0
-  const showEmpty = !isFetching && ((Array.isArray(dataSearch?.comics) && !dataSearch.comics.length) || isError)
+  const comicsList = dataSearch?.comics
+  const totalComics = comicsList?.length ?? 0
+  const totalEntries = totalComics
+  const hasResults = Array.isArray(comicsList) && comicsList.length > 0
+  const showEmpty = !isFetching && ((Array.isArray(comicsList) && comicsList.length === 0) || isError)
 
   return (
     <>
