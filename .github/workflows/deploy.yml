@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             # Navigate to project directory
-            cd /home/Workspace/Webnettruyen/MeTruyen/nettruyenV2/metruyenplus
+            cd /home/Workspace/WebTcomic/NettruyenClone/metruyenplus
             
             # Pull latest changes
             git pull origin nettruyen
