@@ -224,7 +224,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
     <div className={embedded ? 'w-full' : 'w-full py-3'}>
       <div className={embedded ? 'w-full' : 'flex items-center justify-center'}>
         <form
-          className={`relative flex w-full rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden focus-within:ring-1 focus-within:ring-primary ${
+          className={`relative flex w-full rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-visible focus-within:ring-1 focus-within:ring-primary ${
             embedded ? 'shadow-none' : 'sm:w-auto max-w-[500px]'
           }`}
           onSubmit={handleSearch}

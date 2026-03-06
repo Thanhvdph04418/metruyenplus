@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import PATH from '@/utils/path'
 import { SITE_LOGO_TEXT, SITE_NAME } from '@/config/siteConfig'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import iconSearch from '/icon_search.webp'
 import classNames from 'classnames'
 import { SearchBar } from '.'
@@ -721,7 +721,9 @@ const MobileSearchOverlay = ({
 
                     {/* Content */}
                     <div className='flex-1 min-w-0'>
-                      <div className='font-medium text-sm truncate'>{suggestion.title}</div>
+                      <div className='font-medium text-sm truncate text-gray-900 dark:text-gray-100'>
+                        {suggestion.title}
+                      </div>
                       <div className='text-xs text-gray-500 dark:text-gray-400 truncate'>
                         {suggestion.authors}
                       </div>
@@ -855,6 +857,7 @@ const Header = () => {
   const [searchSuggestions, setSearchSuggestions] = useState<any[]>([])
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [recentSearches, setRecentSearches] = useState<string[]>([])
+  const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const token = localStorage.getItem('auth_token')
 
   const heightHeader = 56
@@ -881,6 +884,14 @@ const Header = () => {
     setIsSearchOpen(false)
     setSearchQuery('')
   }, [pathname, queryConfig.q])
+
+  // Clear mobile search debounce timer when overlay closes
+  useEffect(() => {
+    if (!isSearchOpen && searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current)
+      searchDebounceRef.current = null
+    }
+  }, [isSearchOpen])
 
   // Load recent searches from localStorage
   useEffect(() => {
@@ -914,42 +925,38 @@ const Header = () => {
     }
   }
 
-  // Handle search input change with API search
+  // Handle search input change with API search (debounced 600ms, same as desktop SearchBar)
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchQuery(value)
 
+    if (searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current)
+      searchDebounceRef.current = null
+    }
+
     if (value.trim().length > 0) {
       setIsSearching(true)
-      // API call with debounce
-      const timeoutId = setTimeout(async () => {
+      searchDebounceRef.current = setTimeout(async () => {
+        searchDebounceRef.current = null
         try {
-          const response = await comicApis.getSearch({ q: value, page: '1' })
-          console.log('Search response:', response.data) // Debug log
-
-          // Check if response is valid and has comics
+          const response = await comicApis.getSearch({ q: value.trim(), page: '1' })
           if (
             response?.data?.status === 0 &&
             response?.data?.comics &&
             Array.isArray(response.data.comics)
           ) {
-            const comics = response.data.comics || []
-            console.log('Comics found:', comics) // Debug log
-            setSearchSuggestions(comics.slice(0, 5)) // Limit to 5 suggestions
+            setSearchSuggestions(response.data.comics.slice(0, 5))
           } else {
-            console.log('API error or no comics:', response?.data)
             setSearchSuggestions([])
           }
         } catch (error) {
           console.error('Search suggestions error:', error)
-          // Don't show error to user, just clear suggestions
           setSearchSuggestions([])
         } finally {
           setIsSearching(false)
         }
-      }, 300) // 300ms debounce
-
-      return () => clearTimeout(timeoutId)
+      }, 600)
     } else {
       setSearchSuggestions([])
       setIsSearching(false)
@@ -1107,11 +1114,19 @@ const Header = () => {
             }}
           >
             {currentTheme !== 'light' ? (
-              <button onClick={() => onSwitchTheme('light')} className='mr-1 p-1'>
+              <button
+                onClick={() => onSwitchTheme('light')}
+                className='mr-1 p-1 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary transition-colors'
+                title='Chế độ sáng'
+              >
                 <SvgSun />
               </button>
             ) : (
-              <button onClick={() => onSwitchTheme('dark')} className='mr-1 p-1'>
+              <button
+                onClick={() => onSwitchTheme('dark')}
+                className='mr-1 p-1 text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary transition-colors'
+                title='Chế độ tối'
+              >
                 <SvgMoon />
               </button>
             )}

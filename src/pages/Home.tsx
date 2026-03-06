@@ -66,7 +66,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>{`Đọc Truyện Chữ Online - ${SITE_NAME}`}</title>
+        <title>{`Đọc Truyện Tranh Online - ${SITE_NAME}`}</title>
         <link rel='canonical' href={SITE_URL} />
         <meta
           name='description'
