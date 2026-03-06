@@ -353,8 +353,16 @@ const ComicsDetail = () => {
         <>
           <div className='w-full h-48 sm:h-56 bg-neutral-100 dark:bg-neutral-900 relative overflow-hidden'>
             <div
-              className='absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-20'
-              style={{ backgroundImage: `url('${dataComics?.thumbnail}')`, filter: 'blur(24px)' }}
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${
+                dataComics?.thumbnail
+                  ? 'opacity-30 dark:opacity-20'
+                  : 'opacity-100 animate-pulse bg-neutral-200 dark:bg-neutral-800'
+              }`}
+              style={
+                dataComics?.thumbnail
+                  ? { backgroundImage: `url('${dataComics.thumbnail}')`, filter: 'blur(24px)' }
+                  : undefined
+              }
             />
           </div>
           <div className='container px-4 sm:px-6 xl:px-0 max-w-[1100px] -mt-24 sm:-mt-28 relative'>
@@ -447,18 +455,48 @@ const ComicsDetail = () => {
                           </span>
                         </div>
                         <div className='flex items-center gap-3'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='w-5 h-5'
+                            viewBox='0 0 24 24'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z'
+                            />
+                          </svg>
                           <span className='min-w-[90px]'>Lượt thích</span>
                           <span className='font-medium text-primary'>
                             {formatCurrency(dataComics.total_likes)}
                           </span>
                         </div>
                         <div className='flex items-center gap-3'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='w-5 h-5'
+                            viewBox='0 0 24 24'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3m-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3m0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5m8 0c-.29 0-.62.02-.97.05c1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5'
+                            />
+                          </svg>
                           <span className='min-w-[90px]'>Lượt theo dõi</span>
                           <span className='font-medium text-primary'>
                             {formatCurrency(dataComics.followers)}
                           </span>
                         </div>
                         <div className='flex items-center gap-3'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='w-5 h-5'
+                            viewBox='0 0 24 24'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5m0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3'
+                            />
+                          </svg>
                           <span className='min-w-[90px]'>Lượt xem</span>
                           <span className='font-medium text-primary'>
                             {formatCurrency(dataComics.total_views)}
@@ -518,7 +556,7 @@ const ComicsDetail = () => {
                               }}
                               title={genre.name}
                               key={genre.id}
-                              className='text-xs px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors'
+                              className='text-xs px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-primary transition-colors cursor-pointer'
                             >
                               {genre.name}
                             </Link>
@@ -540,8 +578,8 @@ const ComicsDetail = () => {
                             onClick={() => setIsOpen((prev) => !prev)}
                             className={
                               !isOpen
-                                ? 'absolute right-0 bg-white dark:bg-neutral-900 bottom-0 z-10 pl-4'
-                                : 'mt-1'
+                                ? 'absolute right-0 bottom-0 z-10 pl-8 bg-gradient-to-l from-white dark:from-neutral-900 to-transparent cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm'
+                                : 'mt-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm'
                             }
                           >
                             <span className='text-primary text-sm font-medium'>
@@ -592,7 +630,7 @@ const ComicsDetail = () => {
                         {/* Follow Button */}
                         <button
                           disabled={isFollowing}
-                          className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
+                          className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all cursor-pointer ${
                             isFollowing ? 'opacity-70 cursor-not-allowed' : ''
                           } ${
                             dataComics?.is_follow
@@ -633,7 +671,7 @@ const ComicsDetail = () => {
                         {/* Like Button */}
                         <button
                           disabled={isLiking}
-                          className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all ${
+                          className={`hidden sm:flex items-center gap-2 h-11 px-4 rounded font-medium transition-all cursor-pointer ${
                             isLiking ? 'opacity-70 cursor-not-allowed' : ''
                           } ${
                             dataComics?.is_like
@@ -872,6 +910,27 @@ const ComicsDetail = () => {
               className='bg-white dark:bg-neutral-900 p-5 rounded border border-neutral-200 dark:border-neutral-700'
               onMouseDown={(e) => e.stopPropagation()}
             >
+              <div className='flex items-center justify-between mb-4'>
+                <h3 className='font-medium text-neutral-800 dark:text-neutral-200 text-sm'>
+                  Tải xuống chương
+                </h3>
+                <button
+                  type='button'
+                  aria-label='Đóng'
+                  onClick={() => {
+                    setIsOpenModal(false)
+                    document.body.style.overflow = 'auto'
+                  }}
+                  className='w-8 h-8 flex items-center justify-center rounded text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer'
+                >
+                  <svg xmlns='http://www.w3.org/2000/svg' className='w-5 h-5' viewBox='0 0 24 24'>
+                    <path
+                      fill='currentColor'
+                      d='M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z'
+                    />
+                  </svg>
+                </button>
+              </div>
               <section className='w-full sm:w-[450px] md:w-[550px] lg:w-[700px]'>
                 {dataComics && id && <ListDownloadChapter id={id} data={dataComics.chapters} />}
               </section>
