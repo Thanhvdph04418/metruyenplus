@@ -58,7 +58,7 @@ const CardItem = ({ data, index, scrollPosition: propScrollPosition }: Props) =>
   }
   return (
     <div className='relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded overflow-hidden'>
-      <div className='w-full h-[220px] xl:h-[200px] overflow-hidden relative bg-neutral-100 dark:bg-neutral-800 rounded-t'>
+      <div className='w-full h-[200px] sm:h-[240px] xl:h-[220px] overflow-hidden relative bg-neutral-100 dark:bg-neutral-800 rounded-t'>
         {is_trending && (
           <span className='absolute top-2 right-2 bg-primary text-white text-[10px] font-semibold px-1.5 py-0.5 rounded'>
             HOT
