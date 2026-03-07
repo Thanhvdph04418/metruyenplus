@@ -104,17 +104,6 @@ export const useChapterSEO = ({
         title={`${dataComics?.title} - ${chapterInfo?.name}`}
       />
 
-      {/* Twitter Card Tags - Enhanced */}
-      <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:site' content='@nettruyen' />
-      <meta name='twitter:title' content={`${dataComics?.title} - ${chapterInfo?.name}`} />
-      <meta
-        name='twitter:description'
-        content={`Đọc truyện ${dataComics?.title} ${chapterInfo?.name} và hàng ngàn chương truyện khác tại nettruyen - Cộng đồng đọc truyện tranh online lớn nhất Việt Nam`}
-      />
-      <meta name='twitter:image' content={image} />
-      <meta name='twitter:image:alt' content={`${dataComics?.title} chapter cover`} />
-
       {/* Enhanced Structured Data */}
       <script type='application/ld+json'>{JSON.stringify(structuredData)}</script>
 
