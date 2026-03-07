@@ -65,7 +65,9 @@ export const PATH = {
   forgotPassword: '/quen-mat-khau',
   googleCallback: '/google-callback',
   mobileLogin: '/mobile-login',
-  sitemap: '/so-do-trang-web'
+  sitemap: '/so-do-trang-web',
+  nettruyenAlternative: '/thay-the-nettruyen',
+  nettruyenDown: '/nettruyen-khong-vao-duoc'
 } as const
 
 export const API_MAPPING_PATH = {
