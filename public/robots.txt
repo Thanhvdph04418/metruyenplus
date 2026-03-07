@@ -2,10 +2,10 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://nettruyenclub.com
+Host: https://nettruyenstore.com
 
 # Crawl-delay
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://nettruyenclub.com/sitemap.xml
+Sitemap: https://nettruyenstore.com/sitemap.xml

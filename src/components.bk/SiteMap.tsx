@@ -201,7 +201,7 @@ const SiteMap = () => {
                 </li>
                 <li>
                   <a
-                    href='mailto:support@nettruyenclub.com'
+                    href='mailto:support@nettruyenstore.com'
                     title='Liên hệ'
                     className='flex items-center text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary/90 transition-colors'
                   >

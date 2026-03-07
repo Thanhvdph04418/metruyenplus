@@ -79,7 +79,7 @@ const Footer = () => {
               GIỚI THIỆU
             </h2>
             <p className='text-xs leading-relaxed'>
-              nettruyenClub.com - Đọc Truyện Tranh Online Hoàn Toàn Miễn Phí - Nơi Thỏa Mãn Đam Mê.
+              nettruyenstore.com - Đọc Truyện Tranh Online Hoàn Toàn Miễn Phí - Nơi Thỏa Mãn Đam Mê.
             </p>
             <p className='text-xs mt-2 leading-relaxed'>
               Cập nhật các bộ truyện tranh hay, mới nhất, nhanh nhất để phục vụ độc giả, hỗ trợ trên

@@ -34,7 +34,7 @@ if ($args ~* "(.*)(?:^|&)(utm_source|utm_medium|utm_campaign|utm_content|utm_ter
 ```nginx
 server {
     listen 80;
-    server_name nettruyenclub.com www.nettruyenclub.com;
+    server_name nettruyenstore.com www.nettruyenstore.com;
 
     root /var/www/nettruyen;
     index index.html;
@@ -87,9 +87,9 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 # 3. Test redirects
-curl -I https://nettruyenclub.com/the-loai/?page=1     # → 301 redirect to /the-loai
-curl -I https://nettruyenclub.com/the-loai//           # → 301 redirect to /the-loai
-curl -I https://nettruyenclub.com/truyen-tranh/abc//0  # → 301 redirect to /truyen-tranh/abc
+curl -I https://nettruyenstore.com/the-loai/?page=1     # → 301 redirect to /the-loai
+curl -I https://nettruyenstore.com/the-loai//           # → 301 redirect to /the-loai
+curl -I https://nettruyenstore.com/truyen-tranh/abc//0  # → 301 redirect to /truyen-tranh/abc
 ```
 
 ## Giải Thích
