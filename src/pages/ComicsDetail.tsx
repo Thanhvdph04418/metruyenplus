@@ -31,7 +31,7 @@ import {
 } from '@/utils/imageOptimization'
 import { genettruyenHistory } from '@/utils/history'
 import { trackComicView } from '@/utils/analytics'
-import { SITE_NAME, SITE_TWITTER_HANDLE, SITE_URL } from '@/config/siteConfig'
+import { SITE_NAME, SITE_URL } from '@/config/siteConfig'
 
 const ComicsDetail = () => {
   const { comicIndentify } = useParams()
@@ -277,23 +277,6 @@ const ComicsDetail = () => {
         <meta property='og:image' content={dataComics?.thumbnail} />
         <meta property='og:image:alt' content={`Ảnh bìa truyện ${dataComics?.title}`} />
         <meta property='og:url' content={`${SITE_URL}${PATH.comics}/${slug}-${id}`} />
-
-        {/* Twitter */}
-        <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content={SITE_TWITTER_HANDLE} />
-        <meta
-          name='twitter:title'
-          content={`${dataComics?.title} | Đọc Truyện Tranh Online - ${SITE_NAME}`}
-        />
-        <meta
-          name='twitter:description'
-          content={`Đọc truyện tranh ${dataComics?.title} Tiếng Việt bản dịch Full mới nhất. ${dataComics?.description?.substring(
-            0,
-            150
-          )}...`}
-        />
-        <meta name='twitter:image' content={dataComics?.thumbnail} />
-        <meta name='twitter:image:alt' content={`Ảnh bìa truyện ${dataComics?.title}`} />
 
         {/* Additional Meta Tags */}
         <meta name='author' content={dataComics?.authors || SITE_NAME} />
