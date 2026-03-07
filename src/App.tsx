@@ -25,6 +25,8 @@ const Customer = lazy(() => import('./components/Customer'))
 const ForgotPassword = lazy(() => import('./components/ForgotPassword'))
 const MobileLogin = lazy(() => import('./components/MobileLogin'))
 const SitemapPage = lazy(() => import('./pages/Sitemap'))
+const NetTruyenAlternative = lazy(() => import('./pages/NetTruyenAlternative'))
+const NetTruyenDown = lazy(() => import('./pages/NetTruyenDown'))
 
 function App() {
   const [isInitialized, setIsInitialized] = useState(false)
@@ -239,6 +241,22 @@ function App() {
           element: (
             <Suspense fallback={<LoadingPage />}>
               <SitemapPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.nettruyenAlternative,
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <NetTruyenAlternative />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.nettruyenDown,
+          element: (
+            <Suspense fallback={<LoadingPage />}>
+              <NetTruyenDown />
             </Suspense>
           )
         }
