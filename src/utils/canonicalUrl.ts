@@ -1,9 +1,11 @@
+import { SITE_URL as CONFIGURED_SITE_URL } from '@/config/siteConfig'
+
 /**
  * Canonical URL utility for generating clean, SEO-friendly URLs
  * Helps prevent Google Search Console "Duplicate without user-selected canonical" issues
  */
 
-const SITE_URL = 'https://nettruyenfanq.com'
+const SITE_URL = CONFIGURED_SITE_URL
 
 // Query parameters that should be stripped from canonical URLs
 const EXCLUDED_PARAMS = [
