@@ -1,6 +1,5 @@
 import comicApis from '@/apis/comicApis'
 import {
-  EveningModeToggle,
   ListChapter,
   ListComment,
   ListDownloadChapter,
@@ -232,7 +231,7 @@ const ComicsDetail = () => {
 
   return (
     <>
-      <EveningModeToggle />
+
       <Helmet>
         {/* Add new canonical */}
         <link rel='canonical' href={`${SITE_URL}${PATH.comics}/${slug}-${id}`} />

@@ -71,21 +71,7 @@ body.dark {
   @apply bg-neutral-900 text-neutral-200;
 }
 
-/* Apply eye-relief filters to all images */
-:not(.dark) img {
-  filter: brightness(98%) contrast(95%) saturate(95%); /* Reduced brightness, contrast, saturation */
-}
 
-/* Evening mode specific styles - can be toggled with JS */
-.evening-mode img {
-  filter: brightness(90%) contrast(90%) saturate(85%) sepia(5%);
-}
-
-/* Add evening mode class to body or html element via JS when needed */
-.evening-mode {
-  background-color: var(--evening-bg-light);
-  color: var(--evening-text-light);
-}
 
 html ::-webkit-scrollbar {
   width: 6px;
@@ -465,26 +451,7 @@ a:hover {
   @apply text-primary;
 }
 
-.evening-reading-mode {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.dark .evening-reading-mode {
-  background: rgba(0, 0, 0, 0.2);
-}
-.evening-mode-status {
-  display: none;
-}
+
 
 .is-hide-header {
   transition: all 0.5s ease;

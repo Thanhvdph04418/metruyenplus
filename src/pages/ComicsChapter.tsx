@@ -2,7 +2,6 @@ import comicApis from '@/apis/comicApis'
 import {
   // AdNotice,
   Affiliate,
-  EveningModeToggle,
   ReadingProgress
 } from '@/components'
 import { useScrollTop, useChapterHistory, useChapterAnalytics, useChapterSEO } from '@/hooks'
@@ -135,7 +134,7 @@ const ComicsChapter = () => {
 
       <ReadingProgress />
 
-      <EveningModeToggle />
+
 
       {seoElement}
 

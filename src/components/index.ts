@@ -13,7 +13,7 @@ export { default as ListComment } from './ListComment'
 export { default as Suggesnettruyens } from './SuggestComics'
 export { default as ListDownloadChapter } from './ListDownloadChapter'
 export { default as ScrollToTop } from './ScrollToTop'
-export { default as EveningModeToggle } from './EveningModeToggle'
+
 export { default as ReadingProgress } from './ReadingProgress'
 export { default as LunarNewYearCouplets } from './LunarNewYearCouplets'
 export { default as LunarNewYearCountdown } from './LunarNewYearCountdown'
