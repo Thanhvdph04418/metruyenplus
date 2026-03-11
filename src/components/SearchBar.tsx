@@ -1,12 +1,12 @@
 import iconSearch from '/icon_search.webp'
 import { Suggesnettruyens } from '.'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import comicApis from '@/apis/comicApis'
 import PATH from '@/utils/path'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import imgLoading from '/loading.gif'
-// import LunarNewYearCountdown from './LunarNewYearCountdown'
+import { useIsMobile } from '@/hooks'
 
 // Types and Interfaces
 interface HistoryItem {
@@ -30,6 +30,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchHistory, setSearchHistory] = useState<HistoryItem[]>([])
   const navigate = useNavigate()
+  const isMobile = useIsMobile()
 
   // Search suggestions query
   const { data: dataSuggest, isLoading } = useQuery({
@@ -50,6 +51,18 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
     const history = localStorage.getItem('searchHistory')
     if (history) setSearchHistory(JSON.parse(history))
   }, [])
+
+  // Lock body scroll when mobile overlay is open
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobile, isOpen])
 
   // History management
   const saveToHistory = (comic: HistoryItem) => {
@@ -82,6 +95,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
     }
     navigate(`${PATH.comics}/${comic.slug}-${id}`)
     setValueForm('')
+    setIsOpen(false)
   }
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,9 +109,15 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
         }).toString()
       })
       setValueForm('')
+      setIsOpen(false)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false)
+    setValueForm('')
+  }, [])
 
   const SearchIcon = () => (
     <svg
@@ -143,6 +163,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
         >
           <div
             onMouseDown={() => handleClick(item.id, item.title, item)}
+            onClick={() => handleClick(item.id, item.title, item)}
             className='flex-1 flex items-center gap-3 min-w-0 cursor-pointer'
           >
             <Suggesnettruyens
@@ -162,6 +183,10 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
             type='button'
             className='p-1.5 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 rounded transition-colors shrink-0'
             onMouseDown={(e) => {
+              e.stopPropagation()
+              removeFromHistory(i)
+            }}
+            onClick={(e) => {
               e.stopPropagation()
               removeFromHistory(i)
             }}
@@ -192,6 +217,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
         <div
           key={item.id}
           onMouseDown={() => handleClick(item.id, item.title, item)}
+          onClick={() => handleClick(item.id, item.title, item)}
           className='px-3 py-2 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 cursor-pointer'
         >
           <Suggesnettruyens
@@ -220,6 +246,76 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
     </>
   )
 
+  // ─── Mobile: Fullscreen Overlay ────────────────────────────────────────────
+  if (isMobile && isOpen && !embedded) {
+    return (
+      <div className='fixed inset-0 z-[60] bg-white dark:bg-neutral-900 flex flex-col'>
+        {/* Header */}
+        <div className='flex items-center gap-3 px-4 py-3 border-b border-neutral-200 dark:border-neutral-700 flex-shrink-0'>
+          <button
+            type='button'
+            onClick={handleClose}
+            className='p-2 -ml-2 rounded-lg text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors'
+          >
+            <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
+              />
+            </svg>
+          </button>
+
+          <form onSubmit={handleSearch} className='flex-1 flex'>
+            <div className='flex-1 relative'>
+              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                <SearchIcon />
+              </div>
+              <input
+                autoFocus
+                onChange={(e) => setValueForm(e.target.value)}
+                value={valueForm}
+                type='text'
+                placeholder='Tìm truyện, tác giả...'
+                className='w-full h-10 pl-10 pr-10 bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 rounded-lg outline-none text-sm focus:ring-1 focus:ring-primary'
+              />
+              {valueForm && (
+                <button
+                  type='button'
+                  onClick={() => setValueForm('')}
+                  className='absolute inset-y-0 right-0 pr-3 flex items-center text-neutral-400 hover:text-neutral-600'
+                >
+                  <svg className='h-4 w-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 18L18 6M6 6l12 12'
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+            <button
+              type='submit'
+              className='ml-2 px-4 h-10 bg-primary text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity shrink-0'
+            >
+              Tìm
+            </button>
+          </form>
+        </div>
+
+        {/* Scrollable results */}
+        <div className='flex-1 overflow-y-auto overscroll-contain'>
+          {!valueForm && searchHistory.length > 0 && <HistoryList />}
+          <SuggestionsList />
+        </div>
+      </div>
+    )
+  }
+
+  // ─── Desktop + Default: Dropdown ───────────────────────────────────────────
   return (
     <div className={embedded ? 'w-full' : 'w-full py-3'}>
       <div className={embedded ? 'w-full' : 'flex items-center justify-center'}>
@@ -238,7 +334,10 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
           </div>
           <input
             onFocus={() => setIsOpen(true)}
-            onBlur={() => setIsOpen(false)}
+            onBlur={() => {
+              // On mobile, don't close via blur — the overlay handles its own close
+              if (!isMobile) setIsOpen(false)
+            }}
             onChange={(e) => setValueForm(e.target.value)}
             value={valueForm}
             type='text'
@@ -248,7 +347,7 @@ const SearchBar = ({ embedded = false }: SearchBarProps) => {
             }`}
           />
           <SearchButton />
-          {isOpen && (
+          {isOpen && !isMobile && (
             <div className='absolute top-full left-0 right-0 mt-1 z-50 rounded border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 max-h-[400px] overflow-y-auto py-2'>
               {!valueForm && searchHistory.length > 0 && <HistoryList />}
               <SuggestionsList />

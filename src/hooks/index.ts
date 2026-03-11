@@ -42,3 +42,6 @@ export * from './useComicsListSEO'
 // Phase 3: ComicsSearch Page hooks
 export * from './useSearchResults'
 export * from './useSearchSEO'
+
+// Responsive / breakpoint hooks
+export * from './useResponsive'
